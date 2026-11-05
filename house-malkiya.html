@@ -77,10 +77,11 @@ dl.spec dd{margin:0}
 .where{top:calc(12px + env(safe-area-inset-top,0px));inset-inline-start:calc(12px + env(safe-area-inset-right,0px));background:rgba(18,22,24,.72);color:#fff;
   padding:6px 12px;border-radius:999px;font-weight:600;font-size:14px;backdrop-filter:blur(6px)}
 .mini{pointer-events:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));inset-inline-end:calc(12px + env(safe-area-inset-left,0px));
-  width:180px;height:214px;border-radius:12px;background:rgba(250,251,250,.92);box-shadow:0 4px 18px rgba(0,0,0,.25);cursor:crosshair}
+  width:170px;height:222px;border-radius:12px;background:rgba(250,251,250,.92);box-shadow:0 4px 18px rgba(0,0,0,.25);cursor:crosshair}
 .labels{inset:0;overflow:hidden}
 .rl{position:absolute;transform:translate(-50%,-50%);background:rgba(255,255,255,.88);color:#1c2326;border-radius:8px;padding:3px 8px;
   font-size:12.5px;font-weight:600;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,.2);text-align:center;line-height:1.25}
+.rl.pl-b{background:#ff4d1a;color:#fff}.rl.pl-b small{color:#ffe3d6}.rl.pl-l{background:#1f7ae0;color:#fff;font-size:11.5px}.rl.pl-l small{color:#dcebff}
 .rl small{display:block;font-weight:500;color:#5d696e;font-variant-numeric:tabular-nums}
 .joy{pointer-events:auto;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:calc(22px + env(safe-area-inset-left,0px));width:120px;height:120px;border-radius:50%;
   background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.55);backdrop-filter:blur(4px);touch-action:none}
@@ -139,6 +140,10 @@ dl.spec dd{margin:0}
         <div><div class="lbl-main">ריהוט</div><div class="lbl-note" id="furnNote">מוצג ריהוט מלא</div></div>
         <label class="switch" aria-label="הצגת ריהוט"><input type="checkbox" id="furn" checked><span></span></label>
       </div>
+      <div class="row">
+        <div><div class="lbl-main">גבולות מגרש וקווי בניין</div><div class="lbl-note" id="plotNote"></div></div>
+        <label class="switch" aria-label="הדגשת גבולות המגרש"><input type="checkbox" id="plotT" checked><span></span></label>
+      </div>
       <div class="seg two" role="group" aria-label="שעת היום">
         <button id="t-day" data-time="day" aria-pressed="true">☀ יום</button>
         <button id="t-eve" data-time="eve" aria-pressed="false">☾ ערב</button>
@@ -169,7 +174,7 @@ dl.spec dd{margin:0}
     <div class="hud labels" id="labels"></div>
     <div class="hud where" id="where" hidden></div>
     <div class="hud hint" id="hint"></div>
-    <canvas class="hud mini" id="mini" width="360" height="430" aria-label="מפה: לחיצה מעבירה לנקודה"></canvas>
+    <canvas class="hud mini" id="mini" width="360" height="470" aria-label="מפה: לחיצה מעבירה לנקודה"></canvas>
     <button class="hud floorbtn" id="floorBtn" hidden></button>
     <div class="hud joy" id="joy" hidden><i id="joyKnob"></i></div>
     <div class="hud loading" id="loading">בונה את הבית…</div>
@@ -289,7 +294,11 @@ const R = id => ALLROOMS.find(r=>r.id===id);
 const area = r => (r.x1-r.x0)*(r.z1-r.z0);
 const BUILT = Math.round(ALLROOMS.filter(r=>r.type!=='balcony').reduce((s,r)=>s+area(r),0));
 const BALC  = Math.round(ALLROOMS.filter(r=>r.type==='balcony').reduce((s,r)=>s+area(r),0));
-const BOUNDS = {x0:-1.85, x1:14.1, z0:0, z1:19.0};
+// Plot boundary (ג.מ.) and building lines (ק.ב.) from elevations 1-2 and sections 1-1, 2-2: setbacks N 3 m, W 3 m, E 2 m, S 5 m
+const BLD  = {x0:-0.125, x1:18.7, z0:-0.125, z1:24.5};
+const PLOT = {x0:BLD.x0-3, x1:BLD.x1+2, z0:BLD.z0-3, z1:BLD.z1+5};
+const PLOT_W = PLOT.x1-PLOT.x0, PLOT_D = PLOT.z1-PLOT.z0, PLOT_A = Math.round(PLOT_W*PLOT_D);
+const BOUNDS = {x0:PLOT.x0-.6, x1:PLOT.x1+.6, z0:PLOT.z0-.6, z1:PLOT.z1+.6};
 const C0 = [6.1, 9.5];
 const CONTRACT = 1521000;
 /* ============================== TIERS ============================== */
@@ -1180,30 +1189,64 @@ const plinthM = M({color:'#8d8a84', roughness:.9}, true);
   B(g,plinthM,10.25,.16,18.35,4.98,-.16,9.05); B(g,plinthM,1.55,.16,3.65,10.7,-.16,6.2); B(g,plinthM,4.2,.16,8.6,12.05,-.16,13.55);
   B(g,plinthM,2.6,.16,1.3,5.75,-.16,18.4); B(g,plinthM,1.95,.16,5.6,-.95,-.16,10.15); B(g,plinthM,2.6,.16,3.7,11.25,-.16,2.7);
   // paths and parking (concrete per the bill of quantities)
-  pv(1.6,5.0,5.75,21.5); pv(5.5,5.0,0.6,21.9); pv(1.2,7.0,-2.5,15.5); pv(1.2,6,13.1,4.0);
+  pv(1.6,10.55,5.75,24.28); pv(5.5,8.0,0.6,25.4); pv(1.2,7.0,-2.5,15.5); pv(1.2,6,13.1,4.0);
   const trunk=M({color:'#5b4636',roughness:.9},true), leafA=M({color:'#3e6430',roughness:.8},true), leafB=M({color:'#56793a',roughness:.8},true), hedge=M({color:'#3b5c2c',roughness:.9},true);
   const tree=(x,z,s)=>{ const t=G(g,x,z,0); t.scale.setScalar(s); C(t,trunk,.12,.18,2.4,0,0,0,10); const r=rng(Math.floor(x*31+z*17));
     for(let i=0;i<7;i++){ const geo=new THREE.SphereGeometry(.9+r()*.6,28,18); const p=geo.attributes.position, s1=r()*9, s2=r()*9; for(let k=0;k<p.count;k++){const X=p.getX(k),Y=p.getY(k),Z=p.getZ(k); const f=1+.16*Math.sin(X*3.1+s1)*Math.sin(Y*2.7+s2)*Math.sin(Z*3.4)+.06*Math.sin(X*9+Z*7+s2); p.setXYZ(k,X*f,Y*f*.85,Z*f);} geo.computeVertexNormals();
       const m=new THREE.Mesh(geo,r()<.5?leafA:leafB); m.position.set((r()-.5)*1.8,2.4+r()*1.6,(r()-.5)*1.8); m.castShadow=true; m.receiveShadow=true; t.add(m);} };
-  tree(-6,-3,1.25); tree(17.5,3,1.1); tree(-7,16,1.3); tree(24,11,1.15); tree(15,29,1.0); tree(-5,25,1.2);
-  for (const [w,d,x,z] of [[0.9,14,-4.6,9],[0.9,12,16.4,14.5],[12,.9,4.5,-3.2]]) B(g,hedge,w,1.1,d,x,0,z,.3);
+  tree(-7,-6,1.25); tree(-1.6,27.5,1.0); tree(16.5,4,1.1); tree(-8,16,1.3); tree(25,11,1.15); tree(14.5,28,1.0); tree(25,32,1.2);
+  for (const [w,d,x,z] of [[0.8,10,-2.3,16],[0.8,8,19.9,10]]) B(g,hedge,w,1.0,d,x,0,z,.3);
+})();
+
+/* ---------------- plot boundary & building lines ---------------- */
+const plotG = new THREE.Group(), plotHi = new THREE.Group(); scene.add(plotG); plotG.add(plotHi);
+const wallM = M({map:plasterTex('bwall','#cfc8bb',.18,2,95), roughness:.9}, true);
+const fenceM = M({color:'#26282a', roughness:.5, metalness:.6}, true);
+const bndM = new THREE.MeshBasicMaterial({color:0xff4d1a, transparent:true, opacity:.95, depthWrite:false});
+const bldM = new THREE.MeshBasicMaterial({color:0x1f7ae0, transparent:true, opacity:.9, depthWrite:false});
+const stakeM = new THREE.MeshBasicMaterial({color:0xff4d1a});
+(function plot(){
+  const P=PLOT, gates=[[-2.4,3.4],[4.9,6.6]]; // driveway and front path on the south side
+  const side=(x0,z0,x1,z1,gaps=[])=>{
+    const h=z0===z1, a0=h?x0:z0, a1=h?x1:z1, segs=[]; let cur=a0;
+    gaps.forEach(([g0,g1])=>{ segs.push([cur,g0]); cur=g1; }); segs.push([cur,a1]);
+    for (const [s0,s1] of segs){ if(s1-s0<.05) continue; const L=s1-s0, m=(s0+s1)/2;
+      const cx=h?m:x0, cz=h?z0:m;
+      B(plotG,wallM,h?L:.25,.7,h?.25:L,cx,-.03,cz);
+      B(plotG,fenceM,h?L:.04,.04,h?.04:L,cx,1.75,cz); B(plotG,fenceM,h?L:.03,.03,h?.03:L,cx,.85,cz);
+      for(let t=s0+.12;t<s1;t+=.12){ const px=h?t:x0, pz=h?z0:t; const b=new THREE.Mesh(new THREE.BoxGeometry(.018,1.05,.018),fenceM); b.position.set(px,.67+.525,pz); plotG.add(b); }
+      // highlight band on the ground + on the wall top
+      const band=new THREE.Mesh(new THREE.BoxGeometry(h?L:.32,.02,h?.32:L),bndM); band.position.set(cx,.03,cz); band.renderOrder=3; plotHi.add(band);
+      const cap=new THREE.Mesh(new THREE.BoxGeometry(h?L:.27,.03,h?.27:L),bndM); cap.position.set(cx,.69,cz); cap.renderOrder=3; plotHi.add(cap);
+    }
+  };
+  side(P.x0,P.z0,P.x1,P.z0); side(P.x1,P.z0,P.x1,P.z1); side(P.x0,P.z1,P.x1,P.z1,gates); side(P.x0,P.z0,P.x0,P.z1);
+  for (const [x,z] of [[P.x0,P.z0],[P.x1,P.z0],[P.x1,P.z1],[P.x0,P.z1]]){
+    const st=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,2.6,12),stakeM); st.position.set(x,1.3,z); plotHi.add(st);
+    const cone=new THREE.Mesh(new THREE.ConeGeometry(.16,.3,16),stakeM); cone.position.set(x,2.75,z); plotHi.add(cone);
+  }
+  // building lines: dashed blue band on the ground
+  const dash=(x0,z0,x1,z1)=>{ const h=z0===z1, a0=h?x0:z0, a1=h?x1:z1;
+    for(let t=a0;t<a1;t+=.9){ const e=Math.min(a1,t+.55), m=(t+e)/2; const d=new THREE.Mesh(new THREE.BoxGeometry(h?e-t:.12,.02,h?.12:e-t),bldM); d.position.set(h?m:x0,.04,h?z0:m); d.renderOrder=3; plotHi.add(d); } };
+  const Bl=BLD; dash(Bl.x0,Bl.z0,Bl.x1,Bl.z0); dash(Bl.x1,Bl.z0,Bl.x1,Bl.z1); dash(Bl.x0,Bl.z1,Bl.x1,Bl.z1); dash(Bl.x0,Bl.z0,Bl.x0,Bl.z1);
 })();
 
 const hemi = new THREE.HemisphereLight(0xdfeaff, 0x7a6e5e, .35); scene.add(hemi);
 const sun = new THREE.DirectionalLight(0xfff0dc, 2.4);
 sun.castShadow=true; sun.shadow.mapSize.set(isTouch?2048:4096, isTouch?2048:4096);
-const sc=sun.shadow.camera; sc.left=-16; sc.right=16; sc.top=16; sc.bottom=-16; sc.near=1; sc.far=80;
+const sc=sun.shadow.camera; sc.left=-20; sc.right=20; sc.top=20; sc.bottom=-20; sc.near=1; sc.far=80;
 sun.shadow.bias=-.0003; sun.shadow.normalBias=.03;
 sun.target.position.set(C0[0],0,C0[1]); scene.add(sun, sun.target);
 
 /* ============================== STATE / MODES ============================== */
-const state = { mode:'doll', furn:true, eve:false, tour:false, view:0, cur:0 };
+const state = { mode:'doll', furn:true, eve:false, tour:false, view:0, cur:0, plot:true };
 let yaw=0, pitch=0;
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping=true; controls.dampingFactor=.08; controls.maxDistance=80; controls.minDistance=3;
+const PC = [(PLOT.x0+PLOT.x1)/2, (PLOT.z0+PLOT.z1)/2];
 const PRESETS = {
-  doll: v => ({ pos:[C0[0]+11, 21+LEVELS[v].y, C0[1]+15], tgt:[C0[0]-.5, LEVELS[v].y, C0[1]-.5] }),
-  plan: v => ({ pos:[C0[0]+.6, 40, C0[1]+.01], tgt:[C0[0]+.6, LEVELS[v].y, C0[1]] }),
+  doll: v => state.plot ? ({ pos:[PC[0]+15, 30+LEVELS[v].y, PC[1]+21], tgt:[PC[0]-1, LEVELS[v].y, PC[1]-2] }) : ({ pos:[C0[0]+11, 21+LEVELS[v].y, C0[1]+15], tgt:[C0[0]-.5, LEVELS[v].y, C0[1]-.5] }),
+  plan: v => state.plot ? ({ pos:[PC[0]+2.5, 58, PC[1]+.01], tgt:[PC[0]+2.5, LEVELS[v].y, PC[1]] }) : ({ pos:[C0[0]+.6, 40, C0[1]+.01], tgt:[C0[0]+.6, LEVELS[v].y, C0[1]] }),
   ext:  () => ({ pos:[C0[0]+15, 4.2, C0[1]+19], tgt:[C0[0]-.5, 2.6, C0[1]] }),
 };
 let tween=null;
@@ -1225,6 +1268,7 @@ function applyState(){
     rt.furn.visible = state.furn;
     rt.lights.visible = state.eve && !above;
   });
+  plotHi.visible = state.plot;
   const e = state.eve;
   sun.intensity = e ? .12 : 2.4; sun.color.set(e ? 0x9fb4ff : 0xfff0dc);
   sun.position.set(C0[0]+(e?-6:-7), e?10:18, C0[1]+(e?9:14));
@@ -1353,6 +1397,8 @@ document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',(
 document.querySelectorAll('[data-level]').forEach(b=>b.addEventListener('click',()=>{ stopTour(); setView(+b.dataset.level); }));
 document.querySelectorAll('[data-time]').forEach(b=>b.addEventListener('click',()=>{ state.eve = b.dataset.time==='eve'; applyState(); }));
 document.getElementById('furn').addEventListener('change',e=>{ state.furn=e.target.checked; applyState(); });
+document.getElementById('plotT').addEventListener('change',e=>{ state.plot=e.target.checked; if(state.mode==='doll'||state.mode==='plan'){ const p=PRESETS[state.mode](state.view); flyTo(p.pos,p.tgt); } applyState(); });
+document.getElementById('plotNote').textContent = `מגרש כ־${PLOT_W.toFixed(1)}×${PLOT_D.toFixed(1)} מ׳ (≈${PLOT_A} מ״ר) · קווי בניין: 3 מ׳ צפון ומערב, 2 מ׳ מזרח, 5 מ׳ דרום`;
 const floorBtn=document.getElementById('floorBtn');
 floorBtn.addEventListener('click',()=>{ stopTour(); if(state.cur===0){ goRoom('family'); } else { goRoom('salon'); } });
 const rateIn=document.getElementById('rateIn');
@@ -1389,9 +1435,19 @@ function showLoading(fn){ loadingEl.hidden=false; requestAnimationFrame(()=>requ
 /* ---------------- labels ---------------- */
 const labelsEl=document.getElementById('labels');
 const LBL = ALLROOMS.filter(r=>r.lbl!==false).map(r=>{ const d=document.createElement('div'); d.className='rl'; d.innerHTML=`${r.name}<small>${area(r).toFixed(1)} מ״ר</small>`; labelsEl.appendChild(d); return {r,d,v:new THREE.Vector3((r.x0+r.x1)/2, LEVELS[r.L].y+.2, (r.z0+r.z1)/2)}; });
+const PL = (()=>{ const P=PLOT, Bl=BLD, out=[];
+  const add=(html,x,z,cls)=>{ const d=document.createElement('div'); d.className='rl '+cls; d.innerHTML=html; labelsEl.appendChild(d); out.push({d,v:new THREE.Vector3(x,.3,z)}); };
+  add(`גבול מגרש<small>${PLOT_W.toFixed(1)} מ׳</small>`,(P.x0+P.x1)/2,P.z0,'pl-b'); add(`גבול מגרש<small>${PLOT_W.toFixed(1)} מ׳</small>`,(P.x0+P.x1)/2,P.z1,'pl-b');
+  add(`גבול מגרש<small>${PLOT_D.toFixed(1)} מ׳</small>`,P.x0,(P.z0+P.z1)/2,'pl-b'); add(`גבול מגרש<small>${PLOT_D.toFixed(1)} מ׳</small>`,P.x1,(P.z0+P.z1)/2,'pl-b');
+  add('קו בניין<small>3 מ׳ מהגבול</small>',8,(P.z0+Bl.z0)/2,'pl-l'); add('קו בניין<small>5 מ׳ מהגבול</small>',11,(P.z1+Bl.z1)/2,'pl-l');
+  add('קו בניין<small>3 מ׳</small>',(P.x0+Bl.x0)/2,20,'pl-l'); add('קו בניין<small>2 מ׳</small>',(P.x1+Bl.x1)/2,20,'pl-l');
+  return out; })();
 function updateLabels(){
+  const showP = state.plot && state.mode!=='walk';
+  const w0=view.clientWidth, h0=view.clientHeight;
+  for (const L of PL){ if(!showP){ L.d.style.display='none'; continue; } const p=L.v.clone().project(camera); const vis=p.z<1 && Math.abs(p.x)<1.05 && Math.abs(p.y)<1.05; L.d.style.display=vis?'':'none'; if(vis){ L.d.style.left=((p.x+1)/2*w0)+'px'; L.d.style.top=((1-p.y)/2*h0)+'px'; } }
   const show = state.mode==='plan' || state.mode==='doll';
-  labelsEl.hidden = !show; if(!show) return;
+  labelsEl.hidden = !(show || showP); if(!show){ LBL.forEach(L=>L.d.style.display='none'); return; }
   const w=view.clientWidth, h=view.clientHeight;
   for (const L of LBL){ if(L.r.L!==state.view){ L.d.style.display='none'; continue; } const p=L.v.clone().project(camera); const vis=p.z<1 && Math.abs(p.x)<1.1 && Math.abs(p.y)<1.1; L.d.style.display = vis?'':'none'; if(vis){ L.d.style.left=((p.x+1)/2*w)+'px'; L.d.style.top=((1-p.y)/2*h)+'px'; } }
 }
@@ -1411,6 +1467,8 @@ function drawMini(){
     if (r.void){ mx.fillStyle='#cfc9bf'; mx.fillRect(a,b,c-a,d-b); } }
   if (Li===0){ mx.strokeStyle='#9a9388'; mx.lineWidth=1; const ln=(x0,z0,x1,z1)=>{ const [p1,q1]=toMini(x0,z0),[p2,q2]=toMini(x1,z1); mx.beginPath(); mx.moveTo(p1,q1); mx.lineTo(p2,q2); mx.stroke(); };
     for(let i=0;i<=5;i++) ln(.15,15-.27*i,.97,15-.27*i); for(let j=0;j<=7;j++) ln(.97+.27*j,13.1,.97+.27*j,13.95); for(let k=0;k<=8;k++) ln(2.9,13.1-.27*k,3.8,13.1-.27*k); }
+  if (state.plot){ const [a,b]=toMini(PLOT.x0,PLOT.z0),[c,d]=toMini(PLOT.x1,PLOT.z1); mx.strokeStyle='#ff4d1a'; mx.lineWidth=3; mx.strokeRect(a,b,c-a,d-b);
+    const [e,f]=toMini(BLD.x0,BLD.z0),[g2,h2]=toMini(BLD.x1,BLD.z1); mx.strokeStyle='#1f7ae0'; mx.lineWidth=1.5; mx.setLineDash([5,4]); mx.strokeRect(e,f,g2-e,h2-f); mx.setLineDash([]); }
   mx.strokeStyle='#2a2f31'; mx.lineCap='square';
   for(const w of L.walls){ const [a,b]=toMini(...w.a), [c,d]=toMini(...w.b); mx.lineWidth=w.t>.2?4.5:2.4; mx.beginPath(); mx.moveTo(a,b); mx.lineTo(c,d); mx.stroke(); }
   for(const o of rt.OPEN){ const win=o.bot>0; mx.strokeStyle= win?'#7aa0b8':'#f6f4ef'; mx.lineWidth= win?3:5.5; const [a,b]= o.axis==='h'?toMini(o.s,o.coord):toMini(o.coord,o.s); const [c,d]= o.axis==='h'?toMini(o.e,o.coord):toMini(o.coord,o.e); mx.beginPath(); mx.moveTo(a,b); mx.lineTo(c,d); mx.stroke(); }
