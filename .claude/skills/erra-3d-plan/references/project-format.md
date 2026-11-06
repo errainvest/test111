@@ -133,7 +133,8 @@ fits, wardrobes), keeping door zones clear.
 - `stone` rules: `{floors:[i]}` whole floors, `{kinds:['core']}` wall kinds, `{zone:[[x,z],...]}` a polygon. Everything
   else is plaster.
 - `areas_by_level` holds the official area table per building and level; apartments are matched by size order, so
-  the count must equal the measured apartments on that level (the assembler prints a mismatch).
+  the count must equal the measured apartments on that level (the assembler prints a mismatch). This is the canonical
+  source of apartment areas; the top-level `apartments` list is a fallback for a project without a table. Do not use both.
 - `views.ext` = exterior camera: position `[x,z]` at `h` above the terrain, looking at `tgt` at `th` above the
   building's base. `views.dir` = the direction the doll-house view looks from.
 - `site_extra` keys are appended to SITE.json's lists: `kerbs crosswalks gates roads sidewalks driveways poles

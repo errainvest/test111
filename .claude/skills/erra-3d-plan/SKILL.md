@@ -32,6 +32,11 @@ A walkthrough costs time in proportion to what is shown inside. Before measuring
 
 If the user already has a PROJECT JSON or a recipe (an earlier walkthrough), skip to **Build**.
 
+**No drawings at all** (a brief: "4 rooms, 110 m², second floor, balcony off the living room")? Skip steps 1–3: design
+the floor JSON yourself from the brief, following `references/project-format.md` and `examples/mini-house/` for the
+shape of every file, then run `scripts/lint_floor.py` instead of an overlay (there is nothing to overlay on). Say in
+the recipe's `fine` text that the plan is a proposal, not measured from a drawing, and show that line on the page.
+
 ## 1. Get and prepare the drawings
 
 - Google Drive: search by place / plot / family name, try spelling variants (מלאכיה/מלכיה), and list the parent folder —
@@ -65,6 +70,9 @@ Read `references/measuring.md` before the first floor. The short version:
   centreline, rooms as polygons, outdoor areas with their level, stairs with `up_dir`.
 - `overlay2.py` draws the floor JSON back onto the sheet. Look at it. Fix anything that is not on the drawn walls before
   moving on. Compare room areas with the areas printed on the plan.
+- `lint_floor.py FLOOR.json` (or `--recipe recipe.json` for all floors) catches what the engine would otherwise fix
+  silently: an opening too far from any wall (dropped), an unknown room kind (becomes a hall), overlapping rooms, an
+  open room side with nothing beyond it, a window between two rooms. Run it before assembling, every time.
 - An independent second reading is worth it for the apartment shown inside: two readers extract fixtures (counters with
   sink/cooktop, sanitary ware, washer, AC, door swings), then reconcile. Their disagreements expose errors in the floor.
 - With subagents available, measure floors in parallel (one agent per floor or pair of floors, each with its own
@@ -83,16 +91,30 @@ Read `references/measuring.md` before the first floor. The short version:
 ## 5. Recipe → PROJECT → page
 
 ```
+cd <this skill folder>                                               # the commands below use scripts/ relative to it; data paths are yours
+python3 -I scripts/lint_floor.py --recipe recipe.json                # the silent-failure check
 python3 -I scripts/permit_to_project.py recipe.json project.json     # floors + roof + site + areas + fixtures → one PROJECT
 python3 -I scripts/build_page.py project.json out.html --title "…"   # the viewer page (CDN libraries)
 node scripts/render_check.js out.html shots/v1                        # headless: ext, doll, walk screenshots; fails on page errors
 ```
 
+`render_check.js` takes 2–3 minutes (software GL: ~30 s to load, then each view): run it with a shell timeout of at
+least 400 s, or in the background. It loads the JS libraries from `engine/libs/` without network. The installed skill
+carries them; a repo checkout does not (they are git-ignored), so either run `scripts/fetch_libs.sh` once or point
+`ERRA_LIBS` at a folder that has them. `playwright` must be resolvable from the scripts folder (it is pre-installed in
+Claude's cloud sessions).
+
 The recipe (see `examples/modiin-b43/recipe.json`) names the buildings, their floor files and levels, which floors are
 detailed (`detail_floors`), which apartments are shown (`show_apts`), fixtures files, stone rules, railing style, the area
-tables (`areas_by_level`, matched to measured apartments by size), the opening state (`start`: building, level, apartment,
-`mode:'ext'`), `views.ext` for the exterior camera, and `site_extra` for things measured outside SITE.json (kerbs,
-crosswalks, poles, gates, neighbours, `pets`).
+tables (`areas_by_level`, matched to measured apartments by size; the canonical source of official areas — the flat
+`apartments` list is only for a project with no table, and listing both duplicates entries), the opening state (`start`:
+building, level, apartment, `mode:'ext'`), `views.ext` for the exterior camera, and `site_extra` for things measured
+outside SITE.json (kerbs, crosswalks, poles, gates, neighbours, `pets`).
+
+Engine behaviour that is easy to trip over: storey height = next floor's level − this one; the top floor takes the roof
+level if that is 2.3–4.5 m above it, else 3.0 m. A stair polygon 2 m or wider becomes a U-stair with its landing at the
+far end of `up_dir`. Two room polygons that share an edge with no wall between them make an open plan. Rooms with
+`apt:'common'` (lobby, stairs) are always walkable on a detailed floor.
 
 Look at the screenshots. Typical things to catch: a floor a storey too high (level/zero mix-up), stairs built full height
 instead of between their two levels, slivers on roofs, a balcony that is not walkable, furniture missing in a room
