@@ -75,7 +75,7 @@ function setMode(m){
   controls.maxPolarAngle = m==='ext' ? 1.5 : 1.38;
   if (m==='walk'){ const r=R(currentRoomId) || firstRoom(); if (r) goRoom(r.id); }
   else { camera.up.set(0,1,0); const p=PRESETS[m](); flyTo(p.pos,p.tgt); }
-  camera.fov = m==='walk'? 68 : m==='plan'? 38 : 50; camera.updateProjectionMatrix();
+  camera.fov = m==='walk'? 68 : m==='plan'? 38 : 50; camera.near = m==='walk' ? .05 : .4; camera.updateProjectionMatrix();
   applyState();
 }
 function refly(){ if (state.mode==='walk'){ const r=firstRoom(); if(r) goRoom(r.id); return; } if (state.mode==='ext') setMode('doll'); else { const p=PRESETS[state.mode](); flyTo(p.pos,p.tgt); applyState(); } }
@@ -93,7 +93,7 @@ function goRoom(id, dur){
   let cam=r.view || r.cam; if (!r.view && r.focus){ const d=Math.hypot(r.focus[0]-cam[0],r.focus[1]-cam[1]); if (d>1.3) cam=[cam[0],cam[1],r.focus[0],r.focus[1]]; }
   const y=L.y+(r.dy||0), pos=[cam[0],y+EYE,cam[1]], dd=Math.hypot(cam[2]-cam[0],cam[3]-cam[1]), tgt=[cam[2],y+(dd>2?1.0:1.3),cam[3]];
   flyTo(pos,tgt,reduceMotion?1:(dur||1300),()=>{ setYawPitchFrom(new THREE.Vector3(...pos),new THREE.Vector3(...tgt)); });
-  camera.fov=68; camera.updateProjectionMatrix(); applyState();
+  camera.fov=68; camera.near=.05; camera.updateProjectionMatrix(); applyState();
 }
 
 /* ============================== WALK ============================== */
@@ -324,7 +324,7 @@ mini.addEventListener('click',e=>{
   const p=new THREE.Vector3(x,sp.y+EYE,z); collide(p,sp.Li);
   const look = sp.room ? new THREE.Vector3(sp.room.cent[0]+(sp.room.cent[0]-x)*.5+.01, sp.y+1.3, sp.room.cent[1]+(sp.room.cent[1]-z)*.5+.01) : new THREE.Vector3(PCEN[0], sp.y+3, PCEN[1]);
   flyTo([p.x,p.y,p.z],[look.x,look.y,look.z],900,()=>setYawPitchFrom(p,look));
-  camera.fov=68; camera.updateProjectionMatrix(); applyState();
+  camera.fov=68; camera.near=.05; camera.updateProjectionMatrix(); applyState();
 });
 
 /* ============================== BUILD ============================== */
@@ -371,6 +371,7 @@ function build(id){
   if (houseRoot){ scene.remove(houseRoot); disposeTree(houseRoot); }
   MATS.forEach(m=>m.dispose()); MATS=[]; EMIT=[]; PENDANTS=[];
   F=tierMats(id); F.id=id;
+  for (const k of ['floorLiving','floorBed','floorWet','deck']) if (F[k]){ F[k].polygonOffset=true; F[k].polygonOffsetFactor=-1; F[k].polygonOffsetUnits=-4; }
   houseRoot=new THREE.Group();
   LV=LEVELS.map(L=>{
     const root=new THREE.Group(); root.position.y=L.y; houseRoot.add(root);
@@ -384,7 +385,7 @@ function build(id){
   });
   for (const B_ of BLDS){
     buildSlabs2(B_, F); buildRoofExtras(B_, F);
-    B_.levels.forEach((L,i)=>{ const rt=LV[LEVELS.indexOf(L)], up=B_.levels[i+1]; if (up) for (const s of L.stairs) buildStairs2(L, rt, rt.struct, s, up.y-L.y); });
+    B_.levels.forEach((L,i)=>{ const rt=LV[LEVELS.indexOf(L)], up=B_.levels[i+1]; for (const s of L.stairs) if (up || (s.from_level!=null && s.to_level!=null)) buildStairs2(L, rt, rt.struct, s, up?up.y-L.y:3); });
   }
   LEVELS.forEach((L,i)=>{ const rt=LV[i]; buildFurniture2(L, rt, rt.furn, F, id); });
   LEVELS.forEach((L,i)=>{ const rt=LV[i]; buildFixtures2(L, rt.fix, F, id); buildGlow(L, rt); buildScreens(L, rt); });
@@ -444,6 +445,7 @@ requestAnimationFrame(loop);
 window.__studio={state,setMode,goRoom,build,selectBld,selectFloor,selectApt,camera,APTS:()=>APTS,LEVELS:()=>LEVELS,
   edges:id=>{ const r=R(id); const L=LEVELS[r.L], rt=LV[r.L]; return roomEdges(L,rt,r).map(e=>({len:+e.len.toFixed(2), free:+freeLen(e).toFixed(2), depth:+e.depth.toFixed(2), t:e.t, ints:e.ints.map(i=>[+i.a.toFixed(2),+i.b.toFixed(2)])})); },
   rooms:()=>ALLROOMS.filter(r=>r.detail).map(r=>[r.id,r.name,r.kind,r.apt,+area(r).toFixed(1),!!r.focus,!!r.view]),
+  layers:(on)=>{ for (const k of ['struct','slab0','slab','furn','fit','fix','glow']) LV.forEach(rt=>{ rt[k].visible = on.includes(k); }); siteRoot.visible=on.includes('site'); },
   why:id=>{ const r=R(id), L=LEVELS[r.L], rt=LV[r.L], P=r.poly, out=[];
     for (let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], len=Math.hypot(b[0]-a[0],b[1]-a[1]); if(len<.5) continue; const u=[(b[0]-a[0])/len,(b[1]-a[1])/len]; let n=[-u[1],u[0]]; const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2; if(!inPoly(P,mx+n[0]*.15,mz+n[1]*.15)) n=[-n[0],-n[1]];
       const proj=(x,z)=>(x-a[0])*u[0]+(z-a[1])*u[1], perp=(x,z)=>(x-a[0])*n[0]+(z-a[1])*n[1];

@@ -1036,30 +1036,31 @@
   },
   {
    "a": [
-    7.724,
-    -2.685
+    7.739,
+    -2.795
    ],
    "b": [
-    7.719,
-    -0.57
+    7.734,
+    -0.615
    ],
-   "t": 0.17,
+   "t": 0.2,
    "kind": "low",
    "h": null,
-   "note": "low wall / kerb east of the steps; encloses x 7.75..8.86, z -2.69..-0.65 (planter or light well, not specified)"
+   "note": "wall between the entrance steps (rising -1.15 -> -0.07) and the basement-stair well (falling -1.15 -> -2.60); unfilled 20 cm double line, top not given (h null)"
   },
   {
    "a": [
-    7.719,
-    -0.57
+    7.734,
+    -0.615
    ],
    "b": [
     9.024,
-    -0.567
+    -0.612
    ],
-   "t": 0.17,
+   "t": 0.2,
    "kind": "low",
-   "h": null
+   "h": null,
+   "note": "parapet/edge of the pilotis (-0.07) over the south end of the basement-stair well; unfilled 20 cm double line, top not given (h null)"
   }
  ],
  "railings": [
@@ -1072,8 +1073,9 @@
     2.785,
     7.854
    ],
-   "h": 1.95,
-   "note": "aluminium screen closing the condenser ledge (מעבה) of apt 1 (misc1 detail, 195 high)"
+   "h": 0.8,
+   "level": 2.2,
+   "note": "[checker] aluminium laundry screen (מסתור כביסה, misc1: 180x195) drawn as the 10 cm double line closing the niche. It is the screen of the +3.00 flat: it HANGS from that floor's window-sill line (+4.05..+4.15) down to +2.20 (printed in section ב-ב over the niche and in detail B-B); the south elevation shows no screen in front of the ground-floor laundry/bath windows (+1.05..+2.10). Only the part inside this storey is encoded: level 2.20 (base, rel. to ±0.00) + h 0.80 = +2.20..+3.00 (E2.json carries +3.00..+4.05). Was h 1.95 standing on the ground, which hid the ground-floor windows. Apt-1 niche; drawn lines z 7.81|7.91."
   },
   {
    "a": [
@@ -1084,8 +1086,9 @@
     17.84,
     7.748
    ],
-   "h": 1.95,
-   "note": "aluminium screen closing the condenser ledge (מעבה) of apt 2"
+   "h": 0.8,
+   "level": 2.2,
+   "note": "[checker] aluminium laundry screen (מסתור כביסה, misc1: 180x195) drawn as the 10 cm double line closing the niche. It is the screen of the +3.00 flat: it HANGS from that floor's window-sill line (+4.05..+4.15) down to +2.20 (printed in section ב-ב over the niche and in detail B-B); the south elevation shows no screen in front of the ground-floor laundry/bath windows (+1.05..+2.10). Only the part inside this storey is encoded: level 2.20 (base, rel. to ±0.00) + h 0.80 = +2.20..+3.00 (E2.json carries +3.00..+4.05). Was h 1.95 standing on the ground, which hid the ground-floor windows. Apt-2 niche; drawn lines z 7.66|7.765."
   }
  ],
  "openings": [
@@ -1105,19 +1108,19 @@
    "z": -2.667,
    "w": 1.2,
    "h": 0.7,
-   "sill": 1.45,
+   "sill": 1.4,
    "label": "120/70",
    "note": "kitchen; written rotated '70/120'; drawn gap 1.21"
   },
   {
    "type": "window",
-   "x": 1.062,
+   "x": 1.097,
    "z": 6.99,
    "w": 1.4,
    "h": 1.05,
-   "sill": 1.1,
+   "sill": 1.05,
    "label": "140/105",
-   "note": "laundry, onto the condenser ledge"
+   "note": "laundry, onto the condenser ledge; [final check] drawn opening x 0.38 (jamb) .. 1.73 (pier) -> centre 1.055 (was 1.02)"
   },
   {
    "type": "window",
@@ -1125,7 +1128,7 @@
    "z": 6.993,
    "w": 0.6,
    "h": 0.7,
-   "sill": 1.45,
+   "sill": 1.4,
    "label": null,
    "note": "bathroom, onto the ledge; drawn gap 0.63, no label (h as on fpD 60/70)"
   },
@@ -1135,7 +1138,7 @@
    "z": 7.444,
    "w": 0.6,
    "h": 0.2,
-   "sill": 1.95,
+   "sill": 1.9,
    "label": "60/20",
    "note": "WC vent window onto the ledge; label '60/20' written below the ledge (may belong to the bath window)"
   },
@@ -1162,12 +1165,12 @@
   {
    "type": "door",
    "x": 4.421,
-   "z": 7.478,
+   "z": 7.418,
    "w": 0.7,
    "h": 2.1,
    "sill": 0.0,
    "label": "70/210",
-   "note": "hall -> WC"
+   "note": "hall -> WC; [final check] drawn opening between the partition stubs z 7.075..7.76 -> centre 7.42 (was 7.48)"
   },
   {
    "type": "door",
@@ -1205,7 +1208,7 @@
    "z": 11.727,
    "w": 1.2,
    "h": 1.05,
-   "sill": 1.1,
+   "sill": 1.05,
    "label": "120/105",
    "note": "bedroom, south"
   },
@@ -1227,7 +1230,7 @@
    "h": 1.0,
    "sill": 1.0,
    "label": "100/100",
-   "note": "mamad; sill 1.00 as read on the south elevation for the upper floors"
+   "note": "mamad; sill +1.00 / head +2.00 printed in section א-א for this floor (drawn gap 6.55..7.50)"
   },
   {
    "type": "slider",
@@ -1245,7 +1248,7 @@
    "z": -2.733,
    "w": 1.2,
    "h": 0.7,
-   "sill": 1.45,
+   "sill": 1.4,
    "label": "120/70",
    "note": "kitchen; written rotated '70/120'"
   },
@@ -1255,7 +1258,7 @@
    "z": -2.697,
    "w": 1.2,
    "h": 1.05,
-   "sill": 1.1,
+   "sill": 1.05,
    "label": "120/105",
    "note": "master bedroom; written rotated '105/120'"
   },
@@ -1311,23 +1314,23 @@
   },
   {
    "type": "door",
-   "x": 16.133,
-   "z": 6.404,
+   "x": 16.134,
+   "z": 6.304,
    "w": 0.8,
    "h": 2.1,
    "sill": 0.0,
    "label": "80/210",
-   "note": "bathroom -> laundry"
+   "note": "bathroom -> laundry; [final check] drawn opening z 5.89 (partition end, hinge) .. 6.67 (stub) -> centre 6.28 (was 6.38, 10 cm off)"
   },
   {
    "type": "window",
-   "x": 16.927,
+   "x": 16.967,
    "z": 6.906,
    "w": 1.4,
    "h": 1.05,
-   "sill": 1.1,
+   "sill": 1.05,
    "label": "140/105",
-   "note": "laundry, onto the condenser ledge"
+   "note": "laundry, onto the condenser ledge; [final check] drawn opening x 16.28 (pier) .. ~17.57 (jamb) -> centre 16.925 (was 16.885)"
   },
   {
    "type": "window",
@@ -1335,7 +1338,7 @@
    "z": 6.903,
    "w": 0.6,
    "h": 0.7,
-   "sill": 1.45,
+   "sill": 1.4,
    "label": null,
    "note": "bathroom, onto the ledge; drawn gap 0.59, no label"
   },
@@ -1345,19 +1348,19 @@
    "z": 7.437,
    "w": 0.6,
    "h": 0.2,
-   "sill": 1.95,
+   "sill": 1.9,
    "label": "60/20",
    "note": "WC vent window onto the ledge; label '60/20' inside the condenser box"
   },
   {
    "type": "door",
-   "x": 12.8,
-   "z": 7.856,
+   "x": 12.85,
+   "z": 7.857,
    "w": 0.8,
    "h": 2.1,
    "sill": 0.0,
    "label": "80/210",
-   "note": "hall -> bedroom"
+   "note": "hall -> bedroom; [checker] drawn opening x 12.43..13.20 (hinge at the mamad corner 12.45), was 12.76"
   },
   {
    "type": "door",
@@ -1381,13 +1384,13 @@
   },
   {
    "type": "window",
-   "x": 14.107,
-   "z": 11.639,
+   "x": 14.152,
+   "z": 11.64,
    "w": 1.2,
    "h": 1.05,
-   "sill": 1.1,
+   "sill": 1.05,
    "label": "120/105",
-   "note": "bedroom, south"
+   "note": "bedroom, south; [final check] drawn opening x 13.56 (pier) .. 14.69 (pier), label leader at 14.14 -> centre 14.12 (was 14.075)"
   },
   {
    "type": "window",
@@ -1618,10 +1621,6 @@
     [
      6.9,
      7.943
-    ],
-    [
-     5.765,
-     7.941
     ],
     [
      5.765,
@@ -1928,7 +1927,7 @@
   },
   {
    "name": "פ. עבודה",
-   "kind": "laundry",
+   "kind": "office",
    "apt": "2",
    "poly": [
     [
@@ -1957,7 +1956,7 @@
     ]
    ],
    "label_area": null,
-   "note": "written 'פ. עבודה'; hall 235 x 260 in front of bath/WC/bedroom/mamad (kind per task mapping)"
+   "note": "written 'פ. עבודה' (פינת עבודה = work corner / study nook), 235 x 260, also the hall to bath/WC/bedroom/mamad; [checker] kind 'office' (was 'laundry': no laundry fixture here, the washing machine is in the 160x160 room; same as E2.json)"
   },
   {
    "name": "ח. שינה",
@@ -2172,11 +2171,11 @@
    "poly": [
     [
      -0.111,
-     -4.993
+     -4.833
     ],
     [
      5.069,
-     -4.981
+     -4.891
     ],
     [
      5.748,
@@ -2199,7 +2198,7 @@
      0.577
     ]
    ],
-   "note": "north-west yard, 246.30/246.20/246.15 marks; label says 21 m2, polygon (to fence centres) ~24.6 m2"
+   "note": "north-west yard, 246.30/246.20/246.15 marks; label says 21 m2; polygon to boundary-wall / fence / building-wall centre lines ~23.6 m2 (SITE.json's face-to-face polygon 21.5)"
   },
   {
    "name": "פרגולה בעתיד",
@@ -2208,23 +2207,23 @@
    "level": -0.1,
    "poly": [
     [
-     0.064,
-     -2.862
+     0.044,
+     -2.742
     ],
     [
      3.164,
-     -2.855
+     -2.735
     ],
     [
      3.157,
      0.485
     ],
     [
-     0.057,
+     0.037,
      0.478
     ]
    ],
-   "note": "future pergola (dashed, 3.10 x 3.25 per the area-table notch); level = garden below, beam height not given"
+   "note": "future pergola, dashed outline: west edge x -0.02, north edge z -2.73 (scanned; was -2.85), east = kitchen wall face 3.10, south = living wall face 0.49 -> 3.12 x 3.22 (area-table notch 3.10 x 3.25); level = garden below, beam height not given"
   },
   {
    "name": "חצר פרטית לדירה מס' 2 (92 מ\"ר)",
@@ -2234,18 +2233,26 @@
    "poly": [
     [
      9.969,
-     -4.97
+     -4.89
     ],
     [
-     18.069,
-     -4.952
+     15.069,
+     -4.828
     ],
     [
-     22.719,
-     -4.861
+     19.069,
+     -4.749
     ],
     [
-     22.704,
+     21.949,
+     -4.743
+    ],
+    [
+     22.767,
+     -3.921
+    ],
+    [
+     22.754,
      1.659
     ],
     [
@@ -2277,7 +2284,7 @@
      -2.7
     ]
    ],
-   "note": "north-east yard (246.20/246.30); continues south along the east wall into the south-east garden (next polygon)"
+   "note": "north-east yard (246.20/246.30) incl. the strip north of the master bedroom (no fence drawn between them); continues south along the east wall into the south-east garden (next polygon)"
   },
   {
    "name": "פרגולה בעתיד",
@@ -2287,14 +2294,14 @@
    "poly": [
     [
      14.854,
-     -2.929
+     -2.839
     ],
     [
-     18.064,
-     -2.922
+     17.954,
+     -2.832
     ],
     [
-     18.057,
+     17.947,
      0.388
     ],
     [
@@ -2302,7 +2309,7 @@
      0.381
     ]
    ],
-   "note": "future pergola (dashed outline)"
+   "note": "future pergola, dashed outline: north edge z -2.86 (was -2.95), east edge x 17.89 (was 18.00; the dashed line is in line with the east wall face 17.91), west = kitchen wall face, south = living wall face -> 3.10 x 3.22"
   },
   {
    "name": "חצר (דרום-מזרח)",
@@ -2320,11 +2327,11 @@
     ],
     [
      18.834,
-     15.08
+     15.3
     ],
     [
-     9.024,
-     15.058
+     9.023,
+     15.338
     ],
     [
      9.032,
@@ -2343,7 +2350,7 @@
      7.748
     ]
    ],
-   "note": "no name/area written; strip along the east wall (fence double line x 18.69..18.93) + garden south of the bedroom/mamad, divided from the west half by the fence with x marks at x 9.0; levels 246.20/246.40"
+   "note": "no name/area written; strip along the east wall (wall double line x 18.67..18.91) + garden south of the bedroom/mamad down to the garden-edge wall, divided from the west half by the fence with x marks at x 9.0; levels 246.20/246.40"
   },
   {
    "name": "חצר (דרום-מערב)",
@@ -2352,7 +2359,7 @@
    "level": -0.1,
    "poly": [
     [
-     0.04,
+     -0.02,
      7.848
     ],
     [
@@ -2376,15 +2383,15 @@
      11.628
     ],
     [
-     9.024,
-     15.058
+     9.023,
+     15.338
     ],
     [
-     0.024,
-     15.038
+     -0.037,
+     15.378
     ]
    ],
-   "note": "no name/area written; west of the x=9 fence; levels 246.30/246.40; assignment to apt 1 inferred"
+   "note": "no name/area written; west of the x=9 fence, east of the wall towards M2's garden (x -0.06; '247.80'/'247.50' marks on that wall belong to M2's side); levels 246.30/246.40; assignment to apt 1 inferred (bedroom door opens onto it)"
   },
   {
    "name": "קומת עמודים",
@@ -2393,12 +2400,20 @@
    "level": -0.07,
    "poly": [
     [
-     5.884,
-     -2.664
+     5.879,
+     -0.699
     ],
     [
-     9.029,
-     -2.702
+     7.734,
+     -0.695
+    ],
+    [
+     7.734,
+     -0.615
+    ],
+    [
+     9.024,
+     -0.612
     ],
     [
      9.019,
@@ -2409,7 +2424,7 @@
      1.781
     ]
    ],
-   "note": "pilotis 4.55 x 3.16 = 14.38 (area table), level 246.33; contains the entrance steps (x 5.92..7.57) and a low-walled bed (x 7.75..8.86, z -2.69..-0.65)"
+   "note": "[checker] walkable pilotis floor 246.33 only (from the top step z -0.70 / the well's south wall to the lobby wall), ~7.7 m2. The area table's 'קומת עמודים 4.55 x 3.16 = 14.38' is the whole covered zone x 5.82..8.97, z -2.75..1.78, which also holds the entrance steps (stairs[0]) and the basement-stair well (stairs[1]); before, this polygon covered both and would have put a slab over them"
   },
   {
    "name": "שביל כניסה",
@@ -2442,11 +2457,19 @@
      -2.702
     ],
     [
+     9.029,
+     -2.792
+    ],
+    [
+     5.884,
+     -2.799
+    ],
+    [
      5.884,
      -2.664
     ]
    ],
-   "note": "entrance forecourt from the north street between the yard retaining walls (x 5.53..5.84 and 9.81..10.01); spot level 245.25 at the foot of the steps (street side ~245.0-245.25, yards ~246.2 above it); main water meter 'מונה מים ראשי' at (5.75,-3.95)"
+   "note": "entrance forecourt from the north street between the yard retaining walls (x 5.53..5.84 and 9.81..10.01), out to the plot line; ends at the building line z -2.80 where the entrance steps go up and the basement stair goes down; spot level 245.25 (street side ~245.0-245.25, yards ~246.2 above it); main water meter 'מונה מים ראשי' at (5.75,-3.95). Not modelled: an unlabelled double-line element (planter/bench?) at x 7.5..9.8, z -4.78..-4.10 with a 15 cm double line from it to the building along x 8.85..9.0 (z -4.2..-2.8)"
   }
  ],
  "stairs": [
@@ -2454,26 +2477,55 @@
    "poly": [
     [
      5.984,
-     -2.779
+     -2.789
     ],
     [
      7.634,
-     -2.775
+     -2.785
     ],
     [
      7.629,
-     -0.695
+     -0.685
     ],
     [
      5.979,
-     -0.699
+     -0.689
     ]
    ],
    "up_dir": [
     -0.0022,
     1.0
    ],
-   "note": "entrance steps from the north forecourt (245.25) up to the pilotis (246.33): 7 treads of 30 between 8 nosing lines, label '8X17/30' (written rotated); walking line with chevron at the south (top) end. The site plan (p0_site) draws the basement stair to storerooms 101-105 (243.80 = -2.60) at the same place - not drawn on fpE"
+   "from_level": -1.15,
+   "to_level": -0.07,
+   "note": "OUTDOOR entrance steps (not a stair to the floor above): from the north forecourt (245.25, -1.15) up to the pilotis (246.33, -0.07): 7 treads of 30 between 8 nosing lines (z -2.79..-0.69), label '8X17/30' (written rotated); walking line with chevron at the south (top) end"
+  },
+  {
+   "poly": [
+    [
+     7.844,
+     -2.795
+    ],
+    [
+     8.904,
+     -2.792
+    ],
+    [
+     8.899,
+     -0.712
+    ],
+    [
+     7.839,
+     -0.715
+    ]
+   ],
+   "up_dir": [
+    0.0022,
+    -1.0
+   ],
+   "from_level": -2.6,
+   "to_level": -1.15,
+   "note": "[checker] BASEMENT STAIR (not a stair to the floor above): goes DOWN southwards from the forecourt (245.25, -1.15) to the corridor of storerooms 101-105 (243.80, -2.60); up = north. On fpE only its well is drawn (20 cm walls, no treads): x 7.78..8.84 (1.06 wide), z -2.80..-0.72, open to the forecourt at the north end. The basement plan on p0_site draws here a '105' wide flight between concrete walls, walking line dot at the south (bottom) and arrow at the north (top); ~8 risers (1.45 m) on 7 treads of 30 = 2.10 m, matching the well length 2.08. Area table -2.60: 'stairs (7) 1.25x4.15 = 5.18'"
   },
   {
    "poly": [
@@ -2498,7 +2550,9 @@
     -0.0022,
     1.0
    ],
-   "note": "main stair (U-shaped around a well, as on the upper floors). At ±0.00 the first flight is the east flight x 9.95..11.01 rising south from z~5.3 (treads ~28), landing at the south, then westward; cut line drawn at x~8.2..8.7. Section A-A: ±0.00 -> landing +1.05 -> +3.00. Dims written: 295 (hall width), 410 (core interior on upper floors), 110 flight width"
+   "from_level": 0.0,
+   "to_level": 3.0,
+   "note": "main stair (U-shaped around a well, as on the upper floors). At ±0.00 the first flight is the east flight x 9.95..11.01 rising south from z~5.3 (treads ~28), landing at the south, then westward; cut line drawn at x~8.5..9.3. Section A-A: ±0.00 -> landing +1.05 -> +3.00. Dims written: 295 (hall width), 410 (core interior on upper floors), 110 flight width"
   }
  ],
  "lifts": [],
@@ -2521,18 +2575,23 @@
   "Envelope on this sheet: west wall faces 0.02..0.24, east wall faces 17.70..17.90 (17.9 m vs the 18.00 chain); mamad south outer face 11.77 (frame reference 11.75). Upper floors (fpD/fpC) put E's west/east walls at ~0.17-0.21 / 17.96 - a 5-15 cm registration difference between sheets, not corrected here.",
   "Building M2 abuts E's west wall from z ~0.6 to 7.6 (its own blue wall x -0.17..-0.03); not modelled. North of it the yard fence continues the line (x -0.18).",
   "Thicknesses: exterior block walls 0.20-0.22, concrete core/L-wall 0.21, mamad 0.20 (south 0.30), partitions 0.10 (labels '10'), storeroom/stair partition 0.12. The shelter south wall and the bedroom south walls are not collinear (bedroom outer face 5 cm further south in apt 1).",
-  "Window labels on the north side are written rotated and read '230/270', '70/120', '105/120' (height first) while the drawn gaps (2.65-2.75, 1.21-1.25, 1.22) show widths 270 / 120 / 120: openings use w x h = 270x230, 120x70, 120x105. South labels read normally (120/105, 100/100, 80/210). Sills: 2.15-h (README) except the mamad windows (1.00, as read on the south elevation for the upper floors).",
-  "Wet rooms are not named on fpE: bath (bathtub 240), laundry 160x160 (washing machine, door from the bath), WC (150) named from fixtures as on fpD. Apt 2 en-suite: only 'ונטה' (exhaust fan) is written - named 'מקלחת' from the shower tray. Apt 1 hall has no name (dims 135/270/235); apt 2 hall is written 'פ. עבודה' (kind laundry per the task mapping).",
+  "Window labels on the north side are written rotated and read '230/270', '70/120', '105/120' (height first) while the drawn gaps (2.65-2.75, 1.21-1.25, 1.22) show widths 270 / 120 / 120: openings use w x h = 270x230, 120x70, 120x105. South labels read normally (120/105, 100/100, 80/210). Sills [checker]: head +2.10 as PRINTED for this floor (section א-א north window +1.05/+2.10; south elevation +1.05/+2.10), so sill = 2.10 - h: 105-high windows 1.05, 70-high 1.40, WC vents 1.90 (was 2.15 - h); ממ\"ד windows +1.00/+2.00 (section א-א). Same rule as E2.json/E3.json.",
+  "Wet rooms are not named on fpE: bath (bathtub 240), laundry 160x160 (washing machine, door from the bath), WC (150) named from fixtures as on fpD. Apt 2 en-suite: only 'ונטה' (exhaust fan) is written - named 'מקלחת' from the shower tray. Apt 1 hall has no name (dims 135/270/235); apt 2 hall is written 'פ. עבודה' (פינת עבודה, work corner) -> kind office [checker; was laundry], as in E2.json.",
   "Open-plan splits (no walls drawn): apt 1 dining/living at z 2.80 ('פ. אוכל' written at z~2.35, 'ח. מגורים' at z~3.3); kitchen 1 ends at z 1.78; apt 2 dining/living at x 13.65, kitchen 2 ends at z 1.135.",
   "Storeroom 106 / 'לובי': both names are written inside one enclosure (L-shaped concrete wall, mamad wall, 12 cm stair partition, storeroom north wall with a 70 door). The line at z 5.97 between the names is the 205/295 dimension line and lines at z 7.12 / x 7.78 are dimension lines (410, 280), so no wall separates them; the 'לובי' has no other access. Kept as two polygons with a virtual boundary at z 5.97 - merge if wanted. Area table lobbies 30.04 = 11.88 (entrance) + 9.54 (stair) + 4.73 + 3.89 (lobby in front of apt-2 door ~ x 8.97..11.11, z 3.23..5.04).",
   "Building entrance: the lobby's north side is a thin double line (mailbox + intercom unit 'מיקום תיבות דאר + אינטרקום') with a door unit labelled 230/130 (= 130 wide x 230 high) whose 1.1 leaf is hinged at x 6.05 and opens outwards into the pilotis; modelled as a 0.20 wall at z 1.78 with an 'entry' opening 1.30 wide.",
-  "Entrance steps in the pilotis (x 5.92..7.57, z -2.78..-0.70, '8X17/30') connect the north forecourt (245.25, ~1.1 m below the pilotis 246.33 and ~1 m below the yards) with the pilotis; up = south. East of them an L-shaped low wall (0.17) encloses x 7.75..8.86, z -2.69..-0.65 (planter or light well - not specified). No stair to the basement is drawn on fpE; the -2.60 storerooms 101-105 and their stair are drawn only on the development plan (p0_site, under the north part of the building), so E0.json was NOT produced from this sheet.",
+  "Entrance steps in the pilotis (x 5.92..7.57, z -2.79..-0.69, '8X17/30') connect the north forecourt (245.25, ~1.1 m below the pilotis 246.33 and ~1 m below the yards) with the pilotis; up = south. [checker] The walled pit east of them (inside x 7.78..8.84, z -2.80..-0.72, 20 cm unfilled walls, open to the forecourt at the north) is the WELL OF THE BASEMENT STAIR, not a planter: the basement plan on p0_site draws a '105' wide flight exactly here (east of the entrance steps, west of storeroom 105, below the master bedroom) going down south to the 243.80 corridor of storerooms 101-105; fpE draws no treads in it. Modelled as stairs[1] (from -2.60 to -1.15, up = north) with its two walls as 'low' (h not given). The storerooms themselves (the -2.60 level) are drawn only on p0_site, not on fpE, so E0.json was NOT produced from this sheet.",
   "Main stair: same U-stair as upper floors; on ±0.00 it starts with the east flight going south. No lift in E.",
-  "Gardens: only the two north yards carry 'חצר פרטית' labels (apt 1: 21 m2, apt 2: 92 m2). Their polygons go to fence centres/plot line: yard 1 ~24.6 m2; yard 2 north part ~59 m2 + the strip east of the building and the south-east garden (~53 m2). The south garden (to the 'גבול מגרש' double line at z ~15.05) is split by a fence with x marks at x 9.0; its halves are assigned to apt 1 / apt 2 by position (not written). Garden levels -0.10 (246.30) with marks 246.15-246.40. Fences / retaining walls are not modelled as walls: yard 1 west x -0.18, forecourt sides x 5.53..5.84 and 9.81..10.01 (retaining, forecourt ~1 m lower), yard 2 east x ~22.65 and south z ~1.62, east strip x 18.69..18.93, plot line north z ~-4.98 (red marker wavy), south z ~15.05.",
-  "Future pergolas 'פרגולה בעתיד' (dashed) north of both living rooms: x 0.0..3.10 / 14.79..18.0, z -2.85/-2.95 .. wall; outdoor kind pergola at garden level (beam height not given on this sheet).",
+  "Gardens: only the two north yards carry 'חצר פרטית' labels (apt 1: 21 m2, apt 2: 92 m2). [checker] Polygons now run to the centre lines of the boundary/garden walls drawn on fpE (those walls are modelled in SITE.json, not here): north boundary wall z -4.82..-4.90 (west) / -4.90..-4.78 (east) instead of the plot line -4.98; NE corner chamfer (21.88,-4.78)-(22.70,-3.96); yard-2 east wall x 22.70; south garden-edge wall z 15.39 (x 0) .. 15.27 (x 18.8) instead of 15.05 (the 'גבול מגרש' text written on that double line is not the plot line, see SITE.json); west wall towards M2's garden x -0.06. Areas: yard 1 ~23.6 m2 (label 21); yard 2 north part ~59 m2 + east strip and south-east garden ~56 m2 (label 92 for the apartment's yard). The south garden is split by a fence with x marks at x 9.0; its halves are assigned to apt 1 / apt 2 by position and by the bedroom garden doors (not written). Garden levels -0.10 (246.30) with marks 246.15-246.40. Fences / retaining walls are not modelled as walls here: yard 1 west x -0.18, forecourt sides x 5.53..5.84 and 9.81..10.01 (retaining, forecourt ~1 m lower), yard 2 east x 22.70 and south z 1.62, east strip x 18.67..18.91.",
+  "Future pergolas 'פרגולה בעתיד' (dashed) north of both living rooms [checker: re-scanned]: x -0.02..3.10, z -2.73..0.49 and x 14.79..17.89, z -2.86..0.36 (3.10-3.12 x 3.22, the 3.10 x 3.25 notches of the area table; the two north edges differ by 13 cm only through the sheet's residual rotation); outdoor kind pergola at garden level (beam height not given on this sheet; misc1 has the pergola detail).",
   "Lobby furniture not modelled: a pencil note 'ארון כ.א' (fire-hose cabinet, depth 30) against the en-suite south wall at x ~9.1..10.3, z ~3.3..3.55; mailboxes + intercom on the entrance wall.",
   "Not modelled: rain-water pipes 'צ.מ.ג Ø4\"' (NW corner, NE corner, SE bedroom corner), AC condenser boxes (X boxes) on the ledges, the water meter, trees and landscape curves, dimension chains.",
-  "Area check (centre-line polygons, ledges excluded): apt 1 = see build output (~71.0 m2 vs 74.7 gross), apt 2 ~94.5 m2 vs 98.85 gross; common: entrance lobby ~15.4, stair hall ~9.0, storeroom+לובי ~5.4, pilotis ~14.0 (table 14.38). Centre-line sums are ~95-96% of the gross areas (as on fpC).",
+  "[checker] Independent re-check on fpE (wall-face profiles across all 73 walls, pixel profiles along every wall holding an opening, zooms at 150-220 px/m): walls within 1-4.5 cm of the drawn centre lines (largest: kitchen/lobby jog z 1.78 vs drawn 1.735; well south wall was 4.5 cm off and 3 cm too thin - fixed), opening centres within 1-4.5 cm of the drawn jambs except the bedroom-2 door (5.5 cm, fixed). Fixed: 'פ. עבודה' kind; window sills (head 2.10); pergola outlines (9-12 cm); pilotis polygon (no longer covers the steps and the well); the walled pit = basement-stair well (stairs[1]); laundry screens (level 2.20, h 0.80 instead of 1.95 standing on the ground); garden edges onto the drawn boundary walls (south edge was 25-35 cm short).",
+  "[checker] Scale/registration: the 18.00 chain at the bottom of fpE (z ~26) measures 17.83 m (ticks x -0.13 .. 17.70) and E's envelope 0.035 .. 17.91 (17.875), while fpC/fpD give 17.99-18.06; the x scale of fpE in reg.json is ~0.7-0.9 % large. Not corrected here (M1/SITE share this registration; tools2/assemble.sh aligns E1 to E2 on the core/ממ\"ד walls). Expect the east facade (x 17.80 here vs ~17.97 on E2/E3) to step by ~15 cm.",
+  "[checker] For the assembler: stairs[0] (entrance steps, -1.15 -> -0.07) and stairs[1] (basement stair, -2.60 -> -1.15) do NOT lead to the floor above (from_level/to_level given) - they must not be built as 3 m flights nor cut holes in the +3.00 slab/terrace; railings[] carry 'level' (base above ±0.00), which studio/tools/permit_to_project.py currently drops.",
+  "Area check (centre-line polygons, ledges excluded): apt 1 ~71.0 m2 vs 74.7 gross, apt 2 ~94.5 m2 vs 98.85 gross; common: entrance lobby ~15.4, stair hall ~9.0, storeroom+לובי ~5.4; pilotis walkable floor ~7.7 (the table's 14.38 = 4.55 x 3.16 includes the entrance steps and the basement-stair well). Centre-line sums are ~95-96% of the gross areas (as on fpC).",
+  "[final check] Full-coverage overlays at 95-250 px/m (overlay2 + an outline overlay with outdoor/stairs/railings), wall-face profiles across all 73 walls, colour-fill and jamb scans along every opening wall, JSON validation (closed simple polygons, finite numbers, allowed kinds, every opening on a wall centreline and inside the wall run, no overlapping openings, room edges without a wall = open-plan splits only, rooms/outdoor not overlapping). Fixed: apt-2 laundry door z 6.38 -> 6.28 (drawn opening 5.89..6.67), apt-1 WC door z 7.48 -> 7.42 (7.075..7.76), bedroom-2 window x 14.075 -> 14.12 (jambs 13.56..14.69), laundry windows x 1.02 -> 1.055 (0.38..1.73) and 16.885 -> 16.925 (16.28..~17.57); removed a 1 cm edge from the apt-1 hall polygon. Wall centres confirmed within ~1-3 cm (apt-2 WC north partition drawn 6.78..6.92 vs 6.83..6.93 modelled - left).",
+  "[final check] REMAINING SCALE DOUBT (not corrected, affects the whole sheet): on fpE the frame's x scale is ~0.7-1.0 % short - E's outer faces measure x 0.02..17.90 (17.88 for the printed 18.00), the bottom 18.00 chain (260/640/640/260, 900/900) spans -0.11..17.70 (17.81) with its middle tick at 8.785, and printed x dims read short (655 -> 6.49, 510 -> 5.045, 310 -> 3.065, 280 -> 2.775) while z dims are right (365, 370, 425, 345). E2/E3 put the outer faces at 0.07..18.07 / 0.045..18.085. After tools2/assemble.sh's rigid fit of E1 onto E2 (core/mamad walls, t = +0.058 in x) the ground-floor outer faces land at ~0.08..17.96, i.e. the east facade ~11 cm inside the upper floors (west within ~1 cm). A proper fix is x' = 9.0 + (x - 9.0) * ~1.0067 for everything measured on fpE (E1, and consistently M1/SITE), i.e. in reg.json or the assembler, not in E1 alone.",
   "aligned to E2.json on ['core', 'mamad'] walls: rotate 0.1288 deg about (0,0), then translate (0.058,-0.012)"
  ]
 }

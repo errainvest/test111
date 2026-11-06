@@ -30,3 +30,9 @@ Use this route when the set has more than one building, walls that are not axis-
 2. Measure each floor into its own floor JSON. Rooms are polygons on wall centrelines, and openings sit on wall centrelines. Then do an independent overlay check that fixes what it finds, followed by a final recheck. With ultracode on, run one workflow per pair of floors so they run in parallel.
 3. Read the cover and area tables (units per floor and areas), the sections (±0.00 absolute, floor and roof levels, parapets), the elevations (stone versus plaster, railing type) and the site plan (plot line, building lines, parking, spot levels, north arrow).
 4. Write a recipe and run `studio/tools/permit_to_project.py`, then `studio/tools/build_project.py`. Render-test headlessly and compare with the elevations before publishing.
+
+### Lessons from the Modiin B-43 permit set
+- Hand-drafted sheets do not agree with each other. In that set the ground-floor sheet was rotated 0.4° and building M2 sat 0.7 m off relative to E. Stack each building on its detailed floor by fitting the core and shelter walls (`studio/tools/permit/align.py`; residuals of about 1 cm). Move site features with a transform that blends between the two buildings (`site_fix.py`).
+- Build the apartment that is shown inside from what the plan draws. Have two independent readers extract the fixtures (counters with sink and cooktop, sanitary ware, washer, AC, door swings), then reconcile and verify them. Their disagreements expose errors in the measured floor (`fix_m3.py` is an example of a confirmed fix).
+- Floors that are not shown inside are exterior shells: facade walls, curtained windows and lit windows in the evening. In the recipe use `detail_floors` / `show_apts`, and set `start` to open on the apartment.
+- Photos of the real building (for example a 3D city model) settle the facade materials and the street corner. Put the photo viewpoint in `views.ext`.

@@ -379,48 +379,24 @@
     -3.17
    ],
    [
-    -13.922,
-    -3.05
+    -17.025,
+    -2.932
    ],
    [
-    -15.13,
-    -2.872
-   ],
-   [
-    -16.271,
-    -2.439
-   ],
-   [
-    -17.292,
-    -1.771
-   ],
-   [
-    -18.146,
-    -0.897
-   ],
-   [
-    -18.791,
-    0.139
-   ],
-   [
-    -19.198,
-    1.289
-   ],
-   [
-    -19.35,
-    2.5
-   ],
-   [
-    -19.236,
-    3.716
+    -19.729,
+    1.305
    ],
    [
     -14.941,
     24.728
    ],
    [
-    6.665,
-    20.429
+    2.398,
+    21.311
+   ],
+   [
+    2.4,
+    20.345
    ],
    [
     14.998,
@@ -874,12 +850,8 @@
      -5.842
     ],
     [
-     31.974,
-     -6.94
-    ],
-    [
-     32.675,
-     -7.519
+     31.843,
+     -6.762
     ]
    ],
    "name": "east aisle (shared with lot 2121)",
@@ -909,28 +881,56 @@
      31.653
     ],
     [
-     -23.709,
-     30.811
+     -23.009,
+     30.814
     ],
     [
-     -23.981,
-     24.409
+     -23.563,
+     24.411
     ],
     [
-     -17.18,
-     24.189
+     -17.051,
+     24.37
     ],
     [
-     -16.082,
-     24.574
+     -16.882,
+     24.56
     ],
     [
-     -6.081,
-     24.388
+     -16.633,
+     24.712
     ],
     [
-     -1.241,
-     24.583
+     -16.283,
+     24.803
+    ],
+    [
+     -15.883,
+     24.756
+    ],
+    [
+     -12.079,
+     23.88
+    ],
+    [
+     -8.075,
+     22.958
+    ],
+    [
+     -4.055,
+     22.172
+    ],
+    [
+     -2.028,
+     21.844
+    ],
+    [
+     -1.598,
+     21.659
+    ],
+    [
+     -1.327,
+     21.328
     ]
    ],
    "name": "south drive (shared with lot 2122) + branch to road B21",
@@ -1022,20 +1022,24 @@
   {
    "poly": [
     [
-     -17.077,
-     23.34
+     -17.404,
+     22.668
     ],
     [
-     -15.926,
-     23.295
+     -16.136,
+     23.254
     ],
     [
-     -11.422,
-     22.244
+     -15.916,
+     23.275
     ],
     [
-     -6.917,
-     21.144
+     -11.432,
+     22.234
+    ],
+    [
+     -6.907,
+     21.154
     ],
     [
      -2.466,
@@ -1043,29 +1047,57 @@
     ],
     [
      -1.229,
-     20.913
+     20.914
     ],
     [
-     -1.241,
-     24.583
+     -1.327,
+     21.328
     ],
     [
-     -6.081,
-     24.388
+     -1.598,
+     21.659
     ],
     [
-     -16.082,
-     24.574
+     -2.028,
+     21.844
     ],
     [
-     -17.18,
-     24.189
+     -4.055,
+     22.172
+    ],
+    [
+     -8.075,
+     22.958
+    ],
+    [
+     -12.079,
+     23.88
+    ],
+    [
+     -15.883,
+     24.756
+    ],
+    [
+     -16.283,
+     24.803
+    ],
+    [
+     -16.633,
+     24.712
+    ],
+    [
+     -16.882,
+     24.56
+    ],
+    [
+     -17.051,
+     24.37
     ]
    ],
    "kind": "path",
    "name": "sidewalk along the south drive (red paving 110)",
    "level": null,
-   "note": "between the M2 fill-ring walls and the drive kerb"
+   "note": "between the outer faces of the M2 fill-ring walls (M1.json low walls + t/2; NW end on the plot line) and the drawn drive kerb (0.22869 x + 0.97350 z = 21.222, see 5b); ~1.4 m wide; tree pit at (-4.11, 22.04)"
   }
  ],
  "retaining_walls": [
@@ -2034,6 +2066,12 @@
    "x": 0.619,
    "z": 16.312,
    "h": 3.5
+  },
+  {
+   "x": -13.516,
+   "z": 23.135,
+   "h": 3.5,
+   "note": "FINAL CHECK: on the development plan only (◐ in the sidewalk south of the M2 fill ring), not drawn on fpE"
   }
  ],
  "spot_levels": [
@@ -2157,11 +2195,11 @@
    "note": "E south garden"
   },
   {
-   "x": 6.326,
-   "z": 14.002,
+   "x": 5.904,
+   "z": 15.271,
    "v": 246.4,
-   "kind": "design",
-   "note": "E south garden"
+   "kind": "wall_top",
+   "note": "garden-edge wall (north line of the double wall), ⊕ with leader to the text"
   },
   {
    "x": 13.528,
@@ -2171,11 +2209,11 @@
    "note": "E south garden"
   },
   {
-   "x": 16.026,
-   "z": 14.024,
+   "x": 14.804,
+   "z": 15.251,
    "v": 246.4,
-   "kind": "design",
-   "note": "E south garden"
+   "kind": "wall_top",
+   "note": "garden-edge wall (north line of the double wall), ⊕ with leader to the text"
   },
   {
    "x": 17.623,
@@ -2493,81 +2531,81 @@
    "note": "refuse room \"M.E\" on lot 2121 (dev plan)"
   },
   {
-   "x": -11.252,
-   "z": -5.135,
+   "x": -9.584,
+   "z": -4.628,
    "v": 245.87,
    "kind": "existing",
-   "note": "survey, bank toe at north boundary"
+   "note": "survey, bank toe (dotted line) along the north boundary"
   },
   {
-   "x": -9.456,
-   "z": -4.127,
+   "x": -8.463,
+   "z": -2.573,
    "v": 247.31,
    "kind": "existing",
-   "note": "survey, bank top"
+   "note": "survey, bank top (dash-dot line)"
   },
   {
-   "x": 5.069,
-   "z": -4.951,
+   "x": 5.469,
+   "z": -4.75,
    "v": 246.06,
    "kind": "existing",
-   "note": "survey, north boundary"
+   "note": "survey, bank toe at the north boundary"
   },
   {
-   "x": 3.564,
-   "z": -3.138,
+   "x": 5.664,
+   "z": -2.75,
    "v": 246.74,
    "kind": "existing",
    "note": "survey, bank top"
   },
   {
-   "x": 26.068,
-   "z": -4.554,
+   "x": 27.914,
+   "z": -2.85,
    "v": 243.61,
    "kind": "existing",
-   "note": "survey, near vertex 71"
+   "note": "survey, bank toe 1.7 m south of vertex 71 (just east of the plot line)"
   },
   {
-   "x": 26.561,
-   "z": -1.453,
+   "x": 28.159,
+   "z": -0.609,
    "v": 244.65,
    "kind": "existing",
-   "note": "survey, bank top near 71"
+   "note": "survey, bank top near 71 (last digit 3 or 5)"
   },
   {
    "x": -13.997,
    "z": -5.048,
    "v": 245.6,
    "kind": "existing",
-   "note": "survey, vertex 842 (placed on the drawn vertex)"
+   "note": "survey, vertex 842 (placed on the drawn vertex; 245.47 also written there)"
   },
   {
    "x": -21.196,
    "z": 4.116,
    "v": 246.07,
    "kind": "existing",
-   "note": "survey, vertex 843 (placed on the drawn vertex)"
+   "note": "survey, vertex 843 (placed on the drawn vertex; 245.77 also written there)"
   },
   {
-   "x": -15.331,
-   "z": 12.847,
+   "x": -14.882,
+   "z": 13.049,
    "v": 246.25,
    "kind": "existing",
    "note": "survey, west bank"
   },
   {
-   "x": -11.435,
-   "z": 13.764,
+   "x": -11.535,
+   "z": 13.814,
    "v": 247.75,
    "kind": "existing",
    "note": "survey, west bank top"
   },
   {
-   "x": 21.023,
-   "z": 15.535,
+   "x": 21.018,
+   "z": 17.685,
    "v": 246.0,
    "kind": "contour",
-   "note": "survey contour label"
+   "note": "survey contour label (on the line; was 1.6 m off it)"
   },
   {
    "x": 16.508,
@@ -2577,11 +2615,11 @@
    "note": "survey contour label"
   },
   {
-   "x": 9.703,
-   "z": 24.61,
+   "x": 10.155,
+   "z": 23.511,
    "v": 247.0,
    "kind": "contour",
-   "note": "survey contour label"
+   "note": "survey contour label (on the line)"
   }
  ],
  "gardens": [
@@ -2629,11 +2667,11 @@
     ],
     [
      15.371,
-     7.472
+     7.742
     ],
     [
      17.971,
-     7.478
+     7.748
     ],
     [
      17.987,
@@ -2679,7 +2717,7 @@
    "owner": "E apt 2",
    "label": "לדירה מס' 2 חצר פרטית 92 מ\"ר",
    "level": 246.25,
-   "note": "NE recess (future pergola, not built) + east yard + east strip + east half of the south garden (fence at x=9); edges on the wall centrelines; ~101 m2 vs 92 written"
+   "note": "NE recess (future pergola, not built) + east yard + east strip + east half of the south garden (fence at x=9); edges on the wall centrelines; SE edge at the laundry-screen line z 7.72 of the מעבה niche (E1.json; was 7.45); ~101 m2 vs 92 written"
   },
   {
    "poly": [
@@ -2707,12 +2745,12 @@
   {
    "poly": [
     [
-     -0.016,
-     6.816
+     -0.018,
+     7.575
     ],
     [
-     2.686,
-     7.004
+     2.684,
+     7.764
     ],
     [
      2.674,
@@ -2733,7 +2771,7 @@
    ],
    "owner": "E (not written; probably apt 1)",
    "level": 246.35000000000002,
-   "note": "west half of E's south garden, separated by the fence at x=9; no ownership label on fpE"
+   "note": "west half of E's south garden, separated by the fence at x=9; no ownership label on fpE; starts at the laundry-screen line z 7.86 of the מעבה niche (E1.json), was 7.10 (overlapped it by 2 m2)"
   },
   {
    "poly": [
@@ -3437,17 +3475,18 @@
   "IMPORTANT, M2 vs E between sheets: on fpD/fpC the whole site underlay (trees, walls, parking row, fill rings) AND building M2 sit ~0.6-0.75 m further north (dz -0.57..-0.75, dx -0.07) relative to E than on fpE (NCC of fpE vs fpD per region; tree circles e.g. (-19.10,6.80) fpE vs (-19.18,6.06) fpD). The development plan p0_aerial (registered on the plot line) agrees with fpE for E, M2 and the plot. So M2.json/M3.json/M4.json (fpD/fpC/fpB) sit ~0.7 m north of this site and of M1.json; M1_aligned.json uses fpE->fpD = rot +0.504 deg about (0,0) then (+0.041,-0.695). If the M2 upper floors are kept in their fpD position, apply that same transform to the M2-zone features of this file (M2 gardens, fill rings, x~-15.2 / x~-0.1 walls, entrance path/steps, south drive west branch); E-zone features must stay.",
   "Plot (\"plot\") = the red \"גבול מגרש\" line as drawn on fpE (raw registration): sides fitted to the red trace (rms 0.02-0.04 m), NW fillet R 7.64 tangent to the W and N lines, north side 842-70-71 from the survey fit (within 0.02-0.07 m of the printed line under the hand-drawn red, which wobbles +-0.1). Area 1367 m2 vs printed 1381 (\"1.381 ד.\"): the drawn lot is ~0.4 m narrower E-W than the survey dimensions because fpE's x scale in tools/reg.json is ~0.7-1 % too large (E1 notes: E measures 17.875 for 18.00; stall groups 9.11-9.13 for \"4X2.3=9.2\"; \"9.32\" from E to the east line measures 9.26). \"plot_survey\" = survey dimensions (71-72 24.54, 72-73 8.45, 73-77 4.28, 77-76 16.41, 76-81 19.40, 81-843 24.69, NW fillet R 7.50, 842-70 14.52, arc 70-71 R 342.50 / 27.35) closure-adjusted and rigidly fitted to the red line (area 1379 m2); it lies 0.18-0.35 m outside the drawn line on the E, W and NW sides, so do not mix it with the fpE-measured features.",
   "North 19.4 deg clockwise from -z (arrows on fpC/fpD vs E walls; survey grid north gives ~19.2 after the fpE tilt). Unit vector given in the E-aligned frame.",
-  "Building lines (one closed polyline = buildable envelope): N 2.00 (\"200\" x2), NW fillet R 5.50, W 2.00 (\"200\" x2), S 76-81 3.00 (\"300\" x2), S 77-76 4.01 (\"401\"), notch side 73-77 4.00 (\"400\", dashed line labelled ק. בניין at x~14.92), E 71-72 3.00 (\"300\", dash-dot line at x~24.15), notch side 72-73 4.00 (\"400\" at x~22.0, line at z~16.0 labelled ק. בניין). Offsets are taken from the written dimensions; the drawn N line is ~0.1 m closer to the plot line than \"200\". A second dashed line at x~19.4 (z -2..11) is unexplained.",
+  "Building lines (one closed polyline = buildable envelope): N 2.00 (\"200\" x2), NW corner = the DRAWN straight chamfer labelled ק. בניין (parallel to M2's central wing, u = -5.44 in the M2R frame; ends at (-17.06,-2.17) on the N line and (-19.75,2.08) on the W line), W 2.00 (\"200\" x2), S 76-81 3.00 (\"300\" x2), S 77-76 4.01 (\"401\") joined to the S 76-81 line by a 1 m jog at x 2.40 (drawn lines stop at x~2.2 / ~2.5; the jog itself is not drawn), notch side 73-77 4.00 (\"400\", dashed line labelled ק. בניין at x~14.92), E 71-72 3.00 (\"300\", dash-dot line at x~24.15), notch side 72-73 4.00 (\"400\" at x~22.0, line at z~16.0 labelled ק. בניין). Straight offsets are taken from the written dimensions. The drawn N line is horizontal at z ~ -2.90 from x~-12 to 18.4: over E it is 1.97-2.02 m from the plot line, but on the M2 side the plot line slopes 2.4 deg, so the drawn line is only 1.89 m from it at the \"200\" dimension (x -4.4) and ~1.55 m at x -11; the model keeps the written 2.00 (up to 0.45 m south of the drawn line at x -11). The NE junction (x 24.13, z -2.72) is constructed (no drawn line between x 18.6 and the east line). A second dashed line at x~19.4 (z -2..11) is unexplained.",
   "Levels: the east aisle and E's 7 stalls are at the B10 level (grading lines 243.75-244.20 on fpE and on the development plan), ~2.2 m below E's yards (246.15-246.40) and ~3 m below the M2 drive (246.9-248.5). Walls x~18.8/18.9 and x~22.7 are therefore 2-3 m retaining walls; safety railings on them are ASSUMED (not drawn). Stall levels are interpolated from the grading lines.",
   "Parking = 15 open stalls 2.30 x 4.25 (table: lot 2123 = 15): M2 has ONE row of 8 along z 16.9-21.3 drawn as two groups \"4X2.3=9.2\" separated by a 1.00 m tree pit (not two rows); E has a column of 7 (4 + 3, 1.00 m tree pit) at x 19.6-23.96 facing the east aisle. Stall corners are raw fpE line fits (<= 1 cm rms).",
-  "The M2 row (8 stalls) opens onto an aisle that is 3.25 m on this lot (\"325\") + 3.26 m on lot 2122 (\"3.26\"); the south drive geometry west of x=-1.2 and its south edge on lot 2122 are approximate (development plan, 1:250).",
+  "The M2 row (8 stalls) opens onto an aisle that is 3.25 m on this lot (\"325\") + 3.26 m on lot 2122 (\"3.26\"). West of the stalls the drive's north edge is the drawn kerb 0.22869 x + 0.97350 z = 21.222 (fpE, parallel to plot side 76-81, also on the development plan; R 1.0 fillet at stall 1\\M2, kerb return onto the plot line at (-16.97,25.13)), so the sidewalk in front of the M2 fill rings is ~1.4 m wide and the drive ~6.6 m. The drive's south edge on lot 2122 (plot line + 3.26) and its mouth on B21 are approximate (development plan, 1:250).",
   "Double wall south of E's garden: south line top steps 248.20 / 247.90 / 247.60 (\"דירוג\", ⊕ on the wall) at ticks x=4.3/10.8/16.85, last step not written (247.30 assumed); north line top 246.40 / 246.10. The text \"גבול מגרש\" written on it at x~9 is not the plot line (red line is at z~24.4).",
-  "Existing levels: survey 1996 bracketed values along the north bank and the west bank; the old ground falls ~6.5 % towards the NE (plane h = 246.51 - 0.052 x + 0.038 z, out/read_site.md). Grading levels are written on dashed lines; positions given are the label positions (+-0.5 m along the line).",
+  "Existing levels: survey 1996 bracketed values along the north bank and the west bank; the old ground falls ~6.5 % towards the NE (plane h = 246.51 - 0.052 x + 0.038 z, out/read_site.md). Grading levels are written on dashed lines; positions given are the label positions (+-0.5 m along the line). Survey values (\"existing\", \"contour\") sit at the centre of their text on p0_survey (registered with work/SITE/xreg.json, +-0.3 m); the 246.50 / 247.00 / 246.00 contour points lie on their contour lines.",
   "Fill rings (M2, hatched) are also in M1.json as kind \"low\" walls with h 2.90: they are repeated here with \"in_M1\": true - build them once.",
-  "Gardens: E apt-1 21 m2 matches the NW yard incl. the recess (20.8 m2 at wall lines); E apt-2 labelled 92 m2 ~ NE/E yard + east half of the south garden (~98 m2); the west half of the south garden has no label. E's ground-floor outline used for the garden edges is read from fpE (E1.json not available yet) - clip gardens with the building footprint.",
+  "Gardens: E apt-1 21 m2 matches the NW yard incl. the recess (20.8 m2 at wall lines); E apt-2 labelled 92 m2 ~ NE/E yard + east half of the south garden (~98 m2); the west half of the south garden has no label. E's ground-floor outline used for the garden edges is read from fpE; the south-west / south-east garden edges stop at the laundry-screen lines (z 7.86 / 7.72) of E1.json's מעבה niches. DUPLICATES: E1.json and M1.json \"outdoor\" carry their own garden / yard / entrance-path polygons over the same ground (E1's use E1's wall lines, e.g. ממ\"ד face 11.62); render ground surfaces from ONE source (this file or the floor files), not both.",
   "Neighbour lots from the survey (vertices +-0.5 m beyond our lot), neighbour buildings are simplified massing outlines from the development plan (+-1 m); \"M.E\" refuse room sits on lot 2121.",
-  "Trees: 10 on the lot + 2 on lot 2121 (circle fits, radius = drawn canopy). Lighting poles (3.50 m) in \"lights\". Future pergolas (\"פרגולה בעתיד\") are not built and not included.",
-  "CHECKER (independent overlay2/scan check on fpE) fixed: (1) \"plot\" was the survey-dimension polygon, 0.20 m outside the drawn red line on the east side, 0.18 m on the west side and 0.25-0.35 m on the NW fillet -> now traced on the red line (all straight sides within 0.01 m of the red trace; survey polygon kept as \"plot_survey\"); the building lines, lot 2121/2122 outlines, B21 sidewalk, south drive and the M2 entrance path / W-corner / NW-corner gardens follow (the east building line now lands on the drawn dash-dot line x~24.15 instead of 24.36); (2) NE corner of apt-2's yard: the 45 deg chamfer wall started 0.3 m too far west (21.55) and had an extra kink -> (21.885,-4.69)-(22.70,-3.86)-(22.745,1.64) from the scanned faces; the boundary wall, railings and the apt-2 garden polygon follow; (3) north boundary wall along the M2 garden was 0.05-0.09 m south of the drawn wall between x=-9 and x=0 -> centreline fitted to the drawn centre dash (resid <= 0.01); E apt-1 part refitted the same way; (4) added the levels 246.30 written in apt-1's NW recess yard and ⊕ 247.80 on the x~-0.06 wall (0.0, 12.5); moved five wall-top spot levels onto their ⊕ marks (0.35-0.7 m off: 246.50 on the north wall x=14.45, 247.80 on the x~-15.2 wall z=-0.37, 246.50 / 247.20 / 247.20 on the x~18.8-19.0 wall at z=11.27 / 17.50 / 24.49); (5) the 72-73 building line is drawn (\"400\", z~16.0), not assumed. Verified without change: 15 stalls (dividers/back/front lines within 0.01-0.02 m), double wall south of E's garden, walls x~-15.2 / x~-0.16 / x~-0.06 / x~18.8, yard walls of apt 2, entrance-path walls, trees, lighting poles, spot-level values."
+  "Trees: 10 on the lot + 2 on lot 2121 (circle fits, radius = drawn canopy). Lighting poles (3.50 m) in \"lights\": 4 drawn on fpE + 1 only on the development plan (sidewalk south of M2, -13.44, 23.88). Future pergolas (\"פרגולה בעתיד\") are not built and not included.",
+  "CHECKER (independent overlay2/scan check on fpE) fixed: (1) \"plot\" was the survey-dimension polygon, 0.20 m outside the drawn red line on the east side, 0.18 m on the west side and 0.25-0.35 m on the NW fillet -> now traced on the red line (all straight sides within 0.01 m of the red trace; survey polygon kept as \"plot_survey\"); the building lines, lot 2121/2122 outlines, B21 sidewalk, south drive and the M2 entrance path / W-corner / NW-corner gardens follow (the east building line now lands on the drawn dash-dot line x~24.15 instead of 24.36); (2) NE corner of apt-2's yard: the 45 deg chamfer wall started 0.3 m too far west (21.55) and had an extra kink -> (21.885,-4.69)-(22.70,-3.86)-(22.745,1.64) from the scanned faces; the boundary wall, railings and the apt-2 garden polygon follow; (3) north boundary wall along the M2 garden was 0.05-0.09 m south of the drawn wall between x=-9 and x=0 -> centreline fitted to the drawn centre dash (resid <= 0.01); E apt-1 part refitted the same way; (4) added the levels 246.30 written in apt-1's NW recess yard and ⊕ 247.80 on the x~-0.06 wall (0.0, 12.5); moved five wall-top spot levels onto their ⊕ marks (0.35-0.7 m off: 246.50 on the north wall x=14.45, 247.80 on the x~-15.2 wall z=-0.37, 246.50 / 247.20 / 247.20 on the x~18.8-19.0 wall at z=11.27 / 17.50 / 24.49) and the two 246.40 labels onto the ⊕ marks on the garden-edge wall (5.88,15.27) / (14.78,15.23) (kind wall_top); (5) the 72-73 building line is drawn (\"400\", z~16.0), not assumed. Verified without change: 15 stalls (dividers/back/front lines within 0.01-0.02 m), double wall south of E's garden, walls x~-15.2 / x~-0.16 / x~-0.06 / x~18.8, yard walls of apt 2, entrance-path walls, trees, lighting poles, spot-level values.",
+  "FINAL CHECK (work/SITE_final: validate.py, overlaps.py, prof2.py, 20 overlay tiles at res 100 on fpE + survey/dev-plan overlays) fixed: (1) NW building line: the offset arc R 5.64 (not drawn) -> the drawn straight chamfer; (2) building line at vertex 76: the constructed corner at x 6.65 -> drawn S2/S1 lines joined by a jog at x 2.40; (3) sidewalk / south drive boundary west of the stalls: ~horizontal z 24.95-25.33 -> the drawn kerb (up to 2.8 m further north at the east end), sidewalk NW corner on the plot line; (4) east aisle mouth no longer sticks 0.8 m into the B10 carriageway; the B10 south sidewalk is split at the aisle mouth and the B21 east sidewalk ends at the south drive mouth (no more overlapping ground surfaces on the lot: were 19.5 m2 and 35 m2), drive mouth ends on the B21 kerb; (5) ten survey levels moved onto their printed positions (were 0.4-2.5 m off); (6) E south gardens no longer overlap E1's מעבה niches; (7) added the light pole of the development plan in the M2 sidewalk. Checked without change: plot vs red trace (median offset per side -0.07..+0.08 m, area 1367.3 vs 1381 printed = fpE x-scale), north arrow (tip = north, fpC), 15 stalls, walls, fences, trees, lights, wall-top/design levels, gardens, roads/neighbours (approximate). Remaining overlaps are road-on-road at the B10/B21 junction (both carriageways cover it; B21 continues north of B10 on the development plan) - acceptable for context roads."
  ],
  "poles": [
   {
@@ -3469,6 +3508,11 @@
    "x": 0.619,
    "z": 16.312,
    "h": 3.5
+  },
+  {
+   "x": -13.516,
+   "z": 23.135,
+   "h": 3.5
   }
  ],
  "sidewalks": [
@@ -3479,60 +3523,129 @@
      -5.031
     ],
     [
-     -11.233,
-     -5.152
+     -11.327,
+     -5.149
     ],
     [
-     -8.013,
-     -5.274
+     -8.201,
+     -5.267
     ],
     [
-     -4.791,
-     -5.316
+     -5.074,
+     -5.324
     ],
     [
-     -1.565,
-     -5.22
+     -1.943,
+     -5.23
     ],
     [
-     1.66,
-     -5.104
+     1.189,
+     -5.125
     ],
     [
-     4.884,
-     -4.995
+     4.319,
+     -4.989
     ],
     [
-     8.104,
-     -5.019
+     7.444,
+     -5.017
     ],
     [
-     11.323,
-     -5.012
+     10.569,
+     -5.017
     ],
     [
-     14.542,
-     -4.975
+     13.694,
+     -4.988
     ],
     [
-     17.761,
-     -4.907
+     16.819,
+     -4.931
     ],
     [
-     20.981,
-     -4.81
+     19.944,
+     -4.845
     ],
     [
-     24.199,
-     -4.682
+     23.069,
+     -4.73
     ],
     [
-     27.418,
-     -4.524
+     23.821,
+     -4.699
     ],
     [
-     30.068,
-     -4.371
+     23.819,
+     -4.859
+    ],
+    [
+     23.521,
+     -6.009
+    ],
+    [
+     22.823,
+     -6.911
+    ],
+    [
+     21.624,
+     -7.294
+    ],
+    [
+     18.348,
+     -7.393
+    ],
+    [
+     15.07,
+     -7.466
+    ],
+    [
+     11.793,
+     -7.509
+    ],
+    [
+     8.516,
+     -7.52
+    ],
+    [
+     5.239,
+     -7.5
+    ],
+    [
+     1.958,
+     -7.59
+    ],
+    [
+     -1.324,
+     -7.731
+    ],
+    [
+     -4.606,
+     -7.846
+    ],
+    [
+     -7.885,
+     -7.799
+    ],
+    [
+     -11.164,
+     -7.63
+    ],
+    [
+     -14.442,
+     -7.43
+    ]
+   ],
+   "name": "B10 south sidewalk (west of the east aisle mouth)"
+  },
+  {
+   "poly": [
+    [
+     30.583,
+     -4.339
+    ],
+    [
+     32.067,
+     -4.241
     ],
     [
      34.067,
@@ -3543,59 +3656,23 @@
      -6.607
     ],
     [
-     30.342,
-     -6.858
+     33.373,
+     -6.656
     ],
     [
-     26.612,
-     -7.07
+     31.843,
+     -6.762
     ],
     [
-     22.882,
-     -7.24
+     31.171,
+     -5.842
     ],
     [
-     19.151,
-     -7.37
-    ],
-    [
-     15.421,
-     -7.46
-    ],
-    [
-     11.69,
-     -7.51
-    ],
-    [
-     7.96,
-     -7.518
-    ],
-    [
-     4.229,
-     -7.488
-    ],
-    [
-     0.493,
-     -7.657
-    ],
-    [
-     -3.244,
-     -7.801
-    ],
-    [
-     -6.978,
-     -7.841
-    ],
-    [
-     -10.71,
-     -7.655
-    ],
-    [
-     -14.442,
-     -7.43
+     30.618,
+     -4.494
     ]
    ],
-   "name": "B10 south sidewalk"
+   "name": "B10 south sidewalk (east of the east aisle mouth, lot 2121)"
   },
   {
    "poly": [
@@ -3817,16 +3894,12 @@
      17.209
     ],
     [
-     -23.581,
-     24.211
+     -23.563,
+     24.411
     ],
     [
-     -23.009,
-     30.814
-    ],
-    [
-     -16.29,
-     28.117
+     -17.051,
+     24.37
     ],
     [
      -21.196,

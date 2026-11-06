@@ -19,6 +19,8 @@ function shapesOf(mp){
   return mp.map(poly=>{ const s=new THREE.Shape(poly[0].map(([x,z])=>new THREE.Vector2(x,-z)));
     for (let k=1;k<poly.length;k++) s.holes.push(new THREE.Path(poly[k].map(([x,z])=>new THREE.Vector2(x,-z)))); return s; });
 }
+function dropSlivers(mp, minA=.6, minW=.3){ // keep polygons that are big enough and wider than minW (2A/P is about the width of a thin strip)
+  return mp.filter(poly=>{ const R=poly[0]; if (!R||R.length<3) return false; const A=Math.abs(polyArea(R)); let P=0; for(let i=0;i<R.length;i++){ const a=R[i], b=R[(i+1)%R.length]; P+=Math.hypot(b[0]-a[0],b[1]-a[1]); } return A>=minA && 2*A/P>=minW; }); }
 function flatGeom(mp, y){ const shapes=shapesOf(mp); if(!shapes.length) return null; const g=new THREE.ShapeGeometry(shapes); g.rotateX(-Math.PI/2); g.translate(0,y,0); return g; }
 function slabGeom(mp, y0, h){ const shapes=shapesOf(mp); if(!shapes.length) return null; const g=new THREE.ExtrudeGeometry(shapes,{depth:h, bevelEnabled:false}); g.rotateX(-Math.PI/2); g.translate(0,y0,0); return g; }
 
@@ -131,7 +133,7 @@ function normalizeProject(P){
     BLDS.push(B_);
   }
   // stairs connect a floor to the next floor of the same building: hole in the slab above
-  for (const B_ of BLDS) B_.levels.forEach((L,i)=>{ const up=B_.levels[i+1]; L.stairUp = up ? L.stairs.map(s=>ring(s.poly)) : []; if(up) up.stairHoles=(up.stairHoles||[]).concat(L.stairUp); });
+  for (const B_ of BLDS) B_.levels.forEach((L,i)=>{ const up=B_.levels[i+1]; L.stairUp = up ? L.stairs.filter(s=>s.to_level==null || +s.to_level>=up.level-.1).map(s=>ring(s.poly)) : []; if(up) up.stairHoles=(up.stairHoles||[]).concat(L.stairUp); });
   ALLROOMS = LEVELS.flatMap(L=>L.rooms);
   ALLROOMS.forEach(r=>{ r.cent=polyCentroid(r.poly); r.detail=isDetail(LEVELS[r.L], r); r.nav = r.detail && r.kind!=='shaft' && r.kind!=='stair' && area(r)>=1.5; });
   LEVELS.forEach(L=>{ L.detail = L.rooms.some(r=>r.detail && r.apt && r.apt!=='common'); L.outdoor.forEach(o=>{ o.detail=isDetail(L,o); });
@@ -284,7 +286,7 @@ function buildFloors2(L, rt, g, F){
     const mat = r.type==='wet'?F.floorWet : r.type==='bed'||r.type==='closet'?F.floorBed : r.kind==='garden'?null : r.type==='balcony'?F.deck : F.floorLiving;
     if (!mat) continue;
     const mp = mpDiff([[r.poly]], [...holes, ...lifts]);
-    const gg = flatGeom(mp, .002 + (r.dy||0)); if(!gg) continue;
+    const gg = flatGeom(mp, .006 + (r.dy||0)); if(!gg) continue;
     const m=new THREE.Mesh(gg,mat); m.receiveShadow=true; m.userData.room=r.id; g.add(m); rt.floors.push(m);
   }
   for (const h of holes) for (let i=0;i<h.length;i++){ const a=h[i], b=h[(i+1)%h.length]; rt.colliders.push({a,b,r:.05}); }
@@ -306,10 +308,10 @@ function buildSlabs2(B_, F){
     // roof over the parts of this floor that the floor above does not cover
     const top = L.floorH;
     const rooms = mpUnion(L.rooms.filter(r=>r.kind!=='shaft').map(r=>r.poly));
-    const exposed = up ? mpDiffMP(rooms, walkable(up)) : rooms;
+    const exposed = up ? dropSlivers(mpDiffMP(rooms, walkable(up))) : rooms;
     if (exposed.length){
       const g=slabGeom(exposed, top-SLAB, SLAB); if(g){ const m=new THREE.Mesh(g,[F.ceilPaint, facadeMat(L,{kind:'ext',a:[0,0],b:[0,0]})]); m.castShadow=m.receiveShadow=true; rt.slab.add(m); }
-      const tg=flatGeom(exposed, top+.004); if(tg){ const m=new THREE.Mesh(tg,roofGravelM); m.receiveShadow=true; rt.slab.add(m); }
+      const tg=flatGeom(exposed, up ? top-.012 : top+.004); if(tg){ const m=new THREE.Mesh(tg,roofGravelM); m.receiveShadow=true; rt.slab.add(m); }
     }
   });
 }
@@ -362,8 +364,11 @@ const boilerM = M({color:'#e8e9e6', roughness:.35, metalness:.3}, true);
 function PROJ_NORTH(){ const nn=(typeof PROJECT!=='undefined'&&PROJECT.north)||[0,-1], l=Math.hypot(nn[0],nn[1])||1; return [nn[0]/l,nn[1]/l]; }
 
 /* ---------------- stairs (straight or U) ---------------- */
-function buildStairs2(L, rt, g, s, rise){
+function buildStairs2(L, rt, g0, s, rise){
   const P=ring(s.poly); if(P.length<3) return;
+  // a flight with its own levels (entrance steps, a stair down to a basement) is built between them
+  let g=g0;
+  if (s.from_level!=null && s.to_level!=null){ const y0=+s.from_level-L.level, y1=+s.to_level-L.level; if (y1<-.4) return; rise=Math.max(.15,y1-y0); g=G(g0,0,0,0,y0); }
   let d=s.up_dir&&Math.hypot(s.up_dir[0],s.up_dir[1])>.1 ? [s.up_dir[0],s.up_dir[1]] : null;
   if (!d){ let best=0; for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if(l>best){ best=l; d=[(b[0]-a[0])/l,(b[1]-a[1])/l]; } } }
   const dl=Math.hypot(d[0],d[1]); d=[d[0]/dl,d[1]/dl]; const p=[-d[1],d[0]];

@@ -79,6 +79,8 @@ def floor_from(F, zero, level_default, name_default):
         q = {'poly': P}
         d = s.get('up_dir')
         if isinstance(d, list) and len(d) >= 2 and num(d[0]) is not None and num(d[1]) is not None: q['up_dir'] = [num(d[0]), num(d[1])]
+        for k in ('from_level', 'to_level'):
+            if num(s.get(k)) is not None: q[k] = rel(s.get(k), zero)
         out['stairs'].append(q)
     for l in F.get('lifts', []):
         P = poly(l.get('poly'))
