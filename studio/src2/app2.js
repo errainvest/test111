@@ -22,7 +22,8 @@ function viewDir(){ const [nx,nz]=NORTH(); const sx=-nx, sz=-nz, ex=-nz, ez=nx; 
 const PRESETS = {
   doll: () => { const f=focus(), s=f.s, d=viewDir(), k=state.apt?1.0:state.bld?(state.view>=0?1.1:1.35):1.0; return { pos:[f.c[0]+d[0]*s*k, f.y+s*.78*k+4, f.c[1]+d[1]*s*k], tgt:[f.c[0], f.y, f.c[1]] }; },
   plan: () => { const f=focus(), s=f.s; return { pos:[f.c[0], f.y+s*1.35+8, f.c[1]+.01], tgt:[f.c[0], f.y, f.c[1]] }; },
-  ext:  () => { const sv=state.apt, sl=state.view; state.apt=null; state.view=-1; const f=focus(); state.apt=sv; state.view=sl; const s=Math.max(f.s,16), d0=viewDir(), by=state.bld?BLD(state.bld).base:0, dist=s*1.25;
+  ext:  () => { const V=PROJECT.views&&PROJECT.views.ext; if (V && (!state.bld || !V.bld || V.bld===state.bld)) return { pos:[V.pos[0], terrainH(V.pos[0],V.pos[1])+(+V.h||14), V.pos[1]], tgt:[V.tgt[0], (state.bld?BLD(state.bld).base:0)+(+V.th||5), V.tgt[1]] };
+    const sv=state.apt, sl=state.view; state.apt=null; state.view=-1; const f=focus(); state.apt=sv; state.view=sl; const s=Math.max(f.s,16), d0=viewDir(), by=state.bld?BLD(state.bld).base:0, dist=s*1.25;
     // look from the default corner, or turn until no other building stands in the way
     const others=FOOTS.filter(q=>!state.bld||q.bld!==state.bld);
     let d=d0;
@@ -55,14 +56,14 @@ function applyState(){
   plotHi.visible = state.plot;
   const under = !!(CL && CL.below); if (TERRAIN) TERRAIN.visible=!under; ground.visible=!under;
   const [nx,nz]=NORTH(), sx=-nx, sz=-nz, wx=nz, wz=-nx, sd=[sx*.82+wx*.57, sz*.82+wz*.57], D=110;
-  sun.intensity = e ? .07 : 2.5; sun.color.set(e ? 0x9fb4ff : 0xfff0dc);
+  sun.intensity = e ? .07 : 1.75; sun.color.set(e ? 0x9fb4ff : 0xfff2e0);
   const el = e ? .9 : .95;
   sun.position.set(PCEN[0]+sd[0]*D*Math.cos(el), D*Math.sin(el), PCEN[1]+sd[1]*D*Math.cos(el)); sun.target.position.set(PCEN[0],0,PCEN[1]);
-  hemi.intensity = e ? .03 : .38;
-  skyU.top.value.set(e?'#0b1426':'#5f8fc8'); skyU.mid.value.set(e?'#33405e':'#d9e6ef'); skyU.bot.value.set(e?'#151a20':'#b9c2b4');
+  hemi.intensity = e ? .03 : .34;
+  skyU.top.value.set(e?'#0b1426':'#5f8fc8').convertLinearToSRGB(); skyU.mid.value.set(e?'#33405e':'#d9e6ef').convertLinearToSRGB(); skyU.bot.value.set(e?'#151a20':'#b9c2b4').convertLinearToSRGB();
   scene.fog = new THREE.Fog(e?'#262f42':'#d4dfe6', 140, 420);
-  renderer.toneMappingExposure = e ? 1.0 : .95;
-  [...MATS,...GMATS].forEach(m=>{ m.envMapIntensity = (m.userData.env||1) * (e ? .07 : .6); });
+  renderer.toneMappingExposure = e ? 1.0 : 1.0;
+  [...MATS,...GMATS].forEach(m=>{ m.envMapIntensity = (m.userData.env||1) * (e ? .07 : .5); });
   EMIT.forEach(o=>{ o.m.emissiveIntensity = e ? o.night : o.day; }); GEMIT.forEach(o=>{ o.m.emissiveIntensity = e ? o.night : o.day; });
   updateUI();
 }

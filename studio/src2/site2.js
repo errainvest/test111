@@ -5,8 +5,8 @@ const dryTex = () => ctex('dry',1024,(x,N)=>{ x.fillStyle='#8f8a66'; x.fillRect(
   const r=rng(63); for(let i=0;i<16000;i++){ const X=r()*N, Y=r()*N; x.fillStyle=r()<.5?`rgba(70,62,40,${.18+r()*.3})`:`rgba(96,112,58,${.22+r()*.35})`; x.fillRect(X,Y,1+r()*2.4,1+r()*2.4); }
   for(let i=0;i<9000;i++){ const X=r()*N, Y=r()*N, l=2+r()*6; x.strokeStyle=`hsla(${48+r()*40},${22+r()*25}%,${34+r()*28}%,.55)`; x.lineWidth=1; x.beginPath(); x.moveTo(X,Y); x.lineTo(X+(r()-.5)*3,Y-l); x.stroke(); }
   for(let i=0;i<140;i++){ const X=r()*N, Y=r()*N, rr=.8+r()*2.2; x.fillStyle=`rgba(${165+r()*35},${160+r()*30},${140+r()*30},.55)`; x.beginPath(); x.ellipse(X,Y,rr,rr*.7,r()*3,0,7); x.fill(); } },[1/5,1/5]);
-const terrM  = M({map:dryTex(), roughness:.97}, true);
-const lawnM  = M({map:grassTex(), roughness:.95, polygonOffset:true, polygonOffsetFactor:-1, polygonOffsetUnits:-2}, true);
+const terrM  = M({map:dryTex(), roughness:.97}, true, .45);
+const lawnM  = M({map:grassTex(), roughness:.95, polygonOffset:true, polygonOffsetFactor:-1, polygonOffsetUnits:-2}, true, .45);
 const asphM  = M({map:tileTex('asph',{base:'#55585a',grout:'#55585a',cols:1,rows:1,sizeU:3,sizeV:3,style:'speckle',seed:401,groutPx:0,N:512}), roughness:.92, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-4}, true);
 const paverM = M({map:tileTex('paver',{base:'#bdb4a5',grout:'#968d7f',cols:6,rows:12,sizeU:1.2,sizeV:1.2,bond:true,style:'concrete',seed:402,groutPx:2,vary:.05}), roughness:.85, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6}, true);
 const parkM  = M({map:tileTex('parkRed',{base:'#9a5a4c',grout:'#7a463b',cols:5,rows:10,sizeU:1.0,sizeV:1.0,bond:true,style:'concrete',seed:403,groutPx:2,vary:.05}), roughness:.88, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6}, true);
@@ -20,7 +20,7 @@ const fenceM = M({color:'#2a2c2e', roughness:.5, metalness:.6}, true);
 const copingM= M({color:'#d9d0bd', roughness:.7}, true);
 const nbM    = M({color:'#ebe7df', roughness:.9}, true);
 const nbRoofM= M({color:'#c9c5bd', roughness:.95}, true);
-const trunkM = M({color:'#5b4636',roughness:.9},true), leafAM=M({color:'#3e6430',roughness:.8},true), leafBM=M({color:'#56793a',roughness:.8},true), oliveM=M({color:'#6f7d52',roughness:.85},true), scrubM=M({color:'#5a6640',roughness:.9},true), cypM=M({color:'#2f4a2a',roughness:.85},true);
+const trunkM = M({color:'#5b4636',roughness:.9},true,.4), leafAM=M({color:'#3a5e2c',roughness:.8},true,.3), leafBM=M({color:'#4f7034',roughness:.8},true,.3), oliveM=M({color:'#66744a',roughness:.85},true,.3), scrubM=M({color:'#4d5a36',roughness:.9},true,.25), cypM=M({color:'#2b4527',roughness:.85},true,.3);
 const carPaint = ['#e9e9e6','#1d1f22','#8b9096','#2b3f5c','#8c1f1f','#c9c3b5','#3c4a3f'].map(c=>M({color:c, roughness:.28, metalness:.55}, true));
 const tyreM = M({color:'#141414', roughness:.8}, true), carGlassM = M({color:'#1b232b', roughness:.08, metalness:.6}, true);
 const bndM = new THREE.MeshBasicMaterial({color:0xff4d1a, transparent:true, opacity:.95, depthWrite:false, side:THREE.DoubleSide});
@@ -130,16 +130,32 @@ function buildSite(){
     const L0=E[0], ang=Math.atan2(L0.b[0]-L0.a[0], L0.b[1]-L0.a[1]); const [cx,cz]=polyCentroid(P);
     if ((k*7+3)%10<6 && L0.l>4.4) carAt(siteRoot, cx, cz, ang+((k%2)?Math.PI:0), k);
   });
+  // crosswalks: white bars across the road
+  for (const cw of (SITE.crosswalks||[])){ if (!cw.a||!cw.b) continue; const a=cw.a, b=cw.b, L=Math.hypot(b[0]-a[0],b[1]-a[1]); if (L<1) continue; const w=+cw.w||3, u=[(b[0]-a[0])/L,(b[1]-a[1])/L];
+    for (let t=.25; t<L-.2; t+=1.0){ const x=a[0]+u[0]*(t+.25), z=a[1]+u[1]*(t+.25); const n=[-u[1],u[0]]; strip([[x-n[0]*w/2,z-n[1]*w/2],[x+n[0]*w/2,z+n[1]*w/2]], .5, .065, lineM, siteRoot, false); } }
+  // kerbs: a raised kerb stone, painted red and white where parking is forbidden
+  const kerbW=M({color:'#efefea',roughness:.6},true), kerbR=M({color:'#b3332b',roughness:.6},true), kerbG=M({color:'#bdb8ae',roughness:.8},true);
+  for (const k of (SITE.kerbs||[])){ const P=(k.pts||[]).map(q=>[+q[0],+q[1]]); for (let i=0;i<P.length-1;i++){ const a=P[i], b=P[i+1], L=Math.hypot(b[0]-a[0],b[1]-a[1]); const n=Math.max(1,Math.round(L/1.0));
+      for (let j=0;j<n;j++){ const x0=a[0]+(b[0]-a[0])*j/n, z0=a[1]+(b[1]-a[1])*j/n, x1=a[0]+(b[0]-a[0])*(j+1)/n, z1=a[1]+(b[1]-a[1])*(j+1)/n, mx=(x0+x1)/2, mz=(z0+z1)/2, y=terrainH(mx,mz);
+        const mt = k.paint==='redwhite' ? ((i*97+j)%2?kerbR:kerbW) : kerbG; B(siteRoot,mt,Math.hypot(x1-x0,z1-z0)+.01,.17,.16,mx,y-.03,mz,0,Math.atan2(-(z1-z0),(x1-x0))); } } }
   // retaining walls: from below the lower side to the given top (or just above the higher side)
   for (const w of (SITE.retaining_walls||[])){
     if (!w.a||!w.b) continue; const a=w.a, b=w.b, L=Math.hypot(b[0]-a[0],b[1]-a[1]); if (L<.2) continue;
     const u=[(b[0]-a[0])/L,(b[1]-a[1])/L], n=[-u[1],u[0]], t=Math.max(.2,+w.t||.3), k=Math.max(1,Math.ceil(L/1.5));
+    const gates=(SITE.gates||[]).filter(g_=>g_.x!=null && segPoint(+g_.x,+g_.z,a[0],a[1],b[0],b[1]).d<.6).map(g_=>{ const q=segPoint(+g_.x,+g_.z,a[0],a[1],b[0],b[1]); return {s:q.t*L, w:+g_.w||1.6, h:+g_.h||2.4, arch:g_.arch!==false}; });
     for (let i=0;i<k;i++){ const s0=i*L/k, s1=(i+1)*L/k, m=(s0+s1)/2, x=a[0]+u[0]*m, z=a[1]+u[1]*m;
+      if (gates.some(gt=>s1>gt.s-gt.w/2 && s0<gt.s+gt.w/2)) continue;
       const h1=terrainH(x+n[0]*(t/2+.7), z+n[1]*(t/2+.7)), h2=terrainH(x-n[0]*(t/2+.7), z-n[1]*(t/2+.7));
       const top = w.top!=null ? toY(w.top) : Math.max(h1,h2)+.3, bot=Math.min(h1,h2)-.4; if (top-bot<.1) continue;
       const ry=Math.atan2(-u[1],u[0]);
       const m1=new THREE.Mesh(meterUV(new THREE.BoxGeometry(s1-s0+.01,top-bot,t),x,(top+bot)/2,z),stoneM); m1.position.set(x,(top+bot)/2,z); m1.rotation.y=ry; m1.castShadow=m1.receiveShadow=true; siteRoot.add(m1);
       const cp=new THREE.Mesh(new THREE.BoxGeometry(s1-s0+.01,.06,t+.06),copingM); cp.position.set(x,top+.03,z); cp.rotation.y=ry; cp.castShadow=true; siteRoot.add(cp); }
+    for (const gt of gates){ // pillars and an arch (or a lintel) around the gate opening
+      const gx=a[0]+u[0]*gt.s, gz=a[1]+u[1]*gt.s, y0=Math.min(terrainH(gx+n[0]*1,gz+n[1]*1),terrainH(gx-n[0]*1,gz-n[1]*1))-.3;
+      const top=Math.max(terrainH(gx+n[0]*1,gz+n[1]*1),terrainH(gx-n[0]*1,gz-n[1]*1))+gt.h+.5, ry=Math.atan2(-u[1],u[0]);
+      for (const sg of [-1,1]){ const px=gx+u[0]*sg*(gt.w/2+.25), pz=gz+u[1]*sg*(gt.w/2+.25); const m1=new THREE.Mesh(meterUV(new THREE.BoxGeometry(.5,top-y0,t+.06),px,(top+y0)/2,pz),stoneM); m1.position.set(px,(top+y0)/2,pz); m1.rotation.y=ry; m1.castShadow=true; siteRoot.add(m1); }
+      const sh=new THREE.Shape(); const W=gt.w/2+.01, H0=y0, H1=top; sh.moveTo(-W,H1); sh.lineTo(W,H1); sh.lineTo(W,H0+gt.h-W); if (gt.arch) sh.absarc(0,H0+gt.h-W,W,0,Math.PI,false); else sh.lineTo(-W,H0+gt.h); sh.lineTo(-W,H1);
+      const ag=new THREE.ExtrudeGeometry(sh,{depth:t+.06,bevelEnabled:false}); ag.translate(0,0,-(t+.06)/2); const am=new THREE.Mesh(ag,stoneM); am.position.set(gx,0,gz); am.rotation.y=ry; am.castShadow=true; siteRoot.add(am); }
   }
   // fences: painted metal railings (on retaining walls or on the ground), split so they follow the terrain
   const fM = RAIL.style==='metal-x' ? M({color:RAIL.color, roughness:.45, metalness:.45}, true) : fenceM;

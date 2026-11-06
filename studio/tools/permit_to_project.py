@@ -154,7 +154,7 @@ def main():
     recipe, out_path = sys.argv[1], sys.argv[2]
     R = json.load(open(recipe))
     D = R.get('dir', '.')
-    P = {k: R[k] for k in ('name', 'place', 'subtitle', 'fine', 'facade', 'apartments', 'railing', 'start') if k in R}
+    P = {k: R[k] for k in ('name', 'place', 'subtitle', 'fine', 'facade', 'apartments', 'railing', 'start', 'views') if k in R}
     P['datum'] = num(R.get('datum'), 0)
     P['buildings'] = []
     for b in R['buildings']:
@@ -217,6 +217,11 @@ def main():
         n = S.get('north')
         if isinstance(n, list) and len(n) >= 2 and num(n[0]) is not None: P['north'] = [num(n[0]), num(n[1])]
     if R.get('north'): P['north'] = R['north']
+    for k in ('crosswalks', 'kerbs', 'gates', 'roads', 'sidewalks', 'driveways', 'poles', 'terrain_plane', 'neighbours'):
+        if k in (R.get('site_extra') or {}):
+            P.setdefault('site', {})
+            if k in ('terrain_plane',): P['site'][k] = R['site_extra'][k]
+            else: P['site'][k] = list(P['site'].get(k, [])) + list(R['site_extra'][k])
     json.dump(P, open(out_path, 'w'), ensure_ascii=False, indent=1)
     for b in P['buildings']:
         print(b['id'], [(f['name'], f.get('level'), len(f.get('walls', [])), len(f.get('rooms', []))) for f in b['floors']])

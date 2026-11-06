@@ -86,5 +86,6 @@
 <script>
 (() => {
 'use strict';
+if (THREE.ColorManagement) THREE.ColorManagement.legacyMode = false;   // hex colours are sRGB: convert them to linear like the textures
 const EYE = 1.62;
 const PROJECT = %%PROJECT%%;

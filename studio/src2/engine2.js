@@ -166,7 +166,9 @@ function autoCam2(L, r){
   let best=null;
   for (const w of L.walls) for (const o of w.open){ if (o.type==='window') continue;
     const cx=w.a[0]+w.u[0]*o.c, cz=w.a[1]+w.u[1]*o.c;
-    for (const s of [1,-1]){ const ix=cx+w.n[0]*s*(w.t/2+.5), iz=cz+w.n[1]*s*(w.t/2+.5); if (!inPoly(r.poly,ix,iz)) continue;
+    for (const s of [1,-1]){ if (!inPoly(r.poly,cx+w.n[0]*s*(w.t/2+.3),cz+w.n[1]*s*(w.t/2+.3))) continue;
+      let ix=null, iz=null; for (const d of [1.0,.8,.6,.45]){ const x_=cx+w.n[0]*s*(w.t/2+d), z_=cz+w.n[1]*s*(w.t/2+d); if (inPoly(r.poly,x_,z_) && polyDist2(r.poly,x_,z_)>=Math.min(.45,d-.05)){ ix=x_; iz=z_; break; } }
+      if (ix===null) continue;
       // outside point (other side of the door) for small rooms
       const ox=cx-w.n[0]*s*(w.t/2+.55), oz=cz-w.n[1]*s*(w.t/2+.55), outOK=L.rooms.some(q=>q!==r && inPoly(q.poly,ox,oz)) || L.outdoor.some(q=>q!==r && inPoly(q.poly,ox,oz));
       const [px,pz] = small && outOK ? [ox,oz] : [ix,iz]; const t=target(px,pz), score=Math.hypot(t[0]-px,t[1]-pz) + (o.type==='door'?.3:0) + (o.type==='slider'?-.6:0);
