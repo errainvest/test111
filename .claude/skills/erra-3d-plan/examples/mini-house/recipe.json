@@ -1,0 +1,88 @@
+{
+ "name": "בית לדוגמה",
+ "place": "דוגמה · מגרש 1",
+ "subtitle": "בית חד־קומתי · 3 חדרים",
+ "facade": "טיח לבן, מעקות מתכת",
+ "fine": "דוגמה מינימלית לפורמט; לא נמדדה משרטוט.",
+ "datum": 100.0,
+ "dir": ".",
+ "railing": {
+  "style": "metal-x",
+  "color": "#2d5f8a"
+ },
+ "buildings": [
+  {
+   "id": "A",
+   "name": "הבית",
+   "zero": 100.0,
+   "floors": [
+    "A1.json"
+   ],
+   "roof": "AR.json",
+   "levels": {
+    "A1.json": 0
+   },
+   "names": {
+    "A1.json": "קומת קרקע"
+   },
+   "stone": [],
+   "detail_floors": [
+    "A1.json"
+   ],
+   "show_apts": {
+    "A1.json": [
+     "1"
+    ]
+   }
+  }
+ ],
+ "site": "SITE.json",
+ "apartments": [
+  {
+   "building": "A",
+   "apt": "1",
+   "main_area": 80,
+   "rooms": 3
+  }
+ ],
+ "start": {
+  "bld": "A",
+  "level": 0,
+  "apt": "1",
+  "mode": "ext"
+ },
+ "views": {
+  "ext": {
+   "pos": [
+    -16,
+    -20
+   ],
+   "h": 12,
+   "tgt": [
+    5,
+    4
+   ],
+   "th": 2.5,
+   "bld": "A"
+  },
+  "dir": [
+   -0.6,
+   -0.8
+  ]
+ },
+ "site_extra": {
+  "pets": [
+   {
+    "a": [
+     1.5,
+     12.0
+    ],
+    "b": [
+     3.0,
+     12.0
+    ],
+    "label": "בחתולים בחצר"
+   }
+  ]
+ }
+}

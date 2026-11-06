@@ -5,6 +5,8 @@ description: Turn an architect's floor plan (PDF/DWG export/image, often Hebrew,
 
 # Plan → 3D (precise workflow)
 
+> For permit sets, multi-building projects and anything client-facing, use the **erra-3d-plan** skill (`.claude/skills/erra-3d-plan`): it bundles the v2 engine, the measuring kit, the assembler, a headless render check and two worked examples. This skill covers the older single-house generator (`studio/plan-to-3d.html`, rectangular rooms, axis-aligned walls).
+
 The studio lives in `studio/`. Read `studio/README.md` for the plan JSON format. The generator page `studio/plan-to-3d.html` renders any plan JSON (auto-furnished, 3 design tiers); `studio/tools/` has the measuring helpers.
 
 ## Steps

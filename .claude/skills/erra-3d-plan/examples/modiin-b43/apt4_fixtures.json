@@ -1,0 +1,560 @@
+{
+ "apt": "4",
+ "building": "M2",
+ "floor": "קומה ג'",
+ "sheet": "fpC",
+ "frame": "global metres (same as M3.json)",
+ "sources": [
+  "out2/apt4_fixtures_A.json",
+  "out2/apt4_fixtures_B.json",
+  "merger re-reads in work/apt4_merge",
+  "final check in work/apt4_final (check.py, draw.py, sheet.py; overlay out2/check_apt4_fixtures.png)"
+ ],
+ "fixtures": [
+  {
+   "type": "counter",
+   "room": "מטבח",
+   "room_index": 2,
+   "a": [
+    -13.049,
+    7.115
+   ],
+   "b": [
+    -12.026,
+    5.497
+   ],
+   "depth": 0.55,
+   "sink": null,
+   "cook": null,
+   "fridge": null,
+   "facing": [
+    0.8453,
+    0.5344
+   ],
+   "note": "run A of the L kitchen, under window 140/70 (sill 1.45) on the west exterior wall; front edge drawn at u_R 3.46 (A 3.465, B 3.465). a = the corner end at run B's front edge (run B owns the corner square), b = the partition face v_R 4.66. 0.55 deep as drawn."
+  },
+  {
+   "type": "counter",
+   "room": "מטבח",
+   "room_index": 2,
+   "a": [
+    -11.294,
+    8.923
+   ],
+   "b": [
+    -13.365,
+    7.614
+   ],
+   "depth": 0.59,
+   "sink": [
+    -12.031,
+    8.082
+   ],
+   "cook": [
+    -12.821,
+    7.455
+   ],
+   "fridge": [
+    -10.654,
+    8.795
+   ],
+   "facing": [
+    0.5344,
+    -0.8453
+   ],
+   "sink_size": [
+    0.51,
+    0.39
+   ],
+   "cook_size": [
+    0.55,
+    0.55
+   ],
+   "cook_rot_deg": 45,
+   "fridge_size": [
+    0.795,
+    0.8
+   ],
+   "fridge_poly": [
+    [
+     -10.776,
+     8.245
+    ],
+    [
+     -10.104,
+     8.67
+    ],
+    [
+     -10.532,
+     9.346
+    ],
+    [
+     -11.204,
+     8.921
+    ]
+   ],
+   "note": "run B along the party wall to apt 5, a = its drawn east end u_R 5.365 (A 5.36, B 5.37), b = the west wall face (run B owns the corner square). Sink = single bowl 0.51x0.39 with tap dot (u_R 4.04-4.55, v_R 6.65-7.04). Cooktop = 4 burners in a ~0.55 square drawn rotated 45 deg in the corner, centre u_R 3.29 v_R 6.74 (both readers). Fridge = separate unlabelled box 0.795 x 0.80 (u_R 5.44-6.235, v_R 6.315-7.115, double front line; its back line is drawn 5 cm in front of the party-wall face, final check) between the counter end and the lift-shaft wall. *_size = [along the run, depth]."
+  },
+  {
+   "type": "other",
+   "room": "מטבח",
+   "room_index": 2,
+   "label": "kitchen counter corner fill: 45-degree chamfer of the inner corner (in front of the corner cooktop)",
+   "poly": [
+    [
+     -12.472,
+     7.232
+    ],
+    [
+     -12.415,
+     7.516
+    ],
+    [
+     -12.585,
+     7.409
+    ]
+   ],
+   "h_bottom": 0.0,
+   "h_top": 0.9,
+   "note": "drawn: run A's front line stops at v_R 6.36 and a 45-degree line runs to (3.665, 6.57) where run B's front line starts; this triangle completes the counter there (same top/finish as the runs; h_top = counter height)."
+  },
+  {
+   "type": "other",
+   "room": "מטבח",
+   "room_index": 2,
+   "label": "upper wall cabinets over run B (dashed line on plan)",
+   "poly": [
+    [
+     -12.496,
+     7.643
+    ],
+    [
+     -11.059,
+     8.551
+    ],
+    [
+     -11.294,
+     8.923
+    ],
+    [
+     -12.731,
+     8.015
+    ]
+   ],
+   "h_bottom": 1.45,
+   "h_top": 2.15,
+   "note": "dashed line at v_R ~6.72 (0.44 off the party-wall face) from the cooktop's east corner (u_R 3.665) eastwards; it is interrupted only where the sink symbol is drawn over it. Heights assumed (window 140/70 in this kitchen: sill 1.45, head 2.15). Nothing dashed along run A (window) or over the corner cooktop."
+  },
+  {
+   "type": "other",
+   "room": "מטבח",
+   "room_index": 2,
+   "label": "upper wall cabinet over the fridge (same dashed line)",
+   "poly": [
+    [
+     -11.059,
+     8.551
+    ],
+    [
+     -10.319,
+     9.019
+    ],
+    [
+     -10.554,
+     9.391
+    ],
+    [
+     -11.294,
+     8.923
+    ]
+   ],
+   "h_bottom": 1.85,
+   "h_top": 2.15,
+   "note": "continuation of the dashed line to the core wall over the fridge; bottom raised to 1.85 (assumed) so that it clears a ~1.80 m fridge."
+  },
+  {
+   "type": "toilet",
+   "room": "מקלחת",
+   "room_index": 4,
+   "x": -3.773,
+   "z": 0.557,
+   "facing": [
+    0,
+    1
+   ],
+   "w": 0.46,
+   "d": 0.65,
+   "note": "tank x -4.00..-3.54 against the north exterior wall (face z 0.23) under window 100/60; bowl front z 0.88."
+  },
+  {
+   "type": "basin",
+   "room": "מקלחת",
+   "room_index": 4,
+   "x": -3.344,
+   "z": 1.293,
+   "w": 0.505,
+   "d": 0.398,
+   "facing": [
+    -1,
+    0
+   ],
+   "note": "rectangle x -3.54..-3.145, z 1.04..1.545 on the east partition with a tap dot at (-3.21, 1.30); its front edge lies on the '260' dimension line (outline +-3 cm)."
+  },
+  {
+   "type": "shower",
+   "room": "מקלחת",
+   "room_index": 4,
+   "poly": [
+    [
+     -4.26,
+     1.955
+    ],
+    [
+     -3.145,
+     1.955
+    ],
+    [
+     -3.145,
+     2.82
+    ],
+    [
+     -4.26,
+     2.82
+    ]
+   ],
+   "drain": [
+    -3.44,
+    2.57
+   ],
+   "note": "tray across the full room width at the south end (square with slope lines to an off-centre drain); top edge drawn double (z 1.955/~2.01) = curb/step. Drain re-measured (A -3.435,2.567; B -3.48,2.60; drawn circle centre ~-3.44,2.57)."
+  },
+  {
+   "type": "bathtub",
+   "room": "ח. רחצה",
+   "room_index": 8,
+   "poly": [
+    [
+     -5.06,
+     6.416
+    ],
+    [
+     -3.741,
+     7.25
+    ],
+    [
+     -4.112,
+     7.837
+    ],
+    [
+     -5.431,
+     7.004
+    ]
+   ],
+   "drain": [
+    -4.036,
+    7.483
+   ],
+   "note": "1.56 x 0.695 against the hall-side wall (u_R 9.295) and the mamad wall (v_R 2.41); rounded end at the door (west) end, drain/tap end east (drain dot u_R 10.73)."
+  },
+  {
+   "type": "toilet",
+   "room": "ח. רחצה",
+   "room_index": 8,
+   "x": -3.148,
+   "z": 6.471,
+   "facing": [
+    -0.5344,
+    0.8453
+   ],
+   "w": 0.45,
+   "d": 0.62,
+   "note": "tank u_R 10.715..11.16 against the partition to bedroom 2 (face v_R 0.43), bowl front v_R 1.05; the '203' dimension line runs through it."
+  },
+  {
+   "type": "basin",
+   "room": "ח. רחצה",
+   "room_index": 8,
+   "x": -3.804,
+   "z": 5.918,
+   "w": 0.5,
+   "d": 0.39,
+   "facing": [
+    -0.5344,
+    0.8453
+   ],
+   "note": "rectangle u_R 9.84..10.34 x v_R 0.43..0.82 on the partition to bedroom 2, tap dot at the back."
+  },
+  {
+   "type": "washer",
+   "room": "ח. כביסה",
+   "room_index": 9,
+   "x": -1.848,
+   "z": 7.246,
+   "facing": [
+    -0.5344,
+    0.8453
+   ],
+   "w": 0.535,
+   "d": 0.54,
+   "poly": [
+    [
+     -1.93,
+     6.875
+    ],
+    [
+     -1.478,
+     7.16
+    ],
+    [
+     -1.767,
+     7.617
+    ],
+    [
+     -2.219,
+     7.331
+    ]
+   ],
+   "note": "unlabelled square with a drum circle (r ~0.16) in the NE corner (against the north partition and the east exterior wall); read as the washing machine (it could also be a dryer). Facing assumed +v_R (into the room). Its south edge lies on the '220/10/120' dimension line."
+  },
+  {
+   "type": "ac",
+   "room": "מעבה",
+   "room_index": 11,
+   "x": -2.454,
+   "z": 9.454,
+   "facing": [
+    0.8453,
+    0.5344
+   ],
+   "w": 0.975,
+   "d": 0.39,
+   "poly": [
+    [
+     -2.36,
+     8.939
+    ],
+    [
+     -2.03,
+     9.148
+    ],
+    [
+     -2.551,
+     9.972
+    ],
+    [
+     -2.881,
+     9.763
+    ]
+   ],
+   "note": "rectangle with an X, pointed at by the label 'מעבה' (arrow from the east). Re-measured: its top edge and its X start AT the mamad wall's outer face (u_R 12.925), right edge u_R ~13.32, bottom = the niche's south closure wall face (v_R 3.38); both readers had u_R 12.99..13.31 (6 cm gap, 0.32 deep), which is the X diagonal, not an edge. South part of the ledge; the north part (outside the laundry window 140/105) is the drying area, nothing drawn there."
+  }
+ ],
+ "door_swings": [
+  {
+   "type": "door",
+   "label": "80/210",
+   "x": -4.88,
+   "z": 2.88,
+   "w": 0.8,
+   "hinge": [
+    -4.48,
+    2.88
+   ],
+   "swing_dir": [
+    0,
+    -1
+   ],
+   "opens_into": "ח. שינה הורים",
+   "room_index": 3,
+   "m3_opening": 2,
+   "geometry": "drawn (M3 opening is wrong, see notes)",
+   "hinge_drawn": [
+    -4.495,
+    2.88
+   ],
+   "note": "drawn in the line of the en-suite's south wall (z 2.88) between the x -5.35 partition (face -5.27/-5.29) and the stub end of the en-suite south wall (x -4.47..-4.49); hinge at the east jamb, leaf opens north against the en-suite's west wall into the master suite's vestibule (x -5.35..-4.32, z 1.49..2.88). M3 has it at (-4.89, 2.17) in a wall that is not drawn; until M3 is fixed the vestibule is part of M3's 'מעבר' polygon, so use swing_dir."
+  },
+  {
+   "type": "door",
+   "label": "70/210",
+   "x": -4.32,
+   "z": 1.35,
+   "w": 0.7,
+   "hinge": [
+    -4.32,
+    1.7
+   ],
+   "swing_dir": [
+    1,
+    0
+   ],
+   "opens_into": "מקלחת",
+   "room_index": 4,
+   "m3_opening": 3,
+   "geometry": "M3",
+   "hinge_drawn": [
+    -4.32,
+    1.605
+   ],
+   "note": "hinge at the south jamb, leaf opens east into the en-suite (drawn leaf z 1.60, drawn jambs ~1.03/1.65 vs M3 1.00/1.70). The open leaf passes between the basin (z<=1.545) and the shower curb (z 1.955)."
+  },
+  {
+   "type": "door",
+   "label": "80/210",
+   "x": -3.55,
+   "z": 3.34,
+   "w": 0.8,
+   "hinge": [
+    -3.55,
+    3.74
+   ],
+   "swing_dir": [
+    1,
+    0
+   ],
+   "opens_into": "ח. שינה",
+   "room_index": 5,
+   "room_ref": "bedroom 1 (NE, 290x360) = M3 rooms[5]",
+   "m3_opening": 6,
+   "geometry": "M3",
+   "hinge_drawn": [
+    -3.55,
+    3.71
+   ],
+   "note": "hinge at the south jamb (column end of the bedroom 1/2 partition); leaf opens east into bedroom 1's nook (drawn jambs 2.95/3.75)."
+  },
+  {
+   "type": "door",
+   "label": "80/210",
+   "x": -4.121,
+   "z": 4.791,
+   "w": 0.8,
+   "hinge": [
+    -4.335,
+    5.129
+   ],
+   "swing_dir": [
+    0.8453,
+    0.5344
+   ],
+   "opens_into": "ח. שינה",
+   "room_index": 6,
+   "room_ref": "bedroom 2 (349x330) = M3 rooms[6]",
+   "m3_opening": 9,
+   "geometry": "M3",
+   "hinge_drawn": [
+    -4.303,
+    5.079
+   ],
+   "note": "hinge at the south jamb (bathroom corner), leaf opens east along the bathroom's north wall (drawn jambs v_R -0.565/0.20..0.23 vs M3 -0.561/0.239)."
+  },
+  {
+   "type": "door",
+   "label": "80/210",
+   "x": -4.917,
+   "z": 6.051,
+   "w": 0.75,
+   "hinge": [
+    -5.118,
+    6.368
+   ],
+   "swing_dir": [
+    0.8453,
+    0.5344
+   ],
+   "opens_into": "ח. רחצה",
+   "room_index": 8,
+   "m3_opening": 10,
+   "geometry": "drawn (M3 opening 10 is 0.98..1.78 in v_R; see notes)",
+   "hinge_drawn": [
+    -5.102,
+    6.343
+   ],
+   "note": "drawn opening v_R 0.955..1.705 (A 0.96..1.71, B 0.96..1.70, merger 0.94..1.70); hinge at the south jamb, the open leaf is drawn at v_R 1.675 just north of the bathtub rim (v_R 1.715). Hung at M3's south jamb (v_R 1.78) the open leaf would run ~6-7 cm into the tub, so the drawn opening is used here; label 80/210 but drawn 0.75 wide."
+  },
+  {
+   "type": "door",
+   "label": "80/210",
+   "x": -3.019,
+   "z": 7.287,
+   "w": 0.8,
+   "hinge": [
+    -3.233,
+    7.625
+   ],
+   "swing_dir": [
+    0.8453,
+    0.5344
+   ],
+   "opens_into": "ח. כביסה",
+   "room_index": 9,
+   "m3_opening": 11,
+   "geometry": "M3",
+   "hinge_drawn": [
+    -3.185,
+    7.549
+   ],
+   "note": "door from the bathroom into the laundry; hinge at the south jamb (next to the 60/80 internal window), leaf opens east (drawn leaf v_R 1.67, drawn jambs ~0.98/1.73-1.76 vs M3 0.96/1.76); nothing in its sweep."
+  },
+  {
+   "type": "door",
+   "label": "70/200",
+   "x": -5.869,
+   "z": 7.555,
+   "w": 0.7,
+   "hinge": [
+    -5.682,
+    7.259
+   ],
+   "swing_dir": [
+    -0.8453,
+    -0.5344
+   ],
+   "opens_into": "מעבר",
+   "room_index": 7,
+   "m3_opening": 14,
+   "geometry": "M3",
+   "hinge_drawn": [
+    -5.687,
+    7.268
+   ],
+   "note": "mamad blast door, hinged at the north jamb, opens OUT of the mamad, west into the hall (drawn jambs v_R 2.75/3.43 vs M3 2.76/3.46)."
+  },
+  {
+   "type": "entry",
+   "label": "90/210",
+   "x": -7.686,
+   "z": 9.27,
+   "w": 0.9,
+   "hinge": [
+    -7.306,
+    9.51
+   ],
+   "swing_dir": [
+    0.5344,
+    -0.8453
+   ],
+   "opens_into": "פ. אוכל",
+   "room_index": 1,
+   "m3_opening": 16,
+   "geometry": "M3 (updated by the M3 checker: centre u_R 8.60, w 0.90)",
+   "hinge_drawn": [
+    -7.31,
+    9.508
+   ],
+   "note": "apartment front door from the stair lobby; hinge at the east jamb (against the mamad wall), opens north into the entrance zone of M3's dining polygon; arc partly hidden under the area box. Both readers had the old M3 entry (centre u_R 8.65, w 0.80); updated to the current M3 opening (hinge jamb unchanged at u_R 9.05)."
+  }
+ ],
+ "notes": [
+  "Merged from two independent readings (apt4_fixtures_A.json, apt4_fixtures_B.json) of sheet fpC (קומה ג' +6.00). Items that agreed within ~5 cm are averaged; every disagreement was re-read on the sheet (renders and darkness profiles in work/apt4_merge). Central-wing items measured in M2R (-12,0,32.3), north-wing items (en-suite, master and bedroom-1 doors) in the global frame. All coordinates are global metres, the same frame as M3.json.",
+  "Checked against M3.json as of 2026-11-06 07:27:09 UTC (after the M3 checker's update). M3 wall indices changed in that update and may change again; door swings carry the M3 opening index ('m3_opening') AND their own x/z/w, so match by position if the indices move.",
+  "Counters: one entry per straight run; run B owns the corner square; the chamfered inner corner (drawn 45-degree front line) is an 'other' triangle with h 0..0.9. 'facing' on counters = unit vector from the wall into the room; a->b is ordered so that the room lies to the LEFT of a->b (facing = left normal (-dz, dx) of b-a). Upper cabinets are 'other' boxes with h_bottom/h_top (heights assumed).",
+  "Door swings: 'hinge' is a jamb end on the wall centreline, so the leaf exactly fills [x,z,w]. 'swing_dir' = unit vector from the wall line towards the side the leaf opens into, which is unambiguous where room names repeat (two 'ח. שינה'). 'room_index' = index in M3 rooms. 'hinge_drawn' = where the drawn leaf meets the wall (projected onto the wall centreline); drawn arcs are only 0.58-0.75 m in radius, smaller than the labels. 'geometry' says whether x/z/w are M3's opening or the drawn one. Sliders (270/230) and the hall-dining pass have no swing.",
+  "M3 FIX NEEDED (master door): opening 2 at (-4.89, 2.17) and the wall [-5.35,2.17]-[-4.32,2.17] are not on the plan (no wall at z 2.17 between x -5.35 and -4.32 on fpC). Suggested: move opening 2 to (-4.88, 2.88) w 0.80; delete that wall; extend the en-suite south wall [-4.32,2.88]-[-3.07,2.88] west to x -4.48 (drawn stub end -4.47..-4.49); move the strip x -5.35..-4.32, z 2.17..2.88 from 'מעבר' into the master polygon.",
+  "M3 FIX NEEDED (bathroom door, opening 10): drawn opening is M2R u 9.22, v 0.955..1.705 (centre (-4.917, 6.051) global, w 0.75); M3 has v 0.98..1.78 (w 0.80). At M3's south jamb the open door leaf would hit the bathtub (v_R 1.715..2.41). If the label width 0.80 is kept, centre it at v_R 1.305 (south jamb 1.705).",
+  "Minor M3 observation: laundry door 11 (v_R 0.96..1.76) and internal window 12 (60/80, v_R 1.73..2.33) overlap by 3 cm; on the sheet the window starts at the door's south jamb (~1.73-1.76).",
+  "No wardrobes/closets ('ארון'), dishwasher, oven, bidet or drying rack are drawn in apartment 4. Rooms with no fixtures: ח. מגורים, פ. אוכל, ח. שינה הורים, both ח. שינה, ממ\"ד, מעבר, מרפסת (only the 'פרגולה בעתיד' cross-hatch and a dashed outline). Not fixtures: thick dashed section-cut marks across bedroom 2 / hall; the framed box by the entry is the apartment area label (שטח עיקרי 104.38) with the circled '4' above it; the 60/80 internal window between bathroom and laundry.",
+  "Unlabelled symbols read by convention: washer (square + drum circle, could be a dryer), fridge (deep box at the end of run B), basins and kitchen sink (plain rectangles with a tap dot). Outline uncertainty +-3 cm where an edge lies on a dimension line (en-suite basin front, washer south edge).",
+  "FINAL CHECK (2026-11-06, work/apt4_final): every fixture and door swing drawn back on fpC both on the sheet itself (m2px) and in the M2R frame (-12,0,32.3) / global frame at res 150-300 and compared symbol by symbol: all outlines lie within ~3 cm of the drawn symbols (kitchen runs, chamfer, corner cooktop, sink, fridge box, dashed upper-cabinet line, both WCs, both basins, shower tray + drain, bathtub + drain, washer, AC box), every footprint lies inside its M3 room (apt 4) without entering a wall, counter a/b lie on the wall faces with depth into the room, every 'facing' points from its wall into the room, no floor fixture stands in a drawn door opening or in a door sweep (the bathtub does reach into M3's opening 10, see the M3 bathroom-door note), and the 8 swings match the drawn arcs (hinge side and direction). FIXED: (1) counter a/b order. The viewer (studio/src2/engine2.js fixtureRoom) tests the point 0.3 m to the LEFT of a->b first and takes the first room whose name equals 'room'; run B was ordered west->east, so that point fell in apt 5's kitchen (also named 'מטבח') and run B with the sink, cooktop and fridge would have been attached to apt 5. Both runs now have the room on the left of a->b (run A swapped too, for one consistent rule; the built geometry does not depend on the order). (2) fridge box re-measured by darkness scans: its back line is drawn at v_R 7.115, 5 cm in front of the party wall -> fridge_poly/size/centre updated (centre moved 1.7 cm)."
+ ]
+}

@@ -1,0 +1,2808 @@
+{
+ "building": "M2",
+ "floor": "קומה ב'",
+ "sheet": "fpD",
+ "level": 3.0,
+ "level_marks": [
+  {
+   "text": "+3.00",
+   "x": -8.099,
+   "z": 10.759
+  },
+  {
+   "text": "+4.05 (balcony parapet top)",
+   "x": -11.765,
+   "z": -2.317
+  },
+  {
+   "text": "+4.05 (balcony parapet top)",
+   "x": -12.315,
+   "z": -0.917
+  },
+  {
+   "text": "250.68 (patio W of apt-3 living = +2.98)",
+   "x": -16.901,
+   "z": 11.582
+  },
+  {
+   "text": "250.68 (E garden = +2.98)",
+   "x": -6.189,
+   "z": 18.592
+  },
+  {
+   "text": "250.90 (E garden)",
+   "x": -4.19,
+   "z": 15.242
+  },
+  {
+   "text": "250.00 (outside W fence)",
+   "x": -18.525,
+   "z": 9.846
+  },
+  {
+   "text": "247.68 (ground under apt-2 ledge)",
+   "x": -1.139,
+   "z": 9.48
+  }
+ ],
+ "walls": [
+  {
+   "a": [
+    -12.28,
+    1.513
+   ],
+   "b": [
+    -7.695,
+    1.513
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "apt2 living N wall, slider 180/230 to balcony"
+  },
+  {
+   "a": [
+    -7.695,
+    -1.587
+   ],
+   "b": [
+    -7.695,
+    1.813
+   ],
+   "t": 0.24,
+   "kind": "ext",
+   "h": null,
+   "note": "master W wall (window 120/105); continues as living-room corner"
+  },
+  {
+   "a": [
+    -7.695,
+    -1.587
+   ],
+   "b": [
+    -4.285,
+    -1.587
+   ],
+   "t": 0.22,
+   "kind": "ext",
+   "h": null,
+   "note": "master N wall, window 120/105"
+  },
+  {
+   "a": [
+    -4.285,
+    -1.587
+   ],
+   "b": [
+    -4.285,
+    0.118
+   ],
+   "t": 0.24,
+   "kind": "ext",
+   "h": null,
+   "note": "master E wall"
+  },
+  {
+   "a": [
+    -4.285,
+    0.118
+   ],
+   "b": [
+    -0.01,
+    0.118
+   ],
+   "t": 0.23,
+   "kind": "ext",
+   "h": null,
+   "note": "N wall of en-suite (window 100/60) and bedroom 1 (window 120/105)"
+  },
+  {
+   "a": [
+    -0.01,
+    0.118
+   ],
+   "b": [
+    -0.011,
+    7.293
+   ],
+   "t": 0.18,
+   "kind": "ext",
+   "h": null,
+   "note": "M2 east wall; building E is attached on the other side (E west face at x~+0.06)"
+  },
+  {
+   "a": [
+    -1.448,
+    7.293
+   ],
+   "b": [
+    -0.011,
+    7.293
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "bedroom 2 S wall, window 100/105"
+  },
+  {
+   "a": [
+    -4.345,
+    0.118
+   ],
+   "b": [
+    -4.345,
+    2.853
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "master / en-suite partition, door 70/210"
+  },
+  {
+   "a": [
+    -4.345,
+    2.853
+   ],
+   "b": [
+    -3.03,
+    2.853
+   ],
+   "t": 0.16,
+   "kind": "int",
+   "h": null,
+   "note": "en-suite S wall"
+  },
+  {
+   "a": [
+    -3.03,
+    0.118
+   ],
+   "b": [
+    -3.03,
+    2.853
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "en-suite E wall"
+  },
+  {
+   "a": [
+    -7.695,
+    1.813
+   ],
+   "b": [
+    -6.765,
+    1.813
+   ],
+   "t": 0.24,
+   "kind": "int",
+   "h": null,
+   "note": "master S wall, concrete part"
+  },
+  {
+   "a": [
+    -6.765,
+    1.763
+   ],
+   "b": [
+    -5.35,
+    1.763
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "closet N wall, door 70/210"
+  },
+  {
+   "a": [
+    -7.635,
+    1.763
+   ],
+   "b": [
+    -7.636,
+    3.458
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "closet W wall (living room side)"
+  },
+  {
+   "a": [
+    -5.35,
+    1.763
+   ],
+   "b": [
+    -5.351,
+    4.831
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "closet E wall, continues S past the 0.83 m pass (hall -> dining) to the hall wall bend"
+  },
+  {
+   "a": [
+    -7.636,
+    3.458
+   ],
+   "b": [
+    -5.351,
+    3.458
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "closet S wall"
+  },
+  {
+   "a": [
+    -5.35,
+    2.853
+   ],
+   "b": [
+    -4.345,
+    2.853
+   ],
+   "t": 0.1,
+   "kind": "int",
+   "h": null,
+   "note": "door-frame wall of the master-suite vestibule door (no wall drawn, only the door)"
+  },
+  {
+   "a": [
+    -3.543,
+    2.853
+   ],
+   "b": [
+    -3.544,
+    3.863
+   ],
+   "t": 0.1,
+   "kind": "int",
+   "h": null,
+   "note": "door-frame wall of bedroom-1 door (no wall drawn, only the door)"
+  },
+  {
+   "a": [
+    -3.544,
+    3.863
+   ],
+   "b": [
+    -0.011,
+    3.863
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "bedroom1 / bedroom2 partition"
+  },
+  {
+   "a": [
+    -12.165,
+    -2.177
+   ],
+   "b": [
+    -7.68,
+    -2.177
+   ],
+   "t": 0.2,
+   "kind": "low",
+   "h": 1.05,
+   "note": "balcony parapet, top +4.05"
+  },
+  {
+   "a": [
+    -12.165,
+    -2.177
+   ],
+   "b": [
+    -12.165,
+    1.513
+   ],
+   "t": 0.2,
+   "kind": "low",
+   "h": 1.05,
+   "note": "balcony parapet, top +4.05"
+  },
+  {
+   "a": [
+    -7.68,
+    -2.177
+   ],
+   "b": [
+    -7.68,
+    -1.587
+   ],
+   "t": 0.19,
+   "kind": "low",
+   "h": 1.05,
+   "note": "short E parapet from the N parapet to the master-bedroom NW corner, in line with the master W wall"
+  },
+  {
+   "a": [
+    -12.28,
+    1.513
+   ],
+   "b": [
+    -13.825,
+    3.956
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "apt2 living W wall, window 240/125"
+  },
+  {
+   "a": [
+    -13.825,
+    3.956
+   ],
+   "b": [
+    -11.987,
+    5.119
+   ],
+   "t": 0.26,
+   "kind": "ext",
+   "h": null,
+   "note": "apt2 living S wall (outside below is open ground)"
+  },
+  {
+   "a": [
+    -11.955,
+    5.068
+   ],
+   "b": [
+    -10.137,
+    6.217
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "apt2 living/kitchen partition (ends free at u=4.85)"
+  },
+  {
+   "a": [
+    -11.987,
+    5.119
+   ],
+   "b": [
+    -17.205,
+    13.372
+   ],
+   "t": 0.26,
+   "kind": "ext",
+   "h": null,
+   "note": "W exterior wall: apt2 kitchen 140/70, apt3 kitchen 140/70, apt3 living slider 220/230"
+  },
+  {
+   "a": [
+    -13.569,
+    7.62
+   ],
+   "b": [
+    -10.555,
+    9.526
+   ],
+   "t": 0.24,
+   "kind": "int",
+   "h": null,
+   "note": "party wall apt2 kitchen / apt3 kitchen"
+  },
+  {
+   "a": [
+    -9.609,
+    8.03
+   ],
+   "b": [
+    -8.105,
+    8.981
+   ],
+   "t": 0.2,
+   "kind": "core",
+   "h": null,
+   "note": "lift shaft N"
+  },
+  {
+   "a": [
+    -9.609,
+    8.03
+   ],
+   "b": [
+    -10.574,
+    9.555
+   ],
+   "t": 0.23,
+   "kind": "core",
+   "h": null,
+   "note": "lift shaft W"
+  },
+  {
+   "a": [
+    -8.105,
+    8.981
+   ],
+   "b": [
+    -9.069,
+    10.507
+   ],
+   "t": 0.17,
+   "kind": "core",
+   "h": null,
+   "note": "lift shaft E (lift door)"
+  },
+  {
+   "a": [
+    -10.574,
+    9.555
+   ],
+   "b": [
+    -9.069,
+    10.507
+   ],
+   "t": 0.23,
+   "kind": "core",
+   "h": null,
+   "note": "lift shaft S"
+  },
+  {
+   "a": [
+    -9.547,
+    10.205
+   ],
+   "b": [
+    -10.383,
+    11.527
+   ],
+   "t": 0.25,
+   "kind": "int",
+   "h": null,
+   "note": "lobby / apt3 kitchen wall"
+  },
+  {
+   "a": [
+    -10.383,
+    11.527
+   ],
+   "b": [
+    -8.938,
+    12.441
+   ],
+   "t": 0.24,
+   "kind": "int",
+   "h": null,
+   "note": "lobby / apt3 wall with apt3 entry door 90/210"
+  },
+  {
+   "a": [
+    -8.105,
+    8.981
+   ],
+   "b": [
+    -7.142,
+    9.601
+   ],
+   "t": 0.2,
+   "kind": "int",
+   "h": null,
+   "note": "door-frame wall lobby / apt2: apt2 entry door 90/210 between lift and mamad"
+  },
+  {
+   "a": [
+    -7.15,
+    9.614
+   ],
+   "b": [
+    -4.124,
+    11.527
+   ],
+   "t": 0.25,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad2 S wall = stair N wall"
+  },
+  {
+   "a": [
+    -4.124,
+    11.527
+   ],
+   "b": [
+    -3.533,
+    11.901
+   ],
+   "t": 0.25,
+   "kind": "core",
+   "h": null,
+   "note": "stair N wall"
+  },
+  {
+   "a": [
+    -3.533,
+    11.901
+   ],
+   "b": [
+    -4.812,
+    13.925
+   ],
+   "t": 0.24,
+   "kind": "core",
+   "h": null,
+   "note": "stair E wall (two wall niches)"
+  },
+  {
+   "a": [
+    -8.43,
+    11.638
+   ],
+   "b": [
+    -5.421,
+    13.54
+   ],
+   "t": 0.24,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad3 N wall = stair S wall"
+  },
+  {
+   "a": [
+    -5.421,
+    13.54
+   ],
+   "b": [
+    -4.812,
+    13.925
+   ],
+   "t": 0.24,
+   "kind": "core",
+   "h": null,
+   "note": "stair S wall"
+  },
+  {
+   "a": [
+    -5.545,
+    7.074
+   ],
+   "b": [
+    -7.15,
+    9.614
+   ],
+   "t": 0.24,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad2 W wall, door 70/200"
+  },
+  {
+   "a": [
+    -5.545,
+    7.074
+   ],
+   "b": [
+    -2.519,
+    8.987
+   ],
+   "t": 0.24,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad2 N wall"
+  },
+  {
+   "a": [
+    -2.544,
+    8.971
+   ],
+   "b": [
+    -4.15,
+    11.511
+   ],
+   "t": 0.32,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad2 E wall (exterior, \"30\" written), window 100/100"
+  },
+  {
+   "a": [
+    -8.43,
+    11.638
+   ],
+   "b": [
+    -10.039,
+    14.182
+   ],
+   "t": 0.24,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad3 W wall"
+  },
+  {
+   "a": [
+    -10.039,
+    14.182
+   ],
+   "b": [
+    -7.029,
+    16.085
+   ],
+   "t": 0.24,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad3 S wall, door 70/200"
+  },
+  {
+   "a": [
+    -5.434,
+    13.532
+   ],
+   "b": [
+    -7.042,
+    16.077
+   ],
+   "t": 0.32,
+   "kind": "mamad",
+   "h": null,
+   "note": "mamad3 E wall (exterior, \"30\" written), window 100/100"
+  },
+  {
+   "a": [
+    -4.411,
+    5.187
+   ],
+   "b": [
+    -5.587,
+    7.047
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "apt2 bath W wall, door 80/210"
+  },
+  {
+   "a": [
+    -4.411,
+    5.187
+   ],
+   "b": [
+    -1.343,
+    7.127
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "apt2 bath+laundry N wall (bedroom 2 side)"
+  },
+  {
+   "a": [
+    -2.467,
+    6.416
+   ],
+   "b": [
+    -3.643,
+    8.276
+   ],
+   "t": 0.1,
+   "kind": "int",
+   "h": null,
+   "note": "apt2 bath/laundry partition, door 80/210 + inner window 60/80"
+  },
+  {
+   "a": [
+    -1.343,
+    7.127
+   ],
+   "b": [
+    -2.519,
+    8.987
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "apt2 laundry E wall, window 140/105 to ledge (starts at the bath/laundry N wall line so the NE corner block is closed)"
+  },
+  {
+   "a": [
+    -5.351,
+    4.831
+   ],
+   "b": [
+    -6.991,
+    7.425
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "apt2 hall W wall (dining side)"
+  },
+  {
+   "a": [
+    -6.991,
+    7.425
+   ],
+   "b": [
+    -6.116,
+    7.978
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "apt2 hall S end wall"
+  },
+  {
+   "a": [
+    -3.544,
+    3.863
+   ],
+   "b": [
+    -4.39,
+    5.201
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "bedroom-2 door wall (jamb stub + door 80/210)"
+  },
+  {
+   "a": [
+    -9.151,
+    14.743
+   ],
+   "b": [
+    -9.776,
+    15.732
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "apt3 laundry W wall"
+  },
+  {
+   "a": [
+    -9.776,
+    15.732
+   ],
+   "b": [
+    -7.655,
+    17.074
+   ],
+   "t": 0.12,
+   "kind": "int",
+   "h": null,
+   "note": "apt3 laundry S wall, door 80/210"
+  },
+  {
+   "a": [
+    -7.029,
+    16.085
+   ],
+   "b": [
+    -8.096,
+    17.772
+   ],
+   "t": 0.26,
+   "kind": "ext",
+   "h": null,
+   "note": "apt3 E wall: laundry window 90/105, bath window 60/105"
+  },
+  {
+   "a": [
+    -10.072,
+    14.161
+   ],
+   "b": [
+    -10.377,
+    14.643
+   ],
+   "t": 0.1,
+   "kind": "int",
+   "h": null,
+   "note": "short stub below mamad3 W wall"
+  },
+  {
+   "a": [
+    -14.982,
+    9.856
+   ],
+   "b": [
+    -12.767,
+    11.257
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "apt3 kitchen/living partition (ends free at u=5.32)"
+  },
+  {
+   "a": [
+    -17.205,
+    13.372
+   ],
+   "b": [
+    -15.531,
+    14.43
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "apt3 living S wall, exterior part (garden)"
+  },
+  {
+   "a": [
+    -15.499,
+    14.379
+   ],
+   "b": [
+    -12.342,
+    16.376
+   ],
+   "t": 0.13,
+   "kind": "int",
+   "h": null,
+   "note": "apt3 living / upper bedroom wall"
+  },
+  {
+   "a": [
+    -15.531,
+    14.43
+   ],
+   "b": [
+    -16.637,
+    16.179
+   ],
+   "t": 0.24,
+   "kind": "ext",
+   "h": null,
+   "note": "short W wall of the upper bedroom"
+  },
+  {
+   "a": [
+    -3.016,
+    9.773
+   ],
+   "b": [
+    -2.352,
+    10.192
+   ],
+   "t": 0.2,
+   "kind": "low",
+   "h": 1.05,
+   "note": "apt2 AC-ledge end wall (height assumed)"
+  },
+  {
+   "a": [
+    -6.532,
+    15.299
+   ],
+   "b": [
+    -5.869,
+    15.718
+   ],
+   "t": 0.19,
+   "kind": "low",
+   "h": 1.05,
+   "note": "apt3 AC-ledge end wall (height assumed)"
+  },
+  {
+   "a": [
+    -16.637,
+    16.179
+   ],
+   "b": [
+    -15.087,
+    22.86
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "W exterior wall, 2 windows 120/105"
+  },
+  {
+   "a": [
+    -15.087,
+    22.86
+   ],
+   "b": [
+    -7.343,
+    21.116
+   ],
+   "t": 0.24,
+   "kind": "ext",
+   "h": null,
+   "note": "S exterior wall: 120/105, 60/60, 120/105"
+  },
+  {
+   "a": [
+    -8.129,
+    17.628
+   ],
+   "b": [
+    -7.343,
+    21.116
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "master E wall: garden door 80/210 + window 120/105"
+  },
+  {
+   "a": [
+    -8.096,
+    17.772
+   ],
+   "b": [
+    -8.129,
+    17.628
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null,
+   "note": "short piece of master E wall at the chamfered corner"
+  },
+  {
+   "a": [
+    -15.946,
+    19.158
+   ],
+   "b": [
+    -11.92,
+    18.252
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "bedroom / bedroom partition"
+  },
+  {
+   "a": [
+    -12.342,
+    16.376
+   ],
+   "b": [
+    -11.084,
+    21.959
+   ],
+   "t": 0.16,
+   "kind": "int",
+   "h": null,
+   "note": "hall W wall (2 bedroom doors) + shower E wall (door 70/210)"
+  },
+  {
+   "a": [
+    -12.857,
+    19.503
+   ],
+   "b": [
+    -11.696,
+    19.242
+   ],
+   "t": 0.12,
+   "kind": "int",
+   "h": null,
+   "note": "shower N wall"
+  },
+  {
+   "a": [
+    -11.688,
+    19.281
+   ],
+   "b": [
+    -10.707,
+    19.06
+   ],
+   "t": 0.1,
+   "kind": "int",
+   "h": null,
+   "note": "door-frame wall of the master door (no wall drawn, only the door)"
+  },
+  {
+   "a": [
+    -12.857,
+    19.503
+   ],
+   "b": [
+    -12.245,
+    22.22
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null,
+   "note": "shower W wall"
+  },
+  {
+   "a": [
+    -11.365,
+    16.143
+   ],
+   "b": [
+    -10.698,
+    19.099
+   ],
+   "t": 0.13,
+   "kind": "int",
+   "h": null,
+   "note": "bath W wall (door 80/210) + master W wall"
+  },
+  {
+   "a": [
+    -11.365,
+    16.143
+   ],
+   "b": [
+    -9.815,
+    15.794
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "bath N wall (dining side)"
+  },
+  {
+   "a": [
+    -9.815,
+    15.794
+   ],
+   "b": [
+    -9.776,
+    15.732
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "bath N wall to laundry corner"
+  },
+  {
+   "a": [
+    -10.89,
+    18.25
+   ],
+   "b": [
+    -8.129,
+    17.628
+   ],
+   "t": 0.14,
+   "kind": "int",
+   "h": null,
+   "note": "master N wall / bath S wall"
+  },
+  {
+   "a": [
+    -7.976,
+    18.306
+   ],
+   "b": [
+    -7.427,
+    18.182
+   ],
+   "t": 0.19,
+   "kind": "low",
+   "h": 1.05,
+   "note": "wall closing apt3 AC ledge on the S (height assumed)"
+  }
+ ],
+ "railings": [
+  {
+   "a": [
+    -0.519,
+    7.293
+   ],
+   "b": [
+    -2.352,
+    10.192
+   ],
+   "h": 1.05,
+   "note": "apt2 AC ledge outer edge (thin double line)"
+  },
+  {
+   "a": [
+    -5.869,
+    15.718
+   ],
+   "b": [
+    -7.427,
+    18.182
+   ],
+   "h": 1.05,
+   "note": "apt3 AC ledge outer edge (thin double line)"
+  }
+ ],
+ "openings": [
+  {
+   "type": "window",
+   "x": -12.969,
+   "z": 2.604,
+   "w": 2.4,
+   "h": 1.25,
+   "sill": 0.9,
+   "label": "240/125",
+   "note": "apt2 living W"
+  },
+  {
+   "type": "slider",
+   "x": -9.185,
+   "z": 1.513,
+   "w": 1.8,
+   "h": 2.3,
+   "sill": 0.0,
+   "label": "180/230",
+   "note": "apt2 living -> balcony"
+  },
+  {
+   "type": "window",
+   "x": -7.695,
+   "z": -0.687,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "master W (over balcony)"
+  },
+  {
+   "type": "window",
+   "x": -6.11,
+   "z": -1.587,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "master N"
+  },
+  {
+   "type": "window",
+   "x": -3.645,
+   "z": 0.118,
+   "w": 1.0,
+   "h": 0.6,
+   "sill": 1.55,
+   "label": "100/60",
+   "note": "en-suite N"
+  },
+  {
+   "type": "window",
+   "x": -1.295,
+   "z": 0.118,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "bedroom 1 N (jamb outlines at x -1.94 / -0.75)"
+  },
+  {
+   "type": "window",
+   "x": -0.636,
+   "z": 7.293,
+   "w": 1.0,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "100/105",
+   "note": "bedroom 2 S"
+  },
+  {
+   "type": "window",
+   "x": -12.607,
+   "z": 6.099,
+   "w": 1.4,
+   "h": 0.7,
+   "sill": 1.45,
+   "label": "140/70",
+   "note": "apt2 kitchen W"
+  },
+  {
+   "type": "window",
+   "x": -2.083,
+   "z": 8.298,
+   "w": 1.4,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "140/105",
+   "note": "apt2 laundry E, onto AC ledge"
+  },
+  {
+   "type": "window",
+   "x": -3.404,
+   "z": 10.332,
+   "w": 1.0,
+   "h": 1.0,
+   "sill": 1.15,
+   "label": "100/100",
+   "note": "mamad2 E"
+  },
+  {
+   "type": "window",
+   "x": -3.397,
+   "z": 7.887,
+   "w": 0.6,
+   "h": 0.8,
+   "sill": 1.35,
+   "label": "60/80",
+   "note": "inner window bath -> laundry in the partition, thin double line v 1.72..2.38 (reading of \"60/80\" uncertain)"
+  },
+  {
+   "type": "door",
+   "x": -4.345,
+   "z": 1.328,
+   "w": 0.7,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "70/210",
+   "note": "master -> en-suite (jambs at z 0.97 / 1.62)"
+  },
+  {
+   "type": "door",
+   "x": -6.425,
+   "z": 1.763,
+   "w": 0.7,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "70/210",
+   "note": "master -> closet (gap -6.79..-6.13)"
+  },
+  {
+   "type": "door",
+   "x": -4.815,
+   "z": 2.853,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> master-suite vestibule"
+  },
+  {
+   "type": "door",
+   "x": -3.544,
+   "z": 3.363,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> bedroom 1 (door frame between bath S wall and partition)"
+  },
+  {
+   "type": "door",
+   "x": -4.123,
+   "z": 4.778,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> bedroom 2"
+  },
+  {
+   "type": "door",
+   "x": -4.951,
+   "z": 6.041,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> bath"
+  },
+  {
+   "type": "door",
+   "x": -3.01,
+   "z": 7.274,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "bath -> laundry (jambs at v 0.95 / 1.72)"
+  },
+  {
+   "type": "door",
+   "x": -5.828,
+   "z": 7.522,
+   "w": 0.7,
+   "h": 2.0,
+   "sill": 0.0,
+   "label": "70/200",
+   "note": "hall -> mamad2"
+  },
+  {
+   "type": "pass",
+   "x": -5.351,
+   "z": 3.923,
+   "w": 0.83,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "",
+   "note": "opening dining -> bedroom hall (no door drawn)"
+  },
+  {
+   "type": "entry",
+   "x": -7.641,
+   "z": 9.286,
+   "w": 0.9,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "90/210",
+   "note": "apt2 entry from floor lobby"
+  },
+  {
+   "type": "door",
+   "x": -8.596,
+   "z": 9.758,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "",
+   "note": "lift door (width assumed 0.80)"
+  },
+  {
+   "type": "window",
+   "x": -4.171,
+   "z": 12.911,
+   "w": 0.55,
+   "h": 1.0,
+   "sill": 1.15,
+   "label": "",
+   "note": "narrow stair window in the core E wall, no label (height assumed 1.00, sill 1.15)"
+  },
+  {
+   "type": "entry",
+   "x": -9.449,
+   "z": 12.118,
+   "w": 0.9,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "90/210",
+   "note": "apt3 entry from floor lobby"
+  },
+  {
+   "type": "window",
+   "x": -14.333,
+   "z": 8.829,
+   "w": 1.4,
+   "h": 0.7,
+   "sill": 1.45,
+   "label": "140/70",
+   "note": "apt3 kitchen W"
+  },
+  {
+   "type": "slider",
+   "x": -16.47,
+   "z": 12.21,
+   "w": 2.2,
+   "h": 2.3,
+   "sill": 0.0,
+   "label": "220/230",
+   "note": "apt3 living -> W garden (ground ~250.68)"
+  },
+  {
+   "type": "door",
+   "x": -9.565,
+   "z": 14.482,
+   "w": 0.7,
+   "h": 2.0,
+   "sill": 0.0,
+   "label": "70/200",
+   "note": "dining -> mamad3"
+  },
+  {
+   "type": "window",
+   "x": -6.187,
+   "z": 14.724,
+   "w": 1.0,
+   "h": 1.0,
+   "sill": 1.15,
+   "label": "100/100",
+   "note": "mamad3 E"
+  },
+  {
+   "type": "door",
+   "x": -8.88,
+   "z": 16.299,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "bath area -> laundry3"
+  },
+  {
+   "type": "window",
+   "x": -7.345,
+   "z": 16.583,
+   "w": 0.9,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "90/105",
+   "note": "laundry3 E, onto AC ledge (jambs at v 11.09 / 11.95)"
+  },
+  {
+   "type": "window",
+   "x": -7.906,
+   "z": 17.471,
+   "w": 0.6,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "60/105",
+   "note": "apt3 bath E (jambs at v 12.28 / 12.86)"
+  },
+  {
+   "type": "door",
+   "x": -11.149,
+   "z": 17.099,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> bath (tub)"
+  },
+  {
+   "type": "door",
+   "x": -12.044,
+   "z": 17.7,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> upper bedroom"
+  },
+  {
+   "type": "door",
+   "x": -11.802,
+   "z": 18.774,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> lower bedroom"
+  },
+  {
+   "type": "door",
+   "x": -11.224,
+   "z": 19.176,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "hall -> master (door frame, no wall)"
+  },
+  {
+   "type": "door",
+   "x": -11.415,
+   "z": 20.49,
+   "w": 0.7,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "70/210",
+   "note": "master -> shower room"
+  },
+  {
+   "type": "door",
+   "x": -7.872,
+   "z": 18.769,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210",
+   "note": "master -> E private garden"
+  },
+  {
+   "type": "window",
+   "x": -7.608,
+   "z": 19.94,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "master E"
+  },
+  {
+   "type": "window",
+   "x": -12.977,
+   "z": 22.385,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "lower bedroom S"
+  },
+  {
+   "type": "window",
+   "x": -11.669,
+   "z": 22.091,
+   "w": 0.6,
+   "h": 0.6,
+   "sill": 1.55,
+   "label": "60/60",
+   "note": "shower room S (jambs at S-u 2.14 / 2.70)"
+  },
+  {
+   "type": "window",
+   "x": -10.138,
+   "z": 21.745,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "master S (jambs at S-u 3.38 / 4.60)"
+  },
+  {
+   "type": "window",
+   "x": -16.243,
+   "z": 17.887,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "upper bedroom W"
+  },
+  {
+   "type": "window",
+   "x": -15.637,
+   "z": 20.488,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105",
+   "note": "lower bedroom W"
+  }
+ ],
+ "rooms": [
+  {
+   "name": "ח. מגורים",
+   "kind": "living",
+   "apt": "2",
+   "poly": [
+    [
+     -12.28,
+     1.513
+    ],
+    [
+     -7.695,
+     1.513
+    ],
+    [
+     -7.695,
+     1.813
+    ],
+    [
+     -7.635,
+     1.813
+    ],
+    [
+     -7.635,
+     2.26
+    ],
+    [
+     -10.137,
+     6.217
+    ],
+    [
+     -11.955,
+     5.068
+    ],
+    [
+     -11.987,
+     5.119
+    ],
+    [
+     -13.825,
+     3.956
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "פ. אוכל",
+   "kind": "dining",
+   "apt": "2",
+   "poly": [
+    [
+     -7.635,
+     2.26
+    ],
+    [
+     -7.636,
+     3.458
+    ],
+    [
+     -5.351,
+     3.458
+    ],
+    [
+     -5.351,
+     4.831
+    ],
+    [
+     -6.991,
+     7.425
+    ],
+    [
+     -8.589,
+     6.415
+    ],
+    [
+     -8.941,
+     6.973
+    ],
+    [
+     -10.137,
+     6.217
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מטבח",
+   "kind": "kitchen",
+   "apt": "2",
+   "poly": [
+    [
+     -11.955,
+     5.068
+    ],
+    [
+     -8.941,
+     6.973
+    ],
+    [
+     -10.555,
+     9.526
+    ],
+    [
+     -13.569,
+     7.62
+    ]
+   ],
+   "label_area": null,
+   "note": "not labelled on this sheet (area box drawn there); sink and cooker drawn"
+  },
+  {
+   "name": "מבואה",
+   "kind": "hall",
+   "apt": "2",
+   "poly": [
+    [
+     -8.589,
+     6.415
+    ],
+    [
+     -6.116,
+     7.978
+    ],
+    [
+     -7.15,
+     9.614
+    ],
+    [
+     -8.105,
+     8.981
+    ],
+    [
+     -9.609,
+     8.03
+    ]
+   ],
+   "label_area": null,
+   "note": "entrance foyer, not labelled"
+  },
+  {
+   "name": "מעבר",
+   "kind": "hall",
+   "apt": "2",
+   "poly": [
+    [
+     -5.35,
+     2.853
+    ],
+    [
+     -3.543,
+     2.853
+    ],
+    [
+     -3.544,
+     3.863
+    ],
+    [
+     -4.39,
+     5.201
+    ],
+    [
+     -4.411,
+     5.187
+    ],
+    [
+     -5.587,
+     7.047
+    ],
+    [
+     -5.545,
+     7.074
+    ],
+    [
+     -6.116,
+     7.978
+    ],
+    [
+     -6.991,
+     7.425
+    ],
+    [
+     -5.351,
+     4.831
+    ],
+    [
+     -5.351,
+     3.458
+    ]
+   ],
+   "label_area": null,
+   "note": "bedroom corridor, not labelled"
+  },
+  {
+   "name": "ח. שינה הורים",
+   "kind": "master",
+   "apt": "2",
+   "poly": [
+    [
+     -7.695,
+     -1.587
+    ],
+    [
+     -4.285,
+     -1.587
+    ],
+    [
+     -4.285,
+     0.118
+    ],
+    [
+     -4.345,
+     0.118
+    ],
+    [
+     -4.345,
+     2.853
+    ],
+    [
+     -5.35,
+     2.853
+    ],
+    [
+     -5.35,
+     1.763
+    ],
+    [
+     -6.765,
+     1.763
+    ],
+    [
+     -6.765,
+     1.813
+    ],
+    [
+     -7.695,
+     1.813
+    ]
+   ],
+   "label_area": null,
+   "note": "includes the vestibule in front of closet and en-suite"
+  },
+  {
+   "name": "ח. ארונות",
+   "kind": "closet",
+   "apt": "2",
+   "poly": [
+    [
+     -7.635,
+     1.813
+    ],
+    [
+     -6.765,
+     1.813
+    ],
+    [
+     -6.765,
+     1.763
+    ],
+    [
+     -5.35,
+     1.763
+    ],
+    [
+     -5.351,
+     3.458
+    ],
+    [
+     -7.636,
+     3.458
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מקלחת",
+   "kind": "bath",
+   "apt": "2",
+   "poly": [
+    [
+     -4.345,
+     0.118
+    ],
+    [
+     -3.03,
+     0.118
+    ],
+    [
+     -3.03,
+     2.853
+    ],
+    [
+     -4.345,
+     2.853
+    ]
+   ],
+   "label_area": null,
+   "note": "en-suite; name not written (shower, WC, basin drawn)"
+  },
+  {
+   "name": "ח. שינה",
+   "kind": "bed",
+   "apt": "2",
+   "poly": [
+    [
+     -3.03,
+     0.118
+    ],
+    [
+     -0.01,
+     0.118
+    ],
+    [
+     -0.011,
+     3.863
+    ],
+    [
+     -3.544,
+     3.863
+    ],
+    [
+     -3.543,
+     2.853
+    ],
+    [
+     -3.03,
+     2.853
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "ח. שינה",
+   "kind": "bed",
+   "apt": "2",
+   "poly": [
+    [
+     -3.544,
+     3.863
+    ],
+    [
+     -0.011,
+     3.863
+    ],
+    [
+     -0.011,
+     7.293
+    ],
+    [
+     -1.448,
+     7.293
+    ],
+    [
+     -1.343,
+     7.127
+    ],
+    [
+     -4.39,
+     5.201
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "אמבטיה",
+   "kind": "bath",
+   "apt": "2",
+   "poly": [
+    [
+     -4.411,
+     5.187
+    ],
+    [
+     -2.467,
+     6.416
+    ],
+    [
+     -3.643,
+     8.276
+    ],
+    [
+     -5.587,
+     7.047
+    ]
+   ],
+   "label_area": null,
+   "note": "name not written (bath tub, WC, basin drawn), \"220\"x\"203\""
+  },
+  {
+   "name": "ח. כביסה",
+   "kind": "laundry",
+   "apt": "2",
+   "poly": [
+    [
+     -2.467,
+     6.416
+    ],
+    [
+     -1.343,
+     7.127
+    ],
+    [
+     -2.519,
+     8.987
+    ],
+    [
+     -3.643,
+     8.276
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "ממ\"ד ח. שינה",
+   "kind": "mamad",
+   "apt": "2",
+   "poly": [
+    [
+     -5.545,
+     7.074
+    ],
+    [
+     -2.544,
+     8.971
+    ],
+    [
+     -4.15,
+     11.511
+    ],
+    [
+     -7.15,
+     9.614
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מעבה",
+   "kind": "service",
+   "apt": "2",
+   "poly": [
+    [
+     -1.448,
+     7.293
+    ],
+    [
+     -0.519,
+     7.293
+    ],
+    [
+     -2.352,
+     10.192
+    ],
+    [
+     -3.016,
+     9.773
+    ]
+   ],
+   "label_area": null,
+   "note": "AC condenser ledge outside the laundry"
+  },
+  {
+   "name": "מבואה קומתית",
+   "kind": "lobby",
+   "apt": "common",
+   "poly": [
+    [
+     -8.105,
+     8.981
+    ],
+    [
+     -7.15,
+     9.614
+    ],
+    [
+     -6.728,
+     9.881
+    ],
+    [
+     -8.007,
+     11.905
+    ],
+    [
+     -8.43,
+     11.638
+    ],
+    [
+     -8.938,
+     12.441
+    ],
+    [
+     -10.383,
+     11.527
+    ],
+    [
+     -9.547,
+     10.205
+    ],
+    [
+     -9.069,
+     10.507
+    ]
+   ],
+   "label_area": null,
+   "note": "floor landing in front of lift and stair, not labelled"
+  },
+  {
+   "name": "חדר מדרגות",
+   "kind": "stair",
+   "apt": "common",
+   "poly": [
+    [
+     -6.728,
+     9.881
+    ],
+    [
+     -3.888,
+     11.676
+    ],
+    [
+     -4.328,
+     12.374
+    ],
+    [
+     -3.973,
+     12.598
+    ],
+    [
+     -4.321,
+     13.148
+    ],
+    [
+     -4.676,
+     12.923
+    ],
+    [
+     -5.167,
+     13.701
+    ],
+    [
+     -8.007,
+     11.905
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "נישה בקיר חדר המדרגות",
+   "kind": "shaft",
+   "apt": "common",
+   "poly": [
+    [
+     -3.954,
+     11.782
+    ],
+    [
+     -3.701,
+     11.942
+    ],
+    [
+     -4.075,
+     12.534
+    ],
+    [
+     -4.328,
+     12.374
+    ]
+   ],
+   "label_area": null,
+   "note": "small boxed recess / riser in the stair E wall behind the landing, no label"
+  },
+  {
+   "name": "נישה בקיר חדר המדרגות",
+   "kind": "shaft",
+   "apt": "common",
+   "poly": [
+    [
+     -4.676,
+     12.923
+    ],
+    [
+     -4.422,
+     13.083
+    ],
+    [
+     -4.85,
+     13.76
+    ],
+    [
+     -5.103,
+     13.599
+    ]
+   ],
+   "label_area": null,
+   "note": "small boxed recess / riser in the stair E wall behind the landing, no label"
+  },
+  {
+   "name": "מטבח",
+   "kind": "kitchen",
+   "apt": "3",
+   "poly": [
+    [
+     -13.569,
+     7.62
+    ],
+    [
+     -10.555,
+     9.526
+    ],
+    [
+     -10.574,
+     9.555
+    ],
+    [
+     -9.547,
+     10.205
+    ],
+    [
+     -10.942,
+     12.411
+    ],
+    [
+     -14.982,
+     9.856
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מבואה",
+   "kind": "hall",
+   "apt": "3",
+   "poly": [
+    [
+     -10.383,
+     11.527
+    ],
+    [
+     -8.938,
+     12.441
+    ],
+    [
+     -9.496,
+     13.324
+    ],
+    [
+     -10.942,
+     12.411
+    ]
+   ],
+   "label_area": null,
+   "note": "entrance foyer, not labelled"
+  },
+  {
+   "name": "ח. מגורים",
+   "kind": "living",
+   "apt": "3",
+   "poly": [
+    [
+     -14.982,
+     9.856
+    ],
+    [
+     -10.942,
+     12.411
+    ],
+    [
+     -13.132,
+     15.876
+    ],
+    [
+     -15.499,
+     14.379
+    ],
+    [
+     -15.531,
+     14.43
+    ],
+    [
+     -17.205,
+     13.372
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "פ. אוכל",
+   "kind": "dining",
+   "apt": "3",
+   "poly": [
+    [
+     -10.942,
+     12.411
+    ],
+    [
+     -9.496,
+     13.324
+    ],
+    [
+     -10.039,
+     14.182
+    ],
+    [
+     -9.151,
+     14.743
+    ],
+    [
+     -9.776,
+     15.732
+    ],
+    [
+     -9.815,
+     15.794
+    ],
+    [
+     -11.365,
+     16.143
+    ],
+    [
+     -12.342,
+     16.376
+    ],
+    [
+     -13.132,
+     15.876
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מעבר",
+   "kind": "hall",
+   "apt": "3",
+   "poly": [
+    [
+     -12.342,
+     16.376
+    ],
+    [
+     -11.365,
+     16.143
+    ],
+    [
+     -10.707,
+     19.06
+    ],
+    [
+     -11.688,
+     19.281
+    ]
+   ],
+   "label_area": null,
+   "note": "bedroom corridor, not labelled"
+  },
+  {
+   "name": "ח. שינה",
+   "kind": "bed",
+   "apt": "3",
+   "poly": [
+    [
+     -16.637,
+     16.179
+    ],
+    [
+     -15.499,
+     14.379
+    ],
+    [
+     -12.342,
+     16.376
+    ],
+    [
+     -11.92,
+     18.252
+    ],
+    [
+     -15.946,
+     19.158
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "ח. שינה",
+   "kind": "bed",
+   "apt": "3",
+   "poly": [
+    [
+     -15.946,
+     19.158
+    ],
+    [
+     -11.92,
+     18.252
+    ],
+    [
+     -11.696,
+     19.242
+    ],
+    [
+     -12.857,
+     19.503
+    ],
+    [
+     -12.245,
+     22.22
+    ],
+    [
+     -15.087,
+     22.86
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מקלחת",
+   "kind": "bath",
+   "apt": "3",
+   "poly": [
+    [
+     -12.857,
+     19.503
+    ],
+    [
+     -11.696,
+     19.242
+    ],
+    [
+     -11.084,
+     21.959
+    ],
+    [
+     -12.245,
+     22.22
+    ]
+   ],
+   "label_area": null,
+   "note": "name not written (shower, WC, basin drawn), off the master bedroom"
+  },
+  {
+   "name": "ח. שינה הורים",
+   "kind": "master",
+   "apt": "3",
+   "poly": [
+    [
+     -10.89,
+     18.25
+    ],
+    [
+     -8.129,
+     17.628
+    ],
+    [
+     -7.343,
+     21.116
+    ],
+    [
+     -11.084,
+     21.959
+    ],
+    [
+     -11.688,
+     19.281
+    ],
+    [
+     -10.707,
+     19.06
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "אמבטיה",
+   "kind": "bath",
+   "apt": "3",
+   "poly": [
+    [
+     -11.365,
+     16.143
+    ],
+    [
+     -9.815,
+     15.794
+    ],
+    [
+     -9.776,
+     15.732
+    ],
+    [
+     -7.655,
+     17.074
+    ],
+    [
+     -8.096,
+     17.772
+    ],
+    [
+     -8.129,
+     17.628
+    ],
+    [
+     -10.89,
+     18.25
+    ]
+   ],
+   "label_area": null,
+   "note": "name not written (bath tub, WC, basin drawn)"
+  },
+  {
+   "name": "ח. כביסה",
+   "kind": "laundry",
+   "apt": "3",
+   "poly": [
+    [
+     -9.151,
+     14.743
+    ],
+    [
+     -7.029,
+     16.085
+    ],
+    [
+     -7.655,
+     17.074
+    ],
+    [
+     -9.776,
+     15.732
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "ממ\"ד ח. שינה",
+   "kind": "mamad",
+   "apt": "3",
+   "poly": [
+    [
+     -8.43,
+     11.638
+    ],
+    [
+     -5.434,
+     13.532
+    ],
+    [
+     -7.042,
+     16.077
+    ],
+    [
+     -10.039,
+     14.182
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מעבה",
+   "kind": "service",
+   "apt": "3",
+   "poly": [
+    [
+     -6.532,
+     15.299
+    ],
+    [
+     -5.869,
+     15.718
+    ],
+    [
+     -7.427,
+     18.182
+    ],
+    [
+     -7.976,
+     18.306
+    ],
+    [
+     -8.096,
+     17.772
+    ]
+   ],
+   "label_area": null,
+   "note": "AC condenser ledge outside mamad/laundry/bath"
+  }
+ ],
+ "outdoor": [
+  {
+   "name": "מרפסת 15 מ\"ר (פרגולה בעתיד)",
+   "kind": "balcony",
+   "apt": "2",
+   "poly": [
+    [
+     -12.165,
+     -2.177
+    ],
+    [
+     -7.68,
+     -2.177
+    ],
+    [
+     -7.695,
+     -1.587
+    ],
+    [
+     -7.695,
+     1.513
+    ],
+    [
+     -12.165,
+     1.513
+    ]
+   ],
+   "level": 3.0,
+   "note": "uncovered balcony off the living room, parapet 20 cm, top +4.05; the hatched grid is a future pergola ('פרגולה בעתיד'); clear 429 x 349; area table: (3.69+3.70)/2 x 4.49 = 16.59"
+  },
+  {
+   "name": "פטיו (פרגולה בעתיד)",
+   "kind": "terrace",
+   "apt": "3",
+   "poly": [
+    [
+     -17.137,
+     9.185
+    ],
+    [
+     -15.404,
+     10.281
+    ],
+    [
+     -16.981,
+     12.774
+    ],
+    [
+     -18.714,
+     11.679
+    ]
+   ],
+   "level": 2.98,
+   "note": "paved patio in front of the living-room slider 220/230, level 250.68 (= +2.98); 'פרגולה בעתיד' = future pergola (dashed outline); steps at its S end (R u 1.4..2.6, v 13.45..14.5) lead down to the garden; area 6.0 m2"
+  },
+  {
+   "name": "גינה פרטית 35 מ\"ר",
+   "kind": "garden",
+   "apt": "3",
+   "poly": [
+    [
+     -17.137,
+     9.185
+    ],
+    [
+     -18.714,
+     11.679
+    ],
+    [
+     -16.981,
+     12.774
+    ],
+    [
+     -17.381,
+     13.408
+    ],
+    [
+     -15.699,
+     14.471
+    ],
+    [
+     -16.747,
+     16.207
+    ],
+    [
+     -15.061,
+     22.972
+    ],
+    [
+     -17.232,
+     23.461
+    ],
+    [
+     -19.849,
+     10.723
+    ],
+    [
+     -18.38,
+     8.4
+    ]
+   ],
+   "level": 2.35,
+   "note": "outline approximate (30.3 m2 here + patio 6.0 = 36.3 vs label 35): strip W of the patio (250.00), the lawn S of the living room and the 2 m strip W of the bedroom block, closed by the W fence/retaining line (ground outside 247.25-247.50) and on the S by the line of the building's S face; levels 250.00-250.10 (= +2.30..+2.40), so ~0.6 m below the floor"
+  },
+  {
+   "name": "גינה פרטית 26 מ\"ר",
+   "kind": "garden",
+   "apt": "3",
+   "poly": [
+    [
+     -4.727,
+     14.015
+    ],
+    [
+     -2.394,
+     15.489
+    ],
+    [
+     -2.362,
+     19.65
+    ],
+    [
+     -6.377,
+     20.975
+    ],
+    [
+     -7.196,
+     21.2
+    ],
+    [
+     -7.833,
+     18.371
+    ],
+    [
+     -7.409,
+     18.276
+    ],
+    [
+     -5.867,
+     15.837
+    ],
+    [
+     -6.476,
+     15.453
+    ],
+    [
+     -5.375,
+     13.711
+    ],
+    [
+     -4.775,
+     14.091
+    ]
+   ],
+   "level": 2.98,
+   "note": "outline approximate (26.8 m2 vs label 26): E of mamad/ledge/master bedroom, closed by the fence lines (levels 250.68 / 250.80 / 250.90); reached by the master-bedroom door 80/210"
+  }
+ ],
+ "stairs": [
+  {
+   "poly": [
+    [
+     -6.795,
+     9.987
+    ],
+    [
+     -3.954,
+     11.782
+    ],
+    [
+     -5.103,
+     13.599
+    ],
+    [
+     -7.943,
+     11.804
+    ]
+   ],
+   "up_dir": [
+    0.8453,
+    0.5344
+   ],
+   "note": "U-stair in the concrete core: two flights '9X29\\16.67=261' side by side (total width 220) between the floor landing '158' (in front of the lift) and an intermediate landing '110' at the E end; 18 risers of 16.67 per floor. up_dir = +u of M2R (first flight from this floor going E); which half goes up is inferred, the arrow is not legible"
+  },
+  {
+   "poly": [
+    [
+     -18.023,
+     12.139
+    ],
+    [
+     -16.991,
+     12.791
+    ],
+    [
+     -17.536,
+     13.653
+    ],
+    [
+     -18.568,
+     13.001
+    ]
+   ],
+   "up_dir": [
+    0.5344,
+    -0.8453
+   ],
+   "note": "OUTDOOR steps in the apt-3 private garden (not the building stair): from the lawn S of the living room (250.10 = +2.40) up to the patio (250.68 = +2.98). Drawn as a box (M2R u 1.35..2.6, v 13.54..14.49) with nosing lines at v 13.54/13.86/14.16/14.49 (about 4 risers of ~0.15) and an arrow pointing to the patio; the E edge is the building's W face. Added by the checker."
+  }
+ ],
+ "lifts": [
+  {
+   "poly": [
+    [
+     -9.609,
+     8.03
+    ],
+    [
+     -8.105,
+     8.981
+    ],
+    [
+     -9.069,
+     10.507
+    ],
+    [
+     -10.574,
+     9.555
+    ]
+   ],
+   "note": "lift shaft ('פיר מעלית'), clear 160 x 160, counterweight on the W side, door on the E side to the floor lobby"
+  }
+ ],
+ "apartments": [
+  {
+   "apt": "2",
+   "main_area": 104.33,
+   "rooms": 5,
+   "note": "north apartment (circled 2): living+dining+kitchen, master suite (closet, en-suite), 2 bedrooms, mamad/bedroom, bath, laundry, balcony 15 m2. Box printed in it: 'שטח עיקרי 104.33' (table: 111.83-7.5). Measured: rooms at wall centrelines 115.4 m2, gross to outer faces ~121 m2 (120.6-122.1 depending on how the walls are split) -> matches the OTHER table value 119.41 (main 111.91); the two area boxes look swapped between apartments 2 and 3"
+  },
+  {
+   "apt": "3",
+   "main_area": 111.91,
+   "rooms": 5,
+   "note": "south apartment (circled 3): living, dining, kitchen, master bedroom + shower room, 2 bedrooms, mamad/bedroom, bath, laundry, 2 private gardens (35 + 26 m2). Box printed in it: 'שטח עיקרי 111.91' (table: 119.41-7.5). Measured: rooms at wall centrelines 107.9 m2, gross ~112.6-112.9 m2 -> matches the table value 111.83 (main 104.33), see apt 2"
+  }
+ ],
+ "notes": [
+  "Frames: north wing in the global frame; central wing in M2R (-12,0,32.3); south block in S=(-16,14,-12.7), i.e. exactly 45.0 deg from M2R (measured -12.6..-13.0 deg on its long walls). Corners are intersections of measured centrelines (see M2_build.py).",
+  "Wall faces were measured with colour-classified scans (black outline, green block fill, blue concrete fill). Exterior walls draw 0.24-0.26 thick, mamad/core 0.24 (the two exterior mamad E walls 0.32, written '30'), partitions 0.10-0.16. The drawn geometry is about 1-2 % smaller than the written dimension chains (e.g. bedroom '400' draws 3.91, '366' draws 3.61, mamad '280' draws 2.76); positions follow the drawing (registration).",
+  "Area check (+3.00): rooms at centrelines apt2 115.4, apt3 107.9, lobby+stair 14.7 m2; gross by raster to outer faces / half party walls: apt2 ~120.6-122.1, apt3 ~112.6-112.9, lobby+stair ~15.6-16.6 (table 15.80), total ~248.8-251.6 (two raster methods) vs table built area 246.68 (+ floor opening 3.02 = 249.70). Per apartment this fits the table only if 119.41 belongs to apt 2 and 111.83 to apt 3, opposite to where the two boxes are printed.",
+  "M2 east wall (x=-0.045, faces -0.135..+0.05) touches building E (E's west wall face at x~+0.06); the plot line is drawn between them.",
+  "Room names: the apt-2 kitchen, both baths with tub, both shower rooms, the foyers, corridors and the floor lobby carry no name on the sheet; names given are descriptive. Living/dining splits are drawn by me: apt2 along M2R u=4.85 (end of the kitchen partition), apt3 along M2R u=7.48 (line of the lobby wall).",
+  "Door-frame walls (t 0.10) were added where a door stands in a gap between two walls without any wall drawn: bedroom 1 and the master-suite vestibule (apt 2), master bedroom (apt 3). Opening 'pass' 0.83 m between dining and bedroom corridor of apt 2.",
+  "AC ledges (מעבה) of both apartments: strip between the E wall (M2R u=12.77/12.75) and a thin outer line at u=13.55 (railing, height assumed 1.05); end walls 0.19-0.20 thick, height assumed 1.05. Apt-3 ledge is at garden level, apt-2 ledge ~3 m above ground.",
+  "'60/80' in apt 2 is read as a small inner window in the bath/laundry partition (uncertain). Lift door width assumed 0.80. Unlabelled narrow window (~0.55) in the core E wall between the two niches, where section line ג-ג crosses: height/sill unknown (probably serves the stair mid-landing, check section ג-ג / east elevation).",
+  "Local scale: the apt-2 corridor is written '90' but draws 0.86 net between wall faces; dimensions follow the drawn lines.",
+  "Stair up-direction inferred (see stairs note). Window sills = 2.15 - h (none written on the sheet).",
+  "Gardens of apt 3: outlines approximate (fences drawn as thin double/triple lines). W: raised patio 250.68 (+2.98, future pergola) + lawn 250.00-250.10 (~+2.35); E: garden 250.68-250.90 (+2.98..+3.20) reached from the master bedroom. The balcony grid of apt 2 is also a future pergola. Floor ב of M2 is thus at grade around apt 3 (W/S/E) and ~3 m above grade on the N (apt 2).",
+  "Registration check (lift shaft, scans on all sheets): fpD and fpC agree within ~2 cm, fpB is ~0.15 m off in M2R v, but fpE places the M2 core ~0.5 m off in both M2R u and v -> the fpE registration is not reliable at M2 (E-based fit).",
+  "Independent check (overlay2 + face/gap scans of every wall and opening) fixed: (1) bedroom-1 N window 120/105 was placed with its centre on the W jamb (x=-1.875); jamb outlines are at x=-1.94/-0.75, centre now -1.33; (2) both mamad E walls were 0.26, drawn 0.32 with '30' written (inner faces 12.58/12.575, outer face unchanged), mamad polygons and windows follow the new centrelines; (3) the short E parapet of the apt-2 balcony was at x=-7.90 on the last pergola-grid bar, the drawn parapet lines are -7.81/-7.62 (in line with the master W wall); (4) the blue concrete part of the master S / closet N wall runs to x=-6.80, not -7.05 (closet door re-centred to -6.46); (5) the drawn outdoor steps between the apt-3 lawn and patio were added as a second stairs[] entry (they were only in a note). The thick dark 'X' lines near the apt-2 bedroom-2 door and in the apt-3 dining are drawn identically on fpE/fpD/fpC and are not walls of this floor (not modelled).",
+  "Final check (jamb scans along every opening's wall, colour/ink classified): re-centred 6 openings on their drawn jambs -- apt-3 laundry E 90/105 (+0.065 m along M2R v, jambs 11.09/11.95), apt-3 bath E 60/105 (+0.13, jambs 12.28/12.86), apt-3 shower-room S 60/60 (+0.05 along S-u, jambs 2.14/2.70), apt-3 master S 120/105 (-0.06, jambs 3.38/4.60), apt-2 bath->laundry door (-0.065, jambs 0.95/1.72; the 60/80 inner window next to it -0.01) and the master->en-suite door (+0.035, jambs 0.97/1.62). The apt-2 laundry E wall now starts on the bath/laundry N wall line (the drawn corner block is closed); the apt-2 living and corridor polygons now follow the wall centrelines exactly (no slanted edge / sliver overlap with the bath). All other walls (faces) and openings were re-scanned and agree with the drawing within ~3 cm.",
+  "Not modelled: a red band drawn along the OUTER face of the west facade (apt-2 living S wall, both kitchens, apt-3 living W wall) -- it appears on fpE, fpD and fpC, lies outside the green/blue wall bodies and is probably a marking (building line / cladding), not part of the wall. The bedroom-2 S wall window lines suggest faces 7.17..7.41 (model 7.135..7.385, ~3 cm).",
+  "aligned to M3.json on ['core', 'mamad'] walls: rotate 0.0023 deg about (0,0), then translate (0.035,0.033)"
+ ]
+}

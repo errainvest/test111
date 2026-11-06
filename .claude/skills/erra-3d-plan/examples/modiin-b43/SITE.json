@@ -1,0 +1,4791 @@
+{
+ "name": "site of lot 2123 (מגרש 212/3), Modiin B-43, buildings E and M2",
+ "sheet": "fpE",
+ "frame": "global, raw fpE registration",
+ "plot": [
+  [
+   27.192,
+   -4.535
+  ],
+  [
+   27.223,
+   20.029
+  ],
+  [
+   18.998,
+   20.154
+  ],
+  [
+   19.005,
+   24.369
+  ],
+  [
+   2.555,
+   24.366
+  ],
+  [
+   -16.29,
+   28.117
+  ],
+  [
+   -21.196,
+   4.116
+  ],
+  [
+   -21.338,
+   3.022
+  ],
+  [
+   -21.321,
+   1.919
+  ],
+  [
+   -21.145,
+   0.83
+  ],
+  [
+   -20.815,
+   -0.224
+  ],
+  [
+   -20.335,
+   -1.218
+  ],
+  [
+   -19.718,
+   -2.132
+  ],
+  [
+   -18.976,
+   -2.949
+  ],
+  [
+   -18.124,
+   -3.65
+  ],
+  [
+   -17.179,
+   -4.221
+  ],
+  [
+   -16.162,
+   -4.65
+  ],
+  [
+   -15.094,
+   -4.927
+  ],
+  [
+   -13.997,
+   -5.048
+  ],
+  [
+   0.072,
+   -5.173
+  ],
+  [
+   1.771,
+   -5.098
+  ],
+  [
+   3.468,
+   -5.016
+  ],
+  [
+   5.164,
+   -4.999
+  ],
+  [
+   6.859,
+   -5.014
+  ],
+  [
+   8.554,
+   -5.02
+  ],
+  [
+   10.249,
+   -5.018
+  ],
+  [
+   11.945,
+   -5.007
+  ],
+  [
+   13.64,
+   -4.989
+  ],
+  [
+   15.335,
+   -4.961
+  ],
+  [
+   17.029,
+   -4.926
+  ],
+  [
+   18.724,
+   -4.881
+  ],
+  [
+   20.418,
+   -4.829
+  ],
+  [
+   22.113,
+   -4.769
+  ],
+  [
+   23.805,
+   -4.699
+  ],
+  [
+   25.499,
+   -4.622
+  ]
+ ],
+ "plot_area": 1381,
+ "plot_area_polygon": 1367.3,
+ "plot_vertices": {
+  "71": [
+   27.124,
+   -4.584
+  ],
+  "72": [
+   27.21,
+   19.98
+  ],
+  "73": [
+   18.985,
+   20.124
+  ],
+  "77": [
+   19.002,
+   24.339
+  ],
+  "76": [
+   2.564,
+   24.468
+  ],
+  "81": [
+   -16.192,
+   28.874
+  ],
+  "843": [
+   -21.203,
+   4.895
+  ],
+  "842": [
+   -14.045,
+   -4.301
+  ],
+  "70": [
+   0.011,
+   -4.892
+  ]
+ },
+ "plot_survey": [
+  [
+   27.352,
+   -4.573
+  ],
+  [
+   27.39,
+   19.967
+  ],
+  [
+   18.94,
+   20.028
+  ],
+  [
+   18.985,
+   24.308
+  ],
+  [
+   2.576,
+   24.417
+  ],
+  [
+   -16.292,
+   28.929
+  ],
+  [
+   -21.511,
+   4.797
+  ],
+  [
+   -21.664,
+   3.72
+  ],
+  [
+   -21.659,
+   2.632
+  ],
+  [
+   -21.496,
+   1.557
+  ],
+  [
+   -21.18,
+   0.516
+  ],
+  [
+   -20.717,
+   -0.468
+  ],
+  [
+   -20.116,
+   -1.375
+  ],
+  [
+   -19.39,
+   -2.185
+  ],
+  [
+   -18.555,
+   -2.882
+  ],
+  [
+   -17.628,
+   -3.45
+  ],
+  [
+   -16.628,
+   -3.879
+  ],
+  [
+   -15.577,
+   -4.158
+  ],
+  [
+   -14.496,
+   -4.282
+  ],
+  [
+   0.011,
+   -4.892
+  ],
+  [
+   1.72,
+   -4.937
+  ],
+  [
+   3.429,
+   -4.972
+  ],
+  [
+   5.138,
+   -4.999
+  ],
+  [
+   6.847,
+   -5.017
+  ],
+  [
+   8.557,
+   -5.027
+  ],
+  [
+   10.266,
+   -5.028
+  ],
+  [
+   11.975,
+   -5.021
+  ],
+  [
+   13.685,
+   -5.006
+  ],
+  [
+   15.394,
+   -4.981
+  ],
+  [
+   17.103,
+   -4.949
+  ],
+  [
+   18.812,
+   -4.907
+  ],
+  [
+   20.52,
+   -4.857
+  ],
+  [
+   22.229,
+   -4.799
+  ],
+  [
+   23.937,
+   -4.732
+  ],
+  [
+   25.645,
+   -4.657
+  ]
+ ],
+ "plot_survey_area": 1378.9,
+ "north": [
+  0.3322,
+  -0.9432
+ ],
+ "north_deg_cw_from_minus_z": 19.4,
+ "building_lines": [
+  [
+   [
+    24.194,
+    -2.68
+   ],
+   [
+    21.789,
+    -2.779
+   ],
+   [
+    19.384,
+    -2.861
+   ],
+   [
+    16.978,
+    -2.926
+   ],
+   [
+    14.572,
+    -2.975
+   ],
+   [
+    12.165,
+    -3.005
+   ],
+   [
+    9.759,
+    -3.019
+   ],
+   [
+    7.352,
+    -3.017
+   ],
+   [
+    4.945,
+    -2.996
+   ],
+   [
+    2.535,
+    -3.062
+   ],
+   [
+    0.122,
+    -3.17
+   ],
+   [
+    -17.025,
+    -2.932
+   ],
+   [
+    -19.729,
+    1.305
+   ],
+   [
+    -14.941,
+    24.728
+   ],
+   [
+    2.398,
+    21.311
+   ],
+   [
+    2.4,
+    20.345
+   ],
+   [
+    14.998,
+    20.381
+   ],
+   [
+    14.99,
+    16.215
+   ],
+   [
+    24.218,
+    16.074
+   ],
+   [
+    24.194,
+    -2.68
+   ]
+  ]
+ ],
+ "parking": [
+  {
+   "poly": [
+    [
+     -1.225,
+     16.664
+    ],
+    [
+     1.091,
+     16.81
+    ],
+    [
+     1.111,
+     21.061
+    ],
+    [
+     -1.206,
+     20.915
+    ]
+   ],
+   "label": "1\\M2",
+   "bldg": "M2",
+   "level": 247.75,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     1.091,
+     16.81
+    ],
+    [
+     3.381,
+     16.952
+    ],
+    [
+     3.403,
+     21.202
+    ],
+    [
+     1.111,
+     21.061
+    ]
+   ],
+   "label": "2\\M2",
+   "bldg": "M2",
+   "level": 247.65,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     3.381,
+     16.952
+    ],
+    [
+     5.654,
+     16.983
+    ],
+    [
+     5.677,
+     21.23
+    ],
+    [
+     3.403,
+     21.202
+    ]
+   ],
+   "label": "3\\M2",
+   "bldg": "M2",
+   "level": 247.55,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     5.654,
+     16.983
+    ],
+    [
+     7.939,
+     16.972
+    ],
+    [
+     7.962,
+     21.219
+    ],
+    [
+     5.677,
+     21.23
+    ]
+   ],
+   "label": "4\\M2",
+   "bldg": "M2",
+   "level": 247.45,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     8.934,
+     16.967
+    ],
+    [
+     11.214,
+     16.956
+    ],
+    [
+     11.237,
+     21.202
+    ],
+    [
+     8.957,
+     21.214
+    ]
+   ],
+   "label": "5\\M2",
+   "bldg": "M2",
+   "level": 247.25,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     11.214,
+     16.956
+    ],
+    [
+     13.494,
+     16.945
+    ],
+    [
+     13.517,
+     21.191
+    ],
+    [
+     11.237,
+     21.202
+    ]
+   ],
+   "label": "6\\M2",
+   "bldg": "M2",
+   "level": 247.15,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     13.494,
+     16.945
+    ],
+    [
+     15.774,
+     16.934
+    ],
+    [
+     15.797,
+     21.179
+    ],
+    [
+     13.517,
+     21.191
+    ]
+   ],
+   "label": "7\\M2",
+   "bldg": "M2",
+   "level": 247.0,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     15.774,
+     16.934
+    ],
+    [
+     18.044,
+     16.923
+    ],
+    [
+     18.066,
+     21.167
+    ],
+    [
+     15.797,
+     21.179
+    ]
+   ],
+   "label": "8\\M2",
+   "bldg": "M2",
+   "level": 246.9,
+   "note": "open stall 2.30 x 4.25, numbered 1..8 from the west; opens south onto the shared aisle"
+  },
+  {
+   "poly": [
+    [
+     19.652,
+     2.527
+    ],
+    [
+     23.874,
+     2.477
+    ],
+    [
+     23.888,
+     4.762
+    ],
+    [
+     19.665,
+     4.811
+    ]
+   ],
+   "label": "1\\E",
+   "bldg": "E",
+   "level": 243.9,
+   "note": "open stall 2.30 x 4.25 (labels \"4X230=9.20\" + \"3X230=6.90\"), numbered 1..7 from the north; opens east onto the east aisle at its level (grading lines 244.00-244.20)"
+  },
+  {
+   "poly": [
+    [
+     19.665,
+     4.811
+    ],
+    [
+     23.888,
+     4.762
+    ],
+    [
+     23.902,
+     7.074
+    ],
+    [
+     19.678,
+     7.109
+    ]
+   ],
+   "label": "2\\E",
+   "bldg": "E",
+   "level": 243.95,
+   "note": "open stall 2.30 x 4.25 (labels \"4X230=9.20\" + \"3X230=6.90\"), numbered 1..7 from the north; opens east onto the east aisle at its level (grading lines 244.00-244.20)"
+  },
+  {
+   "poly": [
+    [
+     19.678,
+     7.109
+    ],
+    [
+     23.902,
+     7.074
+    ],
+    [
+     23.915,
+     9.36
+    ],
+    [
+     19.69,
+     9.417
+    ]
+   ],
+   "label": "3\\E",
+   "bldg": "E",
+   "level": 244.0,
+   "note": "open stall 2.30 x 4.25 (labels \"4X230=9.20\" + \"3X230=6.90\"), numbered 1..7 from the north; opens east onto the east aisle at its level (grading lines 244.00-244.20)"
+  },
+  {
+   "poly": [
+    [
+     19.69,
+     9.417
+    ],
+    [
+     23.915,
+     9.36
+    ],
+    [
+     23.929,
+     11.66
+    ],
+    [
+     19.703,
+     11.717
+    ]
+   ],
+   "label": "4\\E",
+   "bldg": "E",
+   "level": 244.05,
+   "note": "open stall 2.30 x 4.25 (labels \"4X230=9.20\" + \"3X230=6.90\"), numbered 1..7 from the north; opens east onto the east aisle at its level (grading lines 244.00-244.20)"
+  },
+  {
+   "poly": [
+    [
+     19.708,
+     12.712
+    ],
+    [
+     23.934,
+     12.656
+    ],
+    [
+     23.948,
+     14.955
+    ],
+    [
+     19.72,
+     15.017
+    ]
+   ],
+   "label": "5\\E",
+   "bldg": "E",
+   "level": 244.1,
+   "note": "open stall 2.30 x 4.25 (labels \"4X230=9.20\" + \"3X230=6.90\"), numbered 1..7 from the north; opens east onto the east aisle at its level (grading lines 244.00-244.20)"
+  },
+  {
+   "poly": [
+    [
+     19.72,
+     15.017
+    ],
+    [
+     23.948,
+     14.955
+    ],
+    [
+     23.962,
+     17.242
+    ],
+    [
+     19.733,
+     17.29
+    ]
+   ],
+   "label": "6\\E",
+   "bldg": "E",
+   "level": 244.15,
+   "note": "open stall 2.30 x 4.25 (labels \"4X230=9.20\" + \"3X230=6.90\"), numbered 1..7 from the north; opens east onto the east aisle at its level (grading lines 244.00-244.20)"
+  },
+  {
+   "poly": [
+    [
+     19.733,
+     17.29
+    ],
+    [
+     23.962,
+     17.242
+    ],
+    [
+     23.976,
+     19.556
+    ],
+    [
+     19.745,
+     19.605
+    ]
+   ],
+   "label": "7\\E",
+   "bldg": "E",
+   "level": 244.2,
+   "note": "open stall 2.30 x 4.25 (labels \"4X230=9.20\" + \"3X230=6.90\"), numbered 1..7 from the north; opens east onto the east aisle at its level (grading lines 244.00-244.20)"
+  }
+ ],
+ "driveways": [
+  {
+   "poly": [
+    [
+     21.624,
+     -7.294
+    ],
+    [
+     22.823,
+     -6.911
+    ],
+    [
+     23.521,
+     -6.009
+    ],
+    [
+     23.819,
+     -4.859
+    ],
+    [
+     23.836,
+     -3.959
+    ],
+    [
+     23.884,
+     4.041
+    ],
+    [
+     23.931,
+     12.041
+    ],
+    [
+     23.982,
+     20.542
+    ],
+    [
+     24.062,
+     20.642
+    ],
+    [
+     24.066,
+     27.542
+    ],
+    [
+     30.526,
+     27.556
+    ],
+    [
+     30.489,
+     20.056
+    ],
+    [
+     30.433,
+     10.056
+    ],
+    [
+     30.378,
+     0.056
+    ],
+    [
+     30.358,
+     -3.344
+    ],
+    [
+     30.618,
+     -4.494
+    ],
+    [
+     31.171,
+     -5.842
+    ],
+    [
+     31.843,
+     -6.762
+    ]
+   ],
+   "name": "east aisle (shared with lot 2121)",
+   "level": null,
+   "note": "grading lines 243.75 (mouth) / 244.00 / 244.10 / 244.20 on fpE and the development plan; ~2.2 m below E's yards, retained by the walls along x~18.8 and x~22.7; red stall paving / grey carriageway per dev plan"
+  },
+  {
+   "poly": [
+    [
+     -1.229,
+     20.914
+    ],
+    [
+     18.86,
+     21.163
+    ],
+    [
+     18.846,
+     27.629
+    ],
+    [
+     2.94,
+     27.65
+    ],
+    [
+     -17.113,
+     31.653
+    ],
+    [
+     -23.009,
+     30.814
+    ],
+    [
+     -23.563,
+     24.411
+    ],
+    [
+     -17.051,
+     24.37
+    ],
+    [
+     -16.882,
+     24.56
+    ],
+    [
+     -16.633,
+     24.712
+    ],
+    [
+     -16.283,
+     24.803
+    ],
+    [
+     -15.883,
+     24.756
+    ],
+    [
+     -12.079,
+     23.88
+    ],
+    [
+     -8.075,
+     22.958
+    ],
+    [
+     -4.055,
+     22.172
+    ],
+    [
+     -2.028,
+     21.844
+    ],
+    [
+     -1.598,
+     21.659
+    ],
+    [
+     -1.327,
+     21.328
+    ]
+   ],
+   "name": "south drive (shared with lot 2122) + branch to road B21",
+   "level": null,
+   "note": "grading lines 247.10-247.70 in front of the M2 row (falling east), 247.90-248.50 along the west branch; south edge on lot 2122 approximate (plot line + 3.26)"
+  }
+ ],
+ "paths": [
+  {
+   "poly": [
+    [
+     5.929,
+     -5.029
+    ],
+    [
+     9.869,
+     -5.06
+    ],
+    [
+     9.864,
+     -2.79
+    ],
+    [
+     5.924,
+     -2.779
+    ]
+   ],
+   "kind": "path",
+   "name": "entrance path to E (from B10 sidewalk)",
+   "level": 245.25,
+   "note": "\"מונה מים ראשי 245.25\"; between the walls x~5.74 and x~9.91; dev plan: \"מד מים כללי פרט A\", \"מדרגות פרט F\" (a trapezoid drawn at x 6.5-8.4, z -4.9..-4.1, possibly steps/planter, not modelled)"
+  },
+  {
+   "poly": [
+    [
+     -20.77,
+     -0.333
+    ],
+    [
+     -14.78,
+     3.439
+    ],
+    [
+     -16.33,
+     5.913
+    ],
+    [
+     -21.348,
+     2.759
+    ],
+    [
+     -21.22,
+     1.182
+    ]
+   ],
+   "kind": "path",
+   "name": "entrance path to M2 (from B21)",
+   "level": 246.75,
+   "note": "M1.json \"שביל כניסה\" (fpE raw), its west end clipped to the drawn plot line; dev plan \"ריצוף פרט B\", \"מד מים כללי\""
+  },
+  {
+   "poly": [
+    [
+     -14.688,
+     3.519
+    ],
+    [
+     -13.694,
+     4.153
+    ],
+    [
+     -15.227,
+     6.556
+    ],
+    [
+     -16.221,
+     5.921
+    ]
+   ],
+   "kind": "steps",
+   "name": "M2 entrance steps 5x17/30",
+   "level": null,
+   "up_dir": [
+    0.845,
+    0.534
+   ],
+   "note": "from M1.json stairs"
+  },
+  {
+   "poly": [
+    [
+     -17.404,
+     22.668
+    ],
+    [
+     -16.136,
+     23.254
+    ],
+    [
+     -15.916,
+     23.275
+    ],
+    [
+     -11.432,
+     22.234
+    ],
+    [
+     -6.907,
+     21.154
+    ],
+    [
+     -2.466,
+     20.356
+    ],
+    [
+     -1.229,
+     20.914
+    ],
+    [
+     -1.327,
+     21.328
+    ],
+    [
+     -1.598,
+     21.659
+    ],
+    [
+     -2.028,
+     21.844
+    ],
+    [
+     -4.055,
+     22.172
+    ],
+    [
+     -8.075,
+     22.958
+    ],
+    [
+     -12.079,
+     23.88
+    ],
+    [
+     -15.883,
+     24.756
+    ],
+    [
+     -16.283,
+     24.803
+    ],
+    [
+     -16.633,
+     24.712
+    ],
+    [
+     -16.882,
+     24.56
+    ],
+    [
+     -17.051,
+     24.37
+    ]
+   ],
+   "kind": "path",
+   "name": "sidewalk along the south drive (red paving 110)",
+   "level": null,
+   "note": "between the outer faces of the M2 fill-ring walls (M1.json low walls + t/2; NW end on the plot line) and the drawn drive kerb (0.22869 x + 0.97350 z = 21.222, see 5b); ~1.4 m wide; tree pit at (-4.11, 22.04)"
+  }
+ ],
+ "retaining_walls": [
+  {
+   "a": [
+    -15.233,
+    -4.854
+   ],
+   "b": [
+    -12.233,
+    -5.03
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "north boundary wall (M2 garden)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 247.80 written at x=-7.6; B10 sidewalk ~245.4-245.9 below"
+  },
+  {
+   "a": [
+    -12.233,
+    -5.03
+   ],
+   "b": [
+    -9.232,
+    -5.183
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "north boundary wall (M2 garden)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 247.80 written at x=-7.6; B10 sidewalk ~245.4-245.9 below"
+  },
+  {
+   "a": [
+    -9.232,
+    -5.183
+   ],
+   "b": [
+    -6.231,
+    -5.313
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "north boundary wall (M2 garden)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 247.80 written at x=-7.6; B10 sidewalk ~245.4-245.9 below"
+  },
+  {
+   "a": [
+    -6.231,
+    -5.313
+   ],
+   "b": [
+    -3.225,
+    -5.234
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "north boundary wall (M2 garden)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 247.80 written at x=-7.6; B10 sidewalk ~245.4-245.9 below"
+  },
+  {
+   "a": [
+    -3.225,
+    -5.234
+   ],
+   "b": [
+    -0.109,
+    -5.112
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "north boundary wall (M2 garden)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 247.80 written at x=-7.6; B10 sidewalk ~245.4-245.9 below"
+  },
+  {
+   "a": [
+    -0.109,
+    -5.117
+   ],
+   "b": [
+    2.897,
+    -4.95
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "north boundary wall (E apt-1 yard)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 246.50 written at x=1.65"
+  },
+  {
+   "a": [
+    2.897,
+    -4.95
+   ],
+   "b": [
+    5.689,
+    -4.906
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "north boundary wall (E apt-1 yard)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 246.50 written at x=1.65"
+  },
+  {
+   "a": [
+    10.079,
+    -4.919
+   ],
+   "b": [
+    13.079,
+    -4.896
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "north boundary wall (E north strip / apt-2 yard)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 246.50 written at x=14.5"
+  },
+  {
+   "a": [
+    13.079,
+    -4.896
+   ],
+   "b": [
+    16.079,
+    -4.846
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "north boundary wall (E north strip / apt-2 yard)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 246.50 written at x=14.5"
+  },
+  {
+   "a": [
+    16.079,
+    -4.846
+   ],
+   "b": [
+    19.079,
+    -4.771
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "north boundary wall (E north strip / apt-2 yard)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 246.50 written at x=14.5"
+  },
+  {
+   "a": [
+    19.079,
+    -4.771
+   ],
+   "b": [
+    21.953,
+    -4.674
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "north boundary wall (E north strip / apt-2 yard)",
+   "note": "north boundary wall on the plot line along road B10, dev plan \"קיר אבן נסורה פרט A\" (sawn stone, stone coping); drawn 0.20 with a centre dash; top 246.50 written at x=14.5"
+  },
+  {
+   "a": [
+    21.953,
+    -4.653
+   ],
+   "b": [
+    22.767,
+    -3.821
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "E apt-2 yard east wall (above the east aisle)",
+   "note": "yard 246.20-246.30 vs aisle ~243.9 -> retains ~2.3 m; top estimated",
+   "top_est": true
+  },
+  {
+   "a": [
+    22.767,
+    -3.821
+   ],
+   "b": [
+    22.799,
+    1.679
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "E apt-2 yard east wall (above the east aisle)",
+   "note": "yard 246.20-246.30 vs aisle ~243.9 -> retains ~2.3 m; top estimated",
+   "top_est": true
+  },
+  {
+   "a": [
+    18.824,
+    1.66
+   ],
+   "b": [
+    22.799,
+    1.679
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "E apt-2 yard south wall (above stall 1\\E)",
+   "note": "yard 246.30 vs stalls ~243.9; top estimated",
+   "top_est": true
+  },
+  {
+   "a": [
+    18.824,
+    1.66
+   ],
+   "b": [
+    18.884,
+    15.28
+   ],
+   "t": 0.2,
+   "top": 246.5,
+   "name": "wall along the E stalls (x~18.8), E garden side",
+   "note": "⊕ 246.50 on the wall at z=11; 0.75 strip to the stall back line; garden 246.2-246.4 vs stalls ~244.0-244.2"
+  },
+  {
+   "a": [
+    18.884,
+    15.28
+   ],
+   "b": [
+    18.958,
+    22.03
+   ],
+   "t": 0.2,
+   "top": 247.2,
+   "name": "wall along the E stalls / plot notch 73-77 (x~18.9), M2 drive side",
+   "note": "⊕ 247.20 at z=17 (fpE) and z=23.8 (dev plan); drive 246.9-247.1 vs E1/E stalls ~244.2 -> ~3 m retaining"
+  },
+  {
+   "a": [
+    18.958,
+    22.03
+   ],
+   "b": [
+    18.993,
+    24.34
+   ],
+   "t": 0.2,
+   "top": 247.2,
+   "name": "wall along the E stalls / plot notch 73-77 (x~18.9), M2 drive side",
+   "note": "⊕ 247.20 at z=17 (fpE) and z=23.8 (dev plan); drive 246.9-247.1 vs E1/E stalls ~244.2 -> ~3 m retaining"
+  },
+  {
+   "a": [
+    18.993,
+    24.34
+   ],
+   "b": [
+    18.996,
+    27.63
+   ],
+   "t": 0.2,
+   "top": 247.2,
+   "name": "wall along the E stalls / plot notch 73-77 (x~18.9), M2 drive side",
+   "note": "⊕ 247.20 at z=17 (fpE) and z=23.8 (dev plan); drive 246.9-247.1 vs E1/E stalls ~244.2 -> ~3 m retaining"
+  },
+  {
+   "a": [
+    -0.109,
+    -5.124
+   ],
+   "b": [
+    -0.096,
+    0.358
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "wall between M2 north garden and E apt-1 yard (x~-0.16)",
+   "note": "⊕ 247.80 at z=-2.3; M2 side 247.40-247.60, E side 246.15-246.20"
+  },
+  {
+   "a": [
+    -0.048,
+    7.553
+   ],
+   "b": [
+    -0.044,
+    15.795
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "wall between M2 east garden and E south garden (x~-0.06)",
+   "note": "⊕ 247.80 near z=12.3; M2 side 247.50, E side 246.30"
+  },
+  {
+   "a": [
+    -15.243,
+    -4.854
+   ],
+   "b": [
+    -15.188,
+    3.148
+   ],
+   "t": 0.2,
+   "top": 247.8,
+   "name": "M2 north-garden west wall (x~-15.2)",
+   "note": "⊕ 247.80 at z=-0.9; garden 247.5-247.6 vs NW corner ~246.5; M1 calls it the W garden fence; north end on the boundary-wall centreline"
+  },
+  {
+   "a": [
+    5.809,
+    -5.039
+   ],
+   "b": [
+    5.804,
+    -2.779
+   ],
+   "t": 0.2,
+   "top": null,
+   "name": "E entrance path west wall (water-meter niche)",
+   "note": "path 245.25 vs yard 246.15"
+  },
+  {
+   "a": [
+    9.979,
+    -5.06
+   ],
+   "b": [
+    9.974,
+    -2.81
+   ],
+   "t": 0.2,
+   "top": null,
+   "name": "E entrance path east wall",
+   "note": "path 245.25 vs strip 246.20"
+  },
+  {
+   "a": [
+    -2.52,
+    15.729
+   ],
+   "b": [
+    4.322,
+    16.139
+   ],
+   "t": 0.2,
+   "top": 248.2,
+   "name": "retaining wall south of E garden (stepped top \"דירוג\")",
+   "note": "M2 parking/drive ~246.9-247.8 behind it, E garden/strip 246.1-246.4 in front; steps at x 4.3/10.8/16.85 (ticks)"
+  },
+  {
+   "a": [
+    4.322,
+    16.139
+   ],
+   "b": [
+    10.822,
+    16.11
+   ],
+   "t": 0.2,
+   "top": 247.9,
+   "name": "retaining wall south of E garden (stepped top \"דירוג\")",
+   "note": "M2 parking/drive ~246.9-247.8 behind it, E garden/strip 246.1-246.4 in front; steps at x 4.3/10.8/16.85 (ticks)"
+  },
+  {
+   "a": [
+    10.822,
+    16.11
+   ],
+   "b": [
+    16.872,
+    16.082
+   ],
+   "t": 0.2,
+   "top": 247.6,
+   "name": "retaining wall south of E garden (stepped top \"דירוג\")",
+   "note": "M2 parking/drive ~246.9-247.8 behind it, E garden/strip 246.1-246.4 in front; steps at x 4.3/10.8/16.85 (ticks)"
+  },
+  {
+   "a": [
+    16.872,
+    16.082
+   ],
+   "b": [
+    18.822,
+    16.073
+   ],
+   "t": 0.2,
+   "top": 247.3,
+   "name": "retaining wall south of E garden (stepped top \"דירוג\")",
+   "note": "M2 parking/drive ~246.9-247.8 behind it, E garden/strip 246.1-246.4 in front; steps at x 4.3/10.8/16.85 (ticks); top of last step not written",
+   "top_est": true
+  },
+  {
+   "a": [
+    -0.062,
+    15.094
+   ],
+   "b": [
+    16.874,
+    15.293
+   ],
+   "t": 0.2,
+   "top": 246.4,
+   "name": "garden edge wall north of the strip (double line)",
+   "note": "⊕ 246.40 at x=5.6 and 14.6, \"246.10 דירוג\" at the east end; labelled \"גבול מגרש\" at x~9 (sic)"
+  },
+  {
+   "a": [
+    16.874,
+    15.293
+   ],
+   "b": [
+    18.784,
+    15.284
+   ],
+   "t": 0.2,
+   "top": 246.1,
+   "name": "garden edge wall north of the strip (double line)",
+   "note": "⊕ 246.40 at x=5.6 and 14.6, \"246.10 דירוג\" at the east end; labelled \"גבול מגרש\" at x~9 (sic)"
+  },
+  {
+   "a": [
+    -14.028,
+    8.849
+   ],
+   "b": [
+    -17.338,
+    6.743
+   ],
+   "t": 0.68,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -17.338,
+    6.743
+   ],
+   "b": [
+    -19.573,
+    10.806
+   ],
+   "t": 0.68,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -19.573,
+    10.806
+   ],
+   "b": [
+    -17.197,
+    22.388
+   ],
+   "t": 0.68,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -17.197,
+    22.388
+   ],
+   "b": [
+    -15.995,
+    22.947
+   ],
+   "t": 0.68,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -15.995,
+    22.947
+   ],
+   "b": [
+    -11.507,
+    21.9
+   ],
+   "t": 0.68,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -13.317,
+    7.717
+   ],
+   "b": [
+    -14.028,
+    8.849
+   ],
+   "t": 0.68,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -11.507,
+    21.9
+   ],
+   "b": [
+    -12.345,
+    18.314
+   ],
+   "t": 0.48,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -12.345,
+    18.314
+   ],
+   "b": [
+    -16.64,
+    15.615
+   ],
+   "t": 0.42,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -16.64,
+    15.615
+   ],
+   "b": [
+    -12.141,
+    8.457
+   ],
+   "t": 0.4,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -12.141,
+    8.457
+   ],
+   "b": [
+    -13.317,
+    7.717
+   ],
+   "t": 0.47,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -5.216,
+    13.965
+   ],
+   "b": [
+    -2.53,
+    15.824
+   ],
+   "t": 0.66,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -2.53,
+    15.824
+   ],
+   "b": [
+    -2.545,
+    20.0
+   ],
+   "t": 0.66,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -2.545,
+    20.0
+   ],
+   "b": [
+    -6.99,
+    20.795
+   ],
+   "t": 0.73,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -6.99,
+    20.795
+   ],
+   "b": [
+    -7.683,
+    17.828
+   ],
+   "t": 0.46,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -7.683,
+    17.828
+   ],
+   "b": [
+    -5.216,
+    13.965
+   ],
+   "t": 0.44,
+   "top": 250.6,
+   "name": "M2 fill-ring retaining wall (מילוי)",
+   "note": "duplicate of M1.json low wall (h 2.90 above 247.70); top 250.60-250.90 = gardens of the +3.00 apartment",
+   "in_M1": true
+  },
+  {
+   "a": [
+    -21.196,
+    4.116
+   ],
+   "b": [
+    -21.338,
+    3.022
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -21.338,
+    3.022
+   ],
+   "b": [
+    -21.321,
+    1.919
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -21.321,
+    1.919
+   ],
+   "b": [
+    -21.145,
+    0.83
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -21.145,
+    0.83
+   ],
+   "b": [
+    -20.815,
+    -0.224
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -20.815,
+    -0.224
+   ],
+   "b": [
+    -20.335,
+    -1.218
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -20.335,
+    -1.218
+   ],
+   "b": [
+    -19.718,
+    -2.132
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -19.718,
+    -2.132
+   ],
+   "b": [
+    -18.976,
+    -2.949
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -18.976,
+    -2.949
+   ],
+   "b": [
+    -18.124,
+    -3.65
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -18.124,
+    -3.65
+   ],
+   "b": [
+    -17.179,
+    -4.221
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -17.179,
+    -4.221
+   ],
+   "b": [
+    -16.162,
+    -4.65
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -16.162,
+    -4.65
+   ],
+   "b": [
+    -15.094,
+    -4.927
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  },
+  {
+   "a": [
+    -15.094,
+    -4.927
+   ],
+   "b": [
+    -13.997,
+    -5.048
+   ],
+   "t": 0.35,
+   "top": 247.85,
+   "name": "stone wall at the street corner (photos)"
+  }
+ ],
+ "fences": [
+  {
+   "a": [
+    9.031,
+    11.788
+   ],
+   "b": [
+    9.023,
+    15.328
+   ],
+   "h": 1.1,
+   "name": "separation fence between the E south gardens",
+   "note": "drawn with × marks, dev plan \"גדר הפרדה פרט N\" (height not written, 1.10 assumed)"
+  },
+  {
+   "a": [
+    18.824,
+    1.66
+   ],
+   "b": [
+    18.884,
+    15.28
+   ],
+   "h": 1.05,
+   "name": "railing on the wall above the E stalls",
+   "assumed": true,
+   "note": "not drawn on fpE; >2 m drop, dev plan legend \"מעקה בטיחות פרט H\""
+  },
+  {
+   "a": [
+    18.884,
+    15.28
+   ],
+   "b": [
+    18.996,
+    27.63
+   ],
+   "h": 1.05,
+   "name": "railing on the wall between the M2 drive and the E/E1 stalls",
+   "assumed": true,
+   "note": "not drawn; ~3 m drop"
+  },
+  {
+   "a": [
+    21.953,
+    -4.653
+   ],
+   "b": [
+    22.767,
+    -3.821
+   ],
+   "h": 1.05,
+   "name": "railing on the E apt-2 yard NE corner wall",
+   "assumed": true,
+   "note": "not drawn; ~2 m drop to the aisle mouth"
+  },
+  {
+   "a": [
+    22.767,
+    -3.821
+   ],
+   "b": [
+    22.799,
+    1.679
+   ],
+   "h": 1.05,
+   "name": "railing on the E apt-2 yard east wall",
+   "assumed": true,
+   "note": "not drawn; ~2.3 m drop"
+  },
+  {
+   "a": [
+    18.824,
+    1.66
+   ],
+   "b": [
+    22.799,
+    1.679
+   ],
+   "h": 1.05,
+   "name": "railing on the E apt-2 yard south wall",
+   "assumed": true,
+   "note": "not drawn"
+  }
+ ],
+ "trees": [
+  {
+   "x": -16.915,
+   "z": -2.28,
+   "r": 2.0
+  },
+  {
+   "x": -15.921,
+   "z": 1.434,
+   "r": 1.99
+  },
+  {
+   "x": -19.101,
+   "z": 6.031,
+   "r": 1.91
+  },
+  {
+   "x": 8.492,
+   "z": 20.377,
+   "r": 2.05,
+   "note": "tree pit (1.00 gap) between stalls 4\\M2 and 5\\M2"
+  },
+  {
+   "x": 23.231,
+   "z": 11.8,
+   "r": 2.0,
+   "note": "tree pit between stalls 4\\E and 5\\E"
+  },
+  {
+   "x": 23.413,
+   "z": 19.99,
+   "r": 2.0,
+   "note": "tree pit south of 7\\E (lot line)"
+  },
+  {
+   "x": -4.163,
+   "z": 21.465,
+   "r": 1.91,
+   "note": "in the sidewalk south of the M2 fill ring"
+  },
+  {
+   "x": 1.199,
+   "z": 13.962,
+   "r": 1.0
+  },
+  {
+   "x": -1.348,
+   "z": 14.573,
+   "r": 1.0
+  },
+  {
+   "x": 17.726,
+   "z": 13.978,
+   "r": 1.0
+  },
+  {
+   "x": 31.147,
+   "z": 9.508,
+   "r": 2.0,
+   "note": "lot 2121 (off plot)"
+  },
+  {
+   "x": 31.208,
+   "z": 22.208,
+   "r": 2.0,
+   "note": "lot 2121 (off plot)"
+  }
+ ],
+ "lights": [
+  {
+   "x": 23.386,
+   "z": 0.9,
+   "h": 3.5
+  },
+  {
+   "x": 19.357,
+   "z": 9.321,
+   "h": 3.5
+  },
+  {
+   "x": 12.351,
+   "z": 16.485,
+   "h": 3.5
+  },
+  {
+   "x": 0.619,
+   "z": 16.312,
+   "h": 3.5
+  },
+  {
+   "x": -13.516,
+   "z": 23.135,
+   "h": 3.5,
+   "note": "FINAL CHECK: on the development plan only (◐ in the sidewalk south of the M2 fill ring), not drawn on fpE"
+  }
+ ],
+ "spot_levels": [
+  {
+   "x": -7.501,
+   "z": -5.319,
+   "v": 247.8,
+   "kind": "wall_top",
+   "note": "north wall at plot line, M2 garden"
+  },
+  {
+   "x": -6.557,
+   "z": -3.965,
+   "v": 247.5,
+   "kind": "design",
+   "note": "M2 north garden"
+  },
+  {
+   "x": -6.563,
+   "z": -2.665,
+   "v": 247.6,
+   "kind": "design",
+   "note": "M2 north garden"
+  },
+  {
+   "x": -2.145,
+   "z": -4.588,
+   "v": 247.4,
+   "kind": "design",
+   "note": "M2 north garden NE"
+  },
+  {
+   "x": -15.07,
+   "z": -1.122,
+   "v": 247.8,
+   "kind": "wall_top",
+   "note": "x=-15.2 garden wall"
+  },
+  {
+   "x": -0.097,
+   "z": -2.592,
+   "v": 247.8,
+   "kind": "wall_top",
+   "note": "x=-0.16 wall M2/E"
+  },
+  {
+   "x": 1.715,
+   "z": -5.116,
+   "v": 246.5,
+   "kind": "wall_top",
+   "note": "north wall at plot line, E yard"
+  },
+  {
+   "x": 1.362,
+   "z": -4.59,
+   "v": 246.2,
+   "kind": "design",
+   "note": "E apt-1 yard"
+  },
+  {
+   "x": 4.268,
+   "z": -4.403,
+   "v": 246.15,
+   "kind": "design",
+   "note": "E apt-1 yard"
+  },
+  {
+   "x": 7.465,
+   "z": -3.296,
+   "v": 245.25,
+   "kind": "design",
+   "note": "E entrance, main water meter"
+  },
+  {
+   "x": 10.868,
+   "z": -4.388,
+   "v": 246.2,
+   "kind": "design",
+   "note": "strip north of E core"
+  },
+  {
+   "x": 14.519,
+   "z": -4.86,
+   "v": 246.5,
+   "kind": "wall_top",
+   "note": "north wall at plot line"
+  },
+  {
+   "x": 1.501,
+   "z": -0.48,
+   "v": 246.3,
+   "kind": "design",
+   "note": "E apt-1 yard, NW recess (under the future pergola)"
+  },
+  {
+   "x": -0.013,
+   "z": 12.217,
+   "v": 247.8,
+   "kind": "wall_top",
+   "note": "x~-0.06 wall between the M2 east garden and E's south garden"
+  },
+  {
+   "x": 20.567,
+   "z": -4.066,
+   "v": 246.2,
+   "kind": "design",
+   "note": "E apt-2 yard"
+  },
+  {
+   "x": 20.855,
+   "z": 1.135,
+   "v": 246.3,
+   "kind": "design",
+   "note": "E apt-2 yard, south part"
+  },
+  {
+   "x": 4.529,
+   "z": 12.748,
+   "v": 246.3,
+   "kind": "design",
+   "note": "E south garden"
+  },
+  {
+   "x": 5.904,
+   "z": 15.271,
+   "v": 246.4,
+   "kind": "wall_top",
+   "note": "garden-edge wall (north line of the double wall), ⊕ with leader to the text"
+  },
+  {
+   "x": 13.528,
+   "z": 13.518,
+   "v": 246.2,
+   "kind": "design",
+   "note": "E south garden"
+  },
+  {
+   "x": 14.804,
+   "z": 15.251,
+   "v": 246.4,
+   "kind": "wall_top",
+   "note": "garden-edge wall (north line of the double wall), ⊕ with leader to the text"
+  },
+  {
+   "x": 17.623,
+   "z": 15.627,
+   "v": 246.1,
+   "kind": "design",
+   "note": "strip between the double walls, east end (דירוג)"
+  },
+  {
+   "x": 0.803,
+   "z": 15.475,
+   "v": 246.3,
+   "kind": "design",
+   "note": "strip, west end"
+  },
+  {
+   "x": 2.21,
+   "z": 15.972,
+   "v": 248.2,
+   "kind": "wall_top",
+   "note": "stepped wall (דירוג)"
+  },
+  {
+   "x": 7.022,
+   "z": 16.053,
+   "v": 247.9,
+   "kind": "wall_top",
+   "note": "stepped wall (דירוג)"
+  },
+  {
+   "x": 15.172,
+   "z": 16.072,
+   "v": 247.6,
+   "kind": "wall_top",
+   "note": "stepped wall"
+  },
+  {
+   "x": -1.515,
+   "z": 16.212,
+   "v": 247.8,
+   "kind": "design",
+   "note": "between the buildings S of M2 east garden"
+  },
+  {
+   "x": -0.351,
+   "z": 14.094,
+   "v": 247.5,
+   "kind": "design",
+   "note": "M2 east garden"
+  },
+  {
+   "x": -1.351,
+   "z": 9.312,
+   "v": 247.68,
+   "kind": "design",
+   "note": "paving at M2 laundry door"
+  },
+  {
+   "x": 18.803,
+   "z": 11.3,
+   "v": 246.5,
+   "kind": "wall_top",
+   "note": "wall x~18.8"
+  },
+  {
+   "x": 18.899,
+   "z": 17.53,
+   "v": 247.2,
+   "kind": "wall_top",
+   "note": "wall x~18.9"
+  },
+  {
+   "x": 18.853,
+   "z": 24.52,
+   "v": 247.2,
+   "kind": "wall_top",
+   "note": "wall x~19.0 (⊕ on fpE and on the dev plan)"
+  },
+  {
+   "x": -15.433,
+   "z": 4.297,
+   "v": 246.75,
+   "kind": "design",
+   "note": "foot of M2 entrance steps"
+  },
+  {
+   "x": -14.067,
+   "z": 5.033,
+   "v": 247.6,
+   "kind": "design",
+   "note": "top of M2 entrance steps"
+  },
+  {
+   "x": -12.153,
+   "z": 6.591,
+   "v": 247.68,
+   "kind": "design",
+   "note": "M2 entrance porch"
+  },
+  {
+   "x": -19.599,
+   "z": 5.528,
+   "v": 247.6,
+   "kind": "design",
+   "note": "W corner garden (rectangle by the plot line)"
+  },
+  {
+   "x": -18.402,
+   "z": 6.334,
+   "v": 248.7,
+   "kind": "design",
+   "note": "W corner, rectangle (planter/wall top?)"
+  },
+  {
+   "x": -8.541,
+   "z": 19.837,
+   "v": 248.2,
+   "kind": "design",
+   "note": "M2 refuse room floor"
+  },
+  {
+   "x": 0.278,
+   "z": 22.339,
+   "v": 247.7,
+   "kind": "grading",
+   "note": "M2 row / south drive"
+  },
+  {
+   "x": 4.004,
+   "z": 23.797,
+   "v": 247.5,
+   "kind": "grading",
+   "note": "south drive"
+  },
+  {
+   "x": 7.606,
+   "z": 23.005,
+   "v": 247.3,
+   "kind": "grading",
+   "note": "south drive"
+  },
+  {
+   "x": 11.806,
+   "z": 23.014,
+   "v": 247.1,
+   "kind": "grading",
+   "note": "south drive"
+  },
+  {
+   "x": -2.951,
+   "z": 23.512,
+   "v": 247.9,
+   "kind": "grading",
+   "note": "south drive"
+  },
+  {
+   "x": -6.475,
+   "z": 22.986,
+   "v": 248.1,
+   "kind": "grading",
+   "note": "south drive west branch"
+  },
+  {
+   "x": -9.174,
+   "z": 22.674,
+   "v": 248.3,
+   "kind": "grading",
+   "note": "south drive west branch"
+  },
+  {
+   "x": -11.675,
+   "z": 23.063,
+   "v": 248.5,
+   "kind": "grading",
+   "note": "south drive west branch"
+  },
+  {
+   "x": -13.676,
+   "z": 23.254,
+   "v": 248.3,
+   "kind": "grading",
+   "note": "south drive west branch"
+  },
+  {
+   "x": -8.387,
+   "z": 25.778,
+   "v": 248.3,
+   "kind": "grading",
+   "note": "south drive"
+  },
+  {
+   "x": -19.376,
+   "z": 23.23,
+   "v": 248.0,
+   "kind": "grading",
+   "note": "B21 sidewalk/mouth"
+  },
+  {
+   "x": -19.491,
+   "z": 26.729,
+   "v": 248.25,
+   "kind": "grading",
+   "note": "B21"
+  },
+  {
+   "x": -23.056,
+   "z": 18.713,
+   "v": 247.75,
+   "kind": "grading",
+   "note": "B21"
+  },
+  {
+   "x": -21.546,
+   "z": 16.22,
+   "v": 247.5,
+   "kind": "grading",
+   "note": "B21"
+  },
+  {
+   "x": 27.443,
+   "z": 6.549,
+   "v": 244.0,
+   "kind": "grading",
+   "note": "east aisle"
+  },
+  {
+   "x": 23.122,
+   "z": 16.14,
+   "v": 244.2,
+   "kind": "grading",
+   "note": "east aisle / E stalls"
+  },
+  {
+   "x": 26.62,
+   "z": 16.748,
+   "v": 244.1,
+   "kind": "grading",
+   "note": "east aisle"
+  },
+  {
+   "x": 28.662,
+   "z": -1.948,
+   "v": 243.75,
+   "kind": "grading",
+   "note": "east aisle mouth"
+  },
+  {
+   "x": -8.242,
+   "z": -7.322,
+   "v": 245.75,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": -3.138,
+   "z": -7.109,
+   "v": 245.5,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": 3.872,
+   "z": -6.617,
+   "v": 245.25,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": 8.773,
+   "z": -6.793,
+   "v": 245.0,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": 13.272,
+   "z": -6.383,
+   "v": 244.75,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": 17.372,
+   "z": -6.173,
+   "v": 244.5,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": 20.871,
+   "z": -5.865,
+   "v": 244.25,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": 23.071,
+   "z": -5.66,
+   "v": 244.0,
+   "kind": "grading",
+   "note": "road B10 / aisle mouth"
+  },
+  {
+   "x": 29.571,
+   "z": -5.646,
+   "v": 243.5,
+   "kind": "grading",
+   "note": "road B10"
+  },
+  {
+   "x": 32.361,
+   "z": -1.44,
+   "v": 243.85,
+   "kind": "design",
+   "note": "refuse room \"M.E\" on lot 2121 (dev plan)"
+  },
+  {
+   "x": -9.584,
+   "z": -4.628,
+   "v": 245.87,
+   "kind": "existing",
+   "note": "survey, bank toe (dotted line) along the north boundary"
+  },
+  {
+   "x": -8.463,
+   "z": -2.573,
+   "v": 247.31,
+   "kind": "existing",
+   "note": "survey, bank top (dash-dot line)"
+  },
+  {
+   "x": 5.469,
+   "z": -4.75,
+   "v": 246.06,
+   "kind": "existing",
+   "note": "survey, bank toe at the north boundary"
+  },
+  {
+   "x": 5.664,
+   "z": -2.75,
+   "v": 246.74,
+   "kind": "existing",
+   "note": "survey, bank top"
+  },
+  {
+   "x": 27.914,
+   "z": -2.85,
+   "v": 243.61,
+   "kind": "existing",
+   "note": "survey, bank toe 1.7 m south of vertex 71 (just east of the plot line)"
+  },
+  {
+   "x": 28.159,
+   "z": -0.609,
+   "v": 244.65,
+   "kind": "existing",
+   "note": "survey, bank top near 71 (last digit 3 or 5)"
+  },
+  {
+   "x": -13.997,
+   "z": -5.048,
+   "v": 245.6,
+   "kind": "existing",
+   "note": "survey, vertex 842 (placed on the drawn vertex; 245.47 also written there)"
+  },
+  {
+   "x": -21.196,
+   "z": 4.116,
+   "v": 246.07,
+   "kind": "existing",
+   "note": "survey, vertex 843 (placed on the drawn vertex; 245.77 also written there)"
+  },
+  {
+   "x": -14.882,
+   "z": 13.049,
+   "v": 246.25,
+   "kind": "existing",
+   "note": "survey, west bank"
+  },
+  {
+   "x": -11.535,
+   "z": 13.814,
+   "v": 247.75,
+   "kind": "existing",
+   "note": "survey, west bank top"
+  },
+  {
+   "x": 21.018,
+   "z": 17.685,
+   "v": 246.0,
+   "kind": "contour",
+   "note": "survey contour label (on the line; was 1.6 m off it)"
+  },
+  {
+   "x": 16.508,
+   "z": 22.025,
+   "v": 246.5,
+   "kind": "contour",
+   "note": "survey contour label"
+  },
+  {
+   "x": 10.155,
+   "z": 23.511,
+   "v": 247.0,
+   "kind": "contour",
+   "note": "survey contour label (on the line)"
+  }
+ ],
+ "gardens": [
+  {
+   "poly": [
+    [
+     0.001,
+     -5.11
+    ],
+    [
+     5.709,
+     -4.906
+    ],
+    [
+     5.704,
+     -2.78
+    ],
+    [
+     3.012,
+     -2.856
+    ],
+    [
+     3.004,
+     0.324
+    ],
+    [
+     -0.015,
+     0.114
+    ]
+   ],
+   "owner": "E apt 1",
+   "label": "לדירה מס' 1 חצר פרטית 21 מ\"ר",
+   "level": 246.22500000000002,
+   "note": "NW yard incl. the recess (future pergola, not built); 246.15/246.20 along the north wall, 246.30 in the recess"
+  },
+  {
+   "poly": [
+    [
+     9.031,
+     11.778
+    ],
+    [
+     15.361,
+     11.792
+    ],
+    [
+     15.371,
+     7.742
+    ],
+    [
+     17.971,
+     7.748
+    ],
+    [
+     17.987,
+     0.378
+    ],
+    [
+     14.657,
+     0.371
+    ],
+    [
+     14.664,
+     -2.759
+    ],
+    [
+     14.669,
+     -4.873
+    ],
+    [
+     21.953,
+     -4.653
+    ],
+    [
+     22.767,
+     -3.821
+    ],
+    [
+     22.799,
+     1.679
+    ],
+    [
+     18.824,
+     1.66
+    ],
+    [
+     18.884,
+     15.284
+    ],
+    [
+     9.023,
+     15.328
+    ]
+   ],
+   "owner": "E apt 2",
+   "label": "לדירה מס' 2 חצר פרטית 92 מ\"ר",
+   "level": 246.25,
+   "note": "NE recess (future pergola, not built) + east yard + east strip + east half of the south garden (fence at x=9); edges on the wall centrelines; SE edge at the laundry-screen line z 7.72 of the מעבה niche (E1.json; was 7.45); ~101 m2 vs 92 written"
+  },
+  {
+   "poly": [
+    [
+     10.079,
+     -4.919
+    ],
+    [
+     14.669,
+     -4.873
+    ],
+    [
+     14.664,
+     -2.759
+    ],
+    [
+     10.074,
+     -2.77
+    ]
+   ],
+   "owner": "E (common? not written)",
+   "level": 246.2,
+   "note": "strip north of E's core between the entrance wall and the NE recess (246.20); no fence drawn towards apt-2's yard"
+  },
+  {
+   "poly": [
+    [
+     -0.018,
+     7.575
+    ],
+    [
+     2.684,
+     7.764
+    ],
+    [
+     2.674,
+     11.674
+    ],
+    [
+     9.031,
+     11.778
+    ],
+    [
+     9.023,
+     15.328
+    ],
+    [
+     -0.042,
+     15.095
+    ]
+   ],
+   "owner": "E (not written; probably apt 1)",
+   "level": 246.35000000000002,
+   "note": "west half of E's south garden, separated by the fence at x=9; no ownership label on fpE; starts at the laundry-screen line z 7.86 of the מעבה niche (E1.json), was 7.10 (overlapped it by 2 m2)"
+  },
+  {
+   "poly": [
+    [
+     -15.173,
+     -4.905
+    ],
+    [
+     -0.099,
+     -5.034
+    ],
+    [
+     -0.116,
+     0.233
+    ],
+    [
+     -4.183,
+     -0.024
+    ],
+    [
+     -4.189,
+     -1.57
+    ],
+    [
+     -11.443,
+     -1.666
+    ],
+    [
+     -11.431,
+     1.898
+    ],
+    [
+     -12.77,
+     2.109
+    ],
+    [
+     -13.948,
+     3.984
+    ],
+    [
+     -15.209,
+     3.192
+    ]
+   ],
+   "owner": "M2 apt 1",
+   "label": "גינה פרטית 66 מ\"ר",
+   "level": 247.5,
+   "note": "polygon from M1.json"
+  },
+  {
+   "poly": [
+    [
+     -0.139,
+     7.668
+    ],
+    [
+     -1.303,
+     7.595
+    ],
+    [
+     -2.402,
+     9.266
+    ],
+    [
+     -3.941,
+     11.629
+    ],
+    [
+     -3.349,
+     12.039
+    ],
+    [
+     -4.631,
+     13.981
+    ],
+    [
+     -2.198,
+     15.665
+    ],
+    [
+     -0.165,
+     15.808
+    ]
+   ],
+   "owner": "M2 apt 1",
+   "label": "גינה פרטית 23 מ\"ר",
+   "level": 247.65,
+   "note": "polygon from M1.json"
+  },
+  {
+   "poly": [
+    [
+     -17.338,
+     6.743
+    ],
+    [
+     -19.573,
+     10.806
+    ],
+    [
+     -17.197,
+     22.388
+    ],
+    [
+     -15.995,
+     22.947
+    ],
+    [
+     -11.507,
+     21.9
+    ],
+    [
+     -12.345,
+     18.314
+    ],
+    [
+     -16.64,
+     15.615
+    ],
+    [
+     -12.141,
+     8.457
+    ],
+    [
+     -13.317,
+     7.717
+    ],
+    [
+     -14.028,
+     8.849
+    ]
+   ],
+   "owner": "M2 apt 3 (floor +3.00)",
+   "level": 250.34,
+   "note": "top of the SW fill ring = west garden/patio of the +3.00 apartment (M2.json); polygon from M1.json"
+  },
+  {
+   "poly": [
+    [
+     -5.216,
+     13.965
+    ],
+    [
+     -2.53,
+     15.824
+    ],
+    [
+     -2.545,
+     20.0
+    ],
+    [
+     -6.99,
+     20.795
+    ],
+    [
+     -7.683,
+     17.828
+    ]
+   ],
+   "owner": "M2 apt 3 (floor +3.00)",
+   "level": 250.79000000000002,
+   "note": "top of the east fill ring = east garden of the +3.00 apartment; polygon from M1.json"
+  },
+  {
+   "poly": [
+    [
+     -15.243,
+     -4.899
+    ],
+    [
+     -15.311,
+     -4.884
+    ],
+    [
+     -16.576,
+     -4.495
+    ],
+    [
+     -17.756,
+     -3.895
+    ],
+    [
+     -18.814,
+     -3.099
+    ],
+    [
+     -19.718,
+     -2.132
+    ],
+    [
+     -20.443,
+     -1.024
+    ],
+    [
+     -20.77,
+     -0.333
+    ],
+    [
+     -15.188,
+     3.178
+    ]
+   ],
+   "owner": "common (M2)",
+   "level": 246.525,
+   "note": "NW corner outside the M2 garden wall, 2 trees; \"גומה לעץ פרט G\""
+  },
+  {
+   "poly": [
+    [
+     -21.348,
+     2.759
+    ],
+    [
+     -16.33,
+     5.913
+    ],
+    [
+     -17.932,
+     6.356
+    ],
+    [
+     -19.768,
+     9.878
+    ],
+    [
+     -20.179,
+     9.089
+    ],
+    [
+     -21.196,
+     4.116
+    ],
+    [
+     -21.302,
+     3.441
+    ]
+   ],
+   "owner": "common (M2)",
+   "level": 247.175,
+   "note": "W corner between the entrance path, the SW fill ring and the plot line; 1 tree, rectangle 247.60/248.70"
+  }
+ ],
+ "roads": [
+  {
+   "poly": [
+    [
+     -33.906,
+     -15.666
+    ],
+    [
+     -30.948,
+     -16.007
+    ],
+    [
+     -27.99,
+     -16.322
+    ],
+    [
+     -25.032,
+     -16.614
+    ],
+    [
+     -22.075,
+     -16.88
+    ],
+    [
+     -19.117,
+     -17.121
+    ],
+    [
+     -16.16,
+     -17.337
+    ],
+    [
+     -13.202,
+     -17.528
+    ],
+    [
+     -10.245,
+     -17.695
+    ],
+    [
+     -7.287,
+     -17.836
+    ],
+    [
+     -4.332,
+     -17.846
+    ],
+    [
+     -1.377,
+     -17.74
+    ],
+    [
+     1.577,
+     -17.612
+    ],
+    [
+     4.532,
+     -17.492
+    ],
+    [
+     7.488,
+     -17.518
+    ],
+    [
+     10.445,
+     -17.517
+    ],
+    [
+     13.401,
+     -17.492
+    ],
+    [
+     16.358,
+     -17.444
+    ],
+    [
+     19.314,
+     -17.37
+    ],
+    [
+     22.271,
+     -17.271
+    ],
+    [
+     25.226,
+     -17.149
+    ],
+    [
+     28.183,
+     -17.0
+    ],
+    [
+     31.139,
+     -16.828
+    ],
+    [
+     34.095,
+     -16.631
+    ],
+    [
+     34.073,
+     -6.607
+    ],
+    [
+     31.116,
+     -6.809
+    ],
+    [
+     28.161,
+     -6.987
+    ],
+    [
+     25.204,
+     -7.139
+    ],
+    [
+     22.248,
+     -7.265
+    ],
+    [
+     19.291,
+     -7.366
+    ],
+    [
+     16.336,
+     -7.442
+    ],
+    [
+     13.379,
+     -7.492
+    ],
+    [
+     10.423,
+     -7.517
+    ],
+    [
+     7.466,
+     -7.517
+    ],
+    [
+     4.51,
+     -7.491
+    ],
+    [
+     1.549,
+     -7.61
+    ],
+    [
+     -1.411,
+     -7.735
+    ],
+    [
+     -4.373,
+     -7.838
+    ],
+    [
+     -7.331,
+     -7.824
+    ],
+    [
+     -10.289,
+     -7.678
+    ],
+    [
+     -13.246,
+     -7.507
+    ],
+    [
+     -16.204,
+     -7.309
+    ],
+    [
+     -19.161,
+     -7.087
+    ],
+    [
+     -22.119,
+     -6.838
+    ],
+    [
+     -25.076,
+     -6.564
+    ],
+    [
+     -28.034,
+     -6.265
+    ],
+    [
+     -30.992,
+     -5.939
+    ],
+    [
+     -33.95,
+     -5.587
+    ]
+   ],
+   "name": "B10 carriageway"
+  },
+  {
+   "poly": [
+    [
+     -26.097,
+     -17.8
+    ],
+    [
+     -25.158,
+     -3.796
+    ],
+    [
+     -24.953,
+     4.205
+    ],
+    [
+     -24.6,
+     9.207
+    ],
+    [
+     -24.232,
+     14.208
+    ],
+    [
+     -24.05,
+     17.209
+    ],
+    [
+     -23.581,
+     24.211
+    ],
+    [
+     -23.009,
+     30.814
+    ],
+    [
+     -32.009,
+     30.774
+    ],
+    [
+     -32.58,
+     24.172
+    ],
+    [
+     -33.05,
+     17.17
+    ],
+    [
+     -33.232,
+     14.169
+    ],
+    [
+     -33.6,
+     9.167
+    ],
+    [
+     -33.953,
+     4.166
+    ],
+    [
+     -34.158,
+     -3.835
+    ],
+    [
+     -35.097,
+     -17.84
+    ]
+   ],
+   "name": "B21 carriageway"
+  }
+ ],
+ "neighbours": [
+  {
+   "poly": [
+    [
+     36.042,
+     7.069
+    ],
+    [
+     39.554,
+     1.577
+    ],
+    [
+     48.054,
+     1.596
+    ],
+    [
+     52.557,
+     0.606
+    ],
+    [
+     57.048,
+     4.616
+    ],
+    [
+     57.023,
+     15.616
+    ],
+    [
+     45.023,
+     15.589
+    ],
+    [
+     40.029,
+     13.078
+    ]
+   ],
+   "label": "M1 (6 units, ±0.00=243.00)",
+   "h": 11.0,
+   "base_abs": 243.0
+  },
+  {
+   "poly": [
+    [
+     44.516,
+     18.888
+    ],
+    [
+     60.515,
+     18.924
+    ],
+    [
+     60.485,
+     32.624
+    ],
+    [
+     44.485,
+     32.588
+    ]
+   ],
+   "label": "E1 (6 units, ±0.00=244.60)",
+   "h": 9.6,
+   "base_abs": 244.6
+  },
+  {
+   "poly": [
+    [
+     39.959,
+     44.078
+    ],
+    [
+     44.975,
+     37.089
+    ],
+    [
+     56.975,
+     37.116
+    ],
+    [
+     58.952,
+     47.12
+    ],
+    [
+     52.934,
+     55.107
+    ],
+    [
+     44.934,
+     55.089
+    ]
+   ],
+   "label": "M2m (6 units, ±0.00~246.10)",
+   "h": 11.0,
+   "base_abs": 246.1
+  },
+  {
+   "poly": [
+    [
+     -14.118,
+     32.753
+    ],
+    [
+     -1.068,
+     33.147
+    ],
+    [
+     -1.092,
+     40.647
+    ],
+    [
+     3.966,
+     40.997
+    ],
+    [
+     5.954,
+     46.001
+    ],
+    [
+     -0.115,
+     51.718
+    ],
+    [
+     -10.199,
+     51.27
+    ],
+    [
+     -14.168,
+     44.253
+    ]
+   ],
+   "label": "P (6 units, ±0.00=251.10)",
+   "h": 9.6,
+   "base_abs": 251.1
+  },
+  {
+   "poly": [
+    [
+     3.977,
+     35.997
+    ],
+    [
+     13.977,
+     36.019
+    ],
+    [
+     14.441,
+     52.02
+    ],
+    [
+     5.939,
+     53.001
+    ],
+    [
+     1.926,
+     46.858
+    ]
+   ],
+   "label": "P1 (6 units, ±0.00=251.10)",
+   "h": 9.6,
+   "base_abs": 251.1
+  },
+  {
+   "poly": [
+    [
+     30.968,
+     -4.343
+    ],
+    [
+     33.768,
+     -4.336
+    ],
+    [
+     33.756,
+     0.864
+    ],
+    [
+     30.956,
+     0.857
+    ]
+   ],
+   "label": "refuse room \"חדר אשפה לבנינים M.E\" 243.85 (lot 2121)",
+   "h": 3.0,
+   "base_abs": 243.85
+  }
+ ],
+ "datum": {
+  "E": 246.4,
+  "M2": 247.7
+ },
+ "notes": [
+  "FRAME: raw fpE registration (tools/reg.json), the sheet the task names. fpE content is rotated ~0.42 deg counter-clockwise against the E-aligned global frame (E walls 0.28-0.45 deg, parking lines 0.41-0.47 deg); near E this is <= 0.07 m. Not corrected, so the site matches E1/M1 measured on fpE. To get the E-aligned frame: rotate +0.42 deg (clockwise on the drawing) about (9.0, 11.75).",
+  "IMPORTANT, M2 vs E between sheets: on fpD/fpC the whole site underlay (trees, walls, parking row, fill rings) AND building M2 sit ~0.6-0.75 m further north (dz -0.57..-0.75, dx -0.07) relative to E than on fpE (NCC of fpE vs fpD per region; tree circles e.g. (-19.10,6.80) fpE vs (-19.18,6.06) fpD). The development plan p0_aerial (registered on the plot line) agrees with fpE for E, M2 and the plot. So M2.json/M3.json/M4.json (fpD/fpC/fpB) sit ~0.7 m north of this site and of M1.json; M1_aligned.json uses fpE->fpD = rot +0.504 deg about (0,0) then (+0.041,-0.695). If the M2 upper floors are kept in their fpD position, apply that same transform to the M2-zone features of this file (M2 gardens, fill rings, x~-15.2 / x~-0.1 walls, entrance path/steps, south drive west branch); E-zone features must stay.",
+  "Plot (\"plot\") = the red \"גבול מגרש\" line as drawn on fpE (raw registration): sides fitted to the red trace (rms 0.02-0.04 m), NW fillet R 7.64 tangent to the W and N lines, north side 842-70-71 from the survey fit (within 0.02-0.07 m of the printed line under the hand-drawn red, which wobbles +-0.1). Area 1367 m2 vs printed 1381 (\"1.381 ד.\"): the drawn lot is ~0.4 m narrower E-W than the survey dimensions because fpE's x scale in tools/reg.json is ~0.7-1 % too large (E1 notes: E measures 17.875 for 18.00; stall groups 9.11-9.13 for \"4X2.3=9.2\"; \"9.32\" from E to the east line measures 9.26). \"plot_survey\" = survey dimensions (71-72 24.54, 72-73 8.45, 73-77 4.28, 77-76 16.41, 76-81 19.40, 81-843 24.69, NW fillet R 7.50, 842-70 14.52, arc 70-71 R 342.50 / 27.35) closure-adjusted and rigidly fitted to the red line (area 1379 m2); it lies 0.18-0.35 m outside the drawn line on the E, W and NW sides, so do not mix it with the fpE-measured features.",
+  "North 19.4 deg clockwise from -z (arrows on fpC/fpD vs E walls; survey grid north gives ~19.2 after the fpE tilt). Unit vector given in the E-aligned frame.",
+  "Building lines (one closed polyline = buildable envelope): N 2.00 (\"200\" x2), NW corner = the DRAWN straight chamfer labelled ק. בניין (parallel to M2's central wing, u = -5.44 in the M2R frame; ends at (-17.06,-2.17) on the N line and (-19.75,2.08) on the W line), W 2.00 (\"200\" x2), S 76-81 3.00 (\"300\" x2), S 77-76 4.01 (\"401\") joined to the S 76-81 line by a 1 m jog at x 2.40 (drawn lines stop at x~2.2 / ~2.5; the jog itself is not drawn), notch side 73-77 4.00 (\"400\", dashed line labelled ק. בניין at x~14.92), E 71-72 3.00 (\"300\", dash-dot line at x~24.15), notch side 72-73 4.00 (\"400\" at x~22.0, line at z~16.0 labelled ק. בניין). Straight offsets are taken from the written dimensions. The drawn N line is horizontal at z ~ -2.90 from x~-12 to 18.4: over E it is 1.97-2.02 m from the plot line, but on the M2 side the plot line slopes 2.4 deg, so the drawn line is only 1.89 m from it at the \"200\" dimension (x -4.4) and ~1.55 m at x -11; the model keeps the written 2.00 (up to 0.45 m south of the drawn line at x -11). The NE junction (x 24.13, z -2.72) is constructed (no drawn line between x 18.6 and the east line). A second dashed line at x~19.4 (z -2..11) is unexplained.",
+  "Levels: the east aisle and E's 7 stalls are at the B10 level (grading lines 243.75-244.20 on fpE and on the development plan), ~2.2 m below E's yards (246.15-246.40) and ~3 m below the M2 drive (246.9-248.5). Walls x~18.8/18.9 and x~22.7 are therefore 2-3 m retaining walls; safety railings on them are ASSUMED (not drawn). Stall levels are interpolated from the grading lines.",
+  "Parking = 15 open stalls 2.30 x 4.25 (table: lot 2123 = 15): M2 has ONE row of 8 along z 16.9-21.3 drawn as two groups \"4X2.3=9.2\" separated by a 1.00 m tree pit (not two rows); E has a column of 7 (4 + 3, 1.00 m tree pit) at x 19.6-23.96 facing the east aisle. Stall corners are raw fpE line fits (<= 1 cm rms).",
+  "The M2 row (8 stalls) opens onto an aisle that is 3.25 m on this lot (\"325\") + 3.26 m on lot 2122 (\"3.26\"). West of the stalls the drive's north edge is the drawn kerb 0.22869 x + 0.97350 z = 21.222 (fpE, parallel to plot side 76-81, also on the development plan; R 1.0 fillet at stall 1\\M2, kerb return onto the plot line at (-16.97,25.13)), so the sidewalk in front of the M2 fill rings is ~1.4 m wide and the drive ~6.6 m. The drive's south edge on lot 2122 (plot line + 3.26) and its mouth on B21 are approximate (development plan, 1:250).",
+  "Double wall south of E's garden: south line top steps 248.20 / 247.90 / 247.60 (\"דירוג\", ⊕ on the wall) at ticks x=4.3/10.8/16.85, last step not written (247.30 assumed); north line top 246.40 / 246.10. The text \"גבול מגרש\" written on it at x~9 is not the plot line (red line is at z~24.4).",
+  "Existing levels: survey 1996 bracketed values along the north bank and the west bank; the old ground falls ~6.5 % towards the NE (plane h = 246.51 - 0.052 x + 0.038 z, out/read_site.md). Grading levels are written on dashed lines; positions given are the label positions (+-0.5 m along the line). Survey values (\"existing\", \"contour\") sit at the centre of their text on p0_survey (registered with work/SITE/xreg.json, +-0.3 m); the 246.50 / 247.00 / 246.00 contour points lie on their contour lines.",
+  "Fill rings (M2, hatched) are also in M1.json as kind \"low\" walls with h 2.90: they are repeated here with \"in_M1\": true - build them once.",
+  "Gardens: E apt-1 21 m2 matches the NW yard incl. the recess (20.8 m2 at wall lines); E apt-2 labelled 92 m2 ~ NE/E yard + east half of the south garden (~98 m2); the west half of the south garden has no label. E's ground-floor outline used for the garden edges is read from fpE; the south-west / south-east garden edges stop at the laundry-screen lines (z 7.86 / 7.72) of E1.json's מעבה niches. DUPLICATES: E1.json and M1.json \"outdoor\" carry their own garden / yard / entrance-path polygons over the same ground (E1's use E1's wall lines, e.g. ממ\"ד face 11.62); render ground surfaces from ONE source (this file or the floor files), not both.",
+  "Neighbour lots from the survey (vertices +-0.5 m beyond our lot), neighbour buildings are simplified massing outlines from the development plan (+-1 m); \"M.E\" refuse room sits on lot 2121.",
+  "Trees: 10 on the lot + 2 on lot 2121 (circle fits, radius = drawn canopy). Lighting poles (3.50 m) in \"lights\": 4 drawn on fpE + 1 only on the development plan (sidewalk south of M2, -13.44, 23.88). Future pergolas (\"פרגולה בעתיד\") are not built and not included.",
+  "CHECKER (independent overlay2/scan check on fpE) fixed: (1) \"plot\" was the survey-dimension polygon, 0.20 m outside the drawn red line on the east side, 0.18 m on the west side and 0.25-0.35 m on the NW fillet -> now traced on the red line (all straight sides within 0.01 m of the red trace; survey polygon kept as \"plot_survey\"); the building lines, lot 2121/2122 outlines, B21 sidewalk, south drive and the M2 entrance path / W-corner / NW-corner gardens follow (the east building line now lands on the drawn dash-dot line x~24.15 instead of 24.36); (2) NE corner of apt-2's yard: the 45 deg chamfer wall started 0.3 m too far west (21.55) and had an extra kink -> (21.885,-4.69)-(22.70,-3.86)-(22.745,1.64) from the scanned faces; the boundary wall, railings and the apt-2 garden polygon follow; (3) north boundary wall along the M2 garden was 0.05-0.09 m south of the drawn wall between x=-9 and x=0 -> centreline fitted to the drawn centre dash (resid <= 0.01); E apt-1 part refitted the same way; (4) added the levels 246.30 written in apt-1's NW recess yard and ⊕ 247.80 on the x~-0.06 wall (0.0, 12.5); moved five wall-top spot levels onto their ⊕ marks (0.35-0.7 m off: 246.50 on the north wall x=14.45, 247.80 on the x~-15.2 wall z=-0.37, 246.50 / 247.20 / 247.20 on the x~18.8-19.0 wall at z=11.27 / 17.50 / 24.49) and the two 246.40 labels onto the ⊕ marks on the garden-edge wall (5.88,15.27) / (14.78,15.23) (kind wall_top); (5) the 72-73 building line is drawn (\"400\", z~16.0), not assumed. Verified without change: 15 stalls (dividers/back/front lines within 0.01-0.02 m), double wall south of E's garden, walls x~-15.2 / x~-0.16 / x~-0.06 / x~18.8, yard walls of apt 2, entrance-path walls, trees, lighting poles, spot-level values.",
+  "FINAL CHECK (work/SITE_final: validate.py, overlaps.py, prof2.py, 20 overlay tiles at res 100 on fpE + survey/dev-plan overlays) fixed: (1) NW building line: the offset arc R 5.64 (not drawn) -> the drawn straight chamfer; (2) building line at vertex 76: the constructed corner at x 6.65 -> drawn S2/S1 lines joined by a jog at x 2.40; (3) sidewalk / south drive boundary west of the stalls: ~horizontal z 24.95-25.33 -> the drawn kerb (up to 2.8 m further north at the east end), sidewalk NW corner on the plot line; (4) east aisle mouth no longer sticks 0.8 m into the B10 carriageway; the B10 south sidewalk is split at the aisle mouth and the B21 east sidewalk ends at the south drive mouth (no more overlapping ground surfaces on the lot: were 19.5 m2 and 35 m2), drive mouth ends on the B21 kerb; (5) ten survey levels moved onto their printed positions (were 0.4-2.5 m off); (6) E south gardens no longer overlap E1's מעבה niches; (7) added the light pole of the development plan in the M2 sidewalk. Checked without change: plot vs red trace (median offset per side -0.07..+0.08 m, area 1367.3 vs 1381 printed = fpE x-scale), north arrow (tip = north, fpC), 15 stalls, walls, fences, trees, lights, wall-top/design levels, gardens, roads/neighbours (approximate). Remaining overlaps are road-on-road at the B10/B21 junction (both carriageways cover it; B21 continues north of B10 on the development plan) - acceptable for context roads."
+ ],
+ "poles": [
+  {
+   "x": 23.386,
+   "z": 0.9,
+   "h": 3.5
+  },
+  {
+   "x": 19.357,
+   "z": 9.321,
+   "h": 3.5
+  },
+  {
+   "x": 12.351,
+   "z": 16.485,
+   "h": 3.5
+  },
+  {
+   "x": 0.619,
+   "z": 16.312,
+   "h": 3.5
+  },
+  {
+   "x": -13.516,
+   "z": 23.135,
+   "h": 3.5
+  }
+ ],
+ "sidewalks": [
+  {
+   "poly": [
+    [
+     -14.453,
+     -5.031
+    ],
+    [
+     -11.327,
+     -5.149
+    ],
+    [
+     -8.201,
+     -5.267
+    ],
+    [
+     -5.074,
+     -5.324
+    ],
+    [
+     -1.943,
+     -5.23
+    ],
+    [
+     1.189,
+     -5.125
+    ],
+    [
+     4.319,
+     -4.989
+    ],
+    [
+     7.444,
+     -5.017
+    ],
+    [
+     10.569,
+     -5.017
+    ],
+    [
+     13.694,
+     -4.988
+    ],
+    [
+     16.819,
+     -4.931
+    ],
+    [
+     19.944,
+     -4.845
+    ],
+    [
+     23.069,
+     -4.73
+    ],
+    [
+     23.821,
+     -4.699
+    ],
+    [
+     23.819,
+     -4.859
+    ],
+    [
+     23.521,
+     -6.009
+    ],
+    [
+     22.823,
+     -6.911
+    ],
+    [
+     21.624,
+     -7.294
+    ],
+    [
+     18.348,
+     -7.393
+    ],
+    [
+     15.07,
+     -7.466
+    ],
+    [
+     11.793,
+     -7.509
+    ],
+    [
+     8.516,
+     -7.52
+    ],
+    [
+     5.239,
+     -7.5
+    ],
+    [
+     1.958,
+     -7.59
+    ],
+    [
+     -1.324,
+     -7.731
+    ],
+    [
+     -4.606,
+     -7.846
+    ],
+    [
+     -7.885,
+     -7.799
+    ],
+    [
+     -11.164,
+     -7.63
+    ],
+    [
+     -14.442,
+     -7.43
+    ]
+   ],
+   "name": "B10 south sidewalk (west of the east aisle mouth)"
+  },
+  {
+   "poly": [
+    [
+     30.583,
+     -4.339
+    ],
+    [
+     32.067,
+     -4.241
+    ],
+    [
+     34.067,
+     -4.1
+    ],
+    [
+     34.073,
+     -6.607
+    ],
+    [
+     33.373,
+     -6.656
+    ],
+    [
+     31.843,
+     -6.762
+    ],
+    [
+     31.171,
+     -5.842
+    ],
+    [
+     30.618,
+     -4.494
+    ]
+   ],
+   "name": "B10 south sidewalk (east of the east aisle mouth, lot 2121)"
+  },
+  {
+   "poly": [
+    [
+     -33.895,
+     -18.185
+    ],
+    [
+     -30.937,
+     -18.523
+    ],
+    [
+     -27.979,
+     -18.837
+    ],
+    [
+     -25.021,
+     -19.126
+    ],
+    [
+     -22.064,
+     -19.39
+    ],
+    [
+     -19.106,
+     -19.629
+    ],
+    [
+     -16.149,
+     -19.844
+    ],
+    [
+     -13.191,
+     -20.033
+    ],
+    [
+     -10.234,
+     -20.199
+    ],
+    [
+     -7.277,
+     -20.339
+    ],
+    [
+     -4.322,
+     -20.348
+    ],
+    [
+     -1.368,
+     -20.241
+    ],
+    [
+     1.584,
+     -20.113
+    ],
+    [
+     4.538,
+     -19.993
+    ],
+    [
+     7.494,
+     -20.018
+    ],
+    [
+     10.451,
+     -20.017
+    ],
+    [
+     13.407,
+     -19.993
+    ],
+    [
+     16.364,
+     -19.944
+    ],
+    [
+     19.32,
+     -19.871
+    ],
+    [
+     22.276,
+     -19.773
+    ],
+    [
+     25.232,
+     -19.651
+    ],
+    [
+     28.189,
+     -19.504
+    ],
+    [
+     31.144,
+     -19.332
+    ],
+    [
+     34.101,
+     -19.137
+    ],
+    [
+     34.095,
+     -16.631
+    ],
+    [
+     31.139,
+     -16.828
+    ],
+    [
+     28.183,
+     -17.0
+    ],
+    [
+     25.226,
+     -17.149
+    ],
+    [
+     22.271,
+     -17.271
+    ],
+    [
+     19.314,
+     -17.37
+    ],
+    [
+     16.358,
+     -17.444
+    ],
+    [
+     13.401,
+     -17.492
+    ],
+    [
+     10.445,
+     -17.517
+    ],
+    [
+     7.488,
+     -17.518
+    ],
+    [
+     4.532,
+     -17.492
+    ],
+    [
+     1.577,
+     -17.612
+    ],
+    [
+     -1.377,
+     -17.74
+    ],
+    [
+     -4.332,
+     -17.846
+    ],
+    [
+     -7.287,
+     -17.836
+    ],
+    [
+     -10.245,
+     -17.695
+    ],
+    [
+     -13.202,
+     -17.528
+    ],
+    [
+     -16.16,
+     -17.337
+    ],
+    [
+     -19.117,
+     -17.121
+    ],
+    [
+     -22.075,
+     -16.88
+    ],
+    [
+     -25.032,
+     -16.614
+    ],
+    [
+     -27.99,
+     -16.322
+    ],
+    [
+     -30.948,
+     -16.007
+    ],
+    [
+     -33.906,
+     -15.666
+    ]
+   ],
+   "name": "B10 north sidewalk"
+  },
+  {
+   "poly": [
+    [
+     -25.158,
+     -3.796
+    ],
+    [
+     -24.953,
+     4.205
+    ],
+    [
+     -24.6,
+     9.207
+    ],
+    [
+     -24.232,
+     14.208
+    ],
+    [
+     -24.05,
+     17.209
+    ],
+    [
+     -23.563,
+     24.411
+    ],
+    [
+     -17.051,
+     24.37
+    ],
+    [
+     -21.196,
+     4.116
+    ],
+    [
+     -21.349,
+     2.47
+    ],
+    [
+     -21.145,
+     0.83
+    ],
+    [
+     -20.593,
+     -0.729
+    ]
+   ],
+   "name": "B21 east sidewalk"
+  }
+ ],
+ "kerbs": [
+  {
+   "pts": [
+    [
+     -33.906,
+     -15.666
+    ],
+    [
+     -30.948,
+     -16.007
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -30.948,
+     -16.007
+    ],
+    [
+     -27.99,
+     -16.322
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -27.99,
+     -16.322
+    ],
+    [
+     -25.032,
+     -16.614
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -25.032,
+     -16.614
+    ],
+    [
+     -22.075,
+     -16.88
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -22.075,
+     -16.88
+    ],
+    [
+     -19.117,
+     -17.121
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -19.117,
+     -17.121
+    ],
+    [
+     -16.16,
+     -17.337
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -16.16,
+     -17.337
+    ],
+    [
+     -13.202,
+     -17.528
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -13.202,
+     -17.528
+    ],
+    [
+     -10.245,
+     -17.695
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -10.245,
+     -17.695
+    ],
+    [
+     -7.287,
+     -17.836
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -7.287,
+     -17.836
+    ],
+    [
+     -4.332,
+     -17.846
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -4.332,
+     -17.846
+    ],
+    [
+     -1.377,
+     -17.74
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -1.377,
+     -17.74
+    ],
+    [
+     1.577,
+     -17.612
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     1.577,
+     -17.612
+    ],
+    [
+     4.532,
+     -17.492
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     4.532,
+     -17.492
+    ],
+    [
+     7.488,
+     -17.518
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     7.488,
+     -17.518
+    ],
+    [
+     10.445,
+     -17.517
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     10.445,
+     -17.517
+    ],
+    [
+     13.401,
+     -17.492
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     13.401,
+     -17.492
+    ],
+    [
+     16.358,
+     -17.444
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     16.358,
+     -17.444
+    ],
+    [
+     19.314,
+     -17.37
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     19.314,
+     -17.37
+    ],
+    [
+     22.271,
+     -17.271
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     22.271,
+     -17.271
+    ],
+    [
+     25.226,
+     -17.149
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     25.226,
+     -17.149
+    ],
+    [
+     28.183,
+     -17.0
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     28.183,
+     -17.0
+    ],
+    [
+     31.139,
+     -16.828
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     31.139,
+     -16.828
+    ],
+    [
+     34.095,
+     -16.631
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     34.095,
+     -16.631
+    ],
+    [
+     34.073,
+     -6.607
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     34.073,
+     -6.607
+    ],
+    [
+     31.116,
+     -6.809
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     31.116,
+     -6.809
+    ],
+    [
+     28.161,
+     -6.987
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     28.161,
+     -6.987
+    ],
+    [
+     25.204,
+     -7.139
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     25.204,
+     -7.139
+    ],
+    [
+     22.248,
+     -7.265
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     22.248,
+     -7.265
+    ],
+    [
+     19.291,
+     -7.366
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     19.291,
+     -7.366
+    ],
+    [
+     16.336,
+     -7.442
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     16.336,
+     -7.442
+    ],
+    [
+     13.379,
+     -7.492
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     13.379,
+     -7.492
+    ],
+    [
+     10.423,
+     -7.517
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     10.423,
+     -7.517
+    ],
+    [
+     7.466,
+     -7.517
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     7.466,
+     -7.517
+    ],
+    [
+     4.51,
+     -7.491
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     4.51,
+     -7.491
+    ],
+    [
+     1.549,
+     -7.61
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     1.549,
+     -7.61
+    ],
+    [
+     -1.411,
+     -7.735
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -1.411,
+     -7.735
+    ],
+    [
+     -4.373,
+     -7.838
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -4.373,
+     -7.838
+    ],
+    [
+     -7.331,
+     -7.824
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -7.331,
+     -7.824
+    ],
+    [
+     -10.289,
+     -7.678
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -10.289,
+     -7.678
+    ],
+    [
+     -13.246,
+     -7.507
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -13.246,
+     -7.507
+    ],
+    [
+     -16.204,
+     -7.309
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -16.204,
+     -7.309
+    ],
+    [
+     -19.161,
+     -7.087
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -19.161,
+     -7.087
+    ],
+    [
+     -22.119,
+     -6.838
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -22.119,
+     -6.838
+    ],
+    [
+     -25.076,
+     -6.564
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -25.076,
+     -6.564
+    ],
+    [
+     -28.034,
+     -6.265
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -28.034,
+     -6.265
+    ],
+    [
+     -30.992,
+     -5.939
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -30.992,
+     -5.939
+    ],
+    [
+     -33.95,
+     -5.587
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -33.95,
+     -5.587
+    ],
+    [
+     -33.906,
+     -15.666
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -26.097,
+     -17.8
+    ],
+    [
+     -25.158,
+     -3.796
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -25.158,
+     -3.796
+    ],
+    [
+     -24.953,
+     4.205
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -24.953,
+     4.205
+    ],
+    [
+     -24.6,
+     9.207
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -24.6,
+     9.207
+    ],
+    [
+     -24.232,
+     14.208
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -24.232,
+     14.208
+    ],
+    [
+     -24.05,
+     17.209
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -24.05,
+     17.209
+    ],
+    [
+     -23.581,
+     24.211
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -23.581,
+     24.211
+    ],
+    [
+     -23.009,
+     30.814
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -23.009,
+     30.814
+    ],
+    [
+     -32.009,
+     30.774
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -32.009,
+     30.774
+    ],
+    [
+     -32.58,
+     24.172
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -32.58,
+     24.172
+    ],
+    [
+     -33.05,
+     17.17
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -33.05,
+     17.17
+    ],
+    [
+     -33.232,
+     14.169
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -33.232,
+     14.169
+    ],
+    [
+     -33.6,
+     9.167
+    ]
+   ],
+   "paint": "grey"
+  },
+  {
+   "pts": [
+    [
+     -33.6,
+     9.167
+    ],
+    [
+     -33.953,
+     4.166
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -33.953,
+     4.166
+    ],
+    [
+     -34.158,
+     -3.835
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -34.158,
+     -3.835
+    ],
+    [
+     -35.097,
+     -17.84
+    ]
+   ],
+   "paint": "redwhite"
+  },
+  {
+   "pts": [
+    [
+     -35.097,
+     -17.84
+    ],
+    [
+     -26.097,
+     -17.8
+    ]
+   ],
+   "paint": "redwhite"
+  }
+ ],
+ "crosswalks": [
+  {
+   "a": [
+    -13.440999999999999,
+    -17.512567613252195
+   ],
+   "b": [
+    -13.440999999999999,
+    -7.493947261663286
+   ],
+   "w": 3.2
+  },
+  {
+   "a": [
+    -34.0284305711786,
+    1.2220000000000004
+   ],
+   "b": [
+    -25.02942982127234,
+    1.2220000000000009
+   ],
+   "w": 3.2
+  }
+ ],
+ "gates": [
+  {
+   "x": -21.016,
+   "z": 0.418,
+   "w": 1.9,
+   "h": 2.7,
+   "arch": true
+  }
+ ]
+}
