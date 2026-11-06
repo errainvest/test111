@@ -147,7 +147,7 @@ def main():
     recipe, out_path = sys.argv[1], sys.argv[2]
     R = json.load(open(recipe))
     D = R.get('dir', '.')
-    P = {k: R[k] for k in ('name', 'place', 'subtitle', 'fine', 'facade', 'apartments') if k in R}
+    P = {k: R[k] for k in ('name', 'place', 'subtitle', 'fine', 'facade', 'apartments', 'railing') if k in R}
     P['datum'] = num(R.get('datum'), 0)
     P['buildings'] = []
     for b in R['buildings']:
@@ -165,6 +165,28 @@ def main():
         if b.get('roof') and os.path.exists(os.path.join(D, b['roof'])):
             floors.append(roof_from(json.load(open(os.path.join(D, b['roof']))), zero))
         P['buildings'].append({'id': b['id'], 'name': b.get('name') or b['id'], 'zero': zero, 'floors': floors, 'stone': b.get('stone', [])})
+    # official apartment areas per level (from the area tables) are matched to the measured apartments by size
+    def parea(P_):
+        return abs(sum(P_[i][0] * P_[(i + 1) % len(P_)][1] - P_[(i + 1) % len(P_)][0] * P_[i][1] for i in range(len(P_))) / 2)
+    apts = list(P.get('apartments', []))
+    for b in P['buildings']:
+        table = (R.get('areas_by_level') or {}).get(b['id'], {})
+        for f in b['floors']:
+            if f.get('roof'): continue
+            key = str(int(round(f['level']))) if f['level'] == int(round(f['level'])) else str(f['level'])
+            off = table.get(key)
+            if not off: continue
+            groups = {}
+            for r in f['rooms']:
+                if r['apt'] in ('', 'common') or r['kind'] in ('shaft',): continue
+                groups.setdefault(r['apt'], 0.0); groups[r['apt']] += parea(r['poly'])
+            model = sorted(groups.items(), key=lambda kv: kv[1])
+            offs = sorted(off, key=lambda o: o['area'])
+            if len(model) != len(offs):
+                print('area table mismatch', b['id'], key, model, offs); continue
+            for (apt, a_model), o in zip(model, offs):
+                apts.append({'building': b['id'], 'apt': apt, 'main_area': o['area'], 'rooms': o.get('rooms'), 'model_area': round(a_model, 1)})
+    if apts: P['apartments'] = apts
     if R.get('site') and os.path.exists(os.path.join(D, R['site'])):
         S = json.load(open(os.path.join(D, R['site'])))
         P['site'] = site_from(S, P['datum'])

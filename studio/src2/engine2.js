@@ -47,6 +47,7 @@ const plasterWhiteM = M({map:plasterTex('pwhite','#f3f1ec',.07,2.5,303), roughne
 const roofGravelM = M({map:tileTex('gravel',{base:'#c9c6bf',grout:'#c9c6bf',cols:1,rows:1,sizeU:1.2,sizeV:1.2,style:'speckle',seed:305,groutPx:0,N:512}), roughness:.95}, true);
 const darkGlassM = M({color:'#1d2730', roughness:.12, metalness:.5}, true);
 const metalGreyM = M({color:'#9aa0a4', roughness:.45, metalness:.6}, true);
+const sillStoneM = M({map:stoneTex('jstone','#e2d4b6',301), color:'#efe6d2', roughness:.8}, true);
 const nightGlass = []; // window glass materials that glow at night
 
 /* ---------------- normalisation ---------------- */
@@ -66,6 +67,7 @@ function insideL(L,x,z){ return L.rooms.some(r=>inPoly(r.poly,x,z)); }
 
 function normalizeProject(P){
   DATUM = +P.datum || 0;
+  if (P.railing) RAIL={...RAIL, ...P.railing};
   LEVELS=[]; BLDS=[];
   for (const b of P.buildings){
     const base = (+b.zero||DATUM) - DATUM;
@@ -87,7 +89,7 @@ function normalizeProject(P){
         const lv = r0.level!=null ? +r0.level : L.level; const o={id:`${L.id}-o${j}`, name:r0.name||KINDS2[kind].n, kind, type:'balcony', apt:r0.apt!=null?String(r0.apt):'', poly:ring(r0.poly), L:LEVELS.length, bld:b.id, level:lv, dy:lv-L.level};
         if (kind==='pergola') L.pergolas.push(o);
         if (Math.abs(o.dy)<.45 || kind==='garden') L.outdoor.push(o); });
-      for (const r0 of (f.railings||[])) if (r0.a&&r0.b) L.railings.push({a:[+r0.a[0],+r0.a[1]], b:[+r0.b[0],+r0.b[1]], h:+r0.h||1.1});
+      for (const r0 of (f.railings||[])) if (r0.a&&r0.b) L.railings.push({a:[+r0.a[0],+r0.a[1]], b:[+r0.b[0],+r0.b[1]], h:+r0.h||1.1, y:r0.level!=null? (+r0.level>100? +r0.level-(+b.zero||DATUM) : +r0.level)-L.level : 0});
       // attach openings to the nearest wall
       for (const o of (f.openings||[])){
         if (o.x==null||o.z==null) continue;
@@ -186,15 +188,36 @@ function buildWall2(L, rt, g, w, F){
     const fx=G(g,cx,cz,Math.atan2(-w.u[1],w.u[0]));
     const d=w.t/2+.15, inLocal = insideL(L,cx+w.n[0]*d,cz+w.n[1]*d) ? 1 : -1;
     buildOpening(fx, F, {...o, into:o.into||1}, w.t, sill, top, inLocal, true);
+    if (w.kind!=='int' && w.kind!=='low'){ // exterior stone sill and head on facade openings
+      const outS = -inLocal, fm=facadeMat(L,w);
+      if (o.type==='window' && sill>.05) B(fx, sillStoneM, o.w+.12, .045, .09, 0, sill-.045, outS*(w.t/2+.03));
+      B(fx, fm===stoneM?sillStoneM:fm, o.w+.06, .06, .03, 0, top, outS*(w.t/2+.012));
+    }
   }
   wallBox(L,rt,g,w,cur,w.len+ext,0,H,F);
 }
+let RAIL={style:'glass', color:'#2d5f8a'}, railMetalM=null;
+function metalRail(g, a, b, ya, yb, h, mat){
+  // painted metal railing: posts, top and bottom rails, a band of small X's under the top rail, vertical bars below
+  const dx=b[0]-a[0], dz=b[1]-a[1], len=Math.hypot(dx,dz); if (len<.1) return;
+  const ux=dx/len, uz=dz/len, ry=Math.atan2(-uz,ux), np=Math.max(1,Math.round(len/1.6));
+  const at=(t,y)=>[a[0]+dx*t, ya+(yb-ya)*t+y, a[1]+dz*t];
+  const bar=(t0,y0,t1,y1,th)=>{ const p0=at(t0,y0), p1=at(t1,y1), L=Math.hypot(p1[0]-p0[0],p1[1]-p0[1],p1[2]-p0[2]); if(L<.01) return;
+    const m=new THREE.Mesh(new THREE.BoxGeometry(th,L,th),mat); m.position.set((p0[0]+p1[0])/2,(p0[1]+p1[1])/2,(p0[2]+p1[2])/2);
+    m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), new THREE.Vector3(p1[0]-p0[0],p1[1]-p0[1],p1[2]-p0[2]).normalize()); m.castShadow=true; g.add(m); };
+  for (let i=0;i<=np;i++){ const t=i/np; bar(t,0,t,h,.05); }
+  bar(0,h,1,h,.055); bar(0,h-.2,1,h-.2,.03); bar(0,.1,1,.1,.03);
+  const nx=Math.max(1,Math.round(len/.2)); for (let i=0;i<nx;i++){ const t0=i/nx, t1=(i+1)/nx; bar(t0,h-.2,t1,h,.016); bar(t0,h,t1,h-.2,.016); }
+  const nb=Math.max(1,Math.round(len/.12)); for (let i=1;i<nb;i++){ const t=i/nb; bar(t,.1,t,h-.2,.018); }
+}
 function buildRailing2(L, rt, g, r){
   const dx=r.b[0]-r.a[0], dz=r.b[1]-r.a[1], len=Math.hypot(dx,dz); if(len<.1) return;
-  const ry=Math.atan2(-dz/len, dx/len), cx=(r.a[0]+r.b[0])/2, cz=(r.a[1]+r.b[1])/2, h=r.h||1.1;
-  const top=new THREE.Mesh(new THREE.BoxGeometry(len,.05,.06),railM); top.position.set(cx,h,cz); top.rotation.y=ry; top.castShadow=true; g.add(top);
-  const n=Math.max(1,Math.round(len/1.2)); for(let i=0;i<=n;i++){ const t=i/n; const p=new THREE.Mesh(new THREE.BoxGeometry(.04,h,.04),railM); p.position.set(r.a[0]+dx*t,h/2,r.a[1]+dz*t); g.add(p); }
-  const gl=new THREE.Mesh(new THREE.PlaneGeometry(len,h-.12),F.glass); gl.position.set(cx,(h-.12)/2+.06,cz); gl.rotation.y=ry; g.add(gl);
+  const h=r.h||1.1, y0=r.y||0;
+  if (RAIL.style==='metal-x'){ if(!railMetalM) railMetalM=M({color:RAIL.color, roughness:.45, metalness:.45}, true); metalRail(g, r.a, r.b, y0, y0, h, railMetalM); rt.colliders.push({a:r.a,b:r.b,r:.05}); return; }
+  const ry=Math.atan2(-dz/len, dx/len), cx=(r.a[0]+r.b[0])/2, cz=(r.a[1]+r.b[1])/2;
+  const top=new THREE.Mesh(new THREE.BoxGeometry(len,.05,.06),railM); top.position.set(cx,y0+h,cz); top.rotation.y=ry; top.castShadow=true; g.add(top);
+  const n=Math.max(1,Math.round(len/1.2)); for(let i=0;i<=n;i++){ const t=i/n; const p=new THREE.Mesh(new THREE.BoxGeometry(.04,h,.04),railM); p.position.set(r.a[0]+dx*t,y0+h/2,r.a[1]+dz*t); g.add(p); }
+  const gl=new THREE.Mesh(new THREE.PlaneGeometry(len,h-.12),F.glass); gl.position.set(cx,y0+(h-.12)/2+.06,cz); gl.rotation.y=ry; g.add(gl);
   rt.colliders.push({a:r.a,b:r.b,r:.05});
 }
 function buildPergola2(L, g, o){

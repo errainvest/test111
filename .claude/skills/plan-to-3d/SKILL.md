@@ -21,3 +21,12 @@ The studio lives in `studio/`. Read `studio/README.md` for the plan JSON format.
 ## Rebuilding the generator after code changes
 
 Edit `studio/src/*`, then run `python3 studio/tools/build_generator.py`. It assembles `studio/plan-to-3d.html` from the sources, the shared engine in `house-malkiya-erra.html`, and the sample plan.
+
+## Permit sets with several buildings (engine v2)
+
+Use this route when the set has more than one building, walls that are not axis-aligned, or several apartments per floor. A typical set is 1:100 with Hebrew sheet titles such as קומה א׳ / ב׳, תכנית גג, חתכים and חזיתות.
+
+1. Register every floor sheet into **one** global metric frame: per-sheet scale, offset and scan tilt, anchored on a feature that stacks, such as the ממ״ד block or the stair core. For a wing at another angle, use a rotated reading frame.
+2. Measure each floor into its own floor JSON. Rooms are polygons on wall centrelines, and openings sit on wall centrelines. Then do an independent overlay check that fixes what it finds, followed by a final recheck. With ultracode on, run one workflow per pair of floors so they run in parallel.
+3. Read the cover and area tables (units per floor and areas), the sections (±0.00 absolute, floor and roof levels, parapets), the elevations (stone versus plaster, railing type) and the site plan (plot line, building lines, parking, spot levels, north arrow).
+4. Write a recipe and run `studio/tools/permit_to_project.py`, then `studio/tools/build_project.py`. Render-test headlessly and compare with the elevations before publishing.

@@ -15,7 +15,7 @@ const fenceM = M({color:'#2a2c2e', roughness:.5, metalness:.6}, true);
 const copingM= M({color:'#d9d0bd', roughness:.7}, true);
 const nbM    = M({color:'#ebe7df', roughness:.9}, true);
 const nbRoofM= M({color:'#c9c5bd', roughness:.95}, true);
-const trunkM = M({color:'#5b4636',roughness:.9},true), leafAM=M({color:'#3e6430',roughness:.8},true), leafBM=M({color:'#56793a',roughness:.8},true), oliveM=M({color:'#7d8a62',roughness:.85},true), cypM=M({color:'#2f4a2a',roughness:.85},true);
+const trunkM = M({color:'#5b4636',roughness:.9},true), leafAM=M({color:'#3e6430',roughness:.8},true), leafBM=M({color:'#56793a',roughness:.8},true), oliveM=M({color:'#6f7d52',roughness:.85},true), scrubM=M({color:'#5a6640',roughness:.9},true), cypM=M({color:'#2f4a2a',roughness:.85},true);
 const carPaint = ['#e9e9e6','#1d1f22','#8b9096','#2b3f5c','#8c1f1f','#c9c3b5','#3c4a3f'].map(c=>M({color:c, roughness:.28, metalness:.55}, true));
 const tyreM = M({color:'#141414', roughness:.8}, true), carGlassM = M({color:'#1b232b', roughness:.08, metalness:.6}, true);
 const bndM = new THREE.MeshBasicMaterial({color:0xff4d1a, transparent:true, opacity:.95, depthWrite:false, side:THREE.DoubleSide});
@@ -104,7 +104,7 @@ function buildSite(){
   for (let j=0;j<=nz;j++) for (let i=0;i<=nx;i++){ const x=bb.x0+i*st, z=bb.z0+j*st, k=j*(nx+1)+i; pos[k*3]=x; pos[k*3+1]=terrainH(x,z); pos[k*3+2]=z; uv[k*2]=x; uv[k*2+1]=-z; }
   for (let j=0;j<nz;j++) for (let i=0;i<nx;i++){ const a=j*(nx+1)+i, b=a+1, c=a+nx+1, d=c+1; idx.push(a,c,b, b,c,d); }
   const tg=new THREE.BufferGeometry(); tg.setAttribute('position',new THREE.BufferAttribute(pos,3)); tg.setAttribute('uv',new THREE.BufferAttribute(uv,2)); tg.setIndex(idx); tg.computeVertexNormals();
-  TERRAIN=new THREE.Mesh(tg,terrM); TERRAIN.receiveShadow=true; siteRoot.add(TERRAIN);
+  TERRAIN=new THREE.Mesh(tg,terrM); TERRAIN.receiveShadow=true; TERRAIN.userData.keep=true; siteRoot.add(TERRAIN);
   const edgeY=(terrainH(bb.x0,bb.z0)+terrainH(bb.x1,bb.z0)+terrainH(bb.x0,bb.z1)+terrainH(bb.x1,bb.z1))/4;
   ground.position.set((bb.x0+bb.x1)/2, edgeY-.08, (bb.z0+bb.z1)/2); ground.material=terrM; ground.scale.set(3,1,3);
   sky.position.set(PCEN[0],0,PCEN[1]);
@@ -131,27 +131,24 @@ function buildSite(){
       const m1=new THREE.Mesh(meterUV(new THREE.BoxGeometry(s1-s0+.01,top-bot,t),x,(top+bot)/2,z),stoneM); m1.position.set(x,(top+bot)/2,z); m1.rotation.y=ry; m1.castShadow=m1.receiveShadow=true; siteRoot.add(m1);
       const cp=new THREE.Mesh(new THREE.BoxGeometry(s1-s0+.01,.06,t+.06),copingM); cp.position.set(x,top+.03,z); cp.rotation.y=ry; cp.castShadow=true; siteRoot.add(cp); }
   }
-  // fences: posts, rails and bars (instanced)
-  const bars=[];
+  // fences: painted metal railings (on retaining walls or on the ground), split so they follow the terrain
+  const fM = RAIL.style==='metal-x' ? M({color:RAIL.color, roughness:.45, metalness:.45}, true) : fenceM;
   for (const f of (SITE.fences||[])){
-    if (!f.a||!f.b) continue; const a=f.a, b=f.b, L=Math.hypot(b[0]-a[0],b[1]-a[1]); if (L<.3) continue; const h=+f.h||1.2, base=f.base!=null?toY(f.base):null;
-    const ry=Math.atan2(-(b[1]-a[1])/L,(b[0]-a[0])/L), np=Math.max(1,Math.ceil(L/2));
-    for (let i=0;i<=np;i++){ const x=a[0]+(b[0]-a[0])*i/np, z=a[1]+(b[1]-a[1])*i/np, y=base!=null?base:terrainH(x,z); B(siteRoot,fenceM,.06,h,.06,x,y,z); }
-    for (let i=0;i<np;i++){ const x0=a[0]+(b[0]-a[0])*i/np, z0=a[1]+(b[1]-a[1])*i/np, x1=a[0]+(b[0]-a[0])*(i+1)/np, z1=a[1]+(b[1]-a[1])*(i+1)/np, mx=(x0+x1)/2, mz=(z0+z1)/2, y=base!=null?base:(terrainH(x0,z0)+terrainH(x1,z1))/2;
-      for (const yy of [.12,h-.04]) B(siteRoot,fenceM,L/np,.04,.04,mx,y+yy,mz,0,ry);
-      for (let s=.1; s<L/np; s+=.12){ const px=x0+(x1-x0)*s/(L/np), pz=z0+(z1-z0)*s/(L/np); bars.push([px,y+.12,pz,h-.16]); } }
+    if (!f.a||!f.b) continue; const a=f.a, b=f.b, L=Math.hypot(b[0]-a[0],b[1]-a[1]); if (L<.3) continue; const h=+f.h||1.1, base=f.base!=null?toY(f.base):null;
+    const n=Math.max(1,Math.ceil(L/3));
+    for (let i=0;i<n;i++){ const p0=[a[0]+(b[0]-a[0])*i/n, a[1]+(b[1]-a[1])*i/n], p1=[a[0]+(b[0]-a[0])*(i+1)/n, a[1]+(b[1]-a[1])*(i+1)/n];
+      const top=(x,z)=>{ if (base!=null) return base; let y=terrainH(x,z); for (const w of (SITE.retaining_walls||[])){ if(!w.a||!w.b) continue; const q=segPoint(x,z,w.a[0],w.a[1],w.b[0],w.b[1]); if (q.d<.45){ const t=w.top!=null?toY(w.top):null; y = t!=null ? Math.max(y,t) : y; } } return y; };
+      metalRail(siteRoot, p0, p1, top(p0[0],p0[1]), top(p1[0],p1[1]), h, fM); }
   }
-  if (bars.length){ const im=new THREE.InstancedMesh(new THREE.BoxGeometry(.018,1,.018),fenceM,bars.length); const mt=new THREE.Matrix4();
-    bars.forEach(([x,y,z,h],i)=>{ mt.makeScale(1,h,1); mt.setPosition(x,y+h/2,z); im.setMatrixAt(i,mt); }); im.castShadow=true; siteRoot.add(im); }
   for (const t of (SITE.trees||[])) if (t.x!=null) treeAt(siteRoot,+t.x,+t.z,+t.r||2);
   { // low scrub on the open land around the plot (not on surfaces, buildings or roads)
     const rr=rng(907), pts=[], hard=[...(SITE.roads||[]),...(SITE.driveways||[]),...(SITE.parking||[]),...(SITE.paths||[]),...(SITE.neighbours||[])].filter(p=>p.poly).map(p=>p.poly);
     for (let i=0;i<900 && pts.length<260;i++){ const x=bb.x0+10+rr()*(bb.x1-bb.x0-20), z=bb.z0+10+rr()*(bb.z1-bb.z0-20);
       if (PLOT && (inPoly(PLOT,x,z) || polyDist(PLOT,x,z)<1.5)) continue; if (hard.some(P=>inPoly(P,x,z))) continue; if (FOOTS.some(f=>polyDist(f.poly,x,z)<3)) continue; pts.push([x,z,.35+rr()*.7]); }
     if (pts.length){ const geo=new THREE.IcosahedronGeometry(1,1); const p=geo.attributes.position; for(let k=0;k<p.count;k++){ const X=p.getX(k),Y=p.getY(k),Z=p.getZ(k); const f=1+.18*Math.sin(X*5+Z*3)+.12*Math.sin(Y*7); p.setXYZ(k,X*f,Math.max(-.2,Y)*f*.65,Z*f); } geo.computeVertexNormals();
-      const im=new THREE.InstancedMesh(geo,oliveM,pts.length), mt=new THREE.Matrix4(), q=new THREE.Quaternion(), sv=new THREE.Vector3();
+      const im=new THREE.InstancedMesh(geo,scrubM,pts.length), mt=new THREE.Matrix4(), q=new THREE.Quaternion(), sv=new THREE.Vector3();
       pts.forEach(([x,z,s],i)=>{ q.setFromAxisAngle(new THREE.Vector3(0,1,0),rr()*6); sv.set(s*(1+rr()*.6),s,s*(1+rr()*.6)); mt.compose(new THREE.Vector3(x,terrainH(x,z)+s*.1,z),q,sv); im.setMatrixAt(i,mt); });
-      im.castShadow=true; im.receiveShadow=true; siteRoot.add(im); } }
+      im.castShadow=true; im.receiveShadow=true; im.userData.keep=true; siteRoot.add(im); } }
   for (const nb of (SITE.neighbours||[])){ if(!nb.poly||nb.poly.length<3) continue; const P=ring(nb.poly); const y0=Math.min(...P.map(q=>terrainH(q[0],q[1])))-.3, h=+nb.h||7.5;
     const g=slabGeom([[P]], y0, h+.3); if(g){ const m=new THREE.Mesh(g,[nbRoofM,nbM]); m.castShadow=m.receiveShadow=true; siteRoot.add(m); } }
   // plot boundary, stakes, building lines
@@ -161,5 +158,6 @@ function buildSite(){
   }
   for (const bl of (SITE.building_lines||[])){ const P=(bl.pts||bl).map(q=>[+q[0],+q[1]]); if (P.length<2) continue;
     for (let i=0;i<P.length-1;i++){ const a=P[i], b=P[i+1], L=Math.hypot(b[0]-a[0],b[1]-a[1]); for (let t=0;t<L;t+=1.0){ const e=Math.min(L,t+.6); strip([[a[0]+(b[0]-a[0])*t/L,a[1]+(b[1]-a[1])*t/L],[a[0]+(b[0]-a[0])*e/L,a[1]+(b[1]-a[1])*e/L]], .14, .08, bldM, plotHi, false); } } }
+  siteRoot.traverse(o=>{ if (o.isInstancedMesh) o.userData.keep=true; }); mergeGroup(siteRoot);
   const ext=Math.max(TERR_BB.x1-TERR_BB.x0, TERR_BB.z1-TERR_BB.z0)/2-25; sc.left=-ext; sc.right=ext; sc.top=ext; sc.bottom=-ext; sc.far=260; sc.updateProjectionMatrix();
 }

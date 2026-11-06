@@ -22,7 +22,14 @@ function viewDir(){ const [nx,nz]=NORTH(); const sx=-nx, sz=-nz, ex=-nz, ez=nx; 
 const PRESETS = {
   doll: () => { const f=focus(), s=f.s, d=viewDir(), k=state.apt?1.0:state.bld?1.35:1.0; return { pos:[f.c[0]+d[0]*s*k, f.y+s*.78*k+4, f.c[1]+d[1]*s*k], tgt:[f.c[0], f.y, f.c[1]] }; },
   plan: () => { const f=focus(), s=f.s; return { pos:[f.c[0], f.y+s*1.35+8, f.c[1]+.01], tgt:[f.c[0], f.y, f.c[1]] }; },
-  ext:  () => { const f=focus(), s=Math.max(f.s,16), d=viewDir(); const x=f.c[0]+d[0]*s*1.25, z=f.c[1]+d[1]*s*1.25; const by=state.bld?BLD(state.bld).base:0; return { pos:[x, Math.max(terrainH(x,z)+1.8, by+2)+s*.06, z], tgt:[f.c[0], by+5.5, f.c[1]] }; },
+  ext:  () => { const f=focus(), s=Math.max(f.s,16), d0=viewDir(), by=state.bld?BLD(state.bld).base:0, dist=s*1.25;
+    // look from the default corner, or turn until no other building stands in the way
+    const others=FOOTS.filter(q=>!state.bld||q.bld!==state.bld);
+    let d=d0;
+    for (const k of [0,1,-1,2,-2,3,-3,4]){ const a=k*Math.PI/4, c=Math.cos(a), sn=Math.sin(a), dd=[d0[0]*c-d0[1]*sn, d0[0]*sn+d0[1]*c];
+      let clear=true; for (let t=.25;t<=1;t+=.05){ const x=f.c[0]+dd[0]*dist*t, z=f.c[1]+dd[1]*dist*t; if (others.some(q=>inPoly(q.poly,x,z))) { clear=false; break; } }
+      if (clear){ d=dd; break; } }
+    const x=f.c[0]+d[0]*dist, z=f.c[1]+d[1]*dist; return { pos:[x, Math.max(terrainH(x,z)+1.8, by+2)+s*.06, z], tgt:[f.c[0], by+5.5, f.c[1]] }; },
 };
 const POOL=[]; for (let i=0;i<10;i++){ const l=new THREE.PointLight(0xffd6a6,0,6,2); l.visible=false; scene.add(l); POOL.push(l); }
 let poolKey='';

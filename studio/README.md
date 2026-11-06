@@ -52,3 +52,24 @@
 - הקירות עוברים על קווי המרכז ויכולים להיות אופקיים או אנכיים בלבד. כשלא מציינים עובי, הקיר מקבל 0.25 אם הוא חיצוני ו־0.12 אם הוא פנימי.
 - כל פתח מוצמד לקיר הקרוב אליו. כיוון הפתיחה של דלת נקבע אוטומטית, לכיוון החדר הפרטי יותר.
 - סוגי החדרים (`kind`): `living`, `kitchen`, `dining`, `hall`, `bed`, `master`, `kids`, `office`, `mamad`, `closet`, `storage`, `bath`, `wc`, `laundry`, `stair`, `balcony`, `void`. לפי הסוג נקבעים הריצוף והריהוט. חדר מסוג `stair` פותח חור בתקרה שמעליו.
+
+## Multi-building projects (permit sets) — engine v2
+
+A permit set (היתר בנייה) with several buildings, many floors and walls at any angle goes through engine v2:
+
+| File | What it is |
+|---|---|
+| `studio/src2/engine2.js` | The engine. Rooms are polygons, walls can run at any angle, and a site can hold several buildings with floors at different levels. Slabs, roofs and terraces are cut with polygon operations (polygon-clipping). Facade materials come from stone rules. |
+| `studio/src2/furnish2.js` | Furnishes polygonal rooms automatically: furniture goes against walls, keeps doors clear and does not collide with other pieces. |
+| `studio/src2/site2.js` | Terrain (interpolated from spot levels), driveways, parking with cars, retaining walls clad in stone, fences, trees, and the plot boundary. |
+| `studio/src2/app2.js`, `body.html`, `style.css` | ERRA-style menu: building, floor and apartment pickers, walkthrough between buildings, three design styles, furniture on/off, day and evening. |
+| `studio/tools/permit_to_project.py` | Combines the per-floor measurement files into a single project file (PROJECT JSON). |
+| `studio/tools/build_project.py` | Builds the HTML page from the project file. |
+
+```bash
+python3 -I studio/tools/permit_to_project.py RECIPE.json studio/plans/<project>.json
+python3 studio/tools/build_project.py studio/plans/<project>.json <project>.html --title "..."
+```
+
+PROJECT JSON: `{name, place, datum, north:[nx,nz], railing:{style:'metal-x'|'glass', color}, buildings:[{id, name, zero (absolute ±0.00), floors:[{name, level, walls, openings, rooms:[{name,kind,apt,poly}], outdoor:[{name,kind,apt,poly,level}], railings, stairs:[{poly,up_dir}], lifts}], stone:[{floors:[i], kinds:[...], zone:[[x,z]...]}]}], site:{plot, building_lines, parking, driveways, paths, retaining_walls, fences, trees, spot_levels:[{x,z,v}], gardens, roads, neighbours}}`.
+Coordinates are metres in one global frame (x right, z down the drawing). Floor `level` is relative to its building's ±0.00. The roof is a floor with `roof:true`: parapet walls (`kind:'low'`, `h`) and `items` (solar, tank, hatch, ac, machine_room).
