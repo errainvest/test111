@@ -351,6 +351,20 @@ const curtainTex = (key, base, kind) => ctex(key,256,(x,N)=>{ x.fillStyle=base; 
   fine(x,N,6,77); },[1,1]);
 const CURTAIN=[M({map:curtainTex('cur1','#efe9df','fold'), roughness:.95},true), M({map:curtainTex('cur2','#ddd2bf','fold'), roughness:.95},true), M({map:curtainTex('cur3','#cfcfcb','blind'), roughness:.8},true)];
 const capM = M({color:'#e4e1db', roughness:.95}, true);
+// aluminium chevron louvres that screen the AC / laundry niches (detail "אלמנט המסתור": profiles 11.5 cm with 3 cm gaps, 195 cm high)
+const louvreM = M({map:ctex('louvre',256,(x,N)=>{ x.fillStyle='#cfd2d4'; x.fillRect(0,0,N,N); const p=N/7; for(let i=0;i<7;i++){ const g=x.createLinearGradient(i*p,0,i*p+p,0); g.addColorStop(0,'#e6e8ea'); g.addColorStop(.45,'#c3c7ca'); g.addColorStop(.78,'#9aa0a5'); g.addColorStop(.8,'#3c4246'); g.addColorStop(1,'#3c4246'); x.fillStyle=g; x.fillRect(i*p,0,p,N); } fine(x,N,5,91); },[1/1.03,1]), roughness:.45, metalness:.5}, true);
+function buildScreens(L, rt){
+  for (const r of L.rooms){ if (r.kind!=='service') continue;
+    const P=r.poly;
+    for (let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], len=Math.hypot(b[0]-a[0],b[1]-a[1]); if (len<.5) continue;
+      const u=[(b[0]-a[0])/len,(b[1]-a[1])/len], n=[-u[1],u[0]], mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2;
+      const walled=L.walls.some(w=>Math.abs(w.u[0]*u[1]-w.u[1]*u[0])<.05 && Math.abs((mx-w.a[0])*w.n[0]+(mz-w.a[1])*w.n[1])<.15 && segPoint(mx,mz,w.a[0],w.a[1],w.b[0],w.b[1]).d<.2);
+      if (walled) continue;
+      let out=n; if (inPoly(P,mx+n[0]*.2,mz+n[1]*.2)) out=[-n[0],-n[1]];
+      if (roomAtL(L,mx+out[0]*.3,mz+out[1]*.3,true)) continue;
+      const h=Math.min(1.95,L.H-.05), geo=new THREE.BoxGeometry(len,h,.05); const uv=geo.attributes.uv, pos=geo.attributes.position; for(let k=0;k<pos.count;k++) uv.setXY(k,pos.getX(k)+len/2,pos.getY(k)+h/2);
+      const m=new THREE.Mesh(geo,louvreM); m.position.set(mx+out[0]*.03,h/2+.02,mz+out[1]*.03); m.rotation.y=Math.atan2(-u[1],u[0]); m.castShadow=m.receiveShadow=true; rt.struct.add(m); } }
+}
 function build(id){
   if (houseRoot){ scene.remove(houseRoot); disposeTree(houseRoot); }
   MATS.forEach(m=>m.dispose()); MATS=[]; EMIT=[]; PENDANTS=[];
@@ -371,7 +385,7 @@ function build(id){
     B_.levels.forEach((L,i)=>{ const rt=LV[LEVELS.indexOf(L)], up=B_.levels[i+1]; if (up) for (const s of L.stairs) buildStairs2(L, rt, rt.struct, s, up.y-L.y); });
   }
   LEVELS.forEach((L,i)=>{ const rt=LV[i]; buildFurniture2(L, rt, rt.furn, F, id); });
-  LEVELS.forEach((L,i)=>{ const rt=LV[i]; buildFixtures2(L, rt.fix, F, id); buildGlow(L, rt); });
+  LEVELS.forEach((L,i)=>{ const rt=LV[i]; buildFixtures2(L, rt.fix, F, id); buildGlow(L, rt); buildScreens(L, rt); });
   LEVELS.forEach((L,i)=>{ if (!L.detail) return; const hidden=L.rooms.filter(r=>!r.detail); if (!hidden.length) return;
     const mp=mpUnion(hidden.map(r=>r.poly)); const gc=slabGeom(mp, L.H, SLAB*.6); if (gc){ const m=new THREE.Mesh(gc,[capM,capM]); m.castShadow=m.receiveShadow=true; LV[i].struct.add(m); } });
   LV.forEach(rt=>{ for (const k of ['struct','slab0','slab','furn','fit','fix']) mergeGroup(rt[k]); });
