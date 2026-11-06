@@ -72,16 +72,19 @@ dl.spec dd{margin:0;line-height:1.45}
 .hint{top:calc(12px + env(safe-area-inset-top,0px));inset-inline-end:calc(12px + env(safe-area-inset-left,0px));max-width:min(420px,70%);
   background:rgba(255,255,255,.93);color:#1f1f1f;padding:8px 12px;border-radius:8px;font-size:13px;line-height:1.45;box-shadow:0 4px 16px rgba(0,0,0,.12)}
 .hint{display:flex;align-items:flex-start;gap:8px}
+.hint-body{min-width:0}
 .hint-x{pointer-events:auto;flex:none;width:28px;height:28px;margin:-4px 0 -4px -6px;border:0;border-radius:6px;background:transparent;color:#6e6e6e;font:700 14px var(--f-body);cursor:pointer}
 .hint-x:hover{background:var(--brand-soft);color:var(--brand)}
 .hint-open{pointer-events:auto;top:calc(12px + env(safe-area-inset-top,0px));inset-inline-end:calc(12px + env(safe-area-inset-left,0px));width:36px;height:36px;border:0;border-radius:50%;
   background:rgba(255,255,255,.93);color:var(--brand);font:700 17px var(--f-body);cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.12)}
 .hint-open:hover{background:#fff}
-.hint-x:focus-visible,.hint-open:focus-visible,.lblbtn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.hint-link{pointer-events:auto;border:0;background:none;padding:0;color:var(--brand);font:700 13px var(--f-body);line-height:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.hint-link:hover{color:var(--brand-hover)}
+.hint-x:focus-visible,.hint-open:focus-visible,.lblbtn:focus-visible,.hint-link:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .lblbtn{pointer-events:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:max(50%,300px);transform:translateX(-50%);border:0;border-radius:999px;height:40px;padding:0 18px;
   font:700 14px var(--f-body);background:rgba(255,255,255,.95);color:var(--brand);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);white-space:nowrap}
 .lblbtn:hover{background:#fff;color:var(--brand-hover)}
-.lblbtn[aria-pressed="false"]{background:var(--brand);color:#fff}
+.lblbtn.off{background:var(--brand);color:#fff}
 .where{top:calc(12px + env(safe-area-inset-top,0px));inset-inline-start:calc(12px + env(safe-area-inset-right,0px));background:var(--brand);color:#fff;
   padding:7px 14px;border-radius:999px;font-weight:700;font-size:14px}
 .mini{pointer-events:auto;bottom:calc(12px + env(safe-area-inset-bottom,0px));inset-inline-end:calc(12px + env(safe-area-inset-left,0px));
@@ -105,6 +108,7 @@ dl.spec dd{margin:0;line-height:1.45}
   h1{font-size:23px}
   .mini{width:132px;height:132px}
   .hint{font-size:12px;max-width:62%}
+  .hint-link{font-size:12px}
   .lblbtn{left:auto;right:calc(12px + env(safe-area-inset-right,0px));transform:none;height:36px;padding:0 14px;font-size:13px}
 }
 @media (prefers-reduced-motion:reduce){.switch span,.switch span::after,.tier,.tour{transition:none}}
@@ -193,11 +197,11 @@ dl.spec dd{margin:0;line-height:1.45}
   <main class="view" id="view">
     <div class="hud labels" id="labels"></div>
     <div class="hud where" id="where" hidden></div>
-    <div class="hud hint" id="hint"><span id="hintTxt"></span><button class="hint-x" id="hintClose" aria-label="סגירת ההסבר" title="סגירת ההסבר">✕</button></div>
+    <div class="hud hint" id="hint"><div class="hint-body"><span id="hintTxt"></span><button class="hint-link" id="petsGo" hidden>הציצו בחתולים בגינה</button></div><button class="hint-x" id="hintClose" aria-label="סגירת ההסבר" title="סגירת ההסבר">✕</button></div>
     <button class="hud hint-open" id="hintOpen" aria-label="הצגת ההסבר" title="הצגת ההסבר" hidden>?</button>
     <canvas class="hud mini" id="mini" width="420" height="420" aria-label="מפה: לחיצה מעבירה לנקודה"></canvas>
     <button class="hud floorbtn" id="floorBtn" hidden></button>
-    <button class="hud lblbtn" id="lblBtn" aria-pressed="true">הסתרת תוויות</button>
+    <button class="hud lblbtn" id="lblBtn">הסתרת תוויות</button>
     <div class="hud joy" id="joy" hidden><i id="joyKnob"></i></div>
     <div class="hud loading" id="loading">בונה את הבניינים…</div>
   </main>
@@ -2224,6 +2228,9 @@ hintEl.hidden=hintOff; hintOpen.hidden=!hintOff;
 const lblBtn=document.getElementById('lblBtn');
 try{ if(localStorage.getItem('studio-labels-off')==='1') state.labels=false; }catch(e){}
 lblBtn.addEventListener('click',()=>{ state.labels=!state.labels; try{ localStorage.setItem('studio-labels-off', state.labels?'0':'1'); }catch(e){} updateUI(); });
+// a link in the explanation flies to the cats: on phones and narrow windows the minimap can cover them in the exterior view
+const petsGo=document.getElementById('petsGo');
+petsGo.addEventListener('click',()=>{ if (PETS.length) lookAtPets(PETS[0]); });
 function updateUI(){
   document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.mode===state.mode)));
   document.querySelectorAll('[data-time]').forEach(b=>b.setAttribute('aria-pressed', String((b.dataset.time==='eve')===state.eve)));
@@ -2231,13 +2238,14 @@ function updateUI(){
   const t=TIERS[TIER];
   document.getElementById('furnNote').textContent = state.furn ? t.furnDesc : 'דירות ריקות: גמר, מטבחים וכלים סניטריים';
   document.getElementById('spec').innerHTML = t.spec.filter(([k])=>k!=='מדרגות').map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('') + (PROJECT.facade?`<dt>חזיתות</dt><dd>${esc(PROJECT.facade)}</dd>`:'');
-  document.getElementById('hintTxt').textContent = HINTS[state.mode] + (state.mode==='ext' && PETS.length ? ' · לחיצה על החתולים בגינה מקרבת אליהם' : '');
+  petsGo.hidden = !(PETS.length && state.mode!=='walk');
+  document.getElementById('hintTxt').textContent = HINTS[state.mode] + (petsGo.hidden ? '' : ' · ');
   document.getElementById('joy').hidden = !(isTouch && state.mode==='walk');
   const L=LEVELS[state.cur], B_=L&&BLD(L.bld);
   const dl = B_ ? B_.levels.filter(q=>q.detail) : [];
   floorBtn.hidden = state.mode!=='walk' || dl.length<2;
   lblBtn.hidden = state.mode==='walk';
-  lblBtn.setAttribute('aria-pressed', String(state.labels));
+  lblBtn.classList.toggle('off', !state.labels);   // a plain action button: its text says what a press will do
   lblBtn.textContent = state.labels ? 'הסתרת תוויות' : 'הצגת תוויות';
   if (dl.length>1 && dl.includes(L)){ const n=dl[(dl.indexOf(L)+1)%dl.length]; floorBtn.textContent = (n.idx>L.idx?'▲ ':'▼ ')+n.name; }
   roomsEl.querySelectorAll('button').forEach(b=>b.classList.toggle('on', state.mode==='walk' && b.id==='room-'+currentRoomId));

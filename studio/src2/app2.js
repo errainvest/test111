@@ -246,6 +246,9 @@ hintEl.hidden=hintOff; hintOpen.hidden=!hintOff;
 const lblBtn=document.getElementById('lblBtn');
 try{ if(localStorage.getItem('studio-labels-off')==='1') state.labels=false; }catch(e){}
 lblBtn.addEventListener('click',()=>{ state.labels=!state.labels; try{ localStorage.setItem('studio-labels-off', state.labels?'0':'1'); }catch(e){} updateUI(); });
+// a link in the explanation flies to the cats: on phones and narrow windows the minimap can cover them in the exterior view
+const petsGo=document.getElementById('petsGo');
+petsGo.addEventListener('click',()=>{ if (PETS.length) lookAtPets(PETS[0]); });
 function updateUI(){
   document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.mode===state.mode)));
   document.querySelectorAll('[data-time]').forEach(b=>b.setAttribute('aria-pressed', String((b.dataset.time==='eve')===state.eve)));
@@ -253,13 +256,14 @@ function updateUI(){
   const t=TIERS[TIER];
   document.getElementById('furnNote').textContent = state.furn ? t.furnDesc : 'דירות ריקות: גמר, מטבחים וכלים סניטריים';
   document.getElementById('spec').innerHTML = t.spec.filter(([k])=>k!=='מדרגות').map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('') + (PROJECT.facade?`<dt>חזיתות</dt><dd>${esc(PROJECT.facade)}</dd>`:'');
-  document.getElementById('hintTxt').textContent = HINTS[state.mode] + (state.mode==='ext' && PETS.length ? ' · לחיצה על החתולים בגינה מקרבת אליהם' : '');
+  petsGo.hidden = !(PETS.length && state.mode!=='walk');
+  document.getElementById('hintTxt').textContent = HINTS[state.mode] + (petsGo.hidden ? '' : ' · ');
   document.getElementById('joy').hidden = !(isTouch && state.mode==='walk');
   const L=LEVELS[state.cur], B_=L&&BLD(L.bld);
   const dl = B_ ? B_.levels.filter(q=>q.detail) : [];
   floorBtn.hidden = state.mode!=='walk' || dl.length<2;
   lblBtn.hidden = state.mode==='walk';
-  lblBtn.setAttribute('aria-pressed', String(state.labels));
+  lblBtn.classList.toggle('off', !state.labels);   // a plain action button: its text says what a press will do
   lblBtn.textContent = state.labels ? 'הסתרת תוויות' : 'הצגת תוויות';
   if (dl.length>1 && dl.includes(L)){ const n=dl[(dl.indexOf(L)+1)%dl.length]; floorBtn.textContent = (n.idx>L.idx?'▲ ':'▼ ')+n.name; }
   roomsEl.querySelectorAll('button').forEach(b=>b.classList.toggle('on', state.mode==='walk' && b.id==='room-'+currentRoomId));
