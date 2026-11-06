@@ -1,5 +1,6 @@
 /* ============================== PETS: two cats playing with a ball (PROJECT.site.pets) ============================== */
-// PROJECT.site.pets = [{a:[x,z], b:[x,z]}]: the two cats sit at a and b, facing each other, and bat a ball back and forth.
+// PROJECT.site.pets = [{a:[x,z], b:[x,z], label}]: two cats sit at a and b, facing each other, and bat a ball back and forth;
+// {kind:'dog', bld, level, c:[x,z], r, label}: a dog chases a butterfly within r metres of c on that building floor (a roof terrace).
 // Everything is procedural (no assets): ellipsoid bodies with baked vertex-colour coats, 2-bone IK legs, a 9-joint tail.
 const petsRoot = new THREE.Group(); petsRoot.name='pets'; scene.add(petsRoot);
 let PETS = [], petsFrozen = false, petsFixedT = null, petsPinned = null;   // petsFixedT: a debug hook pins the animation to one moment
@@ -181,17 +182,158 @@ function petPair(P, t, dt){
   b.position.set(bx,by,bz);
   P.cats.forEach((c,i)=>petPose(c, i===from?'send':'recv', p, t, dt, b.position));
 }
+/* ---------- a dog on a roof terrace chasing a butterfly: PROJECT.site.pets {kind:'dog', bld, level, c:[x,z], r} ---------- */
+const petDogNoseM = M({color:'#1d1612', roughness:.3}, true, .8);
+const petDogEyeM  = M({color:'#21140c', roughness:.06}, true, 1);
+const petMouthM   = M({color:'#7a2e2a', roughness:.6}, true, .3);
+const bflyBodyM   = M({color:'#17120e', roughness:.6}, true, .4);
+const DOGC = { white:new THREE.Color('#f2eee6'), tan:new THREE.Color('#b8743c'), dark:new THREE.Color('#6b4426') };
+function dogColour(part,x,y,z,s){   // a Jack Russell: white, tan saddle and head patches, a white blaze and muzzle
+  const c=DOGC.white.clone();
+  if (part==='torso'){ const phi=Math.abs(Math.atan2(x,y)), n=.015*Math.sin(x*70+z*40)+.012*Math.sin(z*95+1); c.lerp(DOGC.tan, sm01(-.03+n,-.085+n,z)*sm01(1.45,.95,phi)); }
+  else if (part==='head'){ const side=sm01(.011,.024,Math.abs(x))*sm01(-.004,.016,y)*sm01(.078,.05,z); c.lerp(DOGC.tan,side); c.lerp(DOGC.dark,side*sm01(.06,.088,y)*.4); }
+  else if (part==='ear'){ c.copy(DOGC.tan); c.lerp(DOGC.dark, sm01(-.01,-.05,y)*.55); }
+  else if (part==='tail') c.lerp(DOGC.tan, sm01(.32,.12,s));
+  c.multiplyScalar(1+.05*Math.sin(x*173+y*97+z*41)*Math.sin(z*131+x*61-y*29));
+  return c;
+}
+function makeDog(){
+  const root=new THREE.Group(), torso=new THREE.Group(); torso.position.y=.27; root.add(torso);
+  petMesh(torso, petPaint(petMerge([petEllip(.082,.09,.2, 0,0,0, 0,32,22), petEllip(.078,.095,.09, 0,.012,.13), petEllip(.055,.075,.08, .045,0,-.13), petEllip(.055,.075,.08, -.045,0,-.13), petEllip(.05,.062,.085, 0,.07,.19, -.85)]),
+    (x,y,z)=>dogColour('torso',x,y,z)), petFurM);
+  const head=new THREE.Group(); head.position.set(0,.115,.225); head.rotation.order='YXZ'; torso.add(head);
+  petMesh(head, petPaint(petMerge([petEllip(.058,.056,.066, 0,.035,0), petEllip(.034,.03,.06, 0,.008,.075)]),(x,y,z)=>dogColour('head',x,y,z)), petFurM);
+  petMesh(head, petEllip(.016,.012,.012, 0,.024,.133), petDogNoseM, false);
+  petMesh(head, petEllip(.024,.009,.04, 0,-.012,.07), petMouthM, false);   // the inside of the mouth, seen when the jaw drops
+  const jaw=new THREE.Group(); jaw.position.set(0,-.012,.03); head.add(jaw);
+  petMesh(jaw, petPaint(petEllip(.027,.009,.05, 0,-.004,.05),(x,y,z)=>dogColour('head',x,y-.012,z+.03)), petFurM, false);
+  const eyes=new THREE.Group(); eyes.position.y=.048; head.add(eyes);
+  petMesh(eyes, petMerge([-1,1].map(sx=>{ const g=petEllip(.0115,.0115,.008, 0,0,0); g.rotateY(sx*.35); g.translate(sx*.03,0,.05); return g; })), petDogEyeM, false);
+  const ears=[-1,1].map(sx=>{ const e=new THREE.Group(); e.position.set(sx*.047,.075,0); e.rotation.set(-.25,0,sx*.35); head.add(e);   // drop ears folded forward
+    petMesh(e, petPaint(petEllip(.03,.045,.007, 0,-.032,.012),(x,y,z)=>dogColour('ear',x,y,z)), petFurM); e.userData.rz=e.rotation.z; e.userData.sx=sx; return e; });
+  const tail=[]; const NT=6, SL=.034; const tp=new THREE.Group(); tp.position.set(0,.05,-.185); torso.add(tp);
+  for (let i=0;i<NT;i++){ const j=i===0?tp:new THREE.Group(); if (i>0){ j.position.z=-SL; tail[i-1].add(j); }
+    const r=.019-.008*i/(NT-1), g=new THREE.CapsuleGeometry(r,SL,3,10); g.rotateX(Math.PI/2); g.translate(0,0,-SL/2);
+    petMesh(j, petPaint(g,(x,y,z)=>dogColour('tail',x,y,z,(i+Math.min(1,Math.max(0,-z/SL)))/NT)), petFurM);
+    j.userData.rx = i===0 ? 1.0 : .06; j.rotation.x=j.userData.rx; tail.push(j); }   // carried high
+  const legs=[];
+  const LEG=(sx,front)=>{ const a=front?.115:.12, b=front?.105:.115, ra=front?.027:.03, rb=front?.019:.02, pr=front?.025:.026, W=g=>petPaint(g,(x,y,z)=>dogColour('leg',x,y,z));
+    legs.push({ a, b, ra, th:0, front, piv:new THREE.Vector3(sx*(front?.045:.05), front?-.055:-.045, front?.135:-.135), rest:new THREE.Vector3(sx*(front?.048:.052), .018, front?.155:-.165),
+      up:petMesh(root, W(new THREE.CapsuleGeometry(ra,a,3,10)), petFurM), lo:petMesh(root, W(new THREE.CapsuleGeometry(rb,b,3,10)), petFurM), paw:petMesh(root, W(petEllip(pr,pr*.6,pr*1.35, 0,0,.006)), petFurM),
+      P:new THREE.Vector3(), T:new THREE.Vector3(), K:new THREE.Vector3(), foot:new THREE.Vector3(), from:new THREE.Vector3(), su:-1, sdur:.2 }); };
+  LEG(-1,true); LEG(1,true); LEG(-1,false); LEG(1,false);   // trot pairs: [0,3] and [1,2]
+  return { root, torso, head, jaw, eyes, ears, tail, legs, pos:new THREE.Vector3(), th:0, v:0, jump:null, lastJump:-9, lastPair:1, hy:0, hp:0, tailPh:0, tailAmp:.4, tPrev:null };
+}
+function makeButterfly(){   // a monarch, a little larger than life so it reads from the street
+  const g=new THREE.Group(); g.scale.setScalar(1.5);
+  const body=new THREE.CapsuleGeometry(.0035,.022,3,6); body.rotateX(Math.PI/2); petMesh(g, body, bflyBodyM, false);
+  const fore=[[0,.003],[.02,.014,.05,.032,.06,.024],[.066,.012,.05,-.003,.03,-.005],[0,-.001]], hind=[[0,-.001],[.02,-.004,.045,-.012,.042,-.03],[.036,-.044,.012,-.036,0,-.012]];
+  const shape=d=>{ const s=new THREE.Shape(); s.moveTo(d[0][0],d[0][1]); for (const q of d.slice(1)) q.length===6 ? s.bezierCurveTo(...q) : s.lineTo(q[0],q[1]); return s; };
+  const U=x=>x/.07, V=y=>(y+.045)/.08;   // shape space → texture space (both wings share one texture)
+  const tex=ctex('monarchWing',256,(x,N)=>{ const P=(a,b)=>[U(a)*N,(1-V(b))*N], path=d=>{ x.beginPath(); x.moveTo(...P(d[0][0],d[0][1])); for (const q of d.slice(1)) q.length===6 ? x.bezierCurveTo(...P(q[0],q[1]),...P(q[2],q[3]),...P(q[4],q[5])) : x.lineTo(...P(q[0],q[1])); x.closePath(); };
+    x.fillStyle='#120c08'; x.fillRect(0,0,N,N);
+    for (const [d,k] of [[fore,.8],[hind,.78]]){ x.save(); const o=P(0,0); x.translate(o[0],o[1]); x.scale(k,k); x.translate(-o[0],-o[1]); path(d); x.fillStyle='#f08a1c'; x.fill(); x.restore(); }
+    x.strokeStyle='#120c08'; x.lineWidth=N/110; const o=P(0,0);
+    for (const [a,b] of [[.06,.024],[.052,.03],[.045,.012],[.035,-.002],[.042,-.03],[.03,-.038],[.02,-.03]]){ x.beginPath(); x.moveTo(o[0],o[1]); x.lineTo(...P(a*.85,b*.85)); x.stroke(); }
+    x.fillStyle='#f6f1e6'; for (const [a,b] of [[.058,.02],[.055,.026],[.048,.029],[.062,.016],[.04,-.032],[.034,-.038],[.025,-.036],[.044,-.024]]){ x.beginPath(); x.arc(...P(a*.94,b*.94),N/110,0,7); x.fill(); } });
+  const wingM=M({map:tex, side:THREE.DoubleSide, roughness:.6}, true, .4);
+  const wing=d=>{ const geo=new THREE.ShapeGeometry(shape(d),10), p=geo.attributes.position, uv=geo.attributes.uv; for (let i=0;i<p.count;i++) uv.setXY(i,U(p.getX(i)),V(p.getY(i))); geo.rotateX(Math.PI/2); return geo; };   // shape y → forward (+z)
+  const wR=new THREE.Group(), wL=new THREE.Group(); g.add(wR, wL);
+  const gR=petMerge([wing(fore),wing(hind)]); petMesh(wR, gR, wingM, true); const gL=gR.clone(); gL.scale(-1,1,1); petMesh(wL, gL, wingM, true);
+  return { g, wR, wL };
+}
+const _dv=new THREE.Vector3(), _dv2=new THREE.Vector3(), _dw=new THREE.Vector3();
+function bflyAt(P, t, out){   // a wandering flight over the play area, dipping low now and then; it climbs away whenever the dog leaps
+  const u=t*.55, rb=P.r-.45, e=sm01(P.esc,P.esc+.3,t)*(1-sm01(P.esc+.9,P.esc+2.4,t));
+  return out.set(P.c.x+rb*(.62*Math.sin(u*.83+1.3)+.38*Math.sin(u*1.91+.4)),
+                 P.deck+.6+.32*Math.sin(u*1.13+.7)+.12*Math.sin(u*3.1)+.025*Math.sin(t*17)+.55*e,
+                 P.c.z+rb*(.62*Math.cos(u*.67+.2)+.38*Math.sin(u*1.37+2.1)));
+}
+function dogFootIdeal(D, L, out){ out.copy(L.rest); out.z += D.v*.11; return D.root.localToWorld(out); }   // a little ahead when moving
+function dogReset(P, t){ const D=P.dog; P.headW.set(P.c.x,P.deck+.4,P.c.z+.22); P.torsoW.set(P.c.x,P.deck+.27,P.c.z); D.pos.set(P.c.x,P.deck,P.c.z); D.th=0; D.v=0; D.jump=null; D.lastJump=-9; D.tPrev=t; P.esc=-9;
+  D.root.position.copy(D.pos); D.root.rotation.set(0,0,0); D.root.updateMatrixWorld();
+  for (const L of D.legs){ dogFootIdeal(D,L,L.foot); L.su=-1; L.th=0; } }
+function dogStep(P, t, dt){
+  const D=P.dog, B=bflyAt(P,t,_dv), r0=P.r-.35;
+  for (const [Q,R] of [[P.headW,.24],[P.torsoW,.3]]){ const dx=B.x-Q.x, dy=B.y-Q.y, dz=B.z-Q.z, d=Math.hypot(dx,dy,dz)||1e-3;   // it flits past the dog, never through it
+    if (d<R){ const k=(R-d)/d; B.x+=dx*k; B.z+=dz*k; B.y+=Math.abs(dy)*k+.5*(R-d); } }
+  if (!D.jump){   // steer for the spot under the butterfly, never leaving the play area
+    let tx=B.x, tz=B.z; const ox=tx-P.c.x, oz=tz-P.c.z, ol=Math.hypot(ox,oz); if (ol>r0-.3){ tx=P.c.x+ox*(r0-.3)/ol; tz=P.c.z+oz*(r0-.3)/ol; }
+    const dx=tx-D.pos.x, dz=tz-D.pos.z, dist=Math.hypot(dx,dz);
+    if (dist>.05){ const want=Math.atan2(dx,dz), turn=Math.atan2(Math.sin(want-D.th),Math.cos(want-D.th)); D.th+=Math.max(-3.5*dt,Math.min(3.5*dt,turn));
+      const vd = dist>.38 ? Math.min(1.3,(dist-.3)*2.4)*Math.max(.15,Math.cos(turn)) : 0; D.v += Math.max(-4*dt,Math.min(3*dt,vd-D.v)); }
+    else D.v=Math.max(0,D.v-4*dt);
+  }
+  D.pos.x+=Math.sin(D.th)*D.v*dt; D.pos.z+=Math.cos(D.th)*D.v*dt;
+  { const ox=D.pos.x-P.c.x, oz=D.pos.z-P.c.z, ol=Math.hypot(ox,oz); if (ol>r0){ D.pos.x=P.c.x+ox*r0/ol; D.pos.z=P.c.z+oz*r0/ol; } }
+  D.root.position.set(D.pos.x,P.deck,D.pos.z); D.root.rotation.set(0,D.th,0); D.root.updateMatrixWorld();
+  // leap when the butterfly dips within reach in front of the nose
+  const bl=D.root.worldToLocal(_dw.copy(B));
+  if (!D.jump && t-D.lastJump>3 && bl.z>.12 && bl.z<.62 && Math.abs(bl.x)<.28 && bl.y<.8){ D.jump={t0:t, dur:.72, H:Math.max(.12,Math.min(.3,bl.y-.42)), landed:false}; D.lastJump=t; }
+  let ju=-1, jw=0;
+  if (D.jump){ ju=(t-D.jump.t0)/D.jump.dur; if (ju>=1){ D.jump=null; ju=-1; } }
+  if (ju>=0){
+    if (ju>=.12 && P.esc<D.jump.t0) P.esc=t;   // the butterfly flutters up and away
+    jw = ju<.12 ? 0 : ju<.85 ? (ju-.12)/.73 : 1;
+    D.root.position.y = P.deck + (ju>=.12 && ju<.85 ? D.jump.H*4*jw*(1-jw) : 0); D.root.updateMatrixWorld();
+    if (ju>=.85 && !D.jump.landed){ D.jump.landed=true; for (const L of D.legs){ dogFootIdeal(D,L,L.foot); L.foot.y=P.deck+.018; L.su=-1; } }
+  }
+  const air = ju>=.12 && ju<.85, run=Math.min(1,D.v);
+  const crouch = ju<0 ? 0 : ju<.12 ? -.045*sm01(0,.12,ju) : ju>=.85 ? -.035*(1-sm01(.85,1,ju)) : 0;
+  D.torso.position.set(0,.27+crouch+.007*Math.sin(t*31)*run,0); D.torso.rotation.set((air?-.38*Math.sin(Math.PI*jw):ju>=0&&ju<.12?.08:0)+.04*run,0,0); D.torso.updateMatrix();
+  if (air) D.legs.forEach(L=>{ const sx=Math.sign(L.rest.x); if (L.front) L.T.set(sx*.035,.1+.12*Math.sin(Math.PI*jw),.22); else L.T.set(sx*.05,.03+.03*Math.sin(Math.PI*jw),-.22); });   // front paws reach for it, hind legs trail
+  else {
+    if (ju<0){   // trot: the diagonal pair whose feet fall furthest behind steps; feet stay planted on the deck in between
+      for (const L of D.legs) if (L.su>=0){ L.su+=dt/L.sdur; dogFootIdeal(D,L,_dw); if (L.su>=1){ L.su=-1; L.foot.copy(_dw); L.foot.y=P.deck+.018; } else { const e=L.su*L.su*(3-2*L.su); L.foot.lerpVectors(L.from,_dw,e); L.foot.y=P.deck+.018+.06*Math.sin(Math.PI*L.su); } }
+      if (!D.legs.some(L=>L.su>=0)){ const err=[[0,3],[1,2]].map(pr=>Math.max(...pr.map(i=>dogFootIdeal(D,D.legs[i],_dw).distanceTo(D.legs[i].foot))));
+        let k = err[0]>=err[1] ? 0 : 1; if (err[1-k]>.06 && k===D.lastPair) k=1-k;
+        if (err[k]>.06){ D.lastPair=k; for (const i of (k?[1,2]:[0,3])){ const L=D.legs[i]; L.from.copy(L.foot); L.su=0; L.sdur=Math.max(.13,.24-.07*D.v); } } }
+    }
+    for (const L of D.legs) D.root.worldToLocal(L.T.copy(L.foot));
+  }
+  for (const L of D.legs){ L.P.copy(L.piv).applyMatrix4(D.torso.matrix); petLeg(L); }
+  // head on the butterfly, jaw snapping at the top of a leap (panting otherwise), ears flapping, tail wagging
+  _dw.copy(B); D.root.worldToLocal(_dw); _pm.copy(D.torso.matrix).invert(); _dw.applyMatrix4(_pm).sub(D.head.position);
+  const ty=Math.max(-1,Math.min(1,Math.atan2(_dw.x,_dw.z))), tp=Math.max(-1.1,Math.min(.5,Math.atan2(-_dw.y,Math.hypot(_dw.x,_dw.z)))), kh=1-Math.exp(-dt*12);
+  D.hy+=(ty-D.hy)*kh; D.hp+=(tp-D.hp)*kh; D.head.rotation.set(D.hp,D.hy,0);
+  D.jaw.rotation.x = air ? .5*sm01(.15,.4,jw)*(1-sm01(.55,.62,jw)) : .07+.05*Math.sin(t*14);
+  D.ears.forEach(e=>{ e.rotation.z = e.userData.rz + e.userData.sx*((air?.55*Math.sin(Math.PI*jw):0) + .08*run*Math.sin(t*31+1)); });
+  const near=sm01(1.8,.5,_dw.length()), amp=.25+.45*near+(ju>=0?.2:0), f=3.5+3*near; D.tailAmp+=(amp-D.tailAmp)*(1-Math.exp(-dt*6)); D.tailPh+=2*Math.PI*f*dt;
+  D.tail.forEach((j,i)=>{ j.rotation.y = D.tailAmp*(i?.25:1)*Math.sin(D.tailPh-i*.5); });
+  const bq=(t*1.3+.7)%4.3, bu=bq/.14; D.eyes.scale.y = bu<1 ? 1-.92*Math.sin(Math.PI*bu) : 1;
+  // the butterfly: along its path, wings beating (with a glide now and then)
+  const bf=P.bfly, B2=bflyAt(P,t+.05,_dv2); bf.g.position.copy(B); bf.g.rotation.set(-.15, Math.atan2(B2.x-B.x,B2.z-B.z), .12*Math.sin(t*3));
+  const a = Math.sin(t*.7+.4)>.75 ? .35+.05*Math.sin(t*3) : .25+.85*(.5+.5*Math.sin(t*2*Math.PI*9)); bf.wR.rotation.z=a; bf.wL.rotation.z=-a;
+  P.hit[0].center.set(D.pos.x, D.root.position.y+.25, D.pos.z);
+  D.root.updateMatrixWorld(true); D.head.getWorldPosition(P.headW); D.torso.getWorldPosition(P.torsoW);
+}
+function dogSimTo(P, t){ dogReset(P,0); for (let s=0; s<t; s+=1/60) dogStep(P,s,1/60); }   // deterministic: the same moment always gives the same pose
+function petStill(P, t){ if (P.kind==='dog') dogSimTo(P, t); else petPair(P, t, 1); }
 function petsUpdate(now, dt){
   if (!PETS.length || !petsRoot.visible) return;
-  if (petsFixedT!=null){ if (petsFixedT!==petsPinned){ petsPinned=petsFixedT; for (const P of PETS) petPair(P, petsFixedT, 1); } return; }
+  for (const P of PETS) if (P.Li!=null) P.g.visible = !LV[P.Li] || LV[P.Li].root.visible;   // the roof dog hides with its floor in a cut-away view
+  if (petsFixedT!=null){ if (petsFixedT!==petsPinned){ petsPinned=petsFixedT; for (const P of PETS) petStill(P, petsFixedT); } return; }
   petsPinned=null;
-  if (reduceMotion){ if (petsFrozen) return; petsFrozen=true; for (const P of PETS) petPair(P, .3, 1); return; }   // one still frame: the ball on its way
-  const t=now/1000; for (const P of PETS) petPair(P, t, dt);
+  if (reduceMotion){ if (petsFrozen) return; petsFrozen=true; for (const P of PETS) petStill(P, P.kind==='dog'?3.2:.3); return; }   // one still frame each
+  const t=now/1000;
+  for (const P of PETS){ if (!P.g.visible) continue;
+    if (P.kind==='dog'){ if (P.dog.tPrev==null || t-P.dog.tPrev>1) dogReset(P,t); P.dog.tPrev=t; dogStep(P,t,dt); }
+    else petPair(P, t, dt); }
 }
 function buildPets(){
   for (const c of [...petsRoot.children]){ petsRoot.remove(c); disposeTree(c); }
   PETS=[]; petsFrozen=false;
   for (const sp of ((PROJECT.site||{}).pets||[])){
+    if (sp.kind==='dog'){
+      const B_=BLDS.find(b=>b.id===sp.bld), L=B_ && B_.levels.find(L=>Math.abs(L.level-(+sp.level||0))<.3);
+      if (!L || !Array.isArray(sp.c)) continue;
+      const g=new THREE.Group(); petsRoot.add(g);
+      const dog=makeDog(), bfly=makeButterfly(); g.add(dog.root, bfly.g);
+      const deck=L.y+.006, c=new THREE.Vector3(+sp.c[0],deck,+sp.c[1]);   // terrace finish sits 6 mm above the slab
+      const P={ kind:'dog', g, dog, bfly, c, r:Math.max(1,+sp.r||2), deck, Li:LEVELS.indexOf(L), esc:-9, headW:new THREE.Vector3(), torsoW:new THREE.Vector3(), center:c.clone(), elev:true, label:sp.label||'בכלב',
+        hit:[new THREE.Sphere(new THREE.Vector3(c.x,deck+.25,c.z), .4)] };
+      P.fitW=2*P.r+.6; PETS.push(P); dogReset(P,0); dogStep(P,0,1/60); continue;
+    }
     if (!Array.isArray(sp.a) || !Array.isArray(sp.b)) continue;
     const A=new THREE.Vector3(+sp.a[0],0,+sp.a[1]), Bp=new THREE.Vector3(+sp.b[0],0,+sp.b[1]), dir=new THREE.Vector3().subVectors(Bp,A), len=dir.length();
     if (!(len>.9)) continue; dir.multiplyScalar(1/len);
@@ -204,11 +346,11 @@ function buildPets(){
     petPaint(bg,(x,y,z)=>new THREE.Color(Math.abs(y)<PET_BALL_R*.2 ? '#f4c43a' : Math.abs(x)<PET_BALL_R*.16 ? '#f4f1ea' : '#d6372b'));
     const ball=petMesh(g,bg,petBallM); ball.position.set(E[0].x,E[0].y+PET_BALL_R,E[0].z);
     const ctr=new THREE.Vector3().addVectors(A,Bp).multiplyScalar(.5); ctr.y=yAt(ctr.x,ctr.z);
-    PETS.push({ cats, ball, E, n:new THREE.Vector3(dir.z,0,-dir.x), dir, center:ctr,
+    PETS.push({ kind:'cats', g, cats, ball, E, n:new THREE.Vector3(dir.z,0,-dir.x), dir, center:ctr, fitW:2.7, label:sp.label||'בחתולים',
       hit:cats.map(c=>new THREE.Sphere(new THREE.Vector3(c.root.position.x, c.root.position.y+.2*c.scale, c.root.position.z), .3*c.scale)) });
   }
   petsRoot.updateMatrixWorld(true);
-  for (const P of PETS) petPair(P, 0, 1);
+  for (const P of PETS) if (P.kind==='cats') petPair(P, 0, 1);
 }
 // a short click (not a drag) on a cat flies the camera to a close look at them; the cursor shows they can be clicked
 const _pRay=new THREE.Raycaster(), _pNdc=new THREE.Vector2(), _pHitP=new THREE.Vector3();
@@ -219,26 +361,27 @@ function petAt(e, occl){
   if (!PETS.length || !petsRoot.visible || state.mode==='walk') return null;
   const rc=renderer.domElement.getBoundingClientRect(); _pNdc.set(((e.clientX-rc.left)/rc.width)*2-1, -((e.clientY-rc.top)/rc.height)*2+1);
   _pRay.setFromCamera(_pNdc,camera);
-  for (const P of PETS) for (const s of P.hit){ if (!_pRay.ray.intersectSphere(s,_pHitP)) continue;
+  for (const P of PETS) if (P.g.visible) for (const s of P.hit){ if (!_pRay.ray.intersectSphere(s,_pHitP)) continue;
     if (occl){ const d=_pHitP.distanceTo(_pRay.ray.origin); if (d>.4 && petBlockers(d-.35).length) continue; }
     return P; }
   return null;
 }
+const petInside = p => LEVELS.some(L => p.y>L.y-.3 && p.y<L.y+L.floorH && L.rooms.some(r=>inPoly(r.poly,p.x,p.z)));   // a camera inside a room
 function lookAtPets(P){
   if (state.mode!=='ext') setMode('ext');
-  const c=P.center, tgt=new THREE.Vector3(c.x,c.y+.16,c.z), here=new THREE.Vector3().subVectors(camera.position,c); here.y=0;
-  const n=P.n.clone(); if (n.dot(here)<0) n.negate();                 // look across the cats' line, from the side the camera is on
+  const c=P.center, tgt=new THREE.Vector3(c.x,c.y+(P.elev?.3:.16),c.z), here=new THREE.Vector3().subVectors(camera.position,c); here.y=0;
+  const n = P.n ? P.n.clone() : here.clone(); if (n.lengthSq()<1e-6) n.set(0,0,-1); n.normalize(); if (n.dot(here)<0) n.negate();   // cats: across their line; dog: from the side the camera is on
   const base=Math.atan2(n.x,n.z);
+  const half=Math.tan(THREE.MathUtils.degToRad(50)/2)*Math.min(1.6,camera.aspect), d0=Math.max(2.7,Math.min(P.elev?9:6,(P.fitW||2.7)/2/half));   // fit the play area across the view
+  const rings = P.elev ? [[d0,.45*d0],[d0*1.15,.7*d0*1.15]] : [[d0,.43*d0],[d0*1.2,.7*d0*1.2]];
   let best=null;
-  const half=Math.tan(THREE.MathUtils.degToRad(50)/2)*Math.min(1.6,camera.aspect), d0=Math.max(2.7,Math.min(6,1.35/half));   // fit ~2.7 m across
-  pick: for (const da of [0,.45,-.45,.9,-.9,1.35,-1.35,Math.PI]) for (const [dist,h] of [[d0,.43*d0],[d0*1.2,.7*d0*1.2]]){
+  pick: for (const da of [0,.45,-.45,.9,-.9,1.35,-1.35,Math.PI]) for (const [dist,h] of rings){
     const a=base+da, pos=new THREE.Vector3(c.x+Math.sin(a)*dist, c.y+h, c.z+Math.cos(a)*dist);
-    if (FOOTS.some(f=>inPoly(f.poly,pos.x,pos.z))) continue;
+    if (petInside(pos)) continue;
     if (pos.y < terrainH(pos.x,pos.z)+.6) continue;
-    if (((PROJECT.site||{}).trees||[]).some(t=>Math.hypot(pos.x-t.x,pos.z-t.z) < (+t.r||2)*1.3+.4)) continue;   // a ray cannot see a canopy it starts inside
+    if (((PROJECT.site||{}).trees||[]).some(t=>Math.hypot(pos.x-t.x,pos.z-t.z) < (+t.r||2)*1.3+.4 && pos.y < terrainH(t.x,t.z)+6)) continue;   // a ray cannot see a canopy it starts inside
     const toT=new THREE.Vector3().subVectors(tgt,pos), L=toT.length(); _pRay.set(pos,toT.normalize());
-    const blocked=petBlockers(L-.35).length>0;
-    if (!blocked){ best=pos; break pick; }
+    if (!petBlockers(L-.35).length){ best=pos; break pick; }
   }
   if (!best) best=new THREE.Vector3(c.x+n.x*d0, c.y+1.2*d0, c.z+n.z*d0);
   flyTo([best.x,best.y,best.z],[tgt.x,tgt.y,tgt.z],1500);
@@ -250,5 +393,5 @@ function lookAtPets(P){
     if (e.type==='pointerup' && moved<6 && quick){ const P=petAt(e,true); if (P) lookAtPets(P); } };
   el.addEventListener('pointerup',up); el.addEventListener('pointercancel',up);
   el.addEventListener('pointermove',e=>{ if (e.pointerType!=='mouse' || e.buttons || !PETS.length) return; const now=performance.now(); if (now-hoverT<90) return; hoverT=now;
-    el.style.cursor = petAt(e,true) ? 'pointer' : ''; });
+    el.style.cursor = petAt(e,false) ? 'pointer' : ''; });   // the sphere test only: a full occlusion raycast costs ~7 ms (r147 does not cull by ray length); the click checks it
 }
