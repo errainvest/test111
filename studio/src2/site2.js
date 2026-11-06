@@ -35,7 +35,7 @@ const bldM = new THREE.MeshBasicMaterial({color:0x1f7ae0, transparent:true, opac
 const stakeM = new THREE.MeshBasicMaterial({color:0xff4d1a});
 
 let SITE={}, SPOTS=[], FLATS=[], FOOTS=[], TERRAIN=null, TERR_BB=null;
-const toY = v => (v==null||isNaN(+v)) ? null : (+v > 100 ? +v-DATUM : +v);   // absolute (e.g. 246.40) or already relative
+const toY = v => (v==null||isNaN(+v)) ? null : (isAbs(v) ? +v-DATUM : +v);   // absolute (e.g. 246.40) or already relative
 let PLANE=null; // [h0, dh/dx, dh/dz] relative to the datum: the survey's best-fit ground plane
 const planeH = (x,z) => PLANE ? PLANE[0]+PLANE[1]*x+PLANE[2]*z : 0;
 function idw(x,z){

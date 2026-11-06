@@ -64,6 +64,8 @@ const PRIVATE = new Set(['bed','master','kids','office','mamad','closet','storag
 let ALLOUT=[];
 let LEVELS=[], ALLROOMS=[], BLDS=[], BB={x0:0,x1:10,z0:0,z1:10}, C0=[5,5], PCEN=[5,5], PLOT=null, DATUM=0;
 const area = r => Math.abs(polyArea(r.poly));
+// heights may be absolute (surveyed, e.g. 246.40) or relative to a building's ±0.00: absolute = within ±60 m of the datum (0 datum → all relative)
+const isAbs = v => DATUM>0 && Math.abs(+v-DATUM)<60;
 function wallInfo(w){ const dx=w.b[0]-w.a[0], dz=w.b[1]-w.a[1], len=Math.hypot(dx,dz)||1e-6, u=[dx/len,dz/len]; return {len,u,n:[-u[1],u[0]]}; }
 function roomAtL(L,x,z,withOutdoor){ for(const r of L.rooms) if(inPoly(r.poly,x,z)) return r; if(withOutdoor) for(const r of L.outdoor) if(inPoly(r.poly,x,z)) return r; return null; }
 function insideL(L,x,z){ return L.rooms.some(r=>inPoly(r.poly,x,z)); }
@@ -93,7 +95,7 @@ function normalizeProject(P){
         const lv = r0.level!=null ? +r0.level : L.level; const o={id:`${L.id}-o${j}`, name:r0.name||KINDS2[kind].n, kind, type:'balcony', apt:r0.apt!=null?String(r0.apt):'', poly:ring(r0.poly), L:LEVELS.length, bld:b.id, level:lv, dy:lv-L.level};
         if (kind==='pergola') L.pergolas.push(o);
         if (Math.abs(o.dy)<.45 || kind==='garden') L.outdoor.push(o); });
-      for (const r0 of (f.railings||[])) if (r0.a&&r0.b) L.railings.push({a:[+r0.a[0],+r0.a[1]], b:[+r0.b[0],+r0.b[1]], h:+r0.h||1.1, y:r0.level!=null? (+r0.level>100? +r0.level-(+b.zero||DATUM) : +r0.level)-L.level : 0});
+      for (const r0 of (f.railings||[])) if (r0.a&&r0.b) L.railings.push({a:[+r0.a[0],+r0.a[1]], b:[+r0.b[0],+r0.b[1]], h:+r0.h||1.1, y:r0.level!=null? (isAbs(r0.level)? +r0.level-(+b.zero||DATUM) : +r0.level)-L.level : 0});
       // a wall is on the facade if, somewhere along it, one side has no room (outside or a balcony)
       for (const w of L.walls){ w.exterior = w.kind==='low';
         for (const t of [.12,.35,.5,.65,.88]){ const px=w.a[0]+w.u[0]*w.len*t, pz=w.a[1]+w.u[1]*w.len*t, d=w.t/2+.18;
@@ -326,7 +328,7 @@ function polyDist2(P,x,z){ let d=1e9; for(let i=0;i<P.length;i++){ const a=P[i],
 function buildRoofExtras(B_, F){
   if (!B_.roof || !B_.levels.length) return;
   const topL=B_.levels[B_.levels.length-1], rt=LV[LEVELS.indexOf(topL)], g=rt.slab;
-  const R=B_.roof, rel=v=>{ v=+v; return v>100 ? v-(B_.base+DATUM) : v; };
+  const R=B_.roof, rel=v=>{ v=+v; return isAbs(v) ? v-(B_.base+DATUM) : v; };
   const Lr={...topL, walls:[], rooms:[], outdoor:[]};
   for (const w0 of (R.walls||[])){
     const a=[+w0.a[0],+w0.a[1]], b=[+w0.b[0],+w0.b[1]]; if(Math.hypot(b[0]-a[0],b[1]-a[1])<.1) continue;

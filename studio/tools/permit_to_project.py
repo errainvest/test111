@@ -9,7 +9,7 @@ RECIPE = {
                   "stone": [{"floors": [0]}, {"kinds": ["core"]}], "levels": {"E1.json": 0.0}} ],
   "site": "SITE.json", "apartments": [{"building": "E", "apt": "1", "main_area": 74.7, "rooms": 3}]
 }
-Levels in the floor files may be relative to the building's ±0.00 or absolute (> 100 m); everything is written relative.
+Levels in the floor files may be relative to the building's ±0.00 or absolute (within ±60 m of the datum); everything is written relative.
 """
 import json, math, os, sys
 
@@ -34,10 +34,11 @@ def poly(P):
     a = sum(out[i][0] * out[(i + 1) % len(out)][1] - out[(i + 1) % len(out)][0] * out[i][1] for i in range(len(out))) / 2
     return out if abs(a) > 0.05 else None
 
+DATUM = 0.0
 def rel(v, zero):
     v = num(v)
     if v is None: return None
-    return round(v - zero, 3) if v > 100 else round(v, 3)
+    return round(v - zero, 3) if (DATUM > 0 and abs(v - DATUM) < 60) else round(v, 3)
 
 def floor_from(F, zero, level_default, name_default):
     lv = rel(F.get('level'), zero)
@@ -162,6 +163,7 @@ def main():
     D = R.get('dir', '.')
     P = {k: R[k] for k in ('name', 'place', 'subtitle', 'fine', 'facade', 'apartments', 'railing', 'start', 'views') if k in R}
     P['datum'] = num(R.get('datum'), 0)
+    global DATUM; DATUM = P['datum']
     P['buildings'] = []
     for b in R['buildings']:
         zero = num(b.get('zero'), P['datum'])
