@@ -90,7 +90,8 @@ let currentRoomId=null;
 function goRoom(id, dur){
   const r=R(id); if(!r) return; currentRoomId=id; state.cur=r.L; const L=LEVELS[r.L];
   state.mode='walk'; controls.enabled=false; camera.up.set(0,1,0);
-  const y=L.y+(r.dy||0), pos=[r.cam[0],y+EYE,r.cam[1]], dd=Math.hypot(r.cam[2]-r.cam[0],r.cam[3]-r.cam[1]), tgt=[r.cam[2],y+(dd>2?1.2:1.45),r.cam[3]];
+  let cam=r.view || r.cam; if (!r.view && r.focus){ const d=Math.hypot(r.focus[0]-cam[0],r.focus[1]-cam[1]); if (d>1.3) cam=[cam[0],cam[1],r.focus[0],r.focus[1]]; }
+  const y=L.y+(r.dy||0), pos=[cam[0],y+EYE,cam[1]], dd=Math.hypot(cam[2]-cam[0],cam[3]-cam[1]), tgt=[cam[2],y+(dd>2?1.0:1.3),cam[3]];
   flyTo(pos,tgt,reduceMotion?1:(dur||1300),()=>{ setYawPitchFrom(new THREE.Vector3(...pos),new THREE.Vector3(...tgt)); });
   camera.fov=68; camera.updateProjectionMatrix(); applyState();
 }
@@ -442,6 +443,12 @@ loadingEl.hidden=true;
 requestAnimationFrame(loop);
 window.__studio={state,setMode,goRoom,build,selectBld,selectFloor,selectApt,camera,APTS:()=>APTS,LEVELS:()=>LEVELS,
   edges:id=>{ const r=R(id); const L=LEVELS[r.L], rt=LV[r.L]; return roomEdges(L,rt,r).map(e=>({len:+e.len.toFixed(2), free:+freeLen(e).toFixed(2), depth:+e.depth.toFixed(2), t:e.t, ints:e.ints.map(i=>[+i.a.toFixed(2),+i.b.toFixed(2)])})); },
-  rooms:()=>ALLROOMS.filter(r=>r.detail).map(r=>[r.id,r.name,r.kind,r.apt,+area(r).toFixed(1)])};
+  rooms:()=>ALLROOMS.filter(r=>r.detail).map(r=>[r.id,r.name,r.kind,r.apt,+area(r).toFixed(1),!!r.focus,!!r.view]),
+  why:id=>{ const r=R(id), L=LEVELS[r.L], rt=LV[r.L], P=r.poly, out=[];
+    for (let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], len=Math.hypot(b[0]-a[0],b[1]-a[1]); if(len<.5) continue; const u=[(b[0]-a[0])/len,(b[1]-a[1])/len]; let n=[-u[1],u[0]]; const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2; if(!inPoly(P,mx+n[0]*.15,mz+n[1]*.15)) n=[-n[0],-n[1]];
+      const proj=(x,z)=>(x-a[0])*u[0]+(z-a[1])*u[1], perp=(x,z)=>(x-a[0])*n[0]+(z-a[1])*n[1];
+      const ops=rt.open.filter(o=>!(o.win&&o.sill>=1.0) && Math.abs(perp(o.ax,o.az))<=.18 && Math.abs(perp(o.bx,o.bz))<=.18).map(o=>[+proj(o.ax,o.az).toFixed(2),+proj(o.bx,o.bz).toFixed(2),o.type,o.sill]);
+      const walls=L.walls.filter(w=>w.kind!=='low' && Math.abs(w.u[0]*u[1]-w.u[1]*u[0])<=.035 && Math.abs(perp(w.a[0],w.a[1]))<=.16).map(w=>[+proj(w.a[0],w.a[1]).toFixed(2),+proj(w.b[0],w.b[1]).toFixed(2),w.t]);
+      out.push({i,len:+len.toFixed(2),ops,walls}); } return out; } };
 })();
 </script>

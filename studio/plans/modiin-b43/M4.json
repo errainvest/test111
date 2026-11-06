@@ -1,0 +1,1625 @@
+{
+ "building": "M2",
+ "floor": "קומה ד'",
+ "sheet": "fpB",
+ "level": 9.0,
+ "level_marks": [
+  {
+   "text": "+9.00 (floor lobby)",
+   "x": -7.766,
+   "z": 10.469
+  },
+  {
+   "text": "+9.00 (roof terrace)",
+   "x": -7.695,
+   "z": 6.415
+  },
+  {
+   "text": "+10.05 (terrace edge; plan mark - sections give +10.25)",
+   "x": -3.914,
+   "z": -1.142
+  },
+  {
+   "text": "+10.05 (terrace edge; plan mark - sections give +10.25)",
+   "x": -2.742,
+   "z": 0.026
+  },
+  {
+   "text": "+10.05 (terrace east parapet; plan mark - section ב-ב gives +10.25)",
+   "x": 0.169,
+   "z": 2.717
+  }
+ ],
+ "walls": [
+  {
+   "a": [
+    -9.587,
+    8.047
+   ],
+   "b": [
+    -10.543,
+    9.537
+   ],
+   "t": 0.22,
+   "kind": "core",
+   "h": null
+  },
+  {
+   "a": [
+    -9.587,
+    8.047
+   ],
+   "b": [
+    -8.105,
+    8.999
+   ],
+   "t": 0.25,
+   "kind": "core",
+   "h": null
+  },
+  {
+   "a": [
+    -10.543,
+    9.537
+   ],
+   "b": [
+    -9.061,
+    10.488
+   ],
+   "t": 0.2,
+   "kind": "core",
+   "h": null
+  },
+  {
+   "a": [
+    -8.105,
+    8.999
+   ],
+   "b": [
+    -9.061,
+    10.488
+   ],
+   "t": 0.15,
+   "kind": "core",
+   "h": null
+  },
+  {
+   "a": [
+    -7.917,
+    8.614
+   ],
+   "b": [
+    -8.147,
+    8.971
+   ],
+   "t": 0.23,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -7.917,
+    8.614
+   ],
+   "b": [
+    -6.424,
+    9.572
+   ],
+   "t": 0.23,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -6.424,
+    9.572
+   ],
+   "b": [
+    -6.648,
+    9.922
+   ],
+   "t": 0.21,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -6.648,
+    9.922
+   ],
+   "b": [
+    -3.64,
+    11.853
+   ],
+   "t": 0.25,
+   "kind": "core",
+   "h": null
+  },
+  {
+   "a": [
+    -3.64,
+    11.853
+   ],
+   "b": [
+    -4.934,
+    13.869
+   ],
+   "t": 0.52,
+   "kind": "core",
+   "h": null,
+   "note": "blue concrete u13.32-13.57 + uncoloured inner layer 13.03-13.32"
+  },
+  {
+   "a": [
+    -5.418,
+    13.557
+   ],
+   "b": [
+    -4.934,
+    13.869
+   ],
+   "t": 0.26,
+   "kind": "core",
+   "h": null
+  },
+  {
+   "a": [
+    -9.608,
+    10.136
+   ],
+   "b": [
+    -10.27,
+    11.168
+   ],
+   "t": 0.2,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -10.27,
+    11.168
+   ],
+   "b": [
+    -8.76,
+    12.137
+   ],
+   "t": 0.22,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -8.43,
+    11.623
+   ],
+   "b": [
+    -5.418,
+    13.557
+   ],
+   "t": 0.26,
+   "kind": "mamad",
+   "h": null
+  },
+  {
+   "a": [
+    -8.43,
+    11.623
+   ],
+   "b": [
+    -10.056,
+    14.157
+   ],
+   "t": 0.25,
+   "kind": "mamad",
+   "h": null
+  },
+  {
+   "a": [
+    -5.418,
+    13.557
+   ],
+   "b": [
+    -7.043,
+    16.091
+   ],
+   "t": 0.3,
+   "kind": "mamad",
+   "h": null
+  },
+  {
+   "a": [
+    -10.056,
+    14.157
+   ],
+   "b": [
+    -7.043,
+    16.091
+   ],
+   "t": 0.24,
+   "kind": "mamad",
+   "h": null
+  },
+  {
+   "a": [
+    -10.09,
+    14.135
+   ],
+   "b": [
+    -10.419,
+    14.649
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -9.164,
+    14.729
+   ],
+   "b": [
+    -9.81,
+    15.735
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -9.81,
+    15.735
+   ],
+   "b": [
+    -7.663,
+    17.113
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -7.018,
+    16.107
+   ],
+   "b": [
+    -8.098,
+    17.79
+   ],
+   "t": 0.23,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -6.544,
+    15.313
+   ],
+   "b": [
+    -5.875,
+    15.742
+   ],
+   "t": 0.19,
+   "kind": "low",
+   "h": null,
+   "note": "AC ledge north edge: uncoloured double line (not cut) - low wall/curb, height unknown"
+  },
+  {
+   "a": [
+    -5.875,
+    15.742
+   ],
+   "b": [
+    -7.449,
+    18.194
+   ],
+   "t": 0.08,
+   "kind": "low",
+   "h": null,
+   "note": "thin uncoloured double line (13.48/13.55) closing the AC/service ledge: light screen, height unknown"
+  },
+  {
+   "a": [
+    -7.984,
+    18.311
+   ],
+   "b": [
+    -7.295,
+    18.16
+   ],
+   "t": 0.23,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -13.806,
+    6.919
+   ],
+   "b": [
+    -10.304,
+    9.166
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -13.806,
+    6.919
+   ],
+   "b": [
+    -16.291,
+    10.791
+   ],
+   "t": 0.21,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -16.291,
+    10.791
+   ],
+   "b": [
+    -15.79,
+    11.113
+   ],
+   "t": 0.21,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -15.79,
+    11.113
+   ],
+   "b": [
+    -17.181,
+    13.279
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -15.768,
+    11.079
+   ],
+   "b": [
+    -13.063,
+    12.815
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -17.181,
+    13.279
+   ],
+   "b": [
+    -15.497,
+    14.36
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -15.497,
+    14.36
+   ],
+   "b": [
+    -12.354,
+    16.377
+   ],
+   "t": 0.17,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -15.497,
+    14.36
+   ],
+   "b": [
+    -16.629,
+    16.123
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -13.023,
+    14.772
+   ],
+   "b": [
+    -13.558,
+    15.604
+   ],
+   "t": 0.2,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -16.629,
+    16.122
+   ],
+   "b": [
+    -15.165,
+    22.834
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -15.165,
+    22.834
+   ],
+   "b": [
+    -7.368,
+    21.134
+   ],
+   "t": 0.25,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -8.098,
+    17.79
+   ],
+   "b": [
+    -7.368,
+    21.134
+   ],
+   "t": 0.27,
+   "kind": "ext",
+   "h": null
+  },
+  {
+   "a": [
+    -15.976,
+    19.116
+   ],
+   "b": [
+    -12.346,
+    18.326
+   ],
+   "t": 0.12,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -12.356,
+    18.276
+   ],
+   "b": [
+    -11.898,
+    18.177
+   ],
+   "t": 0.36,
+   "kind": "int",
+   "h": null,
+   "note": "concrete column (blue) u4.21-4.68 v6.30-6.66"
+  },
+  {
+   "a": [
+    -12.352,
+    16.371
+   ],
+   "b": [
+    -11.135,
+    21.955
+   ],
+   "t": 0.12,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -12.895,
+    19.469
+   ],
+   "b": [
+    -12.297,
+    22.209
+   ],
+   "t": 0.12,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -12.895,
+    19.469
+   ],
+   "b": [
+    -11.733,
+    19.215
+   ],
+   "t": 0.12,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -11.37,
+    16.111
+   ],
+   "b": [
+    -10.726,
+    19.067
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -11.724,
+    19.254
+   ],
+   "b": [
+    -10.733,
+    19.038
+   ],
+   "t": 0.12,
+   "kind": "int",
+   "h": null,
+   "note": "door head across corridor end: master bedroom door 80/210"
+  },
+  {
+   "a": [
+    -11.37,
+    16.111
+   ],
+   "b": [
+    -9.836,
+    15.777
+   ],
+   "t": 0.15,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    -10.907,
+    18.236
+   ],
+   "b": [
+    -7.975,
+    17.597
+   ],
+   "t": 0.18,
+   "kind": "int",
+   "h": null
+  },
+  {
+   "a": [
+    0.127,
+    0.156
+   ],
+   "b": [
+    0.079,
+    7.2
+   ],
+   "t": 0.21,
+   "kind": "low",
+   "h": 1.25,
+   "note": "solid parapet on terrace east edge (x -0.22..-0.005); section ב-ב: block parapet, top +10.25 (chain 15+125); plan mark on it +10.05"
+  }
+ ],
+ "railings": [
+  {
+   "a": [
+    -9.306,
+    0.991
+   ],
+   "b": [
+    -7.709,
+    1.002
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -7.709,
+    1.002
+   ],
+   "b": [
+    -7.691,
+    -1.603
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -7.691,
+    -1.603
+   ],
+   "b": [
+    -4.191,
+    -1.579
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -4.191,
+    -1.579
+   ],
+   "b": [
+    -4.203,
+    0.126
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -4.203,
+    0.126
+   ],
+   "b": [
+    0.127,
+    0.156
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    0.079,
+    7.199
+   ],
+   "b": [
+    -1.985,
+    10.414
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -1.985,
+    10.414
+   ],
+   "b": [
+    -2.956,
+    9.789
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -2.956,
+    9.789
+   ],
+   "b": [
+    -4.094,
+    11.561
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -13.806,
+    6.919
+   ],
+   "b": [
+    -11.145,
+    2.775
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -11.145,
+    2.775
+   ],
+   "b": [
+    -10.648,
+    3.094
+   ],
+   "h": 1.25
+  },
+  {
+   "a": [
+    -10.648,
+    3.094
+   ],
+   "b": [
+    -9.306,
+    0.991
+   ],
+   "h": 1.25
+  }
+ ],
+ "openings": [
+  {
+   "type": "window",
+   "x": -14.803,
+   "z": 8.472,
+   "w": 1.4,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "140/105"
+  },
+  {
+   "type": "slider",
+   "x": -12.047,
+   "z": 8.048,
+   "w": 2.7,
+   "h": 2.3,
+   "sill": 0.0,
+   "label": "270/230"
+  },
+  {
+   "type": "window",
+   "x": -16.551,
+   "z": 12.298,
+   "w": 1.4,
+   "h": 0.7,
+   "sill": 1.45,
+   "label": "140/70"
+  },
+  {
+   "type": "window",
+   "x": -6.195,
+   "z": 14.77,
+   "w": 1.0,
+   "h": 1.0,
+   "sill": 1.15,
+   "label": "100/100"
+  },
+  {
+   "type": "window",
+   "x": -7.309,
+   "z": 16.561,
+   "w": 0.9,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "90/105"
+  },
+  {
+   "type": "window",
+   "x": -7.893,
+   "z": 17.47,
+   "w": 0.6,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "60/105"
+  },
+  {
+   "type": "window",
+   "x": -4.28,
+   "z": 12.85,
+   "w": 0.6,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "unlabelled (concrete opening 6.57..7.17, inner jambs 6.50..7.20; h assumed)"
+  },
+  {
+   "type": "window",
+   "x": -16.276,
+   "z": 17.739,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105"
+  },
+  {
+   "type": "window",
+   "x": -15.684,
+   "z": 20.451,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105"
+  },
+  {
+   "type": "window",
+   "x": -13.021,
+   "z": 22.367,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105"
+  },
+  {
+   "type": "window",
+   "x": -11.726,
+   "z": 22.084,
+   "w": 0.6,
+   "h": 0.7,
+   "sill": 1.45,
+   "label": "60/70"
+  },
+  {
+   "type": "window",
+   "x": -10.206,
+   "z": 21.753,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105"
+  },
+  {
+   "type": "window",
+   "x": -7.627,
+   "z": 19.947,
+   "w": 1.2,
+   "h": 1.05,
+   "sill": 1.1,
+   "label": "120/105"
+  },
+  {
+   "type": "entry",
+   "x": -9.908,
+   "z": 10.603,
+   "w": 0.9,
+   "h": 2.05,
+   "sill": 0.0,
+   "label": "90/205"
+  },
+  {
+   "type": "door",
+   "x": -8.583,
+   "z": 9.743,
+   "w": 0.8,
+   "h": 2.0,
+   "sill": 0.0,
+   "label": "lift door (unlabelled; gap in shaft wall 6.10..7.05, door line 6.15..6.95)"
+  },
+  {
+   "type": "door",
+   "x": -9.619,
+   "z": 14.437,
+   "w": 0.7,
+   "h": 2.0,
+   "sill": 0.0,
+   "label": "70/200"
+  },
+  {
+   "type": "door",
+   "x": -8.888,
+   "z": 16.326,
+   "w": 0.8,
+   "h": 2.05,
+   "sill": 0.0,
+   "label": "80/205"
+  },
+  {
+   "type": "door",
+   "x": -12.076,
+   "z": 17.641,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210"
+  },
+  {
+   "type": "door",
+   "x": -11.839,
+   "z": 18.726,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210"
+  },
+  {
+   "type": "door",
+   "x": -11.458,
+   "z": 20.471,
+   "w": 0.7,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "70/210 (label read on fpC, same layout)"
+  },
+  {
+   "type": "door",
+   "x": -11.225,
+   "z": 19.145,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210"
+  },
+  {
+   "type": "door",
+   "x": -11.145,
+   "z": 17.142,
+   "w": 0.8,
+   "h": 2.1,
+   "sill": 0.0,
+   "label": "80/210"
+  }
+ ],
+ "rooms": [
+  {
+   "name": "ח. מגורים",
+   "kind": "living",
+   "apt": "6",
+   "poly": [
+    [
+     -13.806,
+     6.919
+    ],
+    [
+     -10.304,
+     9.166
+    ],
+    [
+     -10.543,
+     9.537
+    ],
+    [
+     -9.608,
+     10.136
+    ],
+    [
+     -10.27,
+     11.168
+    ],
+    [
+     -8.76,
+     12.137
+    ],
+    [
+     -10.324,
+     14.573
+    ],
+    [
+     -16.268,
+     10.757
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מטבח",
+   "kind": "kitchen",
+   "apt": "6",
+   "poly": [
+    [
+     -15.768,
+     11.079
+    ],
+    [
+     -13.063,
+     12.815
+    ],
+    [
+     -13.94,
+     14.182
+    ],
+    [
+     -13.023,
+     14.772
+    ],
+    [
+     -13.558,
+     15.604
+    ],
+    [
+     -17.181,
+     13.279
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "פ. אוכל",
+   "kind": "dining",
+   "apt": "6",
+   "poly": [
+    [
+     -13.063,
+     12.815
+    ],
+    [
+     -10.357,
+     14.552
+    ],
+    [
+     -11.37,
+     16.111
+    ],
+    [
+     -12.352,
+     16.371
+    ],
+    [
+     -13.558,
+     15.604
+    ],
+    [
+     -13.023,
+     14.772
+    ],
+    [
+     -13.94,
+     14.182
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מעבר",
+   "kind": "hall",
+   "apt": "6",
+   "poly": [
+    [
+     -10.09,
+     14.135
+    ],
+    [
+     -9.164,
+     14.729
+    ],
+    [
+     -9.81,
+     15.735
+    ],
+    [
+     -9.836,
+     15.777
+    ],
+    [
+     -11.37,
+     16.111
+    ]
+   ],
+   "label_area": null,
+   "note": "unlabelled hall between dining, mamad door and bedroom corridor"
+  },
+  {
+   "name": "ממ\"ד / ח. שינה",
+   "kind": "mamad",
+   "apt": "6",
+   "poly": [
+    [
+     -8.43,
+     11.623
+    ],
+    [
+     -5.418,
+     13.557
+    ],
+    [
+     -7.043,
+     16.091
+    ],
+    [
+     -10.056,
+     14.157
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "ח. כביסה",
+   "kind": "laundry",
+   "apt": "6",
+   "poly": [
+    [
+     -9.164,
+     14.729
+    ],
+    [
+     -7.03,
+     16.099
+    ],
+    [
+     -7.663,
+     17.113
+    ],
+    [
+     -9.81,
+     15.735
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "מעבה",
+   "kind": "service",
+   "apt": "6",
+   "poly": [
+    [
+     -6.544,
+     15.313
+    ],
+    [
+     -5.875,
+     15.742
+    ],
+    [
+     -7.449,
+     18.194
+    ],
+    [
+     -7.984,
+     18.311
+    ],
+    [
+     -8.098,
+     17.79
+    ],
+    [
+     -7.018,
+     16.107
+    ]
+   ],
+   "label_area": null,
+   "note": "AC condenser / laundry-drying ledge behind a thin (aluminium) screen"
+  },
+  {
+   "name": "ח. רחצה",
+   "kind": "bath",
+   "apt": "6",
+   "poly": [
+    [
+     -11.37,
+     16.111
+    ],
+    [
+     -9.836,
+     15.777
+    ],
+    [
+     -9.81,
+     15.735
+    ],
+    [
+     -7.663,
+     17.113
+    ],
+    [
+     -7.975,
+     17.597
+    ],
+    [
+     -10.907,
+     18.236
+    ]
+   ],
+   "label_area": null,
+   "note": "name not written on plan; tub 170, WC, basin; laundry door opens from it"
+  },
+  {
+   "name": "מקלחת",
+   "kind": "bath",
+   "apt": "6",
+   "poly": [
+    [
+     -12.895,
+     19.469
+    ],
+    [
+     -11.733,
+     19.215
+    ],
+    [
+     -11.135,
+     21.955
+    ],
+    [
+     -12.297,
+     22.209
+    ]
+   ],
+   "label_area": null,
+   "note": "name not written on plan; shower + WC"
+  },
+  {
+   "name": "ח. שינה",
+   "kind": "bed",
+   "apt": "6",
+   "poly": [
+    [
+     -16.629,
+     16.122
+    ],
+    [
+     -15.976,
+     19.116
+    ],
+    [
+     -11.945,
+     18.238
+    ],
+    [
+     -12.352,
+     16.371
+    ],
+    [
+     -15.497,
+     14.36
+    ]
+   ],
+   "label_area": null,
+   "note": "bedroom 1 (pentagon), dims 400 x 297"
+  },
+  {
+   "name": "ח. שינה",
+   "kind": "bed",
+   "apt": "6",
+   "poly": [
+    [
+     -15.976,
+     19.116
+    ],
+    [
+     -11.945,
+     18.238
+    ],
+    [
+     -11.733,
+     19.215
+    ],
+    [
+     -12.895,
+     19.469
+    ],
+    [
+     -12.297,
+     22.209
+    ],
+    [
+     -15.165,
+     22.834
+    ]
+   ],
+   "label_area": null,
+   "note": "bedroom 2, dims 280 x 365"
+  },
+  {
+   "name": "ח. שינה הורים",
+   "kind": "master",
+   "apt": "6",
+   "poly": [
+    [
+     -11.724,
+     19.254
+    ],
+    [
+     -10.733,
+     19.038
+    ],
+    [
+     -10.907,
+     18.236
+    ],
+    [
+     -8.132,
+     17.632
+    ],
+    [
+     -7.368,
+     21.134
+    ],
+    [
+     -11.135,
+     21.955
+    ]
+   ],
+   "label_area": null,
+   "note": "dims 370 x 340"
+  },
+  {
+   "name": "מעבר",
+   "kind": "hall",
+   "apt": "6",
+   "poly": [
+    [
+     -12.352,
+     16.371
+    ],
+    [
+     -11.37,
+     16.111
+    ],
+    [
+     -10.733,
+     19.038
+    ],
+    [
+     -11.724,
+     19.254
+    ]
+   ],
+   "label_area": null,
+   "note": "bedroom corridor (unlabelled)"
+  },
+  {
+   "name": "מבואה קומתית",
+   "kind": "lobby",
+   "apt": "common",
+   "poly": [
+    [
+     -7.917,
+     8.614
+    ],
+    [
+     -6.424,
+     9.572
+    ],
+    [
+     -6.648,
+     9.922
+    ],
+    [
+     -6.736,
+     9.865
+    ],
+    [
+     -8.03,
+     11.88
+    ],
+    [
+     -8.43,
+     11.623
+    ],
+    [
+     -8.76,
+     12.137
+    ],
+    [
+     -10.27,
+     11.168
+    ],
+    [
+     -9.608,
+     10.136
+    ],
+    [
+     -9.061,
+     10.488
+    ],
+    [
+     -8.105,
+     8.999
+    ],
+    [
+     -8.147,
+     8.971
+    ]
+   ],
+   "label_area": null,
+   "note": "floor lobby incl. shallow north niche (inner u 8.07-9.62, v 5.38-5.57; a thin line across its mouth at v 5.68); level mark +9.00"
+  },
+  {
+   "name": "חדר מדרגות",
+   "kind": "stair",
+   "apt": "common",
+   "poly": [
+    [
+     -6.736,
+     9.865
+    ],
+    [
+     -3.64,
+     11.853
+    ],
+    [
+     -4.934,
+     13.869
+    ],
+    [
+     -8.03,
+     11.88
+    ]
+   ],
+   "label_area": null
+  },
+  {
+   "name": "פיר מעלית",
+   "kind": "shaft",
+   "apt": "common",
+   "poly": [
+    [
+     -9.587,
+     8.047
+    ],
+    [
+     -8.105,
+     8.999
+    ],
+    [
+     -9.061,
+     10.488
+    ],
+    [
+     -10.543,
+     9.537
+    ]
+   ],
+   "label_area": null
+  }
+ ],
+ "outdoor": [
+  {
+   "name": "מרפסת גג",
+   "kind": "terrace",
+   "apt": "6",
+   "poly": [
+    [
+     -9.306,
+     0.991
+    ],
+    [
+     -7.709,
+     1.002
+    ],
+    [
+     -7.691,
+     -1.603
+    ],
+    [
+     -4.191,
+     -1.579
+    ],
+    [
+     -4.203,
+     0.126
+    ],
+    [
+     0.127,
+     0.156
+    ],
+    [
+     0.079,
+     7.2
+    ],
+    [
+     -1.985,
+     10.414
+    ],
+    [
+     -2.956,
+     9.789
+    ],
+    [
+     -4.094,
+     11.561
+    ],
+    [
+     -6.648,
+     9.922
+    ],
+    [
+     -6.424,
+     9.572
+    ],
+    [
+     -7.917,
+     8.614
+    ],
+    [
+     -8.147,
+     8.971
+    ],
+    [
+     -9.587,
+     8.047
+    ],
+    [
+     -10.304,
+     9.166
+    ],
+    [
+     -13.806,
+     6.919
+    ],
+    [
+     -11.145,
+     2.775
+    ],
+    [
+     -10.648,
+     3.094
+    ]
+   ],
+   "level": 9.0
+  }
+ ],
+ "stairs": [
+  {
+   "poly": [
+    [
+     -6.804,
+     9.97
+    ],
+    [
+     -3.934,
+     11.812
+    ],
+    [
+     -5.09,
+     13.613
+    ],
+    [
+     -7.96,
+     11.771
+    ]
+   ],
+   "up_dir": [
+    -0.8416,
+    -0.5402
+   ],
+   "note": "top of the stair (section ג-ג): two parallel flights 2.32 long (treads ~29), total width 2.20 (v 5.81-7.95), half landing 110 (u 11.95-13.03) at +7.50; both flights descend from the +9.00 lobby; the flight +7.50->+9.00 rises towards the lobby (-u of M2R). No flight continues up: roof exit 'פתח יציאה לגג עם סולם 80/90' (fpA). A 0.55x1.15 rectangle drawn on the landing edge (R u 11.95-12.5, v 6.3-7.45) is unexplained (also on fpC)."
+  }
+ ],
+ "lifts": [
+  {
+   "poly": [
+    [
+     -9.556,
+     8.204
+    ],
+    [
+     -8.227,
+     9.057
+    ],
+    [
+     -9.064,
+     10.362
+    ],
+    [
+     -10.393,
+     9.508
+    ]
+   ],
+   "note": "lift shaft (inner ~1.60x1.55, door east to lobby)"
+  }
+ ],
+ "apartments": [
+  {
+   "apt": "6",
+   "main_area": 109.62,
+   "rooms": 5,
+   "note": "only apartment on +9.00; gross 117.12 incl. mamad 7.5 (area box); 5 rooms per CBS table (living + 3 bedrooms + mamad/bedroom); private roof terrace ~116 m2"
+  }
+ ],
+ "notes": [
+  "Frames used: G=0,0,0 (terrace north/east edges), R=-12,0,32.3 (core, mamad, living/kitchen, laundry; walls straight to <1 cm over 3-4 m), S=-18,13,-12.7 (bedroom block = R rotated -45 deg; west/south walls straight to 1 cm over 7 m).",
+  "Level: floor +9.00 (lobby mark +9.00; terrace mark +9.00). Roof of this floor +11.85 (fpA / section ג-ג).",
+  "Only one apartment on this floor: circled 6. Area box on plan: 'שטח עיקרי 109.62' (table: 117.12 gross incl. mamad - 7.5 = 109.62).",
+  "Room names for the two bathrooms are NOT written on the plan; named by fixtures: tub+WC+basin room -> 'ח. רחצה' (it also gives access to the laundry door 80/205), shower+WC room -> 'מקלחת'. Halls/corridor unlabelled ('מעבר').",
+  "Bathroom 'ח. רחצה' and laundry: the only door into the laundry (80/205) is from the bathroom side (arc swings into the laundry).",
+  "Mamad: inner 3.35x2.80 drawn (labels 335/280; measured 3.30x2.76); window 100/100, door 70/200 (label read rotated '200/70').",
+  "M2 ±0.00 = 247.70 abs, so this floor +9.00 = 256.70 abs.",
+  "Terrace edges are drawn as 20 cm uncoloured double lines (below the plan cut). North elevation (secB) labels the M2 roof-terrace edge 'מעקה מתכת בגוון המרייט - כחול אולטרמרין' (metal railing, X-pattern panels) -> all edges modelled as railings, EXCEPT the east edge facing building E, which section ב-ב (cut at z~7.2) shows as a solid block parapet -> wall kind low. Height h=1.25 for both (top +10.25): see the railing-height note.",
+  "Terrace polygon (centrelines) area = 114.0 m2; table: uncovered roof terraces at +9.00 = 116.24 m2 (58.40 = 8.00x7.30 + pieces).",
+  "'פרגולה בעתיד' (FUTURE pergola, dashed) over the terrace in front of the living room: R u 2.17-6.13, v 3.92-7.03 (not modelled).",
+  "Red line drawn just outside the living-room west wall / terrace west edge (R u~1.9 and u~2.55) - probably building line (קו בניין), not a wall.",
+  "Thin outlines west of the terrace labelled 'מרפסת בקומה ב'' / 'מרפסת בקומה א'' are lower-floor balconies - ignored.",
+  "Stair east wall is drawn as blue concrete (u 13.32-13.57) plus an uncoloured inner layer (u 13.03-13.32) -> one wall t=0.52; its window has no size label: opening in the blue concrete v 6.57-7.17 (w 0.60, used), gap between the inner-layer blocks 6.50-7.20 - height assumed. The two uncoloured 0.30x0.70 rectangles flanking it (u 13.03-13.33) appear identically on fpC/fpD (pilasters or chases?).",
+  "Lift door: no label; gap in the shaft's east wall v 6.10-7.05 (R), door line 6.15-6.95 -> w 0.80 at v 6.58. Entry door 90/205 hangs from the lift shaft's south face (hinge) and closes the 0.9 m gap to the lobby south wall.",
+  "CHECKER (independent re-measurement on fpB): lobby-niche north wall moved from R v=4.95 to v=5.27 (faces 5.16/5.38; the old position sat on terrace hatching); niche side walls now end there; lobby and terrace polygons follow. SW jog of the living room re-measured (faces v 11.52-11.73, t 0.21; was 0.35 including the red building line). Hall polygon self-intersection removed; duplicated closing vertex of the terrace polygon removed. Small opening re-centring: bed-1 door, lift door, stair window. All other walls, windows and doors were re-scanned and agree with the drawing within ~5 cm.",
+  "AC/drying ledge (מעבה): misc1 has a generic aluminium drying-screen detail (ledge 70 deep, screen 195 high between 20 cm walls); this ledge is ~0.7 m deep, so the thin u=13.52 line may be that 1.95 m screen - left h=null (not stated on fpB). FINAL CHECK: the M2 south elevation (secA ~x4500-4620, y2600-3050) shows this column of ledges closed by vertical-slat panels labelled 'מסתור כביסה מאלומיניום בגוון לבן' (white aluminium laundry screen), each ~2.0-2.2 m tall per storey; their base relative to the floor could not be fixed from the elevation, so the heights stay null. Sibling floors differ: M2.json uses 'low' h 1.05 (assumed), M3.json a 2.5 m railing (assumed).",
+  "Railing heights (FINAL CHECK, changed 1.05 -> 1.25): both sections dimension the terrace railing/parapet 1.25 m above the +9.00 finished terrace: ב-ב prints '+10.25' over the chain 25 (slab) | 15 (build-up) | 125 at the solid parapet next to E; ג-ג (west edge) has the chain '15 | 125' with the 125 tick at the railing top and draws the railing ~1.2 m above the finished floor, but labels it '+10.40'; the task brief also gives parapet ~+10.25. CONFLICT: the plan fpB prints '+10.05' three times on the terrace edges (north bay, north edge, east parapet) -> if the plan is preferred, use h=1.05. Section ג-ג also shows the X-panel metal railing standing on a narrow concrete upstand (blue, ~0.2 wide, top roughly 0.15-0.3 m above the terrace floor) - the 20 cm double line on the plan; not modelled separately.",
+  "Scale check: measured distances are ~1-1.5% shorter than the dimension strings in the x-ish directions (830 -> 8.20, 690 -> 6.83, 370 -> 3.66, 400 -> 3.93, 280 -> 2.75); z-ish chains agree (680 -> 6.79, 1191 -> 11.93). Positions kept as drawn (global registration).",
+  "Shower room width: '10|120|10' written, drawn inner width only ~1.07.",
+  "Bedroom-2 door: drawn opening 0.73 between the column (blue, S u4.21-4.68 v6.30-6.66) and the shower-room NE corner.",
+  "Area check apt 6: room polygons (centreline, excl. AC ledge) = 112.7 m2; gross to outer faces of exterior walls (raster) = 117.1 m2 vs area box 117.12 (main 109.62 + mamad 7.5). Lobby+stair polygons 14.9 m2 vs table 16.20; lift shaft 3.12 vs table opening 1.88x1.70=3.20.",
+  "Notch south of the kitchen (R u 2.68-4.68, v 14.2-16.3, dims 200 x 202) is open (exterior) at this level.",
+  "X-shaped marks on the plan (in the hall at R(9.45,13.0) and on the terrace) are not walls - ignored.",
+  "Cross-sheet check of the vertical core (R frame, same scan lines on each sheet): stair north/south walls and lift walls on fpB lie within ~0.10-0.15 m of fpC and fpD (fpB ~+0.13 in v, lift west wall ~-0.1 in u); on fpE (ground floor, M1) the same walls are ~+0.45..0.6 m off in both u and v -> fpE registration at M2 looks off, fpB/fpC/fpD agree.",
+  "FINAL CHECK - cross-floor stacking (wall-to-wall match of this JSON against M3.json/fpC and M2.json/fpD): over the whole M2 core, mamad, living/kitchen and bedroom wing, M4 sits ~(-0.16, +0.09) m (global x,z) from M3 = about -0.09 in u and +0.165 in v of M2R (residuals +-0.04), and ~+0.17 in v / -0.03 in u from M2.json, while M3 and M2 agree with each other within ~0.05. Near building E the floors agree (terrace east parapet vs M3's east wall: 0.025). Dimension chains do NOT show fpB to be the wrong sheet: on fpB the chain '153|370|430' measures 1.53|3.71|4.34 from E's west line (x=0.01), i.e. the north-bay east face at x=-4.33 vs -4.30 written; on fpC the chain '233|360|430' (total '1023') measures 2.32|3.57|4.28 = 10.16 (-0.7%) and starts at x=+0.09, putting the same face at -4.20. So the ~0.15 m step between the +6.00 and +9.00 cores is a sheet-registration difference (fpC/fpD vs fpB, growing with distance from E), not a design change; M4 was NOT shifted. Align the floors globally (one per-sheet correction) when stacking.",
+  "FINAL CHECK (independent re-check, res 100-170 overlays of every part of the floor; scan/topology/validation scripts in work/M4final): walls, openings, rooms and terrace edges match the drawing to ~2-5 cm; all openings lie on wall centrelines; every room edge is a wall, a railing or a shared open-plan boundary; no real polygon overlaps. Changed now: terrace railing + east parapet height 1.05 -> 1.25 (sections), service-ledge polygon 3 cm step vertex removed, notes on stacking offset and laundry screen added.",
+  "aligned to M3.json on ['core', 'mamad'] walls: rotate 0.3958 deg about (0,0), then translate (0.238,-0.033)"
+ ]
+}

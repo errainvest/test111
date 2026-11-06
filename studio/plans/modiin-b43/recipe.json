@@ -1,0 +1,204 @@
+{
+ "name": "מודיעין · אתר B-43",
+ "place": "מודיעין · גוש 5616 חלקה 14 · מגרש 2123",
+ "subtitle": "דירת 5 חדרים · קומה ג׳ (+6.00) · בניין M2",
+ "facade": "טיח אקרילי לבן, חדר מדרגות וקירות תומכים באבן ירושלמית בעיבוד טלטיש, מעקות מתכת בגוון כחול",
+ "fine": "המודל נבנה מתוכניות ההיתר (קנ״מ 1:100). הקירות, הפתחים והמפלסים נמדדו מהסריקה בדיוק של כ־10 ס״מ. מבפנים מוצגת דירה 4 בקומה ג׳ (+6.00) של בניין M2; שאר הבניין מוצג מבחוץ. השטח לקוח מטבלת השטחים בהיתר (שטח עיקרי 104.38 מ״ר + ממ״ד 7.50). הריהוט והעיצוב מוצעים להמחשה.",
+ "datum": 246.4,
+ "dir": "studio/plans/modiin-b43",
+ "railing": {
+  "style": "metal-x",
+  "color": "#2d5f8a"
+ },
+ "buildings": [
+  {
+   "id": "E",
+   "name": "בניין E",
+   "zero": 246.4,
+   "floors": [
+    "E1.json",
+    "E2.json",
+    "E3.json"
+   ],
+   "roof": "ER.json",
+   "levels": {
+    "E0.json": -2.6,
+    "E1.json": 0,
+    "E2.json": 3,
+    "E3.json": 6
+   },
+   "names": {
+    "E0.json": "מרתף",
+    "E1.json": "קומה א׳",
+    "E2.json": "קומה ב׳",
+    "E3.json": "קומה ג׳"
+   },
+   "stone": [
+    {
+     "kinds": [
+      "core"
+     ]
+    }
+   ],
+   "detail_floors": [],
+   "roof_lower_walls": false
+  },
+  {
+   "id": "M2",
+   "name": "בניין M2",
+   "zero": 247.7,
+   "floors": [
+    "M1.json",
+    "M2.json",
+    "M3.json",
+    "M4.json"
+   ],
+   "roof": "MR.json",
+   "levels": {
+    "M1.json": 0,
+    "M2.json": 3,
+    "M3.json": 6,
+    "M4.json": 9
+   },
+   "names": {
+    "M1.json": "קומה א׳",
+    "M2.json": "קומה ב׳",
+    "M3.json": "קומה ג׳",
+    "M4.json": "קומה ד׳"
+   },
+   "stone": [
+    {
+     "kinds": [
+      "core"
+     ]
+    }
+   ],
+   "detail_floors": [
+    "M3.json"
+   ],
+   "roof_lower_walls": false,
+   "show_apts": {
+    "M3.json": [
+     "4"
+    ]
+   },
+   "fixtures": {
+    "M3.json": "apt4_fixtures.json"
+   }
+  }
+ ],
+ "site": "SITE.json",
+ "areas_by_level": {
+  "E": {
+   "0": [
+    {
+     "area": 74.7,
+     "rooms": 3
+    },
+    {
+     "area": 98.85,
+     "rooms": 4
+    }
+   ],
+   "3": [
+    {
+     "area": 72.5,
+     "rooms": 3
+    },
+    {
+     "area": 72.5,
+     "rooms": 3
+    }
+   ],
+   "6": [
+    {
+     "area": 72.2,
+     "rooms": 3
+    },
+    {
+     "area": 72.2,
+     "rooms": 3
+    }
+   ]
+  },
+  "M2": {
+   "0": [
+    {
+     "area": 112.74,
+     "rooms": 5
+    }
+   ],
+   "3": [
+    {
+     "area": 111.83,
+     "rooms": 5
+    },
+    {
+     "area": 119.41,
+     "rooms": 5
+    }
+   ],
+   "6": [
+    {
+     "area": 109.98,
+     "rooms": 5
+    },
+    {
+     "area": 111.88,
+     "rooms": 5
+    }
+   ],
+   "9": [
+    {
+     "area": 117.12,
+     "rooms": 5
+    }
+   ]
+  }
+ },
+ "start": {
+  "bld": "M2",
+  "level": 6,
+  "apt": "4"
+ },
+ "apartments": [
+  {
+   "building": "M2",
+   "apt": "4",
+   "main_area": 111.88,
+   "rooms": 5
+  },
+  {
+   "building": "M2",
+   "apt": "5",
+   "main_area": 109.98,
+   "rooms": 5
+  }
+ ],
+ "views": {
+  "ext": {
+   "pos": [
+    -33.0,
+    -19.0
+   ],
+   "h": 17,
+   "tgt": [
+    -12.0,
+    6.0
+   ],
+   "th": 6,
+   "bld": "M2"
+  },
+  "dir": [
+   -0.57,
+   -0.82
+  ]
+ },
+ "site_extra": {
+  "terrain_plane": [
+   246.51,
+   -0.052,
+   0.038
+  ]
+ }
+}
