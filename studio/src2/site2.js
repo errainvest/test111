@@ -98,8 +98,9 @@ function buildSite(){
   PLANE = Array.isArray(SITE.terrain_plane) ? [toY(SITE.terrain_plane[0]), +SITE.terrain_plane[1], +SITE.terrain_plane[2]] : null;
   // building footprints: union of the ground-floor rooms, at the building's ±0.00 (slightly below)
   FOOTS=[]; FLATS=[];
-  for (const B_ of BLDS){ const L0=B_.levels.find(L=>L.ground)||B_.levels[0]; if(!L0) continue; const mp=mpUnion(L0.rooms.map(r=>r.poly)); for (const poly of mp) FOOTS.push({bld:B_.id, poly:poly[0], y:B_.base+L0.level-.02, blend:2.2});
-    for (const o of L0.outdoor) FLATS.push({poly:o.poly, y:B_.base+(o.level!=null?o.level:0)-.02, blend:1.6, kind:o.kind}); }
+  for (const B_ of BLDS){ const L0=B_.levels.find(L=>L.ground)||B_.levels[0]; if(!L0) continue; const mp=mpUnion(L0.rooms.map(r=>r.poly)); for (const poly of mp) FOOTS.push({bld:B_.id, poly:poly[0], y:B_.base+L0.level-.02, blend:.3});
+    for (const o of L0.outdoor) FLATS.push({poly:o.poly, y:B_.base+(o.level!=null?o.level:0)-.02, blend:1.6, kind:o.kind});
+    for (const L of B_.levels) if (L!==L0) for (const o of L.outdoor) if (o.kind==='garden') FLATS.push({poly:o.poly, y:B_.base+(o.level!=null?o.level:L.level)-.02, blend:1.6, kind:'garden'}); }
   if (!SPOTS.length){ for (const f of FOOTS){ const [x,z]=polyCentroid(f.poly); SPOTS.push({x,z,y:f.y}); } }
   for (const p of (SITE.parking||[])) if (p.poly && p.poly.length>=3){ const y=p.level!=null?toY(p.level):idw(...polyCentroid(p.poly)); FLATS.push({poly:ring(p.poly), y, blend:1.0, kind:'parking'}); }
   for (const p of (SITE.flats||[])) if (p.poly && p.poly.length>=3) FLATS.push({poly:ring(p.poly), y:toY(p.level), blend:p.blend||1.5, kind:p.kind||'flat'});
@@ -121,7 +122,7 @@ function buildSite(){
   for (const d of (SITE.driveways||[])) if (d.poly) surface(d.poly, d.kind==='asphalt'?asphM:driveM, .035);
   for (const d of (SITE.sidewalks||[])) if (d.poly) surface(d.poly, walkM, .04);
   for (const g of (SITE.gardens||[])) if (g.poly) surface(g.poly, lawnM, .025);
-  for (const B_ of BLDS){ const L0=B_.levels.find(L=>L.ground); if(!L0) continue; for (const o of L0.outdoor) if (o.kind==='garden') surface(o.poly, lawnM, .028); }
+  for (const B_ of BLDS) for (const L of B_.levels) for (const o of L.outdoor) if (o.kind==='garden') surface(o.poly, lawnM, .028);
   for (const p of (SITE.paths||[])) if (p.poly) surface(p.poly, p.kind==='red'?walkM:paverM, .045);
   (SITE.parking||[]).forEach((p,k)=>{ if(!p.poly||p.poly.length<4) return; surface(p.poly, parkM, .045);
     const P=ring(p.poly), E=P.map((a,i)=>{ const b=P[(i+1)%P.length]; return {a,b,l:Math.hypot(b[0]-a[0],b[1]-a[1])}; }).sort((m,n)=>n.l-m.l);

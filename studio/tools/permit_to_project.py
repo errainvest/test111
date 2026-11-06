@@ -65,6 +65,7 @@ def floor_from(F, zero, level_default, name_default):
     for r in F.get('outdoor', []):
         P = poly(r.get('poly'))
         if not P: continue
+        if (r.get('kind') == 'pergola') and ('בעתיד' in (r.get('name') or '') or 'FUTURE' in (r.get('note') or '').upper()): continue
         q = {'name': r.get('name') or '', 'kind': r.get('kind') or 'balcony', 'apt': str(r.get('apt')) if r.get('apt') is not None else '', 'poly': P}
         lv2 = rel(r.get('level'), zero)
         if lv2 is not None: q['level'] = lv2
