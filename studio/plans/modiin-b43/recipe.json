@@ -159,7 +159,8 @@
  "start": {
   "bld": "M2",
   "level": 6,
-  "apt": "4"
+  "apt": "4",
+  "mode": "ext"
  },
  "apartments": [
   {

@@ -454,7 +454,10 @@ function start(){
   build(TIER);
   const st=PROJECT.start||{}; if (st.bld && BLD(st.bld)){ state.bld=st.bld; const B_=BLD(st.bld); const i=B_.levels.findIndex(L=>Math.abs(L.level-(+st.level||0))<.3); state.view = i>=0 ? i : -1;
     if (st.apt!=null){ const a=APTS.find(a=>a.bld===st.bld && String(a.apt)===String(st.apt)); if (a) state.apt={L:a.L, apt:a.apt}; } renderNav(); }
-  setMode('doll');
+  // PROJECT.start.mode picks the opening view (doll by default); its button moves to the front of the view switch
+  const m0 = ['doll','plan','walk','ext'].includes(st.mode) ? st.mode : 'doll', b0=document.getElementById('m-'+m0);
+  if (b0 && b0.parentElement) b0.parentElement.prepend(b0);
+  setMode(m0);
 }
 resize();
 start();
