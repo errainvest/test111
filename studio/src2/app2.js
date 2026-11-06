@@ -4,7 +4,7 @@ let yaw=0, pitch=0, houseRoot=null, APTS=[];
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping=true; controls.dampingFactor=.08; controls.maxDistance=340; controls.minDistance=2.5;
 const BLD = id => BLDS.find(b=>b.id===id);
-const R = id => ALLROOMS.find(r=>r.id===id);
+const R = id => ALLROOMS.find(r=>r.id===id) || ALLOUT.find(r=>r.id===id);
 const levelOf = (bld, idx) => { const B_=BLD(bld); return B_ ? B_.levels[idx] : null; };
 function disposeTree(o){ o.traverse(n=>{ if(n.geometry) n.geometry.dispose(); }); }
 function bboxOf(polys){ let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9; for(const P of polys) for(const [x,z] of P){ x0=Math.min(x0,x); x1=Math.max(x1,x); z0=Math.min(z0,z); z1=Math.max(z1,z); } return {x0,x1,z0,z1}; }
@@ -22,7 +22,7 @@ function viewDir(){ const [nx,nz]=NORTH(); const sx=-nx, sz=-nz, ex=-nz, ez=nx; 
 const PRESETS = {
   doll: () => { const f=focus(), s=f.s, d=viewDir(), k=state.apt?1.0:state.bld?(state.view>=0?1.1:1.35):1.0; return { pos:[f.c[0]+d[0]*s*k, f.y+s*.78*k+4, f.c[1]+d[1]*s*k], tgt:[f.c[0], f.y, f.c[1]] }; },
   plan: () => { const f=focus(), s=f.s; return { pos:[f.c[0], f.y+s*1.35+8, f.c[1]+.01], tgt:[f.c[0], f.y, f.c[1]] }; },
-  ext:  () => { const f=focus(), s=Math.max(f.s,16), d0=viewDir(), by=state.bld?BLD(state.bld).base:0, dist=s*1.25;
+  ext:  () => { const sv=state.apt, sl=state.view; state.apt=null; state.view=-1; const f=focus(); state.apt=sv; state.view=sl; const s=Math.max(f.s,16), d0=viewDir(), by=state.bld?BLD(state.bld).base:0, dist=s*1.25;
     // look from the default corner, or turn until no other building stands in the way
     const others=FOOTS.filter(q=>!state.bld||q.bld!==state.bld);
     let d=d0;
@@ -350,6 +350,7 @@ const curtainTex = (key, base, kind) => ctex(key,256,(x,N)=>{ x.fillStyle=base; 
   else { for(let i=0;i<N;i++){ const v=Math.sin(i/N*Math.PI*2*9)*.5+.5; x.fillStyle=`rgba(0,0,0,${.03+v*.11})`; x.fillRect(i,0,1,N); } }
   fine(x,N,6,77); },[1,1]);
 const CURTAIN=[M({map:curtainTex('cur1','#efe9df','fold'), roughness:.95},true), M({map:curtainTex('cur2','#ddd2bf','fold'), roughness:.95},true), M({map:curtainTex('cur3','#cfcfcb','blind'), roughness:.8},true)];
+const capM = M({color:'#e4e1db', roughness:.95}, true);
 function build(id){
   if (houseRoot){ scene.remove(houseRoot); disposeTree(houseRoot); }
   MATS.forEach(m=>m.dispose()); MATS=[]; EMIT=[]; PENDANTS=[];
@@ -371,6 +372,8 @@ function build(id){
   }
   LEVELS.forEach((L,i)=>{ const rt=LV[i]; buildFurniture2(L, rt, rt.furn, F, id); });
   LEVELS.forEach((L,i)=>{ const rt=LV[i]; buildFixtures2(L, rt.fix, F, id); buildGlow(L, rt); });
+  LEVELS.forEach((L,i)=>{ if (!L.detail) return; const hidden=L.rooms.filter(r=>!r.detail); if (!hidden.length) return;
+    const mp=mpUnion(hidden.map(r=>r.poly)); const gc=slabGeom(mp, L.H, SLAB*.6); if (gc){ const m=new THREE.Mesh(gc,[capM,capM]); m.castShadow=m.receiveShadow=true; LV[i].struct.add(m); } });
   LV.forEach(rt=>{ for (const k of ['struct','slab0','slab','furn','fit','fix']) mergeGroup(rt[k]); });
   houseRoot.traverse(n=>{ if(n.isMesh && n.material && !Array.isArray(n.material) && n.material.transparent){ n.castShadow=false; n.renderOrder=2; } });
   scene.add(houseRoot);
@@ -414,7 +417,8 @@ function start(){
   document.getElementById('fine').textContent = PROJECT.fine || '';
   buildSite(); miniBounds(); renderNav(); renderLabels();
   build(TIER);
-  const st=PROJECT.start||{}; if (st.bld && BLD(st.bld)){ state.bld=st.bld; const B_=BLD(st.bld); const i=B_.levels.findIndex(L=>Math.abs(L.level-(+st.level||0))<.3); state.view = i>=0 ? i : -1; renderNav(); }
+  const st=PROJECT.start||{}; if (st.bld && BLD(st.bld)){ state.bld=st.bld; const B_=BLD(st.bld); const i=B_.levels.findIndex(L=>Math.abs(L.level-(+st.level||0))<.3); state.view = i>=0 ? i : -1;
+    if (st.apt!=null){ const a=APTS.find(a=>a.bld===st.bld && String(a.apt)===String(st.apt)); if (a) state.apt={L:a.L, apt:a.apt}; } renderNav(); }
   setMode('doll');
 }
 resize();

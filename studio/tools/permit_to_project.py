@@ -171,6 +171,21 @@ def main():
             if fn in (b.get('names') or {}): floors[-1]['name'] = b['names'][fn]
             if 'detail_floors' in b and fn not in b['detail_floors']: floors[-1]['shell'] = True
             if fn in (b.get('show_apts') or {}): floors[-1]['show_apts'] = [str(a) for a in b['show_apts'][fn]]
+            fxf = (b.get('fixtures') or {}).get(fn)
+            if fxf and os.path.exists(os.path.join(D, fxf)):
+                FX = json.load(open(os.path.join(D, fxf)))
+                clean = []
+                for fx in FX.get('fixtures', []):
+                    q = {'type': fx.get('type'), 'room': fx.get('room')}
+                    for k in ('a', 'b', 'sink', 'cook', 'fridge', 'facing'):
+                        if isinstance(fx.get(k), list) and len(fx[k]) >= 2 and num(fx[k][0]) is not None: q[k] = [num(fx[k][0]), num(fx[k][1])]
+                    if poly(fx.get('poly')): q['poly'] = poly(fx.get('poly'))
+                    for k in ('x', 'z', 'w', 'depth'):
+                        if num(fx.get(k)) is not None: q[k] = num(fx.get(k))
+                    clean.append(q)
+                floors[-1]['fixtures'] = clean
+                floors[-1]['door_swings'] = [{'x': num(d.get('x')), 'z': num(d.get('z')), 'w': num(d.get('w')), 'hinge': d.get('hinge'), 'opens_into': d.get('opens_into')}
+                                             for d in FX.get('door_swings', []) if num(d.get('x')) is not None]
         if b.get('roof') and os.path.exists(os.path.join(D, b['roof'])):
             floors.append(roof_from(json.load(open(os.path.join(D, b['roof']))), zero, b.get('roof_lower_walls', True)))
         P['buildings'].append({'id': b['id'], 'name': b.get('name') or b['id'], 'zero': zero, 'floors': floors, 'stone': b.get('stone', [])})

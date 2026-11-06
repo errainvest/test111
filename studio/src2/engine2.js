@@ -59,6 +59,7 @@ const KINDS2 = {
   stair:{n:'מדרגות',t:'living'}, balcony:{n:'מרפסת',t:'balcony'}, terrace:{n:'מרפסת',t:'balcony'}, garden:{n:'חצר',t:'balcony'}, pergola:{n:'פרגולה',t:'balcony'}, roof:{n:'גג',t:'balcony'},
 };
 const PRIVATE = new Set(['bed','master','kids','office','mamad','closet','storage','bath','wc','laundry']);
+let ALLOUT=[];
 let LEVELS=[], ALLROOMS=[], BLDS=[], BB={x0:0,x1:10,z0:0,z1:10}, C0=[5,5], PCEN=[5,5], PLOT=null, DATUM=0;
 const area = r => Math.abs(polyArea(r.poly));
 function wallInfo(w){ const dx=w.b[0]-w.a[0], dz=w.b[1]-w.a[1], len=Math.hypot(dx,dz)||1e-6, u=[dx/len,dz/len]; return {len,u,n:[-u[1],u[0]]}; }
@@ -113,12 +114,18 @@ function normalizeProject(P){
         else { op.h=Math.min(+o.h||(type==='entry'?2.2:2.1),L.H-.2); op.sill=0; op.type='door'; if(type==='entry') op.front=1; }
         best.open.push(op);
       }
+      L.fixtures = Array.isArray(f.fixtures) ? f.fixtures : [];
+      L.swings = Array.isArray(f.door_swings) ? f.door_swings : [];
       // door swing side: towards the more private room
       for (const w of L.walls) for (const op of w.open){ if (op.type!=='door') continue;
         const cx=w.a[0]+w.u[0]*op.c, cz=w.a[1]+w.u[1]*op.c, d=w.t/2+.3;
         const rp=roomAtL(L,cx+w.n[0]*d,cz+w.n[1]*d,true), rn=roomAtL(L,cx-w.n[0]*d,cz-w.n[1]*d,true);
         const sc=r=>!r||r.type==='balcony'?-1:(PRIVATE.has(r.kind)?1:0)+1/(1+area(r));
-        op.into = sc(rp)>=sc(rn)?1:-1; }
+        op.into = sc(rp)>=sc(rn)?1:-1;
+        // a door swing drawn on the plan overrides the guess
+        const sw=L.swings.find(q=>q && q.x!=null && Math.hypot(q.x-cx,q.z-cz)<Math.max(.45,op.w*.7));
+        if (sw){ const nm=String(sw.opens_into||''); if (rp && rp.name===nm) op.into=1; else if (rn && rn.name===nm) op.into=-1;
+          if (Array.isArray(sw.hinge)){ const hs=(sw.hinge[0]-cx)*w.u[0]+(sw.hinge[1]-cz)*w.u[1]; op.hinge = hs<0?'s':'e'; } } }
       B_.levels.push(L); LEVELS.push(L);
     });
     BLDS.push(B_);
@@ -126,25 +133,47 @@ function normalizeProject(P){
   // stairs connect a floor to the next floor of the same building: hole in the slab above
   for (const B_ of BLDS) B_.levels.forEach((L,i)=>{ const up=B_.levels[i+1]; L.stairUp = up ? L.stairs.map(s=>ring(s.poly)) : []; if(up) up.stairHoles=(up.stairHoles||[]).concat(L.stairUp); });
   ALLROOMS = LEVELS.flatMap(L=>L.rooms);
-  ALLROOMS.forEach(r=>{ r.cent=polyCentroid(r.poly); r.detail=isDetail(LEVELS[r.L], r); r.nav = r.detail && r.kind!=='shaft' && r.kind!=='stair' && area(r)>=1.5; r.cam=autoCam2(LEVELS[r.L], r); });
-  LEVELS.forEach(L=>{ L.detail = L.rooms.some(r=>r.detail && r.apt && r.apt!=='common'); L.outdoor.forEach(o=>{ o.detail=isDetail(L,o); }); });
+  ALLROOMS.forEach(r=>{ r.cent=polyCentroid(r.poly); r.detail=isDetail(LEVELS[r.L], r); r.nav = r.detail && r.kind!=='shaft' && r.kind!=='stair' && area(r)>=1.5; });
+  LEVELS.forEach(L=>{ L.detail = L.rooms.some(r=>r.detail && r.apt && r.apt!=='common'); L.outdoor.forEach(o=>{ o.detail=isDetail(L,o); });
+    for (const fx of L.fixtures){ const r=fixtureRoom(L,fx); if (r){ (r.fixtures=r.fixtures||[]).push(fx); } } });
+  // balconies and terraces of shown apartments can be walked to
+  ALLOUT = LEVELS.flatMap(L=>L.outdoor.filter(o=>o.detail && o.kind!=='garden' && o.kind!=='roof' && Math.abs(polyArea(o.poly))>=2));
+  ALLOUT.forEach(o=>{ o.cent=polyCentroid(o.poly); o.nav=true; o.cam=autoCam2(LEVELS[o.L], o); });
+  ALLROOMS.forEach(r=>{ r.cam=autoCam2(LEVELS[r.L], r); });
   const xs=[], zs=[]; LEVELS.forEach(L=>{ L.walls.forEach(w=>{ xs.push(w.a[0],w.b[0]); zs.push(w.a[1],w.b[1]); }); });
   BB = xs.length ? {x0:Math.min(...xs), x1:Math.max(...xs), z0:Math.min(...zs), z1:Math.max(...zs)} : {x0:0,x1:10,z0:0,z1:10};
   C0=[(BB.x0+BB.x1)/2,(BB.z0+BB.z1)/2];
   PLOT = P.site && P.site.plot && P.site.plot.length>=3 ? ring(P.site.plot) : null;
   PCEN = PLOT ? polyCentroid(PLOT) : C0;
 }
+function fixtureRoom(L, fx){
+  const pts=[];
+  if (fx.a && fx.b){ const mx=(fx.a[0]+fx.b[0])/2, mz=(fx.a[1]+fx.b[1])/2, l=Math.hypot(fx.b[0]-fx.a[0],fx.b[1]-fx.a[1])||1, n=[-(fx.b[1]-fx.a[1])/l,(fx.b[0]-fx.a[0])/l]; pts.push([mx+n[0]*.3,mz+n[1]*.3],[mx-n[0]*.3,mz-n[1]*.3]); }
+  if (fx.poly && fx.poly.length>=3) pts.push(polyCentroid(fx.poly));
+  if (fx.x!=null) pts.push([+fx.x,+fx.z]);
+  const all=[...L.rooms,...L.outdoor], cands=[];
+  for (const [x,z] of pts) for (const r of all) if (inPoly(r.poly,x,z) && !cands.includes(r)) cands.push(r);
+  return cands.find(r=>fx.room && r.name===fx.room) || cands[0] || null;
+}
 function isDetail(L, r){ if (L.shell) return false; if (!L.showApts) return true; return !r.apt || r.apt==='common' || L.showApts.has(String(r.apt)); }
 function autoCam2(L, r){
-  // stand just inside a door of the room (or at one end of its long axis) and look towards the farthest corner
-  const far=(px,pz)=>{ let b=null, bd=-1; for (const v of r.poly){ const d=Math.hypot(v[0]-px,v[1]-pz); if(d>bd){ bd=d; b=v; } }
-    const [mx,mz]=r.cent; const tx=b[0]+(mx-b[0])*.25, tz=b[1]+(mz-b[1])*.25; return [px,pz,tx,tz]; };
+  // stand in a doorway of the room (a little outside it for small rooms) and look at what is drawn in it, or at the farthest corner
+  const [mx,mz]=r.cent, small=Math.abs(polyArea(r.poly))<6.5;
+  const fxPts=(r.fixtures||[]).map(f=> f.a&&f.b ? [(f.a[0]+f.b[0])/2,(f.a[1]+f.b[1])/2] : f.poly ? polyCentroid(f.poly) : f.x!=null ? [+f.x,+f.z] : null).filter(Boolean);
+  const target=(px,pz)=>{
+    if (fxPts.length){ const tx=fxPts.reduce((a,p)=>a+p[0],0)/fxPts.length, tz=fxPts.reduce((a,p)=>a+p[1],0)/fxPts.length; if (Math.hypot(tx-px,tz-pz)>1.2) return [tx,tz]; }
+    let b=null, bd=-1; for (const v of r.poly){ const d=Math.hypot(v[0]-px,v[1]-pz); if(d>bd){ bd=d; b=v; } } return [b[0]+(mx-b[0])*.25, b[1]+(mz-b[1])*.25]; };
+  let best=null;
   for (const w of L.walls) for (const o of w.open){ if (o.type==='window') continue;
     const cx=w.a[0]+w.u[0]*o.c, cz=w.a[1]+w.u[1]*o.c;
-    for (const s of [1,-1]){ const px=cx+w.n[0]*s*(w.t/2+.55), pz=cz+w.n[1]*s*(w.t/2+.55); if (inPoly(r.poly,px,pz)) return far(px,pz); } }
-  const u=(()=>{ let best=0, uu=[1,0]; const P=r.poly; for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if(l>best){ best=l; uu=[(b[0]-a[0])/l,(b[1]-a[1])/l]; } } return uu; })();
-  const [mx,mz]=r.cent;
-  for (const k of [1.6,1.2,.8,.4]) for (const sg of [1,-1]){ const px=mx-u[0]*k*sg, pz=mz-u[1]*k*sg; if (inPoly(r.poly,px,pz) && polyDist2(r.poly,px,pz)>.35) return far(px,pz); }
+    for (const s of [1,-1]){ const ix=cx+w.n[0]*s*(w.t/2+.5), iz=cz+w.n[1]*s*(w.t/2+.5); if (!inPoly(r.poly,ix,iz)) continue;
+      // outside point (other side of the door) for small rooms
+      const ox=cx-w.n[0]*s*(w.t/2+.55), oz=cz-w.n[1]*s*(w.t/2+.55), outOK=L.rooms.some(q=>q!==r && inPoly(q.poly,ox,oz)) || L.outdoor.some(q=>q!==r && inPoly(q.poly,ox,oz));
+      const [px,pz] = small && outOK ? [ox,oz] : [ix,iz]; const t=target(px,pz), score=Math.hypot(t[0]-px,t[1]-pz) + (o.type==='door'?.3:0) + (o.type==='slider'?-.6:0);
+      if (!best || score>best[0]) best=[score,[px,pz,t[0],t[1]]]; } }
+  if (best) return best[1];
+  const u=(()=>{ let bl=0, uu=[1,0]; const P=r.poly; for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if(l>bl){ bl=l; uu=[(b[0]-a[0])/l,(b[1]-a[1])/l]; } } return uu; })();
+  for (const k of [1.6,1.2,.8,.4]) for (const sg of [1,-1]){ const px=mx-u[0]*k*sg, pz=mz-u[1]*k*sg; if (inPoly(r.poly,px,pz) && polyDist2(r.poly,px,pz)>.35){ const t=target(px,pz); return [px,pz,t[0],t[1]]; } }
   return [mx-.01,mz-.01,mx+u[0]*2,mz+u[1]*2];
 }
 /* ---------------- facade material ---------------- */

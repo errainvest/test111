@@ -103,12 +103,58 @@ function plantIn(ctx, g, F, s=1, k=0){
   for (let j=0;j<sp.length;j++){ const [x,z]=sp[(j+k)%sp.length]; const fp=rectFP(x,z,[1,0],.5,.5); if (occupy(ctx,fp)){ plant(g,F,x,z,s); return; } }
 }
 
+/* ---------------- fixtures drawn on the plan ---------------- */
+function inward(r, a, b){ const l=Math.hypot(b[0]-a[0],b[1]-a[1])||1, u=[(b[0]-a[0])/l,(b[1]-a[1])/l]; let n=[-u[1],u[0]]; const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2;
+  if (!inPoly(r.poly,mx+n[0]*.3,mz+n[1]*.3)) n=[-n[0],-n[1]]; return {u,n,l}; }
+function facingRy(f){ const l=Math.hypot(f[0],f[1])||1; return Math.atan2(f[0]/l,f[1]/l); }
+function buildFixture(L, rt, r, fx, F, id, ctx){
+  const T=fx.type;
+  if ((T==='counter'||T==='closet') && fx.a && fx.b){
+    const {u,n,l}=inward(r,fx.a,fx.b); if (l<.3) return; const dep=+fx.depth||(T==='closet'?.6:.6);
+    ctx.occ.push([fx.a,fx.b,[fx.b[0]+n[0]*dep,fx.b[1]+n[1]*dep],[fx.a[0]+n[0]*dep,fx.a[1]+n[1]*dep]]);
+    const ry=Math.atan2(n[0],n[1]);
+    if (T==='closet'){ const mx=(fx.a[0]+fx.b[0])/2+n[0]*dep/2, mz=(fx.a[1]+fx.b[1])/2+n[1]*dep/2; wardrobe(rt.fit,F,mx,mz,ry,l); return; }
+    let A=fx.a, U=u; if (n[1]*u[0]-n[0]*u[1] < 0){ A=fx.b; U=[-u[0],-u[1]]; }
+    const along=p=>Array.isArray(p)?Math.max(.3,Math.min(l-.3,(p[0]-A[0])*U[0]+(p[1]-A[1])*U[1])):null;
+    let b0=0, b1=l; const fr=along(fx.fridge);
+    if (fr!=null){ if (fr>l-.75) b1=l-.68; else if (fr<.75) b0=.68; }
+    kitchenRun(rt.fit,F,id,{x:A[0],z:A[1],rot:ry,len:l,b0,b1,sink:along(fx.sink),cook:fx.cook?along(fx.cook):null,hood:!!fx.cook,fridge:fr!=null?(fr>l-.75?l-.33:fr<.75?.33:null):null,up:[b0+.05,b1],splash:[b0,b1,.92,id==='lux'?Math.min(2.5,L.H-.3):1.55]});
+    return;
+  }
+  if ((T==='bathtub'||T==='shower') && fx.poly && fx.poly.length>=3){
+    const P=fx.poly, [cx,cz]=polyCentroid(P); let best=0, u=[1,0]; for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if(l>best){ best=l; u=[(b[0]-a[0])/l,(b[1]-a[1])/l]; } }
+    let w=0; for (const q of P) w=Math.max(w,Math.abs((q[0]-cx)*-u[1]+(q[1]-cz)*u[0])*2);
+    ctx.occ.push(P.map(q=>[q[0],q[1]]));
+    const gg=G(rt.fit,cx,cz,Math.atan2(-u[1],u[0]));
+    if (T==='bathtub'){ B(gg,F.ceramic,best,.55,w,0,0,0,.16); B(gg,M({color:'#e9ebea',roughness:.15}),best-.18,.02,w-.15,0,.535,0,.1); }
+    else { B(gg,F.ceramic,best,.04,w,0,0,0,.01);
+      let bi=-1, bd=-1; for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2, d=-Math.hypot(mx-r.cent[0],mz-r.cent[1]); if (bi<0||d>bd){ bd=d; bi=i; } }
+      const a=P[bi], b=P[(bi+1)%P.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); const gl=new THREE.Mesh(new THREE.PlaneGeometry(l*.9,2.0),F.showerGlass); gl.position.set((a[0]+b[0])/2,1.02,(a[1]+b[1])/2); gl.rotation.y=Math.atan2(-(b[1]-a[1])/l,(b[0]-a[0])/l); rt.fit.add(gl);
+      C(rt.fit,id==='lux'?F.handle:F.chrome,.11,.11,.012,cx,L.H-.35,cz,32).castShadow=false; }
+    return;
+  }
+  if (fx.x==null) return;
+  const f=Array.isArray(fx.facing)?fx.facing:[r.cent[0]-fx.x, r.cent[1]-fx.z], fl=Math.hypot(f[0],f[1])||1, fu=[f[0]/fl,f[1]/fl], ry=facingRy(fu);
+  const sq=(w,d)=>{ const s=[fu[1],-fu[0]]; return [[-w/2,-d/2],[w/2,-d/2],[w/2,d/2],[-w/2,d/2]].map(([a,b])=>[+fx.x+s[0]*a+fu[0]*b,+fx.z+s[1]*a+fu[1]*b]); };
+  if (T==='toilet'){ ctx.occ.push(sq(.42,.62)); toilet(rt.fit,F,+fx.x-fu[0]*.3,+fx.z-fu[1]*.3,ry); }
+  else if (T==='basin'){ const w=Math.max(.45,Math.min(1.4,+fx.w||.6)); ctx.occ.push(sq(w,.5)); vanity(rt.fit,F,+fx.x-fu[0]*.24,+fx.z-fu[1]*.24,ry,w,id); }
+  else if (T==='washer'){ ctx.occ.push(sq(.6,.6)); const gg=G(rt.fit,+fx.x,+fx.z,ry); B(gg,F.white,.6,.85,.6,0,0,0,.02); C(gg,F.glassBlack,.17,.17,.02,0,.55,.305,24).rotation.x=Math.PI/2; }
+  else if (T==='ac'){ ctx.occ.push(sq(.85,.35)); const gg=G(rt.fit,+fx.x,+fx.z,ry); B(gg,F.white,.85,.62,.32,0,.05,0,.02); C(gg,F.black,.22,.22,.02,-.12,.33,.165,28).rotation.x=Math.PI/2; }
+}
 function furnishRoom2(L, rt, g, r, F, id, aptHasDining){
   const k=r.kind, A=area(r);
   const ctx={r, occ:[], doors:doorZone(L,rt,r)};
   const edges=roomEdges(L,rt,r).sort((p,q)=>freeLen(q)-freeLen(p));
   const pick=(minLen,minDepth=0,excl=[])=>edges.find(si=>!excl.includes(si) && freeLen(si)>=minLen && si.depth>=minDepth);
   const [cx,cz]=r.cent;
+  const FX=r.fixtures||[], has=t=>FX.some(f=>f.type===t);
+  for (const fx of FX){ try{ buildFixture(L,rt,r,fx,F,id,ctx); }catch(e){ console.warn('fixture',fx,e); } }
+  if (k==='kitchen' && has('counter')){ // kitchen drawn on the plan: only add an island or a small table if there is room
+    if (!aptHasDining && A>11){ const u=mainAxis(r); for (const [dx,dz] of [[0,0],[.4,0],[-.4,0],[0,.4],[0,-.4]]){ const x=cx+dx, z=cz+dz; if (occupy(ctx,rectFP(x,z,u,2.4,1.9))){ const gg=G(g,x,z,Math.atan2(-u[1],u[0])); dining(gg,F,id,0,0,1.2,2); PENDANTS.push([L.id,x,z,'ring']); break; } } }
+    return; }
+  if ((k==='bath'||k==='wc') && (has('toilet')||has('basin')||has('bathtub')||has('shower'))) return;
+  if (k==='laundry' && has('washer')) return;
+  if (k==='service' && has('ac')) return;
   if (k==='bed'||k==='master'||k==='kids'||(k==='mamad'&&A>=9.5)){
     const bw = k==='master'?1.8 : k==='kids'?1.2 : A>12?1.6:1.4;
     let s1=null, c=null;
@@ -119,7 +165,7 @@ function furnishRoom2(L, rt, g, r, F, id, aptHasDining){
       const [ax,az]=atE(s1,c,.03); art(g,F,F.art[(r.id.length)%2],ax,1.4,az,s1.ry,Math.min(1.3,bw-.2),.7);
       const [rx,rz]=atE(s1,c,1.25); const rg=G(g,rx,rz,s1.ry); B(rg,F.rug,bw+.7,.012,2.5,0,.003,0);
     }
-    for (const s2 of edges){ if (s2===s1 || freeLen(s2)<1.0 || s2.depth<1.5) continue; const ww=Math.min(2.4,Math.floor((freeLen(s2)-.1)*10)/10); const c2=takeE(ctx,s2,ww,0,.62); if(c2!==null){ const [wx,wz]=atE(s2,c2,.3); wardrobe(g,F,wx,wz,s2.ry,ww); break; } }
+    if (!has('closet')) for (const s2 of edges){ if (s2===s1 || freeLen(s2)<1.0 || s2.depth<1.5) continue; const ww=Math.min(2.4,Math.floor((freeLen(s2)-.1)*10)/10); const c2=takeE(ctx,s2,ww,0,.62); if(c2!==null){ const [wx,wz]=atE(s2,c2,.3); wardrobe(g,F,wx,wz,s2.ry,ww); break; } }
     if (A>11.5 || k==='kids'){ for (const s3 of edges){ if (s3===s1 || freeLen(s3)<1.2 || s3.depth<1.9) continue; const c3=takeE(ctx,s3,1.15,0,1.1); if(c3!==null){ const [dx,dz]=atE(s3,c3,.33); desk(g,F,dx,dz,s3.ry,1.1); const [ox,oz]=atE(s3,c3,.85); officeChair(g,F,ox,oz,s3.ry+Math.PI); break; } } }
     plantIn(ctx,g,F,.9,r.id.length);
   } else if (k==='living'){
@@ -194,7 +240,7 @@ function furnishRoom2(L, rt, g, r, F, id, aptHasDining){
       const rb=rng(r.id.length*7+3); for(let sh=0;sh<4;sh++){ let bx=-.63; while(bx<.5){ const bw=.03+rb()*.04, bh=.22+rb()*.12; B(bs,F.book[Math.floor(rb()*7)],bw,bh,.24,bx+bw/2,.03+sh*.4+.025,0); bx+=bw+.004; if(rb()<.08) bx+=.15; } } break; } }
     if (A>9.5) for (const s3 of edges){ if (freeLen(s3)<2.0) continue; const c=takeE(ctx,s3,2.0,0,1.0); if(c!==null){ const [x,z]=atE(s3,c,.52); sofa(g,F,x,z,s3.ry,2.0,false); break; } }
     plantIn(ctx,g,F,.85,r.id.length);
-  } else if (k==='closet'||k==='storage'){
+  } else if ((k==='closet'||k==='storage') && !has('closet')){
     let n=0; for (const si of edges){ if (n>=2 || freeLen(si)<.9) continue; const ww=Math.min(2.4,Math.floor((freeLen(si)-.05)*10)/10), c=takeE(ctx,si,ww,0,.62); if(c===null) continue; n++; const [x,z]=atE(si,c,.3);
       if (k==='closet') wardrobe(g,F,x,z,si.ry,ww); else { const gg=G(g,x,z,si.ry); for(let i=0;i<4;i++) B(gg,F.joinery,ww,.03,.45,0,.4+i*.5,0); for (const sx of [-ww/2+.02,ww/2-.02]) B(gg,F.metal,.03,2.0,.45,sx,0,0); const rb=rng(r.id.length+n); for(let i=0;i<4;i++){ let bx=-ww/2+.1; while(bx<ww/2-.35){ const bw=.25+rb()*.2; B(gg,F.fabric2,bw,.22+rb()*.12,.35,bx+bw/2,.43+i*.5,0,.02); bx+=bw+.08; } } } }
   } else if (k==='hall'){
