@@ -12,7 +12,7 @@ function NORTH(){ const n=PROJECT.north||[0,-1], l=Math.hypot(n[0],n[1])||1; ret
 function focus(){
   let polys, y=0;
   if (state.apt){ const L=LEVELS[state.apt.L]; polys=[...L.rooms,...L.outdoor].filter(r=>r.apt===state.apt.apt).map(r=>r.poly); y=L.y; }
-  else if (state.bld){ const B_=BLD(state.bld); polys=B_.levels.flatMap(L=>L.rooms.map(r=>r.poly)); const L=state.view>=0?B_.levels[state.view]:null; y=L?L.y:B_.base; }
+  else if (state.bld){ const B_=BLD(state.bld); const L=state.view>=0?B_.levels[state.view]:null; polys=(L?[L]:B_.levels).flatMap(q=>[...q.rooms,...q.outdoor.filter(o=>o.kind!=='garden')].map(r=>r.poly)); y=L?L.y:B_.base; }
   else { polys = PLOT ? [PLOT] : LEVELS.flatMap(L=>L.rooms.map(r=>r.poly)); y=0; }
   if (!polys.length) polys=[[[BB.x0,BB.z0],[BB.x1,BB.z1]]];
   const bb=bboxOf(polys); return {c:[(bb.x0+bb.x1)/2,(bb.z0+bb.z1)/2], s:Math.max(8,bb.x1-bb.x0,bb.z1-bb.z0), y};
@@ -20,7 +20,7 @@ function focus(){
 // camera directions are taken relative to north so the default views look at the street-facing south-east corner
 function viewDir(){ const [nx,nz]=NORTH(); const sx=-nx, sz=-nz, ex=-nz, ez=nx; const d=[sx*.8+ex*.6, sz*.8+ez*.6], l=Math.hypot(d[0],d[1]); return [d[0]/l,d[1]/l]; }
 const PRESETS = {
-  doll: () => { const f=focus(), s=f.s, d=viewDir(), k=state.apt?1.0:state.bld?1.35:1.0; return { pos:[f.c[0]+d[0]*s*k, f.y+s*.78*k+4, f.c[1]+d[1]*s*k], tgt:[f.c[0], f.y, f.c[1]] }; },
+  doll: () => { const f=focus(), s=f.s, d=viewDir(), k=state.apt?1.0:state.bld?(state.view>=0?1.1:1.35):1.0; return { pos:[f.c[0]+d[0]*s*k, f.y+s*.78*k+4, f.c[1]+d[1]*s*k], tgt:[f.c[0], f.y, f.c[1]] }; },
   plan: () => { const f=focus(), s=f.s; return { pos:[f.c[0], f.y+s*1.35+8, f.c[1]+.01], tgt:[f.c[0], f.y, f.c[1]] }; },
   ext:  () => { const f=focus(), s=Math.max(f.s,16), d0=viewDir(), by=state.bld?BLD(state.bld).base:0, dist=s*1.25;
     // look from the default corner, or turn until no other building stands in the way
@@ -63,7 +63,7 @@ function applyState(){
   scene.fog = new THREE.Fog(e?'#262f42':'#d4dfe6', 140, 420);
   renderer.toneMappingExposure = e ? 1.0 : .95;
   [...MATS,...GMATS].forEach(m=>{ m.envMapIntensity = (m.userData.env||1) * (e ? .07 : .6); });
-  EMIT.forEach(o=>{ o.m.emissiveIntensity = e ? o.night : o.day; });
+  EMIT.forEach(o=>{ o.m.emissiveIntensity = e ? o.night : o.day; }); GEMIT.forEach(o=>{ o.m.emissiveIntensity = e ? o.night : o.day; });
   updateUI();
 }
 function setMode(m){
@@ -89,7 +89,7 @@ let currentRoomId=null;
 function goRoom(id, dur){
   const r=R(id); if(!r) return; currentRoomId=id; state.cur=r.L; const L=LEVELS[r.L];
   state.mode='walk'; controls.enabled=false; camera.up.set(0,1,0);
-  const y=L.y+(r.dy||0), pos=[r.cam[0],y+EYE,r.cam[1]], tgt=[r.cam[2],y+1.25,r.cam[3]];
+  const y=L.y+(r.dy||0), pos=[r.cam[0],y+EYE,r.cam[1]], dd=Math.hypot(r.cam[2]-r.cam[0],r.cam[3]-r.cam[1]), tgt=[r.cam[2],y+(dd>2?1.2:1.45),r.cam[3]];
   flyTo(pos,tgt,reduceMotion?1:(dur||1300),()=>{ setYawPitchFrom(new THREE.Vector3(...pos),new THREE.Vector3(...tgt)); });
   camera.fov=68; camera.updateProjectionMatrix(); applyState();
 }
@@ -130,10 +130,11 @@ function collide(p, Li){
 // where can one stand: a room or balcony of this level, or (on a ground floor) another building's ground floor or the open site
 function spotAt(Li, x, z){
   const L=LEVELS[Li]; const r=roomAtL(L,x,z,true);
+  if (r && !r.detail && r.type!=='balcony') return null;
   if (r) return {Li, y:L.y+(r.dy||0), room:r};
   if (L.ground){
-    for (let j=0;j<LEVELS.length;j++){ const M_=LEVELS[j]; if (!M_.ground||j===Li) continue; const r2=roomAtL(M_,x,z,true); if (r2) return {Li:j, y:M_.y+(r2.dy||0), room:r2}; }
-    if (FOOTS.some(f=>inPoly(f.poly,x,z))) return {Li, y:L.y, room:null};
+    for (let j=0;j<LEVELS.length;j++){ const M_=LEVELS[j]; if (!M_.ground||j===Li) continue; const r2=roomAtL(M_,x,z,true); if (r2 && !r2.detail && r2.type!=='balcony') return null; if (r2) return {Li:j, y:M_.y+(r2.dy||0), room:r2}; }
+    if (FOOTS.some(f=>inPoly(f.poly,x,z))) return L.detail ? {Li, y:L.y, room:null} : null;
     if (TERR_BB && x>TERR_BB.x0+8 && x<TERR_BB.x1-8 && z>TERR_BB.z0+8 && z<TERR_BB.z1-8) return {Li, y:terrainH(x,z), room:null, out:true};
     return null;
   }
@@ -184,7 +185,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'
 function segBtn(parent, label, pressed, fn){ const b=document.createElement('button'); b.type='button'; b.textContent=label; b.setAttribute('aria-pressed',String(pressed)); b.addEventListener('click',()=>{ stopTour(); fn(); }); parent.appendChild(b); return b; }
 function computeApts(){
   APTS=[];
-  LEVELS.forEach((L,Li)=>{ const ids=[...new Set(L.rooms.map(r=>r.apt).filter(a=>a && a!=='common'))];
+  LEVELS.forEach((L,Li)=>{ const ids=[...new Set(L.rooms.filter(r=>r.detail).map(r=>r.apt).filter(a=>a && a!=='common'))];
     for (const apt of ids){ const rs=L.rooms.filter(r=>r.apt===apt), ins=rs.filter(r=>r.type!=='balcony'&&r.kind!=='shaft');
       const nR=(rs.some(r=>r.kind==='living')?1:0)+rs.filter(r=>['bed','master','kids','office','mamad'].includes(r.kind)).length;
       const meta=(PROJECT.apartments||[]).find(a=>String(a.apt)===String(apt) && (!a.building||a.building===L.bld));
@@ -200,7 +201,8 @@ function renderNav(){
   for (const B_ of BLDS) segBtn(bldSeg,B_.name,state.bld===B_.id,()=>selectBld(B_.id));
   levelSeg.hidden=!state.bld;
   if (state.bld){ const B_=BLD(state.bld); const n=B_.levels.length+1; levelSeg.style.gridTemplateColumns=`repeat(${Math.min(n,4)},1fr)`;
-    segBtn(levelSeg,'כל הבניין',state.view<0,()=>selectFloor(-1)); B_.levels.forEach((L,i)=>segBtn(levelSeg,L.name,state.view===i,()=>selectFloor(i))); }
+    segBtn(levelSeg,'כל הבניין',state.view<0,()=>selectFloor(-1)); B_.levels.forEach((L,i)=>{ if (L.detail) segBtn(levelSeg,L.name,state.view===i,()=>selectFloor(i)); });
+    if (levelSeg.children.length<2) levelSeg.hidden=true; else levelSeg.style.gridTemplateColumns=`repeat(${Math.min(levelSeg.children.length,4)},1fr)`; }
   const list=APTS.filter(a=>(!state.bld||a.bld===state.bld) && (state.view<0||!state.bld||LEVELS[a.L].idx===state.view));
   let lastH='';
   for (const a of list){
@@ -223,7 +225,7 @@ document.querySelectorAll('[data-time]').forEach(b=>b.addEventListener('click',(
 document.getElementById('furn').addEventListener('change',e=>{ state.furn=e.target.checked; applyState(); });
 document.getElementById('plotT').addEventListener('change',e=>{ state.plot=e.target.checked; applyState(); });
 const floorBtn=document.getElementById('floorBtn');
-floorBtn.addEventListener('click',()=>{ stopTour(); const L=LEVELS[state.cur], B_=BLD(L.bld), n=B_.levels[(L.idx+1)%B_.levels.length];
+floorBtn.addEventListener('click',()=>{ stopTour(); const L=LEVELS[state.cur], B_=BLD(L.bld), dl=B_.levels.filter(q=>q.detail); if (dl.length<2) return; const n=dl[(dl.indexOf(L)+1)%dl.length];
   state.bld=L.bld; state.view=n.idx; state.apt=null;
   const r=n.rooms.find(r=>r.nav && r.kind==='lobby') || n.rooms.find(r=>r.nav && r.type!=='balcony') || n.rooms.find(r=>r.nav); renderNav(); if(r) goRoom(r.id); });
 const HINTS = {
@@ -242,8 +244,9 @@ function updateUI(){
   document.getElementById('hint').textContent = HINTS[state.mode];
   document.getElementById('joy').hidden = !(isTouch && state.mode==='walk');
   const L=LEVELS[state.cur], B_=L&&BLD(L.bld);
-  floorBtn.hidden = state.mode!=='walk' || !B_ || B_.levels.length<2;
-  if (B_ && B_.levels.length>1){ const n=B_.levels[(L.idx+1)%B_.levels.length]; floorBtn.textContent = (n.idx>L.idx?'▲ ':'▼ ')+n.name; }
+  const dl = B_ ? B_.levels.filter(q=>q.detail) : [];
+  floorBtn.hidden = state.mode!=='walk' || dl.length<2;
+  if (dl.length>1 && dl.includes(L)){ const n=dl[(dl.indexOf(L)+1)%dl.length]; floorBtn.textContent = (n.idx>L.idx?'▲ ':'▼ ')+n.name; }
   roomsEl.querySelectorAll('button').forEach(b=>b.classList.toggle('on', state.mode==='walk' && b.id==='room-'+currentRoomId));
 }
 const loadingEl=document.getElementById('loading');
@@ -255,10 +258,11 @@ let LBL=[], PL=[], BL=[];
 function renderLabels(){
   labelsEl.textContent=''; LBL=[]; PL=[]; BL=[];
   const add=(arr,html,v,cls,extra)=>{ const d=document.createElement('div'); d.className='rl '+(cls||''); d.innerHTML=html; labelsEl.appendChild(d); arr.push({d,v,...extra}); };
-  for (const r of ALLROOMS){ if (r.kind==='shaft' || area(r)<2.2) continue; const L=LEVELS[r.L]; add(LBL,`${esc(r.name)}<small>${area(r).toFixed(1)} מ״ר</small>`,new THREE.Vector3(r.cent[0],L.y+.2,r.cent[1]),'',{r}); }
+  for (const r of ALLROOMS){ if (r.kind==='shaft' || area(r)<2.2 || !r.detail) continue; const L=LEVELS[r.L]; add(LBL,`${esc(r.name)}<small>${area(r).toFixed(1)} מ״ר</small>`,new THREE.Vector3(r.cent[0],L.y+.2,r.cent[1]),'',{r}); }
   for (const a of APTS){ const L=LEVELS[a.L]; add(LBL,`דירה ${esc(a.apt)}`,new THREE.Vector3(a.cent[0],L.y+1.2,a.cent[1]),'apt-l',{apt:a}); }
   for (const B_ of BLDS){ const top=B_.levels[B_.levels.length-1]; if(!top) continue; const mp=mpUnion((B_.levels.find(L=>L.ground)||B_.levels[0]).rooms.map(r=>r.poly)); const c=mp.length?polyCentroid(mp[0][0]):[0,0];
-    add(BL,`${esc(B_.name)}<small>${B_.levels.filter(L=>!L.below).length} קומות · ${APTS.filter(a=>a.bld===B_.id).length} דירות</small>`,new THREE.Vector3(c[0],top.y+top.floorH+3.2,c[1]),'bld-l',{b:B_}); }
+    const nApt=new Set(B_.levels.flatMap(L=>L.rooms.filter(r=>r.apt&&r.apt!=='common').map(r=>L.idx+'|'+r.apt))).size;
+    add(BL,`${esc(B_.name)}<small>${B_.levels.filter(L=>!L.below).length} קומות · ${nApt} דירות</small>`,new THREE.Vector3(c[0],top.y+top.floorH+3.2,c[1]),'bld-l',{b:B_}); }
   if (PLOT){ for (let i=0;i<PLOT.length;i++){ const a=PLOT[i], b=PLOT[(i+1)%PLOT.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if (l<6) continue; const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2;
       add(PL,`${l.toFixed(1)} מ׳`,new THREE.Vector3(mx,terrainH(mx,mz)+.35,mz),'pl-b'); } }
   const A=PLOT?Math.round(Math.abs(polyArea(PLOT))):0;
@@ -274,7 +278,7 @@ function updateLabels(){
   for (const L of BL){ if(!over || CL || state.mode==='walk'){ L.d.style.display='none'; continue; } placeLbl(L,w0,h0); }
   for (const L of LBL){
     const r=L.r, a=L.apt, Li=r?r.L:a.L;
-    const ok = over && CL && LEVELS[Li]===CL && (r ? (!state.apt || r.apt===state.apt.apt) : !state.apt);
+    const ok = over && CL && LEVELS[Li]===CL && (r ? (state.apt && r.apt===state.apt.apt) : !state.apt);
     if(!ok){ L.d.style.display='none'; continue; } placeLbl(L,w0,h0,1.1);
   }
   labelsEl.hidden=false;
@@ -298,7 +302,7 @@ function drawMini(){
   if (L && rt){
     for (const r of [...L.rooms, ...L.outdoor]){ pathPoly(r.poly); mx.fillStyle = r.id===currentRoomId && state.mode==='walk' ? '#dce8fb' : (state.apt && r.apt===state.apt.apt && Li===state.apt.L) ? '#e6eefb' : r.type==='wet'?'#dbe6ea': r.type==='balcony'?'#dfe8d6':'#f6f4ef'; mx.fill(); }
     mx.strokeStyle='#2a2f31'; mx.lineCap='square';
-    for (const w of L.walls){ const [a,b]=toMini(...w.a), [c,d]=toMini(...w.b); mx.lineWidth=w.t>.2?2.6:1.4; mx.beginPath(); mx.moveTo(a,b); mx.lineTo(c,d); mx.stroke(); }
+    for (const w of L.walls){ if (!w.exterior && !wallNearDetail(L,w)) continue; const [a,b]=toMini(...w.a), [c,d]=toMini(...w.b); mx.lineWidth=w.t>.2?2.6:1.4; mx.beginPath(); mx.moveTo(a,b); mx.lineTo(c,d); mx.stroke(); }
     for (const o of rt.open){ mx.strokeStyle=o.win?'#7aa0b8':'#f6f4ef'; mx.lineWidth=o.win?2:3.2; const [a,b]=toMini(o.ax,o.az), [c,d]=toMini(o.bx,o.bz); mx.beginPath(); mx.moveTo(a,b); mx.lineTo(c,d); mx.stroke(); }
   }
   const p=camera.position, [px,py]=toMini(p.x,p.z);
@@ -327,11 +331,25 @@ function buildGlow(L, rt){
   for (const w of L.walls){ for (const op of w.open){ if (op.type!=='window' && op.type!=='slider') continue;
     const cx=w.a[0]+w.u[0]*op.c, cz=w.a[1]+w.u[1]*op.c, d=w.t/2+.18;
     const rp=roomAtL(L,cx+w.n[0]*d,cz+w.n[1]*d,false), rn=roomAtL(L,cx-w.n[0]*d,cz-w.n[1]*d,false);
-    if (!!rp===!!rn) continue; const sg=rp?1:-1, h=(Math.floor(cx*13.7+cz*7.3+L.idx*5)%997+997)%997;
+    if (!!rp===!!rn) continue; const sg=rp?1:-1, h=(Math.floor(cx*13.7+cz*7.3+L.idx*5)%997+997)%997, room=rp||rn;
+    if (!room.detail){ const cu=new THREE.Mesh(new THREE.PlaneGeometry(Math.max(.2,op.w-.08),Math.max(.2,op.h-.06)),CURTAIN[h%3]);
+      cu.position.set(cx+w.n[0]*sg*(w.t/2+.09),(op.sill||0)+op.h/2,cz+w.n[1]*sg*(w.t/2+.09)); cu.rotation.y=Math.atan2(-w.n[0]*sg,-w.n[1]*sg); cu.receiveShadow=true; rt.struct.add(cu); }
     if (h%10<3) continue;
     const pl=new THREE.Mesh(new THREE.PlaneGeometry(Math.max(.2,op.w-.12),Math.max(.2,op.h-.12)),GLOW[h%3]);
     pl.position.set(cx+w.n[0]*sg*(w.t/2+.05),(op.sill||0)+op.h/2,cz+w.n[1]*sg*(w.t/2+.05)); pl.rotation.y=Math.atan2(-w.n[0]*sg,-w.n[1]*sg); rt.glow.add(pl); } }
 }
+function wallNearDetail(L, w){
+  // interior walls are built only where they bound a room that is shown in detail
+  const mx=(w.a[0]+w.b[0])/2, mz=(w.a[1]+w.b[1])/2, d=w.t/2+.18;
+  for (const t of [.2,.5,.8]){ const px=w.a[0]+w.u[0]*w.len*t, pz=w.a[1]+w.u[1]*w.len*t;
+    for (const sg of [1,-1]){ const r=roomAtL(L,px+w.n[0]*d*sg,pz+w.n[1]*d*sg,false); if (r && r.detail) return true; } }
+  return false;
+}
+const curtainTex = (key, base, kind) => ctex(key,256,(x,N)=>{ x.fillStyle=base; x.fillRect(0,0,N,N);
+  if (kind==='blind'){ for(let y=0;y<N;y+=8){ x.fillStyle='rgba(0,0,0,.10)'; x.fillRect(0,y+6,N,2); x.fillStyle='rgba(255,255,255,.10)'; x.fillRect(0,y,N,2); } }
+  else { for(let i=0;i<N;i++){ const v=Math.sin(i/N*Math.PI*2*9)*.5+.5; x.fillStyle=`rgba(0,0,0,${.03+v*.11})`; x.fillRect(i,0,1,N); } }
+  fine(x,N,6,77); },[1,1]);
+const CURTAIN=[M({map:curtainTex('cur1','#efe9df','fold'), roughness:.95},true), M({map:curtainTex('cur2','#ddd2bf','fold'), roughness:.95},true), M({map:curtainTex('cur3','#cfcfcb','blind'), roughness:.8},true)];
 function build(id){
   if (houseRoot){ scene.remove(houseRoot); disposeTree(houseRoot); }
   MATS.forEach(m=>m.dispose()); MATS=[]; EMIT=[]; PENDANTS=[];
@@ -341,7 +359,7 @@ function build(id){
     const root=new THREE.Group(); root.position.y=L.y; houseRoot.add(root);
     const rt={root, colliders:[], floors:[], open:[]};
     for (const k of ['struct','slab0','slab','furn','fit','fix','lights','glow']){ rt[k]=new THREE.Group(); root.add(rt[k]); }
-    for (const w of L.walls) buildWall2(L, rt, rt.struct, w, F);
+    for (const w of L.walls){ if (!w.exterior && !wallNearDetail(L,w)) continue; buildWall2(L, rt, rt.struct, w, F); }
     buildFloors2(L, rt, rt.struct, F);
     for (const r of L.railings) buildRailing2(L, rt, rt.struct, r);
     for (const o of L.pergolas) buildPergola2(L, rt.struct, o);
@@ -396,12 +414,15 @@ function start(){
   document.getElementById('fine').textContent = PROJECT.fine || '';
   buildSite(); miniBounds(); renderNav(); renderLabels();
   build(TIER);
+  const st=PROJECT.start||{}; if (st.bld && BLD(st.bld)){ state.bld=st.bld; const B_=BLD(st.bld); const i=B_.levels.findIndex(L=>Math.abs(L.level-(+st.level||0))<.3); state.view = i>=0 ? i : -1; renderNav(); }
   setMode('doll');
 }
 resize();
 start();
 loadingEl.hidden=true;
 requestAnimationFrame(loop);
-window.__studio={state,setMode,goRoom,build,selectBld,selectFloor,selectApt,camera,APTS:()=>APTS,LEVELS:()=>LEVELS};
+window.__studio={state,setMode,goRoom,build,selectBld,selectFloor,selectApt,camera,APTS:()=>APTS,LEVELS:()=>LEVELS,
+  edges:id=>{ const r=R(id); const L=LEVELS[r.L], rt=LV[r.L]; return roomEdges(L,rt,r).map(e=>({len:+e.len.toFixed(2), free:+freeLen(e).toFixed(2), depth:+e.depth.toFixed(2), t:e.t, ints:e.ints.map(i=>[+i.a.toFixed(2),+i.b.toFixed(2)])})); },
+  rooms:()=>ALLROOMS.filter(r=>r.detail).map(r=>[r.id,r.name,r.kind,r.apt,+area(r).toFixed(1)])};
 })();
 </script>

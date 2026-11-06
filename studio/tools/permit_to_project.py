@@ -84,20 +84,26 @@ def floor_from(F, zero, level_default, name_default):
         if P: out['lifts'].append({'poly': P})
     return out
 
-def roof_from(F, zero):
+def roof_from(F, zero, lower=True):
     out = {'name': 'גג', 'roof': True, 'level': rel(F.get('level'), zero), 'walls': [], 'items': []}
-    for w in F.get('walls', []):
-        a, b = pt(w.get('a')), pt(w.get('b'))
-        if not a or not b: continue
-        o = {'a': a, 'b': b, 't': num(w.get('t'), 0.2), 'kind': 'low', 'h': num(w.get('h'), 1.1)}
-        for k in ('base', 'top'):
-            if num(w.get(k)) is not None: o[k] = rel(w.get(k), zero)
-        out['walls'].append(o)
+    groups = [('walls', False)] + ([('lower_walls', True)] if lower else [])
+    for key, is_lower in groups:
+        for w in F.get(key, []) or []:
+            a, b = pt(w.get('a')), pt(w.get('b'))
+            if not a or not b or math.hypot(b[0] - a[0], b[1] - a[1]) < 0.05: continue
+            o = {'a': a, 'b': b, 't': num(w.get('t'), 0.2), 'kind': 'low'}
+            if num(w.get('h')) is not None: o['h'] = num(w.get('h'))
+            for k in ('base', 'top'):
+                if num(w.get(k)) is not None: o[k] = rel(w.get(k), zero)
+            if is_lower:
+                o['lower'] = True
+                if 'h' not in o and 'top' not in o: o['h'] = 1.05
+            out['walls'].append(o)
     for it in F.get('items', []):
         q = {'type': it.get('type') or 'ac'}
         P = poly(it.get('poly'))
         if P: q['poly'] = P
-        for k in ('x', 'z', 'w', 'd'):
+        for k in ('x', 'z', 'w', 'd', 'tilt_deg', 'h'):
             if num(it.get(k)) is not None: q[k] = num(it.get(k))
         for k in ('level', 'top'):
             if num(it.get(k)) is not None: q[k] = rel(it.get(k), zero)
@@ -147,7 +153,7 @@ def main():
     recipe, out_path = sys.argv[1], sys.argv[2]
     R = json.load(open(recipe))
     D = R.get('dir', '.')
-    P = {k: R[k] for k in ('name', 'place', 'subtitle', 'fine', 'facade', 'apartments', 'railing') if k in R}
+    P = {k: R[k] for k in ('name', 'place', 'subtitle', 'fine', 'facade', 'apartments', 'railing', 'start') if k in R}
     P['datum'] = num(R.get('datum'), 0)
     P['buildings'] = []
     for b in R['buildings']:
@@ -162,8 +168,10 @@ def main():
             floors.append(floor_from(F, zero, lvl_default, F.get('floor') or fn))
             if fn in (b.get('levels') or {}): floors[-1]['level'] = b['levels'][fn]
             if fn in (b.get('names') or {}): floors[-1]['name'] = b['names'][fn]
+            if 'detail_floors' in b and fn not in b['detail_floors']: floors[-1]['shell'] = True
+            if fn in (b.get('show_apts') or {}): floors[-1]['show_apts'] = [str(a) for a in b['show_apts'][fn]]
         if b.get('roof') and os.path.exists(os.path.join(D, b['roof'])):
-            floors.append(roof_from(json.load(open(os.path.join(D, b['roof']))), zero))
+            floors.append(roof_from(json.load(open(os.path.join(D, b['roof']))), zero, b.get('roof_lower_walls', True)))
         P['buildings'].append({'id': b['id'], 'name': b.get('name') or b['id'], 'zero': zero, 'floors': floors, 'stone': b.get('stone', [])})
     # official apartment areas per level (from the area tables) are matched to the measured apartments by size
     def parea(P_):

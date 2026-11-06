@@ -125,8 +125,8 @@ function furnishRoom2(L, rt, g, r, F, id, aptHasDining){
   } else if (k==='living'){
     let done=false;
     for (const s1 of edges){
-      if (freeLen(s1)<2.0 || s1.depth<3.0) continue;
-      const tw=Math.min(2.6,Math.floor((freeLen(s1)-.1)*10)/10), c=takeE(ctx,s1,tw,0,.45,3.0); if (c===null) continue;
+      if (freeLen(s1)<1.7 || s1.depth<2.7) continue;
+      const tw=Math.min(2.6,Math.floor((freeLen(s1)-.06)*10)/10), c=takeE(ctx,s1,tw,0,.45,2.7); if (c===null) continue;
       const [tx,tz]=atE(s1,c,0); tvWall(g,F,tx,tz,s1.ry,tw);
       const sl=Math.min(2.9,tw+.4), dmax=Math.min(depthAt(r,s1,c)-.55, 3.8);
       let ds=null; for (let d=dmax; d>=2.3; d-=.15){ if (occupy(ctx,FP(s1,c,sl,d-.5,d+.5))){ ds=d; break; } }
@@ -144,7 +144,22 @@ function furnishRoom2(L, rt, g, r, F, id, aptHasDining){
       }
       break;
     }
-    if (!done && A>6){ const s=pick(1.8,1.6); if (s){ const c=takeE(ctx,s,2.0,0,1.0); if (c!==null){ const [x,z]=atE(s,c,.52); sofa(g,F,x,z,s.ry,2.0,false); } } }
+    if (!done && A>6){ const s=pick(1.8,1.6); if (s){ const c=takeE(ctx,s,2.0,0,1.0); if (c!==null){ const [x,z]=atE(s,c,.52); sofa(g,F,x,z,s.ry,2.0,false); done=true; } } }
+    if (!done && A>7){
+      // free-standing seating group: search the room for a spot, facing the biggest window/slider, else along the room
+      let f=null, best=0;
+      for (const o of rt.open){ if (!(o.win||o.type==='slider')) continue; const mx=(o.ax+o.bx)/2, mz=(o.az+o.bz)/2, w=Math.hypot(o.bx-o.ax,o.bz-o.az);
+        if (polyDist2(r.poly,mx,mz)>.3 || w<=best) continue; best=w; const d=Math.hypot(mx-cx,mz-cz)||1; f=[(mx-cx)/d,(mz-cz)/d]; }
+      const u=mainAxis(r), dirs=[f,[-u[1],u[0]],[u[1],-u[0]],u,[-u[0],-u[1]]].filter(Boolean);
+      const bb=polyBBox(r.poly), cands=[];
+      for (let x=bb.x0+.6;x<bb.x1-.6;x+=.25) for (let z=bb.z0+.6;z<bb.z1-.6;z+=.25) if (inPoly(r.poly,x,z)) cands.push([x,z,Math.hypot(x-cx,z-cz)]);
+      cands.sort((a,b)=>a[2]-b[2]);
+      search: for (const [sl,dd,ws] of [[2.2,2.3,2.5],[1.9,2.1,2.2],[1.6,1.9,1.9]]) for (const fd of dirs) for (const [gx,gz] of cands){
+        const side=[fd[1],-fd[0]]; if (!occupy(ctx,rectFP(gx,gz,side,ws,dd))) continue;
+        const th=Math.atan2(fd[0],fd[1]); sofa(g,F,gx-fd[0]*(dd/2-.48),gz-fd[1]*(dd/2-.48),th,sl,false);
+        const kt=G(g,gx+fd[0]*(dd/2-.45),gz+fd[1]*(dd/2-.45),th); B(kt,F.tableTop,Math.min(1.1,sl-.6),.05,.55,0,.36,0,.02); for(const lx of [-.4,.4]) for(const lz of [-.2,.2]) C(kt,F.metal,.015,.015,.36,lx*Math.min(1,(sl-.6)/1.1),0,lz,8);
+        const rg=G(g,gx,gz,th); B(rg,F.rug,ws,.012,dd,0,.003,0); done=true; break search; }
+    }
     plantIn(ctx,g,F,1.1,r.id.length); plantIn(ctx,g,F,.9,r.id.length+2);
   } else if (k==='kitchen'){
     let s1=null, c=null, len=0;
@@ -213,6 +228,6 @@ function furnishOutdoor2(L, rt, g, o, F, id){
 }
 function buildFurniture2(L, rt, g, F, id){
   const dining=new Set(L.rooms.filter(r=>r.kind==='dining').map(r=>r.apt));
-  for (const r of L.rooms){ if (r.kind==='shaft'||r.kind==='stair') continue; try{ furnishRoom2(L,rt,g,r,F,id,dining.has(r.apt)); }catch(e){ console.warn('furnish',r.id,e); } }
-  for (const o of L.outdoor){ if (o.kind==='roof') continue; try{ furnishOutdoor2(L,rt,g,o,F,id); }catch(e){ console.warn('furnish out',o.id,e); } }
+  for (const r of L.rooms){ if (r.kind==='shaft'||r.kind==='stair'||!r.detail) continue; try{ furnishRoom2(L,rt,g,r,F,id,dining.has(r.apt)); }catch(e){ console.warn('furnish',r.id,e); } }
+  for (const o of L.outdoor){ if (o.kind==='roof'||!o.detail) continue; try{ furnishOutdoor2(L,rt,g,o,F,id); }catch(e){ console.warn('furnish out',o.id,e); } }
 }

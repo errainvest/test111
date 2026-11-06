@@ -73,9 +73,10 @@ function normalizeProject(P){
     const base = (+b.zero||DATUM) - DATUM;
     const floors = b.floors.filter(f=>!f.roof).sort((a,c)=>a.level-c.level);
     const B_ = {id:b.id, name:b.name||('בניין '+b.id), base, levels:[], roof:b.floors.find(f=>f.roof)||null, stone:b.stone||[], plaster:b.plaster||'white'};
+    const roofF=b.floors.find(f=>f.roof), roofLv = roofF && roofF.level!=null ? +roofF.level : null;
     floors.forEach((f,idx)=>{
-      const next=floors[idx+1], floorH = next ? next.level-f.level : (+f.height||3.0);
-      const L = {id:b.id+'-'+idx, bld:b.id, bldName:B_.name, idx, name:f.name, y:base+(+f.level||0), level:+f.level||0, ground:Math.abs(+f.level||0)<.5, below:(+f.level||0)<-.5, floorH, H:Math.max(2.3,floorH-SLAB),
+      const next=floors[idx+1], floorH = next ? next.level-f.level : (roofLv!=null && roofLv-f.level>2.3 && roofLv-f.level<4.5 ? roofLv-f.level : (+f.height||3.0));
+      const L = {id:b.id+'-'+idx, bld:b.id, bldName:B_.name, idx, name:f.name, y:base+(+f.level||0), level:+f.level||0, ground:Math.abs(+f.level||0)<.5, below:(+f.level||0)<-.5, shell:!!f.shell, showApts:Array.isArray(f.show_apts)?new Set(f.show_apts.map(String)):null, floorH, H:Math.max(2.3,floorH-SLAB),
         walls:[], rooms:[], outdoor:[], railings:[], stairs:f.stairs||[], lifts:f.lifts||[], items:f.items||[], pergolas:[], src:f};
       for (const w0 of (f.walls||[])){
         const a=[+w0.a[0],+w0.a[1]], c=[+w0.b[0],+w0.b[1]]; if(Math.hypot(c[0]-a[0],c[1]-a[1])<.08) continue;
@@ -90,6 +91,10 @@ function normalizeProject(P){
         if (kind==='pergola') L.pergolas.push(o);
         if (Math.abs(o.dy)<.45 || kind==='garden') L.outdoor.push(o); });
       for (const r0 of (f.railings||[])) if (r0.a&&r0.b) L.railings.push({a:[+r0.a[0],+r0.a[1]], b:[+r0.b[0],+r0.b[1]], h:+r0.h||1.1, y:r0.level!=null? (+r0.level>100? +r0.level-(+b.zero||DATUM) : +r0.level)-L.level : 0});
+      // a wall is on the facade if, somewhere along it, one side has no room (outside or a balcony)
+      for (const w of L.walls){ w.exterior = w.kind==='low';
+        for (const t of [.12,.35,.5,.65,.88]){ const px=w.a[0]+w.u[0]*w.len*t, pz=w.a[1]+w.u[1]*w.len*t, d=w.t/2+.18;
+          if (!roomAtL(L,px+w.n[0]*d,pz+w.n[1]*d,false) || !roomAtL(L,px-w.n[0]*d,pz-w.n[1]*d,false)){ w.exterior=true; break; } } }
       // attach openings to the nearest wall
       for (const o of (f.openings||[])){
         if (o.x==null||o.z==null) continue;
@@ -121,22 +126,27 @@ function normalizeProject(P){
   // stairs connect a floor to the next floor of the same building: hole in the slab above
   for (const B_ of BLDS) B_.levels.forEach((L,i)=>{ const up=B_.levels[i+1]; L.stairUp = up ? L.stairs.map(s=>ring(s.poly)) : []; if(up) up.stairHoles=(up.stairHoles||[]).concat(L.stairUp); });
   ALLROOMS = LEVELS.flatMap(L=>L.rooms);
-  ALLROOMS.forEach(r=>{ r.cent=polyCentroid(r.poly); r.nav = r.kind!=='shaft' && r.kind!=='stair' && area(r)>=1.5; r.cam=autoCam2(LEVELS[r.L], r); });
+  ALLROOMS.forEach(r=>{ r.cent=polyCentroid(r.poly); r.detail=isDetail(LEVELS[r.L], r); r.nav = r.detail && r.kind!=='shaft' && r.kind!=='stair' && area(r)>=1.5; r.cam=autoCam2(LEVELS[r.L], r); });
+  LEVELS.forEach(L=>{ L.detail = L.rooms.some(r=>r.detail && r.apt && r.apt!=='common'); L.outdoor.forEach(o=>{ o.detail=isDetail(L,o); }); });
   const xs=[], zs=[]; LEVELS.forEach(L=>{ L.walls.forEach(w=>{ xs.push(w.a[0],w.b[0]); zs.push(w.a[1],w.b[1]); }); });
   BB = xs.length ? {x0:Math.min(...xs), x1:Math.max(...xs), z0:Math.min(...zs), z1:Math.max(...zs)} : {x0:0,x1:10,z0:0,z1:10};
   C0=[(BB.x0+BB.x1)/2,(BB.z0+BB.z1)/2];
   PLOT = P.site && P.site.plot && P.site.plot.length>=3 ? ring(P.site.plot) : null;
   PCEN = PLOT ? polyCentroid(PLOT) : C0;
 }
+function isDetail(L, r){ if (L.shell) return false; if (!L.showApts) return true; return !r.apt || r.apt==='common' || L.showApts.has(String(r.apt)); }
 function autoCam2(L, r){
-  // stand just inside the room's door and look across the room
+  // stand just inside a door of the room (or at one end of its long axis) and look towards the farthest corner
+  const far=(px,pz)=>{ let b=null, bd=-1; for (const v of r.poly){ const d=Math.hypot(v[0]-px,v[1]-pz); if(d>bd){ bd=d; b=v; } }
+    const [mx,mz]=r.cent; const tx=b[0]+(mx-b[0])*.25, tz=b[1]+(mz-b[1])*.25; return [px,pz,tx,tz]; };
   for (const w of L.walls) for (const o of w.open){ if (o.type==='window') continue;
     const cx=w.a[0]+w.u[0]*o.c, cz=w.a[1]+w.u[1]*o.c;
-    for (const s of [1,-1]){ const px=cx+w.n[0]*s*(w.t/2+.5), pz=cz+w.n[1]*s*(w.t/2+.5); if (inPoly(r.poly,px,pz)){ const [mx,mz]=r.cent; return [px,pz,mx+(mx-px)*.7,mz+(mz-pz)*.7]; } } }
-  const [mx,mz]=r.cent; const bb=polyBBox(r.poly); let px=mx-(bb.x1-bb.x0)*.3, pz=mz-(bb.z1-bb.z0)*.3; if(!inPoly(r.poly,px,pz)){ px=mx; pz=mz; }
-  return [px,pz,mx+(mx-px)+.01,mz+(mz-pz)+.01];
+    for (const s of [1,-1]){ const px=cx+w.n[0]*s*(w.t/2+.55), pz=cz+w.n[1]*s*(w.t/2+.55); if (inPoly(r.poly,px,pz)) return far(px,pz); } }
+  const u=(()=>{ let best=0, uu=[1,0]; const P=r.poly; for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if(l>best){ best=l; uu=[(b[0]-a[0])/l,(b[1]-a[1])/l]; } } return uu; })();
+  const [mx,mz]=r.cent;
+  for (const k of [1.6,1.2,.8,.4]) for (const sg of [1,-1]){ const px=mx-u[0]*k*sg, pz=mz-u[1]*k*sg; if (inPoly(r.poly,px,pz) && polyDist2(r.poly,px,pz)>.35) return far(px,pz); }
+  return [mx-.01,mz-.01,mx+u[0]*2,mz+u[1]*2];
 }
-
 /* ---------------- facade material ---------------- */
 function facadeMat(L, w){
   const B_=BLDS.find(b=>b.id===L.bld);
@@ -239,6 +249,7 @@ function buildFloors2(L, rt, g, F){
   const lifts = L.lifts.map(l=>ring(l.poly));
   for (const r of [...L.rooms, ...L.outdoor]){
     if (r.kind==='shaft') continue;
+    if (!r.detail && r.type!=='balcony') continue;
     const mat = r.type==='wet'?F.floorWet : r.type==='bed'||r.type==='closet'?F.floorBed : r.kind==='garden'?null : r.type==='balcony'?F.deck : F.floorLiving;
     if (!mat) continue;
     const mp = mpDiff([[r.poly]], [...holes, ...lifts]);
@@ -288,10 +299,13 @@ function buildRoofExtras(B_, F){
     const a=[+w0.a[0],+w0.a[1]], b=[+w0.b[0],+w0.b[1]]; if(Math.hypot(b[0]-a[0],b[1]-a[1])<.1) continue;
     const w={a,b,t:Math.max(.12,+w0.t||.2),kind:'low',h:+w0.h||1.1,open:[],...wallInfo({a,b})};
     const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2;
-    const y0 = w0.base!=null ? rel(w0.base)-topL.level : roofBaseAt(B_, mx+w.n[0]*.25, mz+w.n[1]*.25, w.t/2+.2);
-    const y1 = w0.top!=null ? rel(w0.top)-topL.level : y0+w.h;
+    // a parapet of a lower terrace belongs to the floor at that level (so it stays visible when that floor is cut open)
+    const home = w0.base!=null ? B_.levels.find(L=>Math.abs(L.level-rel(w0.base))<.5) : null;
+    const ref = home || topL, gg = home ? LV[LEVELS.indexOf(home)].struct : g;
+    const y0 = w0.base!=null ? rel(w0.base)-ref.level : roofBaseAt(B_, mx+w.n[0]*.25, mz+w.n[1]*.25, w.t/2+.2);
+    const y1 = w0.top!=null ? rel(w0.top)-ref.level : y0+w.h;
     if (y1-y0<.05) continue; w.h=y1-y0;
-    const grp=G(g,0,0,0,y0); const rtt={colliders:[],open:[]}; buildWall2({...Lr,H:w.h}, rtt, grp, w, F);
+    const grp=G(gg,0,0,0,y0); const rtt={colliders:[],open:[]}; buildWall2({...Lr,H:w.h}, rtt, grp, w, F);
   }
   for (const it of (R.items||[])){
     let cx, cz, wd=1, dp=2;
@@ -299,18 +313,22 @@ function buildRoofExtras(B_, F){
     else if (it.x!=null){ cx=+it.x; cz=+it.z; wd=+it.w||1; dp=+it.d||2; } else continue;
     const yb = it.level!=null ? rel(it.level)-topL.level : roofBaseAt(B_, cx, cz, .3);
     if (it.type==='machine_room' && it.poly){ const top = it.top!=null ? rel(it.top)-topL.level : yb+2.8; const gg=slabGeom(mpUnion([it.poly]), yb, Math.max(1.2,top-yb)); if(gg){ const m=new THREE.Mesh(gg,[plasterWhiteM, facadeMat(topL,{kind:'core',a:[cx,cz],b:[cx,cz]})]); m.castShadow=m.receiveShadow=true; g.add(m); } continue; }
-    addRoofItem(g, it.type, cx, yb, cz, wd, dp);
+    addRoofItem(g, it.type, cx, yb, cz, wd, dp, it);
   }
 }
-function addRoofItem(g, type, x, y, z, w, d){
-  if (type==='solar'){ const grp=G(g,x,z,0,y); const ang=.6; const p=new THREE.Mesh(new THREE.BoxGeometry(w*.95,.06,d*.95),darkGlassM); p.rotation.x=-ang; p.position.y=.35+Math.sin(ang)*d*.4; p.castShadow=true; grp.add(p);
-    B(grp,metalGreyM,.05,.9,.05,-w*.4,0,-d*.3); B(grp,metalGreyM,.05,.9,.05,w*.4,0,-d*.3); B(grp,metalGreyM,.05,.3,.05,-w*.4,0,d*.3); B(grp,metalGreyM,.05,.3,.05,w*.4,0,d*.3);
-    const t=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,w*.9,20),metalGreyM); t.rotation.z=Math.PI/2; t.position.set(0,1.05,-d*.45); t.castShadow=true; grp.add(t); }
-  else if (type==='tank'){ const t=new THREE.Mesh(new THREE.CylinderGeometry(.3,.3,Math.max(w,d),20),metalGreyM); t.rotation.z=Math.PI/2; t.position.set(x,y+.45,z); t.castShadow=true; g.add(t); }
+function addRoofItem(g, type, x, y, z, w, d, it){
+  const n=PROJ_NORTH(), yaw=Math.atan2(-n[0],-n[1]);   // local +z points south
+  if (type==='solar'){ const tilt=((it&&it.tilt_deg)||40)*Math.PI/180, grp=G(g,x,z,yaw,y), L=Math.max(w,d), Wd=Math.min(w,d)||1;
+    const pl=new THREE.Mesh(new THREE.BoxGeometry(Wd*.96,.05,L*.96),darkGlassM); pl.rotation.x=tilt; pl.position.y=.25+Math.sin(tilt)*L*.48; pl.castShadow=true; grp.add(pl);
+    const fr=new THREE.Mesh(new THREE.BoxGeometry(Wd,.035,L),metalGreyM); fr.rotation.x=tilt; fr.position.y=pl.position.y-.04; grp.add(fr);
+    const hi=.25+Math.sin(tilt)*L*.96; for (const sx of [-Wd*.42,Wd*.42]){ B(grp,metalGreyM,.04,hi,.04,sx,0,-Math.cos(tilt)*L*.46); B(grp,metalGreyM,.04,.28,.04,sx,0,Math.cos(tilt)*L*.46); } }
+  else if (type==='tank'||type==='boiler'){ const r=Math.max(.25,Math.min(w,d)/2); C(g,boilerM,r,r,(it&&it.h)||1.35,x,y,z,24); C(g,metalGreyM,r*.95,r*.95,.06,x,y+((it&&it.h)||1.35),z,24); }
   else if (type==='hatch'){ B(g,metalGreyM,Math.min(w,1.2),.45,Math.min(d,1.2),x,y,z,.02); }
   else if (type==='ac'){ B(g,F.white,.85,.6,.32,x,y,z,.03); }
-  else B(g,plasterWhiteM,w,.6,d,x,y,z);
+  else if (type==='box'||type==='machine'){ B(g,plasterWhiteM,w,.6,d,x,y,z); }
 }
+const boilerM = M({color:'#e8e9e6', roughness:.35, metalness:.3}, true);
+function PROJ_NORTH(){ const nn=(typeof PROJECT!=='undefined'&&PROJECT.north)||[0,-1], l=Math.hypot(nn[0],nn[1])||1; return [nn[0]/l,nn[1]/l]; }
 
 /* ---------------- stairs (straight or U) ---------------- */
 function buildStairs2(L, rt, g, s, rise){
@@ -342,7 +360,7 @@ let PENDANTS=[];
 function buildFixtures2(L, g, F, id){
   const H=L.H;
   for (const r of L.rooms){
-    if (r.kind==='shaft'||r.kind==='stair'||area(r)<1.2) continue;
+    if (r.kind==='shaft'||r.kind==='stair'||area(r)<1.2||!r.detail) continue;
     const [cx,cz]=r.cent, A=area(r), bb=polyBBox(r.poly);
     const ok=(x,z,m=.4)=>inPoly(r.poly,x,z)&&inPoly(r.poly,x+m,z)&&inPoly(r.poly,x-m,z)&&inPoly(r.poly,x,z+m)&&inPoly(r.poly,x,z-m);
     if (id==='basic'){ const pts=A>26?[[cx-(bb.x1-bb.x0)/4,cz],[cx+(bb.x1-bb.x0)/4,cz]]:[[cx,cz]]; for(const [x,z] of pts) if(ok(x,z,.2)||(x===cx&&z===cz)) C(g,F.lampEmit,.2,.22,.06,x,H-.06,z,32).castShadow=false; }

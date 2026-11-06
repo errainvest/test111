@@ -9,7 +9,12 @@ const terrM  = M({map:dryTex(), roughness:.97}, true);
 const lawnM  = M({map:grassTex(), roughness:.95, polygonOffset:true, polygonOffsetFactor:-1, polygonOffsetUnits:-2}, true);
 const asphM  = M({map:tileTex('asph',{base:'#55585a',grout:'#55585a',cols:1,rows:1,sizeU:3,sizeV:3,style:'speckle',seed:401,groutPx:0,N:512}), roughness:.92, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-4}, true);
 const paverM = M({map:tileTex('paver',{base:'#bdb4a5',grout:'#968d7f',cols:6,rows:12,sizeU:1.2,sizeV:1.2,bond:true,style:'concrete',seed:402,groutPx:2,vary:.05}), roughness:.85, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6}, true);
-const parkM  = M({map:tileTex('park',{base:'#8e8982',grout:'#76716a',cols:5,rows:10,sizeU:1.0,sizeV:1.0,bond:true,style:'concrete',seed:403,groutPx:2,vary:.04}), roughness:.88, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6}, true);
+const parkM  = M({map:tileTex('parkRed',{base:'#9a5a4c',grout:'#7a463b',cols:5,rows:10,sizeU:1.0,sizeV:1.0,bond:true,style:'concrete',seed:403,groutPx:2,vary:.05}), roughness:.88, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6}, true);
+const driveM = M({map:tileTex('driveGrey',{base:'#9a968f',grout:'#7f7b74',cols:5,rows:10,sizeU:1.0,sizeV:1.0,bond:true,style:'concrete',seed:404,groutPx:2,vary:.04}), roughness:.88, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-5}, true);
+const walkM  = M({map:tileTex('walkRed',{base:'#a3634f',grout:'#80493b',cols:6,rows:12,sizeU:1.2,sizeV:1.2,bond:true,style:'concrete',seed:405,groutPx:2,vary:.05}), roughness:.86, polygonOffset:true, polygonOffsetFactor:-3, polygonOffsetUnits:-6}, true);
+const poleM = M({color:'#3a3d40', roughness:.5, metalness:.6}, true);
+const lampM = M({color:'#fff3dc', roughness:.3, emissive:new THREE.Color('#ffe2b8'), emissiveIntensity:.05}, true);
+const GEMIT = [{m:lampM, day:.05, night:3.5}];
 const lineM  = M({color:'#f3f3ef', roughness:.6, polygonOffset:true, polygonOffsetFactor:-5, polygonOffsetUnits:-10}, true);
 const fenceM = M({color:'#2a2c2e', roughness:.5, metalness:.6}, true);
 const copingM= M({color:'#d9d0bd', roughness:.7}, true);
@@ -24,11 +29,13 @@ const stakeM = new THREE.MeshBasicMaterial({color:0xff4d1a});
 
 let SITE={}, SPOTS=[], FLATS=[], FOOTS=[], TERRAIN=null, TERR_BB=null;
 const toY = v => (v==null||isNaN(+v)) ? null : (+v > 100 ? +v-DATUM : +v);   // absolute (e.g. 246.40) or already relative
+let PLANE=null; // [h0, dh/dx, dh/dz] relative to the datum: the survey's best-fit ground plane
+const planeH = (x,z) => PLANE ? PLANE[0]+PLANE[1]*x+PLANE[2]*z : 0;
 function idw(x,z){
-  if (!SPOTS.length) return 0;
-  let sw=0, s=0;
-  for (const p of SPOTS){ const d2=(p.x-x)*(p.x-x)+(p.z-z)*(p.z-z); const w=1/Math.pow(d2+.35,1.3); sw+=w; s+=w*p.y; }
-  return s/sw;
+  if (!SPOTS.length) return planeH(x,z);
+  let sw=PLANE?.02:0, s=0;
+  for (const p of SPOTS){ const d2=(p.x-x)*(p.x-x)+(p.z-z)*(p.z-z); const w=1/Math.pow(d2+.35,1.3); sw+=w; s+=w*(p.y-planeH(p.x,p.z)); }
+  return planeH(x,z) + (sw>0 ? s/sw : 0);
 }
 function polyDist(P,x,z){ let d=1e9; for(let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length]; d=Math.min(d,segPoint(x,z,a[0],a[1],b[0],b[1]).d); } return d; }
 function terrainH(x,z){
@@ -88,6 +95,7 @@ function buildSite(){
   for (const c of [...plotHi.children]){ plotHi.remove(c); disposeTree(c); }
   SITE = PROJECT.site || {};
   SPOTS = (SITE.spot_levels||[]).map(p=>({x:+p.x, z:+p.z, y:toY(p.v)})).filter(p=>p.y!=null && isFinite(p.x) && isFinite(p.z));
+  PLANE = Array.isArray(SITE.terrain_plane) ? [toY(SITE.terrain_plane[0]), +SITE.terrain_plane[1], +SITE.terrain_plane[2]] : null;
   // building footprints: union of the ground-floor rooms, at the building's ±0.00 (slightly below)
   FOOTS=[]; FLATS=[];
   for (const B_ of BLDS){ const L0=B_.levels.find(L=>L.ground)||B_.levels[0]; if(!L0) continue; const mp=mpUnion(L0.rooms.map(r=>r.poly)); for (const poly of mp) FOOTS.push({bld:B_.id, poly:poly[0], y:B_.base+L0.level-.02, blend:2.2});
@@ -110,10 +118,11 @@ function buildSite(){
   sky.position.set(PCEN[0],0,PCEN[1]);
   // surfaces
   for (const r of (SITE.roads||[])) if (r.poly) surface(r.poly, asphM, .03);
-  for (const d of (SITE.driveways||[])) if (d.poly) surface(d.poly, asphM, .035);
+  for (const d of (SITE.driveways||[])) if (d.poly) surface(d.poly, d.kind==='asphalt'?asphM:driveM, .035);
+  for (const d of (SITE.sidewalks||[])) if (d.poly) surface(d.poly, walkM, .04);
   for (const g of (SITE.gardens||[])) if (g.poly) surface(g.poly, lawnM, .025);
   for (const B_ of BLDS){ const L0=B_.levels.find(L=>L.ground); if(!L0) continue; for (const o of L0.outdoor) if (o.kind==='garden') surface(o.poly, lawnM, .028); }
-  for (const p of (SITE.paths||[])) if (p.poly) surface(p.poly, paverM, .045);
+  for (const p of (SITE.paths||[])) if (p.poly) surface(p.poly, p.kind==='red'?walkM:paverM, .045);
   (SITE.parking||[]).forEach((p,k)=>{ if(!p.poly||p.poly.length<4) return; surface(p.poly, parkM, .045);
     const P=ring(p.poly), E=P.map((a,i)=>{ const b=P[(i+1)%P.length]; return {a,b,l:Math.hypot(b[0]-a[0],b[1]-a[1])}; }).sort((m,n)=>n.l-m.l);
     for (const e of E.slice(0,2)) strip([e.a,e.b], .1, .06, lineM, siteRoot, false);
@@ -141,6 +150,7 @@ function buildSite(){
       metalRail(siteRoot, p0, p1, top(p0[0],p0[1]), top(p1[0],p1[1]), h, fM); }
   }
   for (const t of (SITE.trees||[])) if (t.x!=null) treeAt(siteRoot,+t.x,+t.z,+t.r||2);
+  for (const p of (SITE.poles||[])) if (p.x!=null){ const y=terrainH(+p.x,+p.z), h=+p.h||3.5; C(siteRoot,poleM,.05,.07,h,+p.x,y,+p.z,12); const hd=C(siteRoot,lampM,.2,.12,.18,+p.x,y+h,+p.z,20); hd.castShadow=false; C(siteRoot,poleM,.22,.22,.03,+p.x,y+h+.18,+p.z,20); }
   { // low scrub on the open land around the plot (not on surfaces, buildings or roads)
     const rr=rng(907), pts=[], hard=[...(SITE.roads||[]),...(SITE.driveways||[]),...(SITE.parking||[]),...(SITE.paths||[]),...(SITE.neighbours||[])].filter(p=>p.poly).map(p=>p.poly);
     for (let i=0;i<900 && pts.length<260;i++){ const x=bb.x0+10+rr()*(bb.x1-bb.x0-20), z=bb.z0+10+rr()*(bb.z1-bb.z0-20);
