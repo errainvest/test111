@@ -199,6 +199,19 @@
    246.51,
    -0.052,
    0.038
+  ],
+  "pets": [
+   {
+    "a": [
+     -13.05,
+     -1.91
+    ],
+    "b": [
+     -11.75,
+     -2.99
+    ],
+    "note": "two cats batting a ball on the lawn at the north-west corner of M2, under apartment 4's balcony, clear of the tree canopy in the exterior view"
+   }
   ]
  }
 }

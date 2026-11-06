@@ -69,9 +69,11 @@
   <main class="view" id="view">
     <div class="hud labels" id="labels"></div>
     <div class="hud where" id="where" hidden></div>
-    <div class="hud hint" id="hint"></div>
+    <div class="hud hint" id="hint"><span id="hintTxt"></span><button class="hint-x" id="hintClose" aria-label="סגירת ההסבר" title="סגירת ההסבר">✕</button></div>
+    <button class="hud hint-open" id="hintOpen" aria-label="הצגת ההסבר" title="הצגת ההסבר" hidden>?</button>
     <canvas class="hud mini" id="mini" width="420" height="420" aria-label="מפה: לחיצה מעבירה לנקודה"></canvas>
     <button class="hud floorbtn" id="floorBtn" hidden></button>
+    <button class="hud lblbtn" id="lblBtn" aria-pressed="true">הסתרת תוויות</button>
     <div class="hud joy" id="joy" hidden><i id="joyKnob"></i></div>
     <div class="hud loading" id="loading">בונה את הבניינים…</div>
   </main>

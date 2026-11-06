@@ -1,5 +1,5 @@
 /* ============================== STATE / MODES (v2) ============================== */
-const state = { mode:'doll', bld:null, view:-1, cur:0, apt:null, furn:true, eve:false, tour:false, plot:true };
+const state = { mode:'doll', bld:null, view:-1, cur:0, apt:null, furn:true, eve:false, tour:false, plot:true, labels:true };
 let yaw=0, pitch=0, houseRoot=null, APTS=[];
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping=true; controls.dampingFactor=.08; controls.maxDistance=340; controls.minDistance=2.5;
@@ -54,7 +54,7 @@ function applyState(){
   POOL.forEach(l=>l.visible = e && litLi>=0);
   if (e && litLi>=0) placePool(litLi, state.mode==='walk' ? R(currentRoomId) : null);
   plotHi.visible = state.plot;
-  const under = !!(CL && CL.below); if (TERRAIN) TERRAIN.visible=!under; ground.visible=!under;
+  const under = !!(CL && CL.below); if (TERRAIN) TERRAIN.visible=!under; ground.visible=!under; petsRoot.visible=!under;
   const [nx,nz]=NORTH(), sx=-nx, sz=-nz, wx=nz, wz=-nx, sd=[sx*.82+wx*.57, sz*.82+wz*.57], D=110;
   sun.intensity = e ? .07 : 1.75; sun.color.set(e ? 0x9fb4ff : 0xfff2e0);
   const el = e ? .9 : .95;
@@ -236,6 +236,16 @@ const HINTS = {
   ext:'מבט חוץ · גררו כדי להקיף את הבניינים',
   walk: isTouch ? 'גררו על המסך כדי להסתכל · ג׳ויסטיק להליכה · נגיעה ברצפה = הליכה לנקודה' : 'גררו כדי להסתכל · W A S D או חיצים להליכה · Shift מהר יותר · לחיצה על הרצפה = הליכה לנקודה',
 };
+// the explanation box can be closed (✕) and reopened (?); labels can be hidden. Both are per-viewer conveniences kept in localStorage.
+let hintOff=false; try{ hintOff = localStorage.getItem('studio-hint-off')==='1'; }catch(e){}
+const hintEl=document.getElementById('hint'), hintOpen=document.getElementById('hintOpen'), hintClose=document.getElementById('hintClose');
+function setHint(off){ hintOff=off; hintEl.hidden=off; hintOpen.hidden=!off; try{ localStorage.setItem('studio-hint-off', off?'1':'0'); }catch(e){} (off?hintOpen:hintClose).focus({preventScroll:true}); }
+hintClose.addEventListener('click',()=>setHint(true));
+hintOpen.addEventListener('click',()=>setHint(false));
+hintEl.hidden=hintOff; hintOpen.hidden=!hintOff;
+const lblBtn=document.getElementById('lblBtn');
+try{ if(localStorage.getItem('studio-labels-off')==='1') state.labels=false; }catch(e){}
+lblBtn.addEventListener('click',()=>{ state.labels=!state.labels; try{ localStorage.setItem('studio-labels-off', state.labels?'0':'1'); }catch(e){} updateUI(); });
 function updateUI(){
   document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.mode===state.mode)));
   document.querySelectorAll('[data-time]').forEach(b=>b.setAttribute('aria-pressed', String((b.dataset.time==='eve')===state.eve)));
@@ -243,11 +253,14 @@ function updateUI(){
   const t=TIERS[TIER];
   document.getElementById('furnNote').textContent = state.furn ? t.furnDesc : 'דירות ריקות: גמר, מטבחים וכלים סניטריים';
   document.getElementById('spec').innerHTML = t.spec.filter(([k])=>k!=='מדרגות').map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('') + (PROJECT.facade?`<dt>חזיתות</dt><dd>${esc(PROJECT.facade)}</dd>`:'');
-  document.getElementById('hint').textContent = HINTS[state.mode];
+  document.getElementById('hintTxt').textContent = HINTS[state.mode] + (state.mode==='ext' && PETS.length ? ' · לחיצה על החתולים בגינה מקרבת אליהם' : '');
   document.getElementById('joy').hidden = !(isTouch && state.mode==='walk');
   const L=LEVELS[state.cur], B_=L&&BLD(L.bld);
   const dl = B_ ? B_.levels.filter(q=>q.detail) : [];
   floorBtn.hidden = state.mode!=='walk' || dl.length<2;
+  lblBtn.hidden = state.mode==='walk';
+  lblBtn.setAttribute('aria-pressed', String(state.labels));
+  lblBtn.textContent = state.labels ? 'הסתרת תוויות' : 'הצגת תוויות';
   if (dl.length>1 && dl.includes(L)){ const n=dl[(dl.indexOf(L)+1)%dl.length]; floorBtn.textContent = (n.idx>L.idx?'▲ ':'▼ ')+n.name; }
   roomsEl.querySelectorAll('button').forEach(b=>b.classList.toggle('on', state.mode==='walk' && b.id==='room-'+currentRoomId));
 }
@@ -275,12 +288,12 @@ const _v=new THREE.Vector3();
 function placeLbl(L, w0, h0, lim=1.05){ _v.copy(L.v).project(camera); const vis=_v.z<1 && Math.abs(_v.x)<lim && Math.abs(_v.y)<lim; L.d.style.display=vis?'':'none'; if(vis){ L.d.style.left=((_v.x+1)/2*w0)+'px'; L.d.style.top=((1-_v.y)/2*h0)+'px'; } }
 function updateLabels(){
   const w0=view.clientWidth, h0=view.clientHeight, CL=cutLevel(), over=state.mode==='doll'||state.mode==='plan';
-  const showP = state.plot && state.mode!=='walk' && !CL;
+  const lb = state.labels, showP = lb && state.plot && state.mode!=='walk' && !CL;
   for (const L of PL){ if(!showP){ L.d.style.display='none'; continue; } placeLbl(L,w0,h0); }
-  for (const L of BL){ if(!over || CL || state.mode==='walk'){ L.d.style.display='none'; continue; } placeLbl(L,w0,h0); }
+  for (const L of BL){ if(!lb || !over || CL || state.mode==='walk'){ L.d.style.display='none'; continue; } placeLbl(L,w0,h0); }
   for (const L of LBL){
     const r=L.r, a=L.apt, Li=r?r.L:a.L;
-    const ok = over && CL && LEVELS[Li]===CL && (r ? (state.apt && r.apt===state.apt.apt) : !state.apt);
+    const ok = lb && over && CL && LEVELS[Li]===CL && (r ? (state.apt && r.apt===state.apt.apt) : !state.apt);
     if(!ok){ L.d.style.display='none'; continue; } placeLbl(L,w0,h0,1.1);
   }
   labelsEl.hidden=false;
@@ -406,7 +419,7 @@ let last=performance.now(), miniT=0;
 function loop(now){
   const dt=Math.min(.05,(now-last)/1000); last=now;
   if (tween){
-    const k=Math.min(1,(now-tween.start)/tween.dur), e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+    const k=Math.min(1,Math.max(0,(now-tween.start)/tween.dur)), e=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;   // rAF time can precede tween.start: never extrapolate
     camera.position.lerpVectors(tween.p0,tween.p1,e); controls.target.lerpVectors(tween.t0,tween.t1,e); camera.lookAt(controls.target);
     if (k>=1){ const d=tween.done; tween=null; d&&d(); if(state.mode!=='walk') controls.update(); }
   } else if (state.mode==='walk') walkStep(dt);
@@ -417,6 +430,7 @@ function loop(now){
     whereEl.hidden=false; whereEl.textContent = (r ? r.name+(r.apt&&r.apt!=='common'?' · דירה '+r.apt:'') : sp&&sp.out ? 'בחצר' : 'מעבר') + ' · ' + L.name + ' · ' + L.bldName;
   } else whereEl.hidden=true;
   updateLabels();
+  petsUpdate(now, dt);
   if (now-miniT>80){ drawMini(); miniT=now; }
   renderer.render(scene,camera);
   requestAnimationFrame(loop);
@@ -432,7 +446,7 @@ function start(){
   const nA=APTS.length, nF=Math.max(...BLDS.map(b=>b.levels.length));
   document.getElementById('projSub').textContent = PROJECT.subtitle || `${BLDS.length} בניינים · ${nA} דירות · עד ${nF} קומות`;
   document.getElementById('fine').textContent = PROJECT.fine || '';
-  buildSite(); miniBounds(); renderNav(); renderLabels();
+  buildSite(); buildPets(); miniBounds(); renderNav(); renderLabels();
   build(TIER);
   const st=PROJECT.start||{}; if (st.bld && BLD(st.bld)){ state.bld=st.bld; const B_=BLD(st.bld); const i=B_.levels.findIndex(L=>Math.abs(L.level-(+st.level||0))<.3); state.view = i>=0 ? i : -1;
     if (st.apt!=null){ const a=APTS.find(a=>a.bld===st.bld && String(a.apt)===String(st.apt)); if (a) state.apt={L:a.L, apt:a.apt}; } renderNav(); }
@@ -442,7 +456,8 @@ resize();
 start();
 loadingEl.hidden=true;
 requestAnimationFrame(loop);
-window.__studio={state,setMode,goRoom,build,selectBld,selectFloor,selectApt,camera,APTS:()=>APTS,LEVELS:()=>LEVELS,
+window.__studio={state,setMode,goRoom,build,selectBld,selectFloor,selectApt,camera,APTS:()=>APTS,LEVELS:()=>LEVELS,terrainH,PRESETS,flyTo,controls,
+  pets:()=>PETS, lookAtPets:i=>lookAtPets(PETS[i||0]), petsTime:t=>{ petsFixedT=t; },
   edges:id=>{ const r=R(id); const L=LEVELS[r.L], rt=LV[r.L]; return roomEdges(L,rt,r).map(e=>({len:+e.len.toFixed(2), free:+freeLen(e).toFixed(2), depth:+e.depth.toFixed(2), t:e.t, ints:e.ints.map(i=>[+i.a.toFixed(2),+i.b.toFixed(2)])})); },
   rooms:()=>ALLROOMS.filter(r=>r.detail).map(r=>[r.id,r.name,r.kind,r.apt,+area(r).toFixed(1),!!r.focus,!!r.view]),
   layers:(on)=>{ for (const k of ['struct','slab0','slab','furn','fit','fix','glow']) LV.forEach(rt=>{ rt[k].visible = on.includes(k); }); siteRoot.visible=on.includes('site'); },
