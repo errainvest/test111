@@ -122,7 +122,7 @@ def site_from(S, datum):
         q = [p for p in (pt(x) for x in (pts or [])) if p]
         if len(q) >= 2: bl.append(q)
     out['building_lines'] = bl
-    for key in ('parking', 'driveways', 'paths', 'gardens', 'roads', 'neighbours'):
+    for key in ('parking', 'driveways', 'paths', 'gardens', 'roads', 'neighbours', 'sidewalks'):
         arr = []
         for it in S.get(key, []) or []:
             Pp = poly(it.get('poly'))
@@ -130,10 +130,14 @@ def site_from(S, datum):
             q = {'poly': Pp}
             for k in ('label', 'kind', 'name', 'owner'):
                 if it.get(k) is not None: q[k] = it.get(k)
-            for k in ('level', 'h'):
+            for k in ('level', 'h', 'base_abs', 'floors'):
                 if num(it.get(k)) is not None: q[k] = num(it.get(k))
             arr.append(q)
         out[key] = arr
+    out['kerbs'] = [{'pts': [p for p in (pt(x) for x in k.get('pts', [])) if p], 'paint': k.get('paint', 'grey')} for k in S.get('kerbs', []) or []]
+    out['crosswalks'] = [{'a': pt(c.get('a')), 'b': pt(c.get('b')), 'w': num(c.get('w'), 3)} for c in S.get('crosswalks', []) or [] if pt(c.get('a')) and pt(c.get('b'))]
+    out['poles'] = [{'x': num(p.get('x')), 'z': num(p.get('z')), 'h': num(p.get('h'), 3.5)} for p in S.get('poles', []) or [] if num(p.get('x')) is not None]
+    out['gates'] = [{'x': num(g.get('x')), 'z': num(g.get('z')), 'w': num(g.get('w'), 1.6), 'h': num(g.get('h'), 2.4), 'arch': g.get('arch', True)} for g in S.get('gates', []) or [] if num(g.get('x')) is not None]
     out['retaining_walls'] = []
     for w in S.get('retaining_walls', []) or []:
         a, b = pt(w.get('a')), pt(w.get('b'))

@@ -19,7 +19,14 @@ const lineM  = M({color:'#f3f3ef', roughness:.6, polygonOffset:true, polygonOffs
 const fenceM = M({color:'#2a2c2e', roughness:.5, metalness:.6}, true);
 const copingM= M({color:'#d9d0bd', roughness:.7}, true);
 const nbM    = M({color:'#ebe7df', roughness:.9}, true);
-const nbRoofM= M({color:'#c9c5bd', roughness:.95}, true);
+const nbRoofM= M({color:'#c9c5bd', roughness:.95, side:THREE.DoubleSide}, true);
+const nbFacadeM = M({map:ctex('nbfac',512,(x,N)=>{ x.fillStyle='#efede8'; x.fillRect(0,0,N,N); blotch(x,N,5,.06,71,'#8a8478','#ffffff');
+  const r=rng(72), u=N/6; // 6 m square = 2 storeys x 2 bays
+  for (let fl=0; fl<2; fl++) for (let b=0; b<2; b++){ const X=b*3*u+u*.75, Y=N-(fl+1)*3*u+u*.95, W=u*1.5, H=u*1.25; const shut=r()<.35;
+    x.fillStyle='#d8d6d1'; x.fillRect(X-4,Y-4,W+8,H+8); x.fillStyle=shut?'#c9cbcc':'#2e3a42'; x.fillRect(X,Y,W,H);
+    if (shut){ x.fillStyle='rgba(0,0,0,.12)'; for(let k=0;k<H;k+=5) x.fillRect(X,Y+k,W,1); } else { const g=x.createLinearGradient(X,Y,X+W,Y+H); g.addColorStop(0,'rgba(170,200,220,.35)'); g.addColorStop(1,'rgba(20,30,40,.0)'); x.fillStyle=g; x.fillRect(X,Y,W,H); x.fillStyle='#e9e9e6'; x.fillRect(X+W/2-2,Y,4,H); }
+    x.fillStyle='#e6e2da'; x.fillRect(X-8,Y+H+2,W+16,7); }
+  fine(x,N,5,73); },[1,1]), roughness:.9}, true, .6);
 const trunkM = M({color:'#5b4636',roughness:.9},true,.4), leafAM=M({color:'#3a5e2c',roughness:.8},true,.3), leafBM=M({color:'#4f7034',roughness:.8},true,.3), oliveM=M({color:'#66744a',roughness:.85},true,.3), scrubM=M({color:'#4d5a36',roughness:.9},true,.25), cypM=M({color:'#2b4527',roughness:.85},true,.3);
 const carPaint = ['#e9e9e6','#1d1f22','#8b9096','#2b3f5c','#8c1f1f','#c9c3b5','#3c4a3f'].map(c=>M({color:c, roughness:.28, metalness:.55}, true));
 const tyreM = M({color:'#141414', roughness:.8}, true), carGlassM = M({color:'#1b232b', roughness:.08, metalness:.6}, true);
@@ -102,6 +109,8 @@ function buildSite(){
     for (const o of L0.outdoor) FLATS.push({poly:o.poly, y:B_.base+(o.level!=null?o.level:0)-.02, blend:1.6, kind:o.kind});
     for (const L of B_.levels) if (L!==L0) for (const o of L.outdoor) if (o.kind==='garden') FLATS.push({poly:o.poly, y:B_.base+(o.level!=null?o.level:L.level)-.02, blend:1.6, kind:'garden'}); }
   if (!SPOTS.length){ for (const f of FOOTS){ const [x,z]=polyCentroid(f.poly); SPOTS.push({x,z,y:f.y}); } }
+  const floorGardens=FLATS.filter(f=>f.kind==='garden');
+  for (const gd of (SITE.gardens||[])) if (gd.poly && gd.poly.length>=3 && gd.level!=null){ const c=polyCentroid(gd.poly); if (!floorGardens.some(f=>inPoly(f.poly,c[0],c[1]))) FLATS.push({poly:ring(gd.poly), y:toY(gd.level)-.02, blend:1.4, kind:'garden'}); }
   for (const p of (SITE.parking||[])) if (p.poly && p.poly.length>=3){ const y=p.level!=null?toY(p.level):idw(...polyCentroid(p.poly)); FLATS.push({poly:ring(p.poly), y, blend:1.0, kind:'parking'}); }
   for (const p of (SITE.flats||[])) if (p.poly && p.poly.length>=3) FLATS.push({poly:ring(p.poly), y:toY(p.level), blend:p.blend||1.5, kind:p.kind||'flat'});
   // terrain grid
@@ -121,7 +130,7 @@ function buildSite(){
   for (const r of (SITE.roads||[])) if (r.poly) surface(r.poly, asphM, .03);
   for (const d of (SITE.driveways||[])) if (d.poly) surface(d.poly, d.kind==='asphalt'?asphM:driveM, .035);
   for (const d of (SITE.sidewalks||[])) if (d.poly) surface(d.poly, walkM, .04);
-  for (const g of (SITE.gardens||[])) if (g.poly) surface(g.poly, lawnM, .025);
+  for (const g of (SITE.gardens||[])) if (g.poly){ const c=polyCentroid(g.poly); if (!BLDS.some(B_=>B_.levels.some(L=>L.outdoor.some(o=>o.kind==='garden' && inPoly(o.poly,c[0],c[1]))))) surface(g.poly, lawnM, .025); }
   for (const B_ of BLDS) for (const L of B_.levels) for (const o of L.outdoor) if (o.kind==='garden') surface(o.poly, lawnM, .028);
   for (const p of (SITE.paths||[])) if (p.poly) surface(p.poly, p.kind==='red'?walkM:paverM, .045);
   (SITE.parking||[]).forEach((p,k)=>{ if(!p.poly||p.poly.length<4) return; surface(p.poly, parkM, .045);
@@ -176,12 +185,24 @@ function buildSite(){
       const im=new THREE.InstancedMesh(geo,scrubM,pts.length), mt=new THREE.Matrix4(), q=new THREE.Quaternion(), sv=new THREE.Vector3();
       pts.forEach(([x,z,s],i)=>{ q.setFromAxisAngle(new THREE.Vector3(0,1,0),rr()*6); sv.set(s*(1+rr()*.6),s,s*(1+rr()*.6)); mt.compose(new THREE.Vector3(x,terrainH(x,z)+s*.1,z),q,sv); im.setMatrixAt(i,mt); });
       im.castShadow=true; im.receiveShadow=true; im.userData.keep=true; siteRoot.add(im); } }
-  for (const nb of (SITE.neighbours||[])){ if(!nb.poly||nb.poly.length<3) continue; const P=ring(nb.poly); const y0=Math.min(...P.map(q=>terrainH(q[0],q[1])))-.3, h=+nb.h||7.5;
-    const g=slabGeom([[P]], y0, h+.3); if(g){ const m=new THREE.Mesh(g,[nbRoofM,nbM]); m.castShadow=m.receiveShadow=true; siteRoot.add(m); } }
+  // neighbouring residential blocks: white plaster facades with a window grid, flat roofs with a parapet
+  for (const nb of (SITE.neighbours||[])){ if(!nb.poly||nb.poly.length<3) continue; let P=ring(nb.poly); if (polyArea(P)<0) P=P.slice().reverse();
+    const gY = nb.base_abs!=null ? toY(nb.base_abs) : null, h=(+nb.h||(+nb.floors||3)*3);
+    const y0=Math.min(...P.map(q=>terrainH(q[0],q[1])), gY!=null?gY:1e9)-.3;
+    const top=(gY!=null ? gY : Math.max(...P.map(q=>terrainH(q[0],q[1]))))+h;
+    for (let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], L=Math.hypot(b[0]-a[0],b[1]-a[1]); if (L<.3) continue;
+      const geo=new THREE.PlaneGeometry(L,top-y0), uv=geo.attributes.uv, pos=geo.attributes.position;
+      for (let k=0;k<pos.count;k++) uv.setXY(k,(pos.getX(k)+L/2)/6,(pos.getY(k)+(top-y0)/2+(y0-Math.floor(y0/3)*3))/6);
+      const m=new THREE.Mesh(geo,nbFacadeM); const nx=-(b[1]-a[1])/L, nz=(b[0]-a[0])/L;
+      m.position.set((a[0]+b[0])/2,(top+y0)/2,(a[1]+b[1])/2); m.rotation.y=Math.atan2(-nx,-nz); m.castShadow=m.receiveShadow=true; siteRoot.add(m); }
+    const rg=flatGeom([[P]], top); if (rg){ const m=new THREE.Mesh(rg,nbRoofM); m.receiveShadow=true; siteRoot.add(m); }
+    for (let i=0;i<P.length;i++){ const a=P[i], b=P[(i+1)%P.length], L=Math.hypot(b[0]-a[0],b[1]-a[1]); if (L<.3) continue; B(siteRoot,nbM,L+.2,.9,.2,(a[0]+b[0])/2,top,(a[1]+b[1])/2,0,Math.atan2(-(b[1]-a[1]),(b[0]-a[0]))); } }
   // plot boundary, stakes, building lines
   if (PLOT){
     strip(PLOT, .34, .07, bndM, plotHi, true);
-    for (const [x,z] of PLOT){ const y=terrainH(x,z); const st_=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,2.4,12),stakeM); st_.position.set(x,y+1.2,z); plotHi.add(st_); const cone=new THREE.Mesh(new THREE.ConeGeometry(.16,.3,16),stakeM); cone.position.set(x,y+2.55,z); plotHi.add(cone); }
+    PLOT.forEach(([x,z],i)=>{ const p=PLOT[(i+PLOT.length-1)%PLOT.length], q=PLOT[(i+1)%PLOT.length]; // stakes only at real corners (turn > 12°)
+      const a1=Math.atan2(z-p[1],x-p[0]), a2=Math.atan2(q[1]-z,q[0]-x); let da=Math.abs(a2-a1); if (da>Math.PI) da=2*Math.PI-da; if (da<.21) return;
+      const y=terrainH(x,z); const st_=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,2.4,12),stakeM); st_.position.set(x,y+1.2,z); plotHi.add(st_); const cone=new THREE.Mesh(new THREE.ConeGeometry(.16,.3,16),stakeM); cone.position.set(x,y+2.55,z); plotHi.add(cone); });
   }
   for (const bl of (SITE.building_lines||[])){ const P=(bl.pts||bl).map(q=>[+q[0],+q[1]]); if (P.length<2) continue;
     for (let i=0;i<P.length-1;i++){ const a=P[i], b=P[i+1], L=Math.hypot(b[0]-a[0],b[1]-a[1]); for (let t=0;t<L;t+=1.0){ const e=Math.min(L,t+.6); strip([[a[0]+(b[0]-a[0])*t/L,a[1]+(b[1]-a[1])*t/L],[a[0]+(b[0]-a[0])*e/L,a[1]+(b[1]-a[1])*e/L]], .14, .08, bldM, plotHi, false); } } }

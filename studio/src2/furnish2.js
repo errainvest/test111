@@ -98,6 +98,12 @@ function cornerSpots(r, inset=.45){
   }
   return out;
 }
+function gridCands(r, step=.2, inset=.5){ const bb=polyBBox(r.poly), [cx,cz]=r.cent, out=[];
+  for (let x=bb.x0+inset;x<=bb.x1-inset;x+=step) for (let z=bb.z0+inset;z<=bb.z1-inset;z+=step) if (inPoly(r.poly,x,z)) out.push([x,z,Math.hypot(x-cx,z-cz)]);
+  return out.sort((a,b)=>a[2]-b[2]); }
+function findSpot(ctx, w, d, dirs, maxTries=4000){ // centre and axis of a free w x d rectangle (w along the axis)
+  let n=0; for (const u of dirs) for (const [x,z] of gridCands(ctx.r)){ if (++n>maxTries) return null; const fp=rectFP(x,z,u,w,d); if (fpFree(ctx,fp)){ ctx.occ.push(fp); return {x,z,u}; } }
+  return null; }
 function plantIn(ctx, g, F, s=1, k=0){
   const sp=cornerSpots(ctx.r, .42); if (!sp.length) return;
   for (let j=0;j<sp.length;j++){ const [x,z]=sp[(j+k)%sp.length]; const fp=rectFP(x,z,[1,0],.5,.5); if (occupy(ctx,fp)){ plant(g,F,x,z,s); return; } }
@@ -115,10 +121,13 @@ function buildFixture(L, rt, r, fx, F, id, ctx){
     const ry=Math.atan2(n[0],n[1]);
     if (T==='closet'){ const mx=(fx.a[0]+fx.b[0])/2+n[0]*dep/2, mz=(fx.a[1]+fx.b[1])/2+n[1]*dep/2; wardrobe(rt.fit,F,mx,mz,ry,l); return; }
     let A=fx.a, U=u; if (n[1]*u[0]-n[0]*u[1] < 0){ A=fx.b; U=[-u[0],-u[1]]; }
-    const along=p=>Array.isArray(p)?Math.max(.3,Math.min(l-.3,(p[0]-A[0])*U[0]+(p[1]-A[1])*U[1])):null;
-    let b0=0, b1=l; const fr=along(fx.fridge);
-    if (fr!=null){ if (fr>l-.75) b1=l-.68; else if (fr<.75) b0=.68; }
-    kitchenRun(rt.fit,F,id,{x:A[0],z:A[1],rot:ry,len:l,b0,b1,sink:along(fx.sink),cook:fx.cook?along(fx.cook):null,hood:!!fx.cook,fridge:fr!=null?(fr>l-.75?l-.33:fr<.75?.33:null):null,up:[b0+.05,b1],splash:[b0,b1,.92,id==='lux'?Math.min(2.5,L.H-.3):1.55]});
+    const raw=p=>Array.isArray(p)?((p[0]-A[0])*U[0]+(p[1]-A[1])*U[1]):null;
+    const along=p=>Array.isArray(p)?Math.max(.3,Math.min(l-.3,raw(p))):null;
+    let b0=0, b1=l, frIn=null; const fr=raw(fx.fridge);
+    if (fr!=null && fr>.1 && fr<l-.1){ if (fr>l-.75){ b1=l-.68; frIn=l-.33; } else if (fr<.75){ b0=.68; frIn=.33; } }
+    else if (fr!=null){ // refrigerator standing beyond the end of the counter
+      const fx_=fx.fridge[0], fz_=fx.fridge[1]; const gg=G(rt.fit,fx_+n[0]*.0,fz_+n[1]*.0,ry); B(gg,id==='basic'?F.steel:F.front,.64,2.05,.64,0,0,0,.005); ctx.occ.push(rectFP(fx_,fz_,U,.7,.7)); }
+    kitchenRun(rt.fit,F,id,{x:A[0],z:A[1],rot:ry,len:l,b0,b1,sink:along(fx.sink),cook:fx.cook?along(fx.cook):null,hood:!!fx.cook,fridge:frIn,up:[b0+.05,b1],splash:[b0,b1,.92,id==='lux'?Math.min(2.5,L.H-.3):1.55]});
     return;
   }
   if ((T==='bathtub'||T==='shower') && fx.poly && fx.poly.length>=3){
@@ -176,6 +185,12 @@ function furnishRoom2(L, rt, g, r, F, id, aptHasDining){
       const [tx,tz]=atE(s1,c,0); tvWall(g,F,tx,tz,s1.ry,tw);
       const sl=Math.min(2.9,tw+.4), dmax=Math.min(depthAt(r,s1,c)-.55, 3.8);
       let ds=null; for (let d=dmax; d>=2.3; d-=.15){ if (occupy(ctx,FP(s1,c,sl,d-.5,d+.5))){ ds=d; break; } }
+      if (ds===null){ // free-standing sofa somewhere in front of the TV, facing it
+        const [tvx,tvz]=atE(s1,c,.2);
+        for (const L2 of [2.2,1.9,1.6]){ let got=null; for (const [x,z] of gridCands(r)){ const fx=tvx-x, fz=tvz-z, dist=Math.hypot(fx,fz); if (dist<2.2||dist>4.2) continue;
+            const f=[fx/dist,fz/dist], side=[f[1],-f[0]], fp=rectFP(x,z,side,L2+.1,1.0); if (fpFree(ctx,fp)){ ctx.occ.push(fp); got={x,z,f}; break; } }
+          if (got){ sofa(g,F,got.x,got.z,Math.atan2(got.f[0],got.f[1]),L2,false); const mx=(got.x+tvx)/2, mz=(got.z+tvz)/2; const kt=G(g,mx,mz,Math.atan2(got.f[0],got.f[1])); B(kt,F.tableTop,1.0,.05,.55,0,.36,0,.02); B(kt,F.rug,2.6,.012,2.0,0,.003,0); break; } }
+      }
       if (ds!==null){
         const [sx,sz]=atE(s1,c,ds); sofa(g,F,sx,sz,s1.ry+Math.PI,sl,A>24);
         const [kx,kz]=atE(s1,c,ds-1.3); const kt=G(g,kx,kz,s1.ry); B(kt,F.tableTop,1.2,.05,.7,0,.36,0,.02); for(const lx of [-.5,.5]) for(const lz of [-.27,.27]) C(kt,F.metal,.015,.015,.36,lx,0,lz,8);
@@ -221,8 +236,8 @@ function furnishRoom2(L, rt, g, r, F, id, aptHasDining){
       else if (!aptHasDining && A>11){ const d=Math.min(depthAt(r,s1,c)*.62, 2.6); if (d>=1.9 && occupy(ctx,FP(s1,c,2.6,d-1.1,d+1.1))){ const [dx,dz]=atE(s1,c,d); const gg=G(g,dx,dz,s1.ry); dining(gg,F,id,0,0,1.4,2); PENDANTS.push([L.id,dx,dz,'ring']); } }
     }
   } else if (k==='dining'){
-    const u=mainAxis(r), bb=polyBBox(r.poly);
-    for (const [len,n] of [[2.2,3],[1.8,3],[1.4,2]]){ if (occupy(ctx,rectFP(cx,cz,u,len+1.25,2.35))){ const gg=G(g,cx,cz,Math.atan2(-u[1],u[0])); dining(gg,F,id,0,0,len,n); PENDANTS.push([L.id,cx,cz,'ring']); break; } }
+    const u=mainAxis(r), dirs=[u,[-u[1],u[0]]];
+    for (const [len,n] of [[2.2,3],[1.8,3],[1.4,2],[1.2,2]]){ const sp=findSpot(ctx,len+1.1,2.25,dirs); if (sp){ const gg=G(g,sp.x,sp.z,Math.atan2(-sp.u[1],sp.u[0])); dining(gg,F,id,0,0,len,n); PENDANTS.push([L.id,sp.x,sp.z,'ring']); break; } }
     plantIn(ctx,g,F,1,r.id.length);
   } else if (k==='bath'||k==='wc'||k==='laundry'){
     if (k==='laundry'){ const s1=pick(1.25); if(s1){ const c=takeE(ctx,s1,1.25,0,.62); if(c!==null) for(const o of [-.32,.32]){ const [x,z]=atE(s1,c+o,.31); const gg=G(rt.fit,x,z,s1.ry); B(gg,F.white,.6,.85,.6,0,0,0,.02); C(gg,F.glassBlack,.17,.17,.02,0,.55,.305,24).rotation.x=Math.PI/2; } } return; }

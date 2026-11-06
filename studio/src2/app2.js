@@ -18,7 +18,7 @@ function focus(){
   const bb=bboxOf(polys); return {c:[(bb.x0+bb.x1)/2,(bb.z0+bb.z1)/2], s:Math.max(8,bb.x1-bb.x0,bb.z1-bb.z0), y};
 }
 // camera directions are taken relative to north so the default views look at the street-facing south-east corner
-function viewDir(){ const [nx,nz]=NORTH(); const sx=-nx, sz=-nz, ex=-nz, ez=nx; const d=[sx*.8+ex*.6, sz*.8+ez*.6], l=Math.hypot(d[0],d[1]); return [d[0]/l,d[1]/l]; }
+function viewDir(){ const v=PROJECT.views&&PROJECT.views.dir; if (Array.isArray(v)){ const l=Math.hypot(v[0],v[1])||1; return [v[0]/l,v[1]/l]; } const [nx,nz]=NORTH(); const sx=-nx, sz=-nz, ex=-nz, ez=nx; const d=[sx*.8+ex*.6, sz*.8+ez*.6], l=Math.hypot(d[0],d[1]); return [d[0]/l,d[1]/l]; }
 const PRESETS = {
   doll: () => { const f=focus(), s=f.s, d=viewDir(), k=state.apt?1.0:state.bld?(state.view>=0?1.1:1.35):1.0; return { pos:[f.c[0]+d[0]*s*k, f.y+s*.78*k+4, f.c[1]+d[1]*s*k], tgt:[f.c[0], f.y, f.c[1]] }; },
   plan: () => { const f=focus(), s=f.s; return { pos:[f.c[0], f.y+s*1.35+8, f.c[1]+.01], tgt:[f.c[0], f.y, f.c[1]] }; },
@@ -264,7 +264,7 @@ function renderLabels(){
   for (const B_ of BLDS){ const top=B_.levels[B_.levels.length-1]; if(!top) continue; const mp=mpUnion((B_.levels.find(L=>L.ground)||B_.levels[0]).rooms.map(r=>r.poly)); const c=mp.length?polyCentroid(mp[0][0]):[0,0];
     const nApt=new Set(B_.levels.flatMap(L=>L.rooms.filter(r=>r.apt&&r.apt!=='common').map(r=>L.idx+'|'+r.apt))).size;
     add(BL,`${esc(B_.name)}<small>${B_.levels.filter(L=>!L.below).length} קומות · ${nApt} דירות</small>`,new THREE.Vector3(c[0],top.y+top.floorH+3.2,c[1]),'bld-l',{b:B_}); }
-  if (PLOT){ for (let i=0;i<PLOT.length;i++){ const a=PLOT[i], b=PLOT[(i+1)%PLOT.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if (l<6) continue; const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2;
+  if (PLOT){ for (let i=0;i<PLOT.length;i++){ const a=PLOT[i], b=PLOT[(i+1)%PLOT.length], l=Math.hypot(b[0]-a[0],b[1]-a[1]); if (l<8) continue; const mx=(a[0]+b[0])/2, mz=(a[1]+b[1])/2;
       add(PL,`${l.toFixed(1)} מ׳`,new THREE.Vector3(mx,terrainH(mx,mz)+.35,mz),'pl-b'); } }
   const A=PLOT?Math.round(Math.abs(polyArea(PLOT))):0;
   document.getElementById('plotRow').hidden=!PLOT;
