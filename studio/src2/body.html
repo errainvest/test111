@@ -1,0 +1,90 @@
+<div class="app" dir="rtl">
+  <aside class="panel" aria-label="הגדרות הדמיה">
+    <div class="topbar"><svg class="logo" width="74" height="23" role="img" aria-label="ERRA" viewBox="0 0 74 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="0.148438" width="13.1393" height="3.31753" fill="#1F1F1F"/>
+<rect y="22.0781" width="21.9326" height="3.23982" transform="rotate(-90 0 22.0781)" fill="#1F1F1F"/>
+<rect x="6.35242" y="9.54688" width="4.50624" height="3.31753" fill="#1F1F1F"/>
+<rect y="18.7656" width="13.1393" height="3.31753" fill="#1F1F1F"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20.9298 3.51682H25.1135C27.0765 3.51682 28.6678 5.21731 28.6678 7.31497C28.6678 9.41264 27.0765 11.1131 25.1135 11.1131H23.4425L24.32 13.0698L24.3159 13.072L28.3495 22.0665H31.9078L28.195 13.7873C30.3985 12.5869 31.9076 10.1393 31.9076 7.31497C31.9076 3.30523 28.8658 0.0546875 25.1135 0.0546875H17.7425V0.131742H17.69V22.0643H20.9298L20.9298 3.51682Z" fill="#1F1F1F"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M64.1475 0.650027C63.8783 0.0437401 63.0179 0.0437415 62.7487 0.650028L53.2427 22.0605H56.6732L63.3124 7.25803L69.9516 22.0605H73.6535L64.1475 0.650027Z" fill="#1F1F1F"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M39.8813 3.51682H44.0653C46.0282 3.51682 47.6195 5.21731 47.6195 7.31497C47.6195 9.41264 46.0282 11.1131 44.0653 11.1131H42.3942L43.2716 13.0697L43.2674 13.072L47.3009 22.0665H50.8592L47.1464 13.7874C49.3501 12.5871 50.8593 10.1394 50.8593 7.31497C50.8593 3.30523 47.8175 0.0546875 44.0653 0.0546875H36.6943V0.131742H36.6415V22.0643H39.8813L39.8813 3.51682Z" fill="#1F1F1F"/>
+</svg><span class="tagline">סטודיו הדמיה תלת־ממדית</span></div>
+    <div class="brand">
+      <span class="eyebrow" id="projEyebrow"></span>
+      <h1 id="projTitle"></h1>
+      <p class="sub" id="projSub"></p>
+    </div>
+
+    <section class="sec">
+      <h2>מצב תצוגה</h2>
+      <div class="seg" role="group" aria-label="מצב תצוגה">
+        <button id="m-doll" data-mode="doll" aria-pressed="true">מבט־על</button>
+        <button id="m-plan" data-mode="plan" aria-pressed="false">תוכנית</button>
+        <button id="m-walk" data-mode="walk" aria-pressed="false">סיור</button>
+        <button id="m-ext" data-mode="ext" aria-pressed="false">חוץ</button>
+      </div>
+      <div class="seg" role="group" aria-label="בניין" id="bldSeg"></div>
+      <div class="seg many" role="group" aria-label="קומה" id="levelSeg" hidden></div>
+      <button class="tour" id="tourBtn" aria-pressed="false">סיור אוטומטי בפרויקט</button>
+    </section>
+
+    <section class="sec">
+      <h2>דירות</h2>
+      <div class="apts" id="apts"></div>
+    </section>
+
+    <section class="sec" id="roomsSec" hidden>
+      <h2>מעבר לחדר</h2>
+      <div class="rooms"><div class="rooms-row" id="rooms"></div></div>
+    </section>
+
+    <section class="sec">
+      <h2>סגנון עיצוב</h2>
+      <div class="tiers" id="tiers"></div>
+    </section>
+
+    <section class="sec">
+      <div class="row">
+        <div><div class="lbl-main">ריהוט</div><div class="lbl-note" id="furnNote"></div></div>
+        <label class="switch" aria-label="הצגת ריהוט"><input type="checkbox" id="furn" checked><span></span></label>
+      </div>
+      <div class="row" id="plotRow">
+        <div><div class="lbl-main">גבולות מגרש וקווי בניין</div><div class="lbl-note" id="plotNote"></div></div>
+        <label class="switch" aria-label="הדגשת גבולות המגרש"><input type="checkbox" id="plotT" checked><span></span></label>
+      </div>
+      <div class="seg two" role="group" aria-label="שעת היום">
+        <button id="t-day" data-time="day" aria-pressed="true">☀ יום</button>
+        <button id="t-eve" data-time="eve" aria-pressed="false">☾ ערב</button>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>מה כולל העיצוב</h2>
+      <dl class="spec" id="spec"></dl>
+    </section>
+
+    <p class="fine" id="fine"></p>
+  </aside>
+
+  <main class="view" id="view">
+    <div class="hud labels" id="labels"></div>
+    <div class="hud where" id="where" hidden></div>
+    <div class="hud hint" id="hint"></div>
+    <canvas class="hud mini" id="mini" width="420" height="420" aria-label="מפה: לחיצה מעבירה לנקודה"></canvas>
+    <button class="hud floorbtn" id="floorBtn" hidden></button>
+    <div class="hud joy" id="joy" hidden><i id="joyKnob"></i></div>
+    <div class="hud loading" id="loading">בונה את הבניינים…</div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/environments/RoomEnvironment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/geometries/RoundedBoxGeometry.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/utils/BufferGeometryUtils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/polygon-clipping@0.15.3/dist/polygon-clipping.umd.min.js"></script>
+<script>
+(() => {
+'use strict';
+const EYE = 1.62;
+const PROJECT = %%PROJECT%%;
